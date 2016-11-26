@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="403.0" prefWidth="454.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label layoutX="98.0" layoutY="14.0" text="Livro - Informações gerais">
+      <font>
+        <Font name="Calibri Light Italic" size="25.0" />
+      </font>
+    </Label>
+    <Label layoutX="120.0" layoutY="98.0" text="Título:">
+      <font>
+        <Font name="Calibri Light Italic" size="20.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="94.0" layoutY="127.0" text="Subtitulo:" />
+    <Label font="$x1" layoutX="12.0" layoutY="69.0" text="Tombo Patrimonial:" />
+    <Label font="$x1" layoutX="63.0" layoutY="182.0" text="Classificação:" />
+    <Label font="$x1" layoutX="112.0" layoutY="212.0" text="Edição:" />
+    <Label font="$x1" layoutX="107.0" layoutY="242.0" text="Editora:" />
+    <Label font="$x1" layoutX="69.0" layoutY="270.0" text="Emprestado:" />
+    <Label font="$x1" layoutX="44.0" layoutY="154.0" text="Nome do autor:" />
+    <TextField disable="true" layoutX="184.0" layoutY="69.0" prefWidth="258.0" />
+    <TextField disable="true" layoutX="184.0" layoutY="97.0" prefWidth="258.0" />
+    <TextField disable="true" layoutX="184.0" layoutY="126.0" prefWidth="258.0" />
+    <TextField disable="true" layoutX="184.0" layoutY="154.0" prefWidth="258.0" />
+    <ComboBox layoutX="185.0" layoutY="181.0" prefHeight="21.0" prefWidth="258.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Item 1" />
+          <String fx:value="Item 2" />
+          <String fx:value="Item 3" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <TextField disable="true" layoutX="184.0" layoutY="209.0" prefWidth="258.0" />
+    <TextField disable="true" layoutX="184.0" layoutY="238.0" prefWidth="258.0" />
+    <TextField disable="true" layoutX="185.0" layoutY="266.0" prefWidth="258.0" />
+    <Label font="$x1" layoutX="113.0" layoutY="296.0" text="Doado:" />
+    <Label font="$x1" layoutX="86.0" layoutY="321.0" text="Removido:" />
+    <TextField disable="true" layoutX="185.0" layoutY="293.0" prefWidth="258.0" />
+    <TextField disable="true" layoutX="185.0" layoutY="320.0" prefWidth="258.0" />
+    <HBox id="HBox" alignment="CENTER" layoutX="135.0" layoutY="355.0" spacing="5.0">
+      <children>
+        <Button mnemonicParsing="false" prefWidth="93.0" text="Fechar">
+          <font>
+            <Font size="15.0" fx:id="x2" />
+          </font>
+        </Button>
+        <Button font="$x2" mnemonicParsing="false" text="Emprestar" />
+      </children>
+    </HBox>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0" layoutX="357.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+  </children>
+</AnchorPane>

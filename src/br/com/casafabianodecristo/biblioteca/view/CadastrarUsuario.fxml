@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.controller.CadastroUsuarioController">
+  <children>
+    <GridPane layoutX="18.0" layoutY="57.0" prefWidth="586.0" AnchorPane.rightAnchor="-18.0">
+      <children>
+        <Label text="* Sobrenome:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="* DDD:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label fx:id="lblNomeUsuario" disable="true" text="* Nome de usuário:" GridPane.rowIndex="5" />
+        <Label fx:id="lblSenha" disable="true" text="* Senha:" GridPane.rowIndex="6" />
+        <Label fx:id="lblConfirmaSenha" disable="true" text="* Confirmação de senha:" GridPane.rowIndex="7" />
+        <TextField fx:id="nome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="sobrenome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="ddd" prefWidth="77.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <GridPane.margin>
+            <Insets right="180.0" />
+          </GridPane.margin>
+        </TextField>
+        <TextField fx:id="telefone" prefHeight="25.0" prefWidth="261.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+          <GridPane.margin>
+            <Insets />
+          </GridPane.margin>
+        </TextField>
+        <CheckBox fx:id="checkAdm" mnemonicParsing="false" text="Administrador" GridPane.rowIndex="4" />
+        <TextField fx:id="nomeUsuario" disable="true" prefHeight="25.0" prefWidth="149.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <PasswordField fx:id="senha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <PasswordField fx:id="confirmacaoSenha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField fx:id="dicaSenha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <Label fx:id="lblDicaSenha" disable="true" text="* Dica de senha:" GridPane.rowIndex="8" />
+        <Label fx:id="lblTamanhoCaracteres" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6">
+          <textFill>
+            <Color blue="0.000" green="0.000" red="0.600" fx:id="x2" />
+          </textFill>
+        </Label>
+        <Label text="* Nome:" />
+            <Label text="* Telefone:" GridPane.rowIndex="3" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="168.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="221.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="150.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Label fx:id="tituloPagina" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="19.0" prefWidth="586.0" text="Adicionar usuário">
+      <font>
+        <Font name="Calibri Light" size="20.0" />
+      </font>
+    </Label>
+    <HBox id="HBox" alignment="CENTER" layoutX="211.0" layoutY="393.0" spacing="5.0">
+      <children>
+        <Button fx:id="botaoSalvar" mnemonicParsing="false" prefWidth="77.0" text="Salvar">
+          <font>
+            <Font size="14.0" fx:id="x1" />
+          </font>
+        </Button>
+        <Button fx:id="botaoCancelar" font="$x1" mnemonicParsing="false" text="Cancelar" />
+      </children>
+    </HBox>
+    <Label layoutX="9.0" layoutY="422.0" text="* Campos Obrigatórios" textFill="$x2" />
+    <Group id="Group" layoutX="409.0" layoutY="6.0" />
+    <Label fx:id="id" layoutX="494.0" layoutY="356.0" text="" visible="false" />
+      <ProgressIndicator fx:id="indicador" layoutX="275.0" layoutY="349.0" prefHeight="45.0" prefWidth="36.0" progress="-1.0" visible="false">
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </ProgressIndicator>
+  </children>
+</AnchorPane>

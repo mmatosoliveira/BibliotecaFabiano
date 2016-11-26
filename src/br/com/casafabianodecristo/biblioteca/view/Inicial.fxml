@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.controller.InicialController">
+  <children>
+    <MenuBar prefWidth="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="Sistema">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Realizar backup do sistema" />
+            <MenuItem fx:id="itemSair" mnemonicParsing="false" text="Sair" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Livros">
+          <items>
+            <MenuItem fx:id="itemCadastrarLivros" mnemonicParsing="false" text="Cadastrar livros" />
+            <MenuItem mnemonicParsing="false" text="Consultar acervo" />
+            <MenuItem mnemonicParsing="false" text="Remover livros do acervo" />
+            <MenuItem mnemonicParsing="false" text="Doar livros do acervo" />
+                  <MenuItem mnemonicParsing="false" text="Gerar etiquetas" />
+          </items>
+        </Menu>
+            <Menu mnemonicParsing="false" text="Classificação">
+               <items>
+                  <MenuItem fx:id="itemCadastrarCorClassificacao" mnemonicParsing="false" text="Cadastrar classificações" />
+                  <MenuItem mnemonicParsing="false" text="Editar classificação" />
+               </items>
+            </Menu>
+        <Menu mnemonicParsing="false" text="Usuários">
+          <items>
+            <MenuItem fx:id="itemCadastrarUsuario" mnemonicParsing="false" text="Cadastrar usuário" />
+            <MenuItem fx:id="itemEditarDadosUsuario" mnemonicParsing="false" text="Editar dados de um usuário" />
+            <MenuItem fx:id="itemRemoverUsuario" mnemonicParsing="false" text="Remover usuário" />
+            <MenuItem mnemonicParsing="false" text="Meus dados" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Empréstimos">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Realizar novo empréstimo" />
+            <MenuItem mnemonicParsing="false" text="Renovar empréstimo" />
+            <MenuItem mnemonicParsing="false" text="Consultar empréstimos atrasados" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Relatórios">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Empréstimos" />
+            <MenuItem mnemonicParsing="false" text="Doações de livros" />
+            <MenuItem mnemonicParsing="false" text="Remoção de livros do acervo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cadastro de usuários" />
+            <MenuItem mnemonicParsing="false" text="Atrasos por usuário" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Ajuda">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Dúvidas frequentes" />
+            <MenuItem mnemonicParsing="false" text="Sobre o LIVRES" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TextField fx:id="dadoLivroPesquisa" prefHeight="25.0" prefWidth="446.0" promptText="Pesquise aqui" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="43.0" />
+    <CheckBox fx:id="checkTitulo" layoutX="160.0" layoutY="70.0" mnemonicParsing="false" text="Título" AnchorPane.leftAnchor="200.0" />
+    <CheckBox fx:id="checkAutor" layoutX="233.0" layoutY="70.0" mnemonicParsing="false" text="Autor" AnchorPane.leftAnchor="270.0" />
+    <CheckBox fx:id="checkTombo" layoutX="299.0" layoutY="70.0" mnemonicParsing="false" text="Tombo patrimonial" AnchorPane.leftAnchor="340.0" />
+    <Label fx:id="dataHora" alignment="CENTER_RIGHT" prefWidth="500.0" text="Bem vindo!" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="0.0">
+      <font>
+        <Font name="Calibri Light Italic" size="16.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Separator prefWidth="650.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    <Label minHeight="13.999908447265625" prefHeight="24.0" text="Devoluções previstas para hoje" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="115.0">
+      <font>
+        <Font name="Calibri Light" size="20.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label alignment="CENTER" font="$x1" layoutY="109.0" minHeight="13.999908447265625" prefHeight="24.0" text="Mensagens" textAlignment="CENTER" AnchorPane.rightAnchor="70.0" />
+    <Label font="$x1" layoutX="20.0" layoutY="43.0" minHeight="13.999908447265625" prefHeight="24.0" text="Consulta rápida: " />
+    <Separator prefWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+    <ImageView fx:id="iconePesquisar" disable="false" fitHeight="33.0" fitWidth="33.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="37.0">
+      <image>
+        <Image url="@../../../../../../resources/images/search-icon.png" />
+      </image>
+    </ImageView>
+    <TableView fx:id="tabelaEmprestimosPendentes" focusTraversable="true" layoutX="260.0" layoutY="147.0" prefHeight="399.0" prefWidth="486.0" tableMenuButtonVisible="false" AnchorPane.rightAnchor="254.0" AnchorPane.topAnchor="147.0">
+      <columns>
+        <TableColumn fx:id="colunaTitulo" maxWidth="5000.0" minWidth="10.0" prefWidth="303.0" text="Nome do livro" />
+        <TableColumn fx:id="colunaNomeUsuario" editable="true" maxWidth="5000.0" minWidth="10.0" prefWidth="182.0" text="Usuário" />
+      </columns>
+    </TableView>
+    <Separator orientation="VERTICAL" prefHeight="473.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="238.0" AnchorPane.topAnchor="100.0" />
+    <Label alignment="CENTER" font="$x1" layoutX="7.0" layoutY="105.0" prefWidth="231.0" text="Menu rápido" />
+    <GridPane layoutY="135.0" prefHeight="181.0" prefWidth="231.0" AnchorPane.leftAnchor="7.0">
+      <children>
+        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Emprestar livro" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Renovar empréstimo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Button fx:id="botaoCadastrarLivro" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Cadastrar livro" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Button fx:id="botaoCadastrarUsuario" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Cadastrar usuário" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <image>
+            <Image url="@../../../../../../resources/images/right-icon.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
+          <image>
+            <Image url="@../../../../../../resources/images/right-icon.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
+          <image>
+            <Image url="@../../../../../../resources/images/right-icon.png" />
+          </image>
+        </ImageView>
+        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
+          <image>
+            <Image url="@../../../../../../resources/images/right-icon.png" />
+          </image>
+        </ImageView>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <ImageView fx:id="iconeAtualizarDevolucoes" fitHeight="26.0" fitWidth="26.0" layoutX="724.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../../../../../../resources/images/icon-refresh.png" />
+      </image>
+    </ImageView>
+    <Label fx:id="usuarioAcesso" font="$x2" layoutX="0.0" layoutY="577.0" prefWidth="500.0" text="Usuário:" />
+      <Separator layoutX="761.0" layoutY="101.0" orientation="VERTICAL" prefHeight="473.0" />
+      <TableView layoutX="780.0" layoutY="149.0" prefHeight="399.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
+        <columns>
+          <TableColumn prefWidth="199.0" text="Título" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="iconeAtualizarDevolucoes1" fitHeight="26.0" fitWidth="26.0" layoutX="953.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../resources/images/icon-refresh.png" />
+         </image>
+      </ImageView>
+  </children>
+</AnchorPane>
