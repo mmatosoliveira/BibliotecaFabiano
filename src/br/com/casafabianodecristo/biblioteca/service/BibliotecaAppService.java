@@ -1,26 +1,12 @@
 package br.com.casafabianodecristo.biblioteca.service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-
-import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
-import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
-import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
-import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
-import br.com.casafabianodecristo.biblioteca.factory.ClassificacaoFactory;
-import br.com.casafabianodecristo.biblioteca.factory.EmprestimoFactory;
-import br.com.casafabianodecristo.biblioteca.factory.LivroFactory;
-import br.com.casafabianodecristo.biblioteca.factory.UsuarioFactory;
-import br.com.casafabianodecristo.biblioteca.model.Classificacao;
-import br.com.casafabianodecristo.biblioteca.model.Emprestimo;
-import br.com.casafabianodecristo.biblioteca.model.Livro;
-import br.com.casafabianodecristo.biblioteca.model.Usuario;
-import br.com.casafabianodecristo.biblioteca.updater.ClassificacaoUpdater;
-import br.com.casafabianodecristo.biblioteca.updater.LivroUpdater;
-import br.com.casafabianodecristo.biblioteca.updater.UsuarioUpdater;
+import java.util.*;
+import javax.persistence.*;
+import org.modelmapper.ModelMapper;
+import br.com.casafabianodecristo.biblioteca.dto.*;
+import br.com.casafabianodecristo.biblioteca.factory.*;
+import br.com.casafabianodecristo.biblioteca.model.*;
+import br.com.casafabianodecristo.biblioteca.updater.*;
 
 public class BibliotecaAppService {
 	private EntityManagerFactory emf;
@@ -57,6 +43,30 @@ public class BibliotecaAppService {
 		Usuario u = em.find(Usuario.class, id);
 		
 		return u;
+	}
+	
+	public List<UsuarioDto> getUsuarios(String nomeUsuario){
+		List<Usuario> usuarios = null;
+		ModelMapper mapper = new ModelMapper();
+		List<UsuarioDto> usuariosDto = new ArrayList<UsuarioDto>();
+		
+		createEntityManagerFactory();
+		createEntityManager();
+		
+			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuario like :nomeUsuario", Usuario.class);
+			query.setParameter("nomeUsuario", "%" + nomeUsuario + "%");
+			try{
+				usuarios = query.getResultList();
+			}
+			catch(NoResultException ex){ex.printStackTrace();}
+		closeEntityManager();
+		closeEntityManagerFactory();
+		
+		for (Usuario u : usuarios){
+			usuariosDto.add(mapper.map(u, UsuarioDto.class));
+		}
+		
+		return usuariosDto;
 	}
 	
 	public Livro getLivroPorTombo(int tombo){

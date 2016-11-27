@@ -36,6 +36,8 @@ public class Principal {
 		 *  USUÁRIO 
 		 **/
 		
+
+		//service.getUsuarios("Matheus");
 		//service.cadastrarUsuario(usuarioDto);	
 		//service.usuarioDto.setSobrenome("Matos");
 		//service.atualizarUsuario(usuarioDto);

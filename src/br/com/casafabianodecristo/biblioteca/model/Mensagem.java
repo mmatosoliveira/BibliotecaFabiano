@@ -38,6 +38,8 @@ public class Mensagem {
 		this.remetente = remetente;
 	}
 
+	public Mensagem(){}
+	
 	public int getId() {
 		return id;
 	}
