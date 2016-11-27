@@ -12,6 +12,10 @@ public class Lembrete {
 	
 	@Column(name="TextoLembrete", length=200)
 	private String lembrete;
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="IdUsuario")
+	private Usuario usuario;
 
 	public Lembrete(String lembrete) {
 		this.lembrete = lembrete;
