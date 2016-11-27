@@ -1,8 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.principal;
 
 import java.util.*;
+
+import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.*;
-import br.com.casafabianodecristo.biblioteca.service.BibliotecaAppService;
 
 public class Principal {
 	BibliotecaAppService service = new BibliotecaAppService();

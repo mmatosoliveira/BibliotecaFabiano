@@ -2,8 +2,8 @@ package br.com.casafabianodecristo.biblioteca.controller;
 
 import java.security.NoSuchAlgorithmException;
 import br.com.casafabianodecristo.biblioteca.Principal.Principal;
+import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.model.Usuario;
-import br.com.casafabianodecristo.biblioteca.service.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -182,10 +182,10 @@ public class CadastroUsuarioController {
             	if (result == true){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
                     stage.close();
-            		alerta.notificacaoSucessoSalvarDados("Cadastrar usuário");
+            		alerta.notificacaoSucessoSalvarDados("Cadastrar usuï¿½rio");
             	}
             	else{
-            		alerta.notificacaoErro("Cadastrar usuário", "O nome de usuário escolhido para acesso ao sistema já está em uso. \nEscolha outro e tente novamente!");
+            		alerta.notificacaoErro("Cadastrar usuï¿½rio", "O nome de usuï¿½rio escolhido para acesso ao sistema jï¿½ estï¿½ em uso. \nEscolha outro e tente novamente!");
             		indicador.setVisible(false);
             	}
         			
@@ -207,10 +207,10 @@ public class CadastroUsuarioController {
             	if (result == true){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
                     stage.close();
-            		alerta.notificacaoSucessoSalvarDados("Alterar dados do usuário");
+            		alerta.notificacaoSucessoSalvarDados("Alterar dados do usuï¿½rio");
             	}
             	else{
-            		alerta.notificacaoErro("Alterar dados do usuário", "Ocorreu um erro ao alterar os dados. Tente novamente mais tarde.");
+            		alerta.notificacaoErro("Alterar dados do usuï¿½rio", "Ocorreu um erro ao alterar os dados. Tente novamente mais tarde.");
             		indicador.setVisible(false);
             	}
         			
@@ -227,16 +227,16 @@ public class CadastroUsuarioController {
 			if (senha.equals(confirmacaoSenha) && !dicaSenha.equals(senha) && senha.length() <= 8)
 				resultado = true;
 			else if (senha.equals(confirmacaoSenha) && dicaSenha.equals(senha)){
-				alerta.alertaErro("Cadastrar usuário", "A dica de senha não pode ser igual a senha.");
+				alerta.alertaErro("Cadastrar usuï¿½rio", "A dica de senha nï¿½o pode ser igual a senha.");
 				resultado = false;
 			}
 			else if (senha.length()>8){
-				alerta.notificacaoErro("Cadastrar usuário", "A senha deve ter no máximo 8 caracteres.");
+				alerta.notificacaoErro("Cadastrar usuï¿½rio", "A senha deve ter no mï¿½ximo 8 caracteres.");
 				this.senha.requestFocus();
 				resultado = false;
 			}
 			else{
-				alerta.notificacaoErro("Cadastrar usuário", "As senhas digitadas não coincidem.");
+				alerta.notificacaoErro("Cadastrar usuï¿½rio", "As senhas digitadas nï¿½o coincidem.");
 				resultado = false;
 			}
 		}		
@@ -255,7 +255,7 @@ public class CadastroUsuarioController {
 		
 		caracteres = this.telefone.getText().length();
 		if (caracteres == 9){
-			lblTamanhoCaracteres.setText("Máximo: 9 caracteres.");
+			lblTamanhoCaracteres.setText("Mï¿½ximo: 9 caracteres.");
 			lblTamanhoCaracteres.setVisible(true);
 		}
 		
@@ -264,12 +264,12 @@ public class CadastroUsuarioController {
 		
 		
 		if (dddString.length() > 3){
-			alerta.alertaAviso("Cadastrar usuários", "O DDD pode ter até 3 digitos.");
+			alerta.alertaAviso("Cadastrar usuï¿½rios", "O DDD pode ter atï¿½ 3 digitos.");
 			retorno =  false;
 		}			
 		
 		if (caracteres > 9){
-			alerta.alertaAviso("Cadastrar usuários", "O telefone pode ter no máximo 9 digitos.");
+			alerta.alertaAviso("Cadastrar usuï¿½rios", "O telefone pode ter no mï¿½ximo 9 digitos.");
 			retorno =  false;
 		}
 		else{
@@ -300,7 +300,7 @@ public class CadastroUsuarioController {
 				!confirmacaoSenha.equals("") && !dicaSenha.equals(""))				
 				resultado = true;
 			else{
-				alerta.alertaErro("Usuário", "Verifique os campos de preenchimento obrigatório e tente novamente.");
+				alerta.alertaErro("Usuï¿½rio", "Verifique os campos de preenchimento obrigatï¿½rio e tente novamente.");
 				resultado = false;
 			}				
 		}
@@ -308,7 +308,7 @@ public class CadastroUsuarioController {
 			if (!nome.equals("") && !sobrenome.equals("") && ddd != 0 && caracteres != 0)
 				resultado =  true;
 			else{
-				alerta.alertaErro("Usuário", "Verifique os campos de preenchimento obrigatório e tente novamente.");
+				alerta.alertaErro("Usuï¿½rio", "Verifique os campos de preenchimento obrigatï¿½rio e tente novamente.");
 				resultado = false;
 			}
 		}

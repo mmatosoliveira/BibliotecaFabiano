@@ -2,9 +2,9 @@ package br.com.casafabianodecristo.biblioteca.controller;
 
 import java.util.List;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
+import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.model.Usuario;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
-import br.com.casafabianodecristo.biblioteca.service.BibliotecaAppService;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

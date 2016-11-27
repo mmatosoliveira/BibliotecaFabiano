@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
+import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.model.Emprestimo;
-//import br.com.casafabianodecristo.biblioteca.model.Lembretes;
-import br.com.casafabianodecristo.biblioteca.service.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
