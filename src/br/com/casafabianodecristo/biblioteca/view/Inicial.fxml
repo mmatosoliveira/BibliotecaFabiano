@@ -10,6 +10,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -92,7 +93,7 @@
         <Font name="Calibri Light" size="20.0" fx:id="x1" />
       </font>
     </Label>
-    <Label alignment="CENTER" font="$x1" layoutY="109.0" minHeight="13.999908447265625" prefHeight="24.0" text="Mensagens" textAlignment="CENTER" AnchorPane.rightAnchor="70.0" />
+    <Label alignment="CENTER" font="$x1" layoutX="824.0" layoutY="385.0" minHeight="13.999908447265625" prefHeight="24.0" text="Mensagens" textAlignment="CENTER" AnchorPane.rightAnchor="67.0" />
     <Label font="$x1" layoutX="20.0" layoutY="43.0" minHeight="13.999908447265625" prefHeight="24.0" text="Consulta rápida: " />
     <Separator prefWidth="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
     <ImageView fx:id="iconePesquisar" disable="false" fitHeight="33.0" fitWidth="33.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="37.0">
@@ -152,15 +153,32 @@
     </ImageView>
     <Label fx:id="usuarioAcesso" font="$x2" layoutX="0.0" layoutY="577.0" prefWidth="500.0" text="Usuário:" />
       <Separator layoutX="761.0" layoutY="101.0" orientation="VERTICAL" prefHeight="473.0" />
-      <TableView layoutX="780.0" layoutY="149.0" prefHeight="399.0" prefWidth="200.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="147.0">
-        <columns>
-          <TableColumn prefWidth="199.0" text="Título" />
-        </columns>
-      </TableView>
-      <ImageView fx:id="iconeAtualizarDevolucoes1" fitHeight="26.0" fitWidth="26.0" layoutX="953.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconeAtualizarDevolucoes1" fitHeight="26.0" fitWidth="26.0" layoutX="953.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0">
          <image>
             <Image url="@../../../../../../resources/images/icon-refresh.png" />
          </image>
       </ImageView>
+      <TextArea fx:id="lembrete" layoutX="776.0" layoutY="147.0" prefHeight="181.0" prefWidth="207.0" wrapText="true" AnchorPane.rightAnchor="15.0" />
+      <Label alignment="CENTER" layoutX="829.0" layoutY="115.0" minHeight="13.999908447265625" prefHeight="24.0" text="Lembretes" textAlignment="CENTER" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="115.0">
+         <font>
+            <Font name="Calibri Light" size="20.0" fx:id="x11" />
+         </font>
+      </Label>
+      <ImageView fx:id="iconeSalvarLembrete" fitHeight="26.0" fitWidth="26.0" layoutX="955.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0">
+         <image>
+            <Image url="@../../../../../../../BibliotecaFabianoInterface/resources/images/icon-save.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="764.0" layoutY="372.0" prefHeight="3.0" prefWidth="238.0" AnchorPane.rightAnchor="0.0" />
+      <ImageView fx:id="iconeAtualizarDevolucoes11" fitHeight="26.0" fitWidth="26.0" layoutX="927.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../resources/images/add-icon.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="766.0" layoutY="441.0" prefHeight="57.0" prefWidth="238.0" text="X mensagens nao lidas!" AnchorPane.rightAnchor="0.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
   </children>
 </AnchorPane>
