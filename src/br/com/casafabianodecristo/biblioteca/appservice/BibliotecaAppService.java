@@ -1,16 +1,19 @@
 package br.com.casafabianodecristo.biblioteca.appservice;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
+import br.com.casafabianodecristo.biblioteca.utils.ConvertToMD5;
 
 public class BibliotecaAppService {
 	private LivroService livroService = new LivroService();
 	private ClassificacaoService classService = new ClassificacaoService();
 	private UsuarioService usuarioService = new UsuarioService();
 	private EmprestimoService empService = new EmprestimoService();
-
+	private LembreteService lemService = new LembreteService();
+	
 	public BibliotecaAppService() {	}
 	
 	/**
@@ -73,6 +76,10 @@ public class BibliotecaAppService {
 		usuarioService.inativarUsuario(id);
 	}
 	
+	public String getDicaSenha(String nomeUsuario){
+		return usuarioService.getDicaSenha(nomeUsuario);
+	}
+	
 	/**
 	 * EMPRÉSTIMO
 	 **/
@@ -80,4 +87,44 @@ public class BibliotecaAppService {
 	public void realizarEmprestimo(EmprestimoDto dto){
 		empService.realizarEmprestimo(dto);
 	}
+	
+	public List<Emprestimo> getDevolucoesPrevistas(){
+		return empService.getDevolucoesPrevistas();
+	}
+
+	/**
+	 * LEMBRETE
+	 **/
+	
+	public String getLembrete(int idUsuario){
+		return lemService.getLembretePorUsuario(idUsuario);
+	}
+	
+	/**
+	 * MENSAGEM
+	 **/
+	
+	
+	/**
+	 * COMUM
+	 **/
+	
+	public Usuario logar(String nomeUsuario, String senha){
+		Usuario usuarioLogado = null;
+		Usuario admin = null;
+		String password = new String();
+		try {
+			password = ConvertToMD5.convertPasswordToMD5("Admin");
+		} catch (NoSuchAlgorithmException e) {}
+			
+		admin = usuarioService.getUsuarioPorNomeUsuario("Admin");
+		if (admin == null){
+			UsuarioDto adminDto = new UsuarioDto(0, "Administrador", "Administrador", "Admin", password, 00, 000000000, 1, "Administrador", 0);
+			usuarioService.cadastrarUsuario(adminDto);
+		}
+		
+		usuarioLogado = usuarioService.logar(nomeUsuario, senha);
+		
+		return usuarioLogado;
+	}	
 }

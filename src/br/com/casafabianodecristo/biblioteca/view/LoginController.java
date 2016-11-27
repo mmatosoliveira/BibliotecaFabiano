@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
-import br.com.casafabianodecristo.biblioteca.appservice.*;
-import br.com.casafabianodecristo.biblioteca.model.Emprestimo;
+import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
+import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -44,7 +44,7 @@ public class LoginController {
     
     private BibliotecaAppService appService = new BibliotecaAppService();
     
-    //private Lembretes lembrete = null;
+    private String lembrete = new String();
 	
     private List<Emprestimo> historico = new ArrayList<Emprestimo>();
     
@@ -127,14 +127,41 @@ public class LoginController {
 		}			
 	}
 	
-	private boolean logar(){	
+	private boolean logar(){
+		try {
+			String password = ConvertToMD5.convertPasswordToMD5(senha.getText());
+			Usuario user = appService.logar(nomeUsuario.getText(), password);
+			tentativas = tentativas + 1;
+			if (user != null){
+				logado = true;
+				if (tentativas == 3)
+					dicaSenha = appService.getDicaSenha(nomeUsuario.getText());
+				else{
+					if (logado){
+						lembrete = appService.getLembrete(user.getIdUsuario());
+						historico = appService.getDevolucoesPrevistas();
+						System.out.println(lembrete);
+						System.out.println(historico);
+					}
+				}
+			}
+			else
+				logado = false;
+			
+			
+		} catch (NoSuchAlgorithmException e) {}
+		
+		return logado;
+	}
+	
+	/*private boolean logar(){	
 		try{
 			String password = ConvertToMD5.convertPasswordToMD5(senha.getText());
-			appService.createEntityManagerFactory();   	
+			
 			logado = appService.logar(nomeUsuario.getText(), password);
 			tentativas = tentativas + 1;
 			if (tentativas == 3)
-				dicaSenha = appService.getDicaSenha(nomeUsuario.getText());
+				//dicaSenha = appService.getDicaSenha(nomeUsuario.getText());
 			else {
 				if(logado){
 					lembrete = appService.getUltimoLembrete();
@@ -145,14 +172,14 @@ public class LoginController {
 						lembrete.setLembrete("");
 					}
 				}
-				appService.closeEntityManagerFactory();
+				
 			}		
 		}
 		catch(NoSuchAlgorithmException error){
 			error.printStackTrace();
 		}
 		return logado;	    	
-	}
+	}*/
 	
 	
 	@SuppressWarnings("rawtypes")
@@ -174,9 +201,9 @@ public class LoginController {
             		}    				
     			}    
             	if (result == true){
-            		principal.carregarTelaInicial(lembrete.getLembrete(), historico, nomeUsuario.getText());
+            		alerta.alertaAviso("Logar", "LOGOOOU!");
+            		//principal.carregarTelaInicial(lembrete.getLembrete(), historico, nomeUsuario.getText());
             	}
-            		
             	else {
             		indicador.setVisible(false);
             		alerta.notificacaoErro("Login", "Usuário ou senha incorretos, verifique os dados e tente novamente.");

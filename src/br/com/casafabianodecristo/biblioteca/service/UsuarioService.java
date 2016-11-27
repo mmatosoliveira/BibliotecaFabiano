@@ -60,6 +60,59 @@ public class UsuarioService {
 		return usuariosDto;
 	}	
 	
+	public Usuario getUsuarioPorNomeUsuario(String nomeUsuario){
+		Usuario user = null;
+		createEntityManagerFactory();
+		createEntityManager();
+			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuarioAcessoSistema = :nomeUsuario", Usuario.class);	
+			query.setParameter("nomeUsuario", nomeUsuario);
+			
+			try{
+				user = query.getSingleResult();
+			}
+			catch(NoResultException ex){}
+		closeEntityManager();
+		closeEntityManagerFactory();
+		return user;
+	}
+	
+	public Usuario logar(String nomeUsuario, String senha){
+		Usuario usuarioLogado = null;
+		createEntityManagerFactory();
+			createEntityManager();
+			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o "+
+					 "where o.nomeUsuarioAcessoSistema = :nomeUsuario " + 
+					 "and o.senha = :senha" , Usuario.class);
+					query.setParameter("nomeUsuario", nomeUsuario);
+					query.setParameter("senha", senha);
+					
+					try {
+						usuarioLogado = query.getSingleResult();
+					}
+					catch(NoResultException ex){
+						System.out.println("N�o foi poss�vel encontrar o usu�rio especificado.");
+					}
+			closeEntityManager();
+		closeEntityManagerFactory();
+		return usuarioLogado;
+	}
+	
+	public String getDicaSenha(String nomeUsuario){
+		Usuario user = null;
+		createEntityManagerFactory();
+		createEntityManager();
+			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuarioAcessoSistema = :nomeUsuario", Usuario.class);	
+			query.setParameter("nomeUsuario", nomeUsuario);
+			
+			try{
+				user = query.getSingleResult();
+			}
+			catch(NoResultException ex){}
+		closeEntityManager();
+		closeEntityManagerFactory();
+		return user.getDicaSenha();
+	}
+	
 	public void atualizarUsuario(UsuarioDto dto){
 		createEntityManagerFactory();
 			createEntityManager();
