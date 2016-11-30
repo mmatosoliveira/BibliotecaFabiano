@@ -29,7 +29,7 @@ public class LembreteService {
 		Lembrete lembrete = new Lembrete();
 		createEntityManagerFactory();
 			createEntityManager();
-				TypedQuery<Lembrete> query = em.createQuery("select o from Lembrete o where o.idUsuario like :idUsuario", Lembrete.class);
+				TypedQuery<Lembrete> query = em.createQuery("select o from Lembrete o where o.usuario.id = :idUsuario", Lembrete.class);
 				query.setParameter("idUsuario", idUsuario);
 				lembrete = query.getSingleResult();
 			closeEntityManager();

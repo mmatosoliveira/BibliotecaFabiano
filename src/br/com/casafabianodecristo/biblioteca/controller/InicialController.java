@@ -1,20 +1,16 @@
 package br.com.casafabianodecristo.biblioteca.controller;
 
 import java.util.List;
-import br.com.casafabianodecristo.biblioteca.Principal.Principal;
+import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
-import br.com.casafabianodecristo.biblioteca.model.Emprestimos;
-import br.com.casafabianodecristo.biblioteca.model.Livro;
+import br.com.casafabianodecristo.biblioteca.model.*;
+import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.*;
+import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.control.*;
 
 public class InicialController {
@@ -37,13 +33,13 @@ public class InicialController {
 	private Label usuarioAcesso;
 	
 	@FXML
-	private TableView<Emprestimos> tabelaEmprestimosPendentes;
+	private TableView<Emprestimo> tabelaEmprestimosPendentes;
 	
 	@FXML
-	private TableColumn<Emprestimos, String> colunaNomeUsuario;
+	private TableColumn<Emprestimo, String> colunaNomeUsuario;
 	
 	@FXML
-	private TableColumn<Emprestimos, String> colunaTitulo;
+	private TableColumn<Emprestimo, String> colunaTitulo;
 	
 	@FXML
 	private MenuItem itemSair = new MenuItem("Close");
@@ -102,7 +98,8 @@ public class InicialController {
 				.getNomeUsuario()));
 		colunaTitulo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x
 					.getValue()
-					.getTituloLivro()));
+					.getLivro()
+					.getTitulo()));
 	}
 	
 	@FXML
@@ -118,11 +115,9 @@ public class InicialController {
 		iconeAtualizarDevolucoes.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	servico.createEntityManagerFactory();
-            		ObservableList<Emprestimos> itens =FXCollections.observableList(servico.getDevolucoesPrevistas());
+            		ObservableList<Emprestimo> itens =FXCollections.observableList(servico.getDevolucoesPrevistas());
             		tabelaEmprestimosPendentes.setItems(itens);
             		atualizarGrid();
-	    		servico.closeEntityManagerFactory();
             }            
         });
 		
@@ -138,28 +133,28 @@ public class InicialController {
 		itemCadastrarLivros.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarCadastroLivros();			
+				//principal.carregarCadastroLivros();			
 			}
 		});
 		
 		itemCadastrarCorClassificacao.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarCadastrarCorClassificacao();			
+				//principal.carregarCadastrarCorClassificacao();			
 			}
 		});
 		
 		itemCadastrarUsuario.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarCadastroUsuario();			
+				//principal.carregarCadastroUsuario();			
 			}
 		});
 		
 		itemEditarDadosUsuario.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarBuscaUsuario();
+				//principal.carregarBuscaUsuario();
 			}
 		});
 		
@@ -175,9 +170,9 @@ public class InicialController {
 		iconeSalvarLembrete.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	servico.createEntityManagerFactory();
+            	/*servico.createEntityManagerFactory();
 	    			servico.salvarLembrete(lembrete.getText());
-	    		servico.closeEntityManagerFactory();
+	    		servico.closeEntityManagerFactory();*/
             }            
         });
 		
@@ -191,14 +186,14 @@ public class InicialController {
 		botaoCadastrarLivro.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	principal.carregarCadastroLivros();	
+            	//principal.carregarCadastroLivros();	
             }            
         });
 		
 		botaoCadastrarUsuario.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	principal.carregarCadastroUsuario();	
+            	//principal.carregarCadastroUsuario();	
             }            
         });
 	}
@@ -212,17 +207,17 @@ public class InicialController {
     	
     	if (textoPesquisa.equals("")){
     		if(alerta.alertaConfirmacao(textoAlerta).get() == ButtonType.OK){
-    			servico.createEntityManagerFactory();
+    			/*servico.createEntityManagerFactory();
     				livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
     			servico.closeEntityManagerFactory();
-    			principal.carregarResultadoBusca(livros);
+    			principal.carregarResultadoBusca(livros);*/
         	}     
     	}
     	else{
-    		servico.createEntityManagerFactory();
+    		/*servico.createEntityManagerFactory();
 				livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
 			servico.closeEntityManagerFactory();
-			principal.carregarResultadoBusca(livros);
+			principal.carregarResultadoBusca(livros);*/
     	}
     	checkTitulo.setSelected(false);
     	checkAutor.setSelected(false);

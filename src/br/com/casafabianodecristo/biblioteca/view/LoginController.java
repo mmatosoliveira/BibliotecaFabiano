@@ -140,47 +140,15 @@ public class LoginController {
 					if (logado){
 						lembrete = appService.getLembrete(user.getIdUsuario());
 						historico = appService.getDevolucoesPrevistas();
-						System.out.println(lembrete);
-						System.out.println(historico);
 					}
 				}
 			}
 			else
-				logado = false;
-			
-			
-		} catch (NoSuchAlgorithmException e) {}
+				logado = false;			
+		} catch (NoSuchAlgorithmException e) {e.printStackTrace();}
 		
 		return logado;
-	}
-	
-	/*private boolean logar(){	
-		try{
-			String password = ConvertToMD5.convertPasswordToMD5(senha.getText());
-			
-			logado = appService.logar(nomeUsuario.getText(), password);
-			tentativas = tentativas + 1;
-			if (tentativas == 3)
-				//dicaSenha = appService.getDicaSenha(nomeUsuario.getText());
-			else {
-				if(logado){
-					lembrete = appService.getUltimoLembrete();
-					historico = appService.getDevolucoesPrevistas();
-					System.out.println(historico.size());
-					if (lembrete == null){
-						lembrete = new Lembretes();
-						lembrete.setLembrete("");
-					}
-				}
-				
-			}		
-		}
-		catch(NoSuchAlgorithmException error){
-			error.printStackTrace();
-		}
-		return logado;	    	
-	}*/
-	
+	}	
 	
 	@SuppressWarnings("rawtypes")
 	public Task taskLogar() {
@@ -201,8 +169,8 @@ public class LoginController {
             		}    				
     			}    
             	if (result == true){
-            		alerta.alertaAviso("Logar", "LOGOOOU!");
-            		//principal.carregarTelaInicial(lembrete.getLembrete(), historico, nomeUsuario.getText());
+            		//alerta.alertaAviso("Logar", "LOGOOOU!");
+            		principal.carregarTelaInicial(lembrete, historico, nomeUsuario.getText());
             	}
             	else {
             		indicador.setVisible(false);

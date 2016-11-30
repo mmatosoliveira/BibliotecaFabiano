@@ -56,6 +56,47 @@ public class Principal extends Application {
         }
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void carregarTelaInicial(String textoLembrete, List<Emprestimo> devolucoes, String nomeUsuario){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/Inicial.fxml"));			
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Scene scene = new Scene (page);
+			
+			TextArea lembrete = (TextArea) scene.lookup("#lembrete");
+			lembrete.setText(textoLembrete);
+			
+			ObservableList<Emprestimo> itens =FXCollections.observableList(devolucoes); 
+			TableView<Emprestimo> tabelaEmprestimosPendentes  = (TableView<Emprestimo>) scene.lookup("#tabelaEmprestimosPendentes");
+			tabelaEmprestimosPendentes.setItems(itens);
+			
+			Label dataHora = (Label) scene.lookup("#dataHora");
+			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			Date data = new Date();
+			String str = fmt.format(data);			
+			dataHora.setText("Horário do acesso: " + str);
+			
+			Label usuarioAcesso = (Label) scene.lookup("#usuarioAcesso");
+			usuarioAcesso.setText("Usuário logado: " + nomeUsuario);
+			
+			primaryStage.setTitle("LIVRES - Sistema para gestão de livros espíritas");
+			primaryStage.setResizable(false);
+			primaryStage.setX(170);
+			primaryStage.setY(50);
+			primaryStage.setScene(scene);
+			
+			InicialController controller = loader.getController();
+			controller.setPrincipal(this);
+			
+			primaryStage.show();			
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	/*public void carregarBuscaUsuario(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -199,46 +240,7 @@ public class Principal extends Application {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void carregarTelaInicial(String textoLembrete, List<Emprestimos> devolucoes, String nomeUsuario){
-		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/Inicial.fxml"));			
-			AnchorPane page = (AnchorPane) loader.load();
-			
-			Scene scene = new Scene (page);
-			
-			TextArea lembrete = (TextArea) scene.lookup("#lembrete");
-			lembrete.setText(textoLembrete);
-			
-			ObservableList<Emprestimos> itens =FXCollections.observableList(devolucoes); 
-			TableView<Emprestimos> tabelaEmprestimosPendentes  = (TableView<Emprestimos>) scene.lookup("#tabelaEmprestimosPendentes");
-			tabelaEmprestimosPendentes.setItems(itens);
-			
-			Label dataHora = (Label) scene.lookup("#dataHora");
-			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			Date data = new Date();
-			String str = fmt.format(data);			
-			dataHora.setText("Horário do acesso: " + str);
-			
-			Label usuarioAcesso = (Label) scene.lookup("#usuarioAcesso");
-			usuarioAcesso.setText("Usuário logado: " + nomeUsuario);
-			
-			primaryStage.setTitle("LIVRES - Sistema para gestão de livros espíritas");
-			primaryStage.setResizable(false);
-			primaryStage.setX(170);
-			primaryStage.setY(50);
-			primaryStage.setScene(scene);
-			
-			InicialController controller = loader.getController();
-			controller.setPrincipal(this);
-			
-			primaryStage.show();			
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-	}
+	
 	
 	@SuppressWarnings({"unchecked"})
 	public void carregarResultadoBusca(List<Livro> livros){

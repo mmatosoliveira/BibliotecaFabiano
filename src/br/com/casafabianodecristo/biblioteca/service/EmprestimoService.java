@@ -1,17 +1,10 @@
 package br.com.casafabianodecristo.biblioteca.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-//import java.util.*;
+import java.util.*;
 import javax.persistence.*;
-//import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
-//import br.com.casafabianodecristo.biblioteca.updater.*;
 
 public class EmprestimoService {
 	private EntityManagerFactory emf;
@@ -51,21 +44,13 @@ public class EmprestimoService {
 	public List<Emprestimo> getDevolucoesPrevistas(){
 		List<Emprestimo> devolucoes = null;
 		Date d = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Date dataFormatada = new Date();
-		try{
-			dataFormatada = sdf.parse(sdf.format(d));
-		}
-		catch(ParseException e){
-			e.printStackTrace();
-		}
 		
 		createEntityManagerFactory();
 		createEntityManager();
 			TypedQuery<Emprestimo> query = em.createQuery("select o from" + 
-											" Emprestimos o where" + 
+											" Emprestimo o where" + 
 											" o.dataDevolucaoPrevista = :dataDevolucao", Emprestimo.class);
-			query.setParameter("dataDevolucao", dataFormatada);
+			query.setParameter("dataDevolucao", d, TemporalType.DATE);
 			
 			try{
 				devolucoes = query.getResultList();
@@ -73,6 +58,7 @@ public class EmprestimoService {
 			catch(NoResultException ex){}
 		closeEntityManager();
 		closeEntityManagerFactory();
+		
 		return devolucoes;
 	}
 }
