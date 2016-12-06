@@ -41,7 +41,7 @@
         </Menu>
             <Menu mnemonicParsing="false" text="Classificação">
                <items>
-                  <MenuItem fx:id="itemCadastrarCorClassificacao" mnemonicParsing="false" text="Cadastrar classificações" />
+                  <MenuItem fx:id="itemCadastrarClassificacao" mnemonicParsing="false" text="Cadastrar classificação" />
                   <MenuItem mnemonicParsing="false" text="Editar classificação" />
                </items>
             </Menu>

@@ -57,7 +57,7 @@ public class InicialController {
 	private MenuItem itemRemoverUsuario;
 	
 	@FXML
-	private MenuItem itemCadastrarCorClassificacao;
+	private MenuItem itemCadastrarClassificacao;
 	
 	@FXML
 	private TextField dadoLivroPesquisa;
@@ -137,10 +137,10 @@ public class InicialController {
 			}
 		});
 		
-		itemCadastrarCorClassificacao.setOnAction(new EventHandler<ActionEvent>(){
+		itemCadastrarClassificacao.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				//principal.carregarCadastrarCorClassificacao();			
+				principal.carregarCadastrarClassificacao();			
 			}
 		});
 		

@@ -17,8 +17,9 @@ public class Lembrete {
 	@JoinColumn(name="IdUsuario")
 	private Usuario usuario;
 
-	public Lembrete(String lembrete) {
+	public Lembrete(String lembrete, Usuario u) {
 		this.lembrete = lembrete;
+		this.usuario = u;
 	}
 	
 	public Lembrete(){}

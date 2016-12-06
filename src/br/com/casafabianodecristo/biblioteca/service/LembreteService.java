@@ -25,6 +25,36 @@ public class LembreteService {
 	
 	public LembreteService(){}
 	
+	public void cadastrarLembrete(Lembrete l){
+		createEntityManagerFactory();
+			createEntityManager();
+				em.getTransaction().begin();
+					em.persist(l);
+					em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+	}
+	
+	public void editarLembrete(Lembrete l){
+		createEntityManagerFactory();
+			createEntityManager();
+				em.getTransaction().begin();
+					em.merge(l);
+				em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+	}
+	
+	public void removerLembrete(Lembrete l){
+		createEntityManagerFactory();
+			createEntityManager();
+				em.getTransaction().begin();
+					em.remove(l);
+				em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+	}
+	
 	public String getLembretePorUsuario(int idUsuario){
 		Lembrete lembrete = new Lembrete();
 		createEntityManagerFactory();

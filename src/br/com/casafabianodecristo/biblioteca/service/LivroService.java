@@ -44,6 +44,28 @@ public class LivroService {
 		return livro;
 	}
 	
+	public Livro getLivroPorTomboPatrimonial(int tombo){
+		Livro livro = null;
+		createEntityManagerFactory();
+		createEntityManager();
+		TypedQuery<Livro> query = em.createQuery("select o from Livro o " +
+                "where o.tomboPatrimonial = :tombo",
+                Livro.class);
+		
+		query.setParameter("tombo", tombo);
+		
+		try {
+			livro = query.getSingleResult();
+		}
+		catch (NoResultException ex){}
+		
+		closeEntityManager();
+		closeEntityManagerFactory();
+		
+		return livro;
+	}
+	
+	
 	public void atualizarLivro(LivroDto dto){
 		createEntityManagerFactory();
 			createEntityManager();
@@ -51,6 +73,17 @@ public class LivroService {
 					Livro livro = getLivroPorTombo(dto.getTomboPatrimonial());
 					livro = LivroUpdater.update(dto);
 					em.merge(livro);
+				em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+	}
+	
+	public void excluir(LivroDto dto){
+		createEntityManagerFactory();
+			createEntityManager();
+				Livro l = getLivroPorTombo(dto.getTomboPatrimonial());
+				em.getTransaction().begin();
+					em.remove(l);
 				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();

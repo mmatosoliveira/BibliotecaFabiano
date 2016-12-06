@@ -24,6 +24,10 @@ public class BibliotecaAppService {
 		return livroService.getLivroPorTombo(tombo);
 	}
 	
+	public Livro getLivroPorTomboPatrimonial(int tombo){
+		return livroService.getLivroPorTomboPatrimonial(tombo);
+	}
+	
 	public void atualizarLivro(LivroDto dto){
 		livroService.atualizarLivro(dto);
 	}
@@ -34,6 +38,10 @@ public class BibliotecaAppService {
 	
 	public void removerLivroAcervo(int tomboPatrimonial){
 		livroService.removerLivroAcervo(tomboPatrimonial);
+	}
+	
+	public void excluirLivro(LivroDto dto){
+		livroService.excluir(dto);
 	}
 	
 	/**
@@ -91,6 +99,10 @@ public class BibliotecaAppService {
 	public List<Emprestimo> getDevolucoesPrevistas(){
 		return empService.getDevolucoesPrevistas();
 	}
+	
+	public void devolverLivro(EmprestimoDto dto){
+		empService.devolverLivro(dto);
+	}
 
 	/**
 	 * LEMBRETE
@@ -98,6 +110,14 @@ public class BibliotecaAppService {
 	
 	public String getLembrete(int idUsuario){
 		return lemService.getLembretePorUsuario(idUsuario);
+	}
+	
+	public void cadastrarLembrete(Lembrete l){
+		lemService.cadastrarLembrete(l);
+	}
+	
+	public void editarLembrete(Lembrete l){
+		lemService.editarLembrete(l);
 	}
 	
 	/**
@@ -108,6 +128,8 @@ public class BibliotecaAppService {
 	/**
 	 * COMUM
 	 **/
+	
+	
 	
 	public Usuario logar(String nomeUsuario, String senha){
 		Usuario usuarioLogado = null;
@@ -127,4 +149,6 @@ public class BibliotecaAppService {
 		
 		return usuarioLogado;
 	}	
+	
+	
 }

@@ -5,19 +5,23 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.controller.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
+import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.view.LoginController;
 import javafx.application.Application;
 import javafx.collections.*;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Principal extends Application {
 	private Stage primaryStage;
 	private AnchorPane login;
+	private Alertas alerta = new Alertas();
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -39,6 +43,24 @@ public class Principal extends Application {
 	public void carregarLogin(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/PainelControle.fxml"));
+			login = (AnchorPane) loader.load();
+			
+			Scene scene = new Scene(login);
+			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+            primaryStage.show();
+            
+            
+		}
+		catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	/*public void carregarLogin(){
+		try{
+			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/Login.fxml"));
 			
 			login = (AnchorPane) loader.load();
@@ -54,7 +76,7 @@ public class Principal extends Application {
 		} catch (IOException e) {
             e.printStackTrace();
         }
-	}
+	}*/
 	
 	@SuppressWarnings("unchecked")
 	public void carregarTelaInicial(String textoLembrete, List<Emprestimo> devolucoes, String nomeUsuario){
@@ -87,6 +109,19 @@ public class Principal extends Application {
 			primaryStage.setY(50);
 			primaryStage.setScene(scene);
 			
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				public void handle(WindowEvent ev) {
+					//TODO Verificar forma de impedir que ele feche a tela
+					//no clique do botão cancelar.
+					//Verificar na tela de cadastro de classificação!
+					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
+						primaryStage.close();	    	
+			    	}	
+					else 
+						primaryStage.show();
+	        	}
+			});
+			
 			InicialController controller = loader.getController();
 			controller.setPrincipal(this);
 			
@@ -95,6 +130,33 @@ public class Principal extends Application {
 		catch (IOException e){
 			e.printStackTrace();
 		}
+	}
+	
+	public void carregarCadastrarClassificacao(){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Principal.class.getResource("../view/CadastrarClassificacao.fxml"));
+		
+		try {
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			
+			Stage pagina = new Stage();
+			pagina.setTitle("Cadastrar classificação");
+			
+			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				public void handle(WindowEvent ev) {
+					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
+			            pagina.close();	    	
+			    	}	
+	        	}
+			});
+			
+			pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.setScene(scene);
+			pagina.show();
+			
+		} catch (IOException e) {}
 	}
 	
 	/*public void carregarBuscaUsuario(){

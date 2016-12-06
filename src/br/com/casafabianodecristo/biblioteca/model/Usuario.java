@@ -39,9 +39,9 @@ public class Usuario {
 	@Column(name="DicaSenha", length= 200)
 	private String dicaSenha;
 	
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="usuario")
 	@JoinColumn(name="Id")
-	private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();;
+	private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 	
 	@OneToMany(mappedBy="destinatario")
 	@JoinColumn(name="Id")

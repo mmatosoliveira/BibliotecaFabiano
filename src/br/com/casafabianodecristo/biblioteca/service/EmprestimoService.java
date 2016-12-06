@@ -35,9 +35,22 @@ public class EmprestimoService {
 					Emprestimo emprestimo = EmprestimoFactory.create(dto);
 					emprestimo.getLivro().setFlEmprestado(1);
 					emprestimo.getLivro().addEmprestimo(emprestimo);
-					em.persist(emprestimo);
+					em.merge(emprestimo);
 				em.getTransaction().commit();
 			closeEntityManager();
+		closeEntityManagerFactory();
+	}
+	
+	public void devolverLivro(EmprestimoDto dto){
+		createEntityManagerFactory();
+		createEntityManager();
+			Emprestimo e = em.find(Emprestimo.class, dto.getId());
+			System.out.println(e);
+			e.setDataDevolucaoEfetiva(new Date());
+			em.getTransaction().begin();
+			em.merge(e);
+			em.getTransaction().commit();
+		closeEntityManager();
 		closeEntityManagerFactory();
 	}
 	
