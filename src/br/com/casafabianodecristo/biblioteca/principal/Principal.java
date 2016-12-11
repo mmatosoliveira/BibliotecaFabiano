@@ -11,10 +11,12 @@ import javafx.application.Application;
 import javafx.collections.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -25,10 +27,10 @@ public class Principal extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
+		primaryStage.setResizable(false);
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("LIVRES - Sistema para gestão de livros espíritas");
-		this.primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
-		primaryStage.setResizable(false);
 		carregarLogin();
 	}
 	
@@ -40,24 +42,6 @@ public class Principal extends Application {
 		launch(args);
 	}
 	
-	/*public void carregarLogin(){
-		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/PainelControle.fxml"));
-			login = (AnchorPane) loader.load();
-			
-			Scene scene = new Scene(login);
-			primaryStage.setScene(scene);
-			primaryStage.setResizable(false);
-            primaryStage.show();
-            
-            
-		}
-		catch (IOException e) {
-            e.printStackTrace();
-        }
-	}*/
-	
 	public void carregarLogin(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
@@ -68,6 +52,7 @@ public class Principal extends Application {
 			Scene scene = new Scene(login);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
+			primaryStage.sizeToScene();
             primaryStage.show();
             
             LoginController controller = loader.getController();
@@ -84,48 +69,54 @@ public class Principal extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/Inicial.fxml"));			
 			AnchorPane page = (AnchorPane) loader.load();
-			
+			Stage pagina = new Stage();			
 			Scene scene = new Scene (page);
-			
+			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 			TextArea lembrete = (TextArea) scene.lookup("#lembrete");
-			lembrete.setText(textoLembrete);
-			
 			ObservableList<Emprestimo> itens =FXCollections.observableList(devolucoes); 
 			TableView<Emprestimo> tabelaEmprestimosPendentes  = (TableView<Emprestimo>) scene.lookup("#tabelaEmprestimosPendentes");
-			tabelaEmprestimosPendentes.setItems(itens);
-			
 			Label dataHora = (Label) scene.lookup("#dataHora");
 			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			Date data = new Date();
+			
+			lembrete.setText(textoLembrete);
+			tabelaEmprestimosPendentes.setItems(itens);
+			
+			
 			String str = fmt.format(data);			
 			dataHora.setText("Horário do acesso: " + str);
 			
 			Label usuarioAcesso = (Label) scene.lookup("#usuarioAcesso");
 			usuarioAcesso.setText("Usuário logado: " + nomeUsuario);
 			
-			primaryStage.setTitle("LIVRES - Sistema para gestão de livros espíritas");
-			primaryStage.setResizable(false);
-			primaryStage.setX(170);
-			primaryStage.setY(50);
-			primaryStage.setScene(scene);
+			pagina.setTitle("LIVRES - Sistema para gestão de livros espíritas");
+			pagina.getIcons().add(new Image("file:resources/images/icon-principal.png"));
+			pagina.setResizable(false);
+			pagina.setScene(scene);
+			pagina.setX(primaryScreenBounds.getMinX());
+			pagina.setY(primaryScreenBounds.getMinY());
+			pagina.setWidth(primaryScreenBounds.getWidth());
+			pagina.setHeight(primaryScreenBounds.getHeight());
 			
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				public void handle(WindowEvent ev) {
 					//TODO Verificar forma de impedir que ele feche a tela
 					//no clique do botão cancelar.
 					//Verificar na tela de cadastro de classificação!
 					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
-						primaryStage.close();	    	
+						pagina.close();	    	
 			    	}	
-					else 
-						primaryStage.show();
+					else {} 
+						
 	        	}
 			});
 			
 			InicialController controller = loader.getController();
 			controller.setPrincipal(this);
 			
-			primaryStage.show();			
+			pagina.show();
+			primaryStage.close();
+						
 		}
 		catch (IOException e){
 			e.printStackTrace();
