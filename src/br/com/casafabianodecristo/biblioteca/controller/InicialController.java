@@ -186,7 +186,7 @@ public class InicialController {
 		botaoCadastrarLivro.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	//principal.carregarCadastroLivros();	
+            	principal.carregarCadastroLivros();	
             }            
         });
 		

@@ -1,13 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
-import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -129,9 +125,7 @@ public class LoginController {
 	private boolean logar(){
 		try {			
 			String password = ConvertToMD5.convertPasswordToMD5(senha.getText());
-			
 			dto = appService.logar(nomeUsuario.getText(), password);
-			System.out.println(dto);
 			tentativas = tentativas + 1;
 			
 			if (dto != null){
@@ -166,10 +160,6 @@ public class LoginController {
             		}    				
     			}    
             	if (result == true){
-            		//alerta.alertaAviso("Logar", "LOGOOOU!");
-            		
-            		
-            		System.out.println("nome usuario -->" + nomeUsuario);
             		principal.carregarTelaInicial(dto.getTextoLembrete(), dto.getEmprestimo(), dto.getUsuario().getNomeUsuario());
             	}
             	else {

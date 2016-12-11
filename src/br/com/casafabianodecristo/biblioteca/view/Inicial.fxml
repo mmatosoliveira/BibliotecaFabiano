@@ -106,8 +106,8 @@
         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
       </columnResizePolicy>
       <columns>
-        <TableColumn fx:id="colunaTitulo" editable="false" maxWidth="8000.0" minWidth="10.0" prefWidth="303.0" text="Nome do livro" />
-        <TableColumn fx:id="colunaNomeUsuario" editable="false" maxWidth="6000.0" minWidth="10.0" prefWidth="182.0" text="Usuário" />
+        <TableColumn fx:id="colunaTitulo" editable="false" maxWidth="8000.0" minWidth="10.0" prefWidth="360.0" text="Nome do livro" />
+        <TableColumn fx:id="colunaNomeUsuario" editable="false" maxWidth="6000.0" minWidth="10.0" prefWidth="300.0" text="Usuário" />
       </columns>
     </TableView>
     <Separator orientation="VERTICAL" prefHeight="473.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="238.0" AnchorPane.topAnchor="100.0" />

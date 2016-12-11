@@ -1,6 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.controller;
 
-//import javafx.collections.FXCollections;
+import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
+import br.com.casafabianodecristo.biblioteca.model.Classificacao;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -33,16 +36,20 @@ public class CadastroLivroController {
 	private TextField editora;
 	
 	@FXML
-	private ComboBox<String> classificacao = new ComboBox<>();
+	private ComboBox<Classificacao> classificacao = new ComboBox<>();
 	
 	@FXML
 	private TextField quantidadeExemplares;
+	
+	private BibliotecaAppService appService = new BibliotecaAppService();
 
 	public CadastroLivroController(){}
 	
 	@FXML
 	public void initialize(){
-		//classificacao.setItems(FXCollections.observableList(ClassificacaoLivroEnum.getDescricoes()));
+		ObservableList<Classificacao> itens = FXCollections.observableArrayList(appService.getClassificacoes());
+		classificacao.setItems(itens);
+		
 		botaoCancelar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

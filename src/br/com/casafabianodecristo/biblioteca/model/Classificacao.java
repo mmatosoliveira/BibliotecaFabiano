@@ -84,6 +84,6 @@ public class Classificacao {
 
 	@Override
 	public String toString() {
-		return "Classificacao [id=" + id + ", descricao=" + descricao + ", cor=" + cor + "]";
+		return id + " - " + descricao;
 	}	
 }

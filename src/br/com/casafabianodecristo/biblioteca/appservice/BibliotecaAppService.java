@@ -64,6 +64,10 @@ public class BibliotecaAppService {
 		classService.atualizarClassificacao(dto);
 	}
 	
+	public List<Classificacao> getClassificacoes(){
+		return classService.getClassificacoes();
+	}
+	
 	/**
 	 * USUÁRIO
 	 **/
@@ -155,7 +159,6 @@ public class BibliotecaAppService {
 		usuarioLogado = usuarioService.logar(nomeUsuario, senha);
 		
 		if (usuarioLogado != null){
-			System.out.println("chegou no IF do usuario logado != null");
 			ModelMapper mapper = new ModelMapper();
 			
 			UsuarioDto uDto = mapper.map(usuarioLogado, UsuarioDto.class);

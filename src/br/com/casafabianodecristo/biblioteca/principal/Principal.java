@@ -152,6 +152,27 @@ public class Principal extends Application {
 		} catch (IOException e) {}
 	}
 	
+	public void carregarCadastroLivros(){
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/CadastrarLivro.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Scene scene = new Scene(page);
+			
+			Stage pagina = new Stage();
+			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
+			pagina.setTitle("Cadastrar livro");
+			pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.setScene(scene);
+			pagina.show();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*public void carregarBuscaUsuario(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -174,24 +195,6 @@ public class Principal extends Application {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void carregarCadastrarCorClassificacao(){
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Principal.class.getResource("../view/CadastrarClassificacao.fxml"));
-		
-		try {
-			AnchorPane page = (AnchorPane) loader.load();
-			Scene scene = new Scene(page);
-			
-			Stage pagina = new Stage();
-			pagina.setTitle("Cadastrar cor para uma classificação");
-			pagina.setResizable(false);
-			pagina.initOwner(primaryStage);
-			pagina.setScene(scene);
-			pagina.show();
-			
-		} catch (IOException e) {}
 	}
 	
 	public void carregarDadosUsuario(Usuario usuario){
@@ -274,26 +277,7 @@ public class Principal extends Application {
 		}
 	}
 	
-	public void carregarCadastroLivros(){
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/CadastrarLivro.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-			
-			Scene scene = new Scene(page);
-			
-			Stage pagina = new Stage();
-			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
-			pagina.setTitle("Cadastrar livro");
-			pagina.setResizable(false);
-			pagina.initOwner(primaryStage);
-			pagina.setScene(scene);
-			pagina.show();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	
 	

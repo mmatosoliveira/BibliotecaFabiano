@@ -5,6 +5,7 @@ import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.updater.*;
+import java.util.*;
 
 public class ClassificacaoService {
 	private EntityManagerFactory emf;
@@ -59,5 +60,20 @@ public class ClassificacaoService {
 		closeEntityManager();
 	closeEntityManagerFactory();
 	}
-	
+
+	public List<Classificacao> getClassificacoes() {
+		List<Classificacao> c = new ArrayList<Classificacao>();
+		createEntityManagerFactory();
+		createEntityManager();
+			TypedQuery<Classificacao> query = em.createQuery("select o from Classificacao o", Classificacao.class);
+			
+			try{
+				c = query.getResultList();
+			}
+			catch(NoResultException e){}
+			
+		closeEntityManager();
+		closeEntityManagerFactory();
+		return c;
+	}	
 }
