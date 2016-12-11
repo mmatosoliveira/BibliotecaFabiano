@@ -31,6 +31,8 @@ public class Principal extends Application {
 		primaryStage.setResizable(false);
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("LIVRES - Sistema para gestão de livros espíritas");
+		this.primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
+		this.primaryStage.setResizable(false);
 		carregarLogin();
 	}
 	
