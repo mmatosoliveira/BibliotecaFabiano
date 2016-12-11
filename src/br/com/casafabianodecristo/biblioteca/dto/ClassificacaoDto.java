@@ -39,4 +39,10 @@ public class ClassificacaoDto {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "ClassificacaoDto [id=" + id + ", descricao=" + descricao + ", cor=" + cor + "]";
+	}
+	
 }

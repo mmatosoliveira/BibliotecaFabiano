@@ -129,4 +129,14 @@ public class LivroDto {
 	public void setSubtitulo(String subtitulo) {
 		this.subtitulo = subtitulo;
 	}
+
+	@Override
+	public String toString() {
+		return "LivroDto [tomboPatrimonial=" + tomboPatrimonial + ", titulo=" + titulo + ", subtitulo=" + subtitulo
+				+ ", nomeAutor=" + nomeAutor + ", editora=" + editora + ", edicao=" + edicao + ", classificacaoLivro="
+				+ classificacaoLivro + ", flEmprestado=" + flEmprestado + ", flDoado=" + flDoado + ", flRemovido="
+				+ flRemovido + ", emprestimoDtos=" + emprestimoDtos + "]";
+	}
+	
+	
 }

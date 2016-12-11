@@ -225,6 +225,14 @@ public class Livro {
 
 	@Override
 	public String toString() {
+		return "Livro [tomboPatrimonial=" + tomboPatrimonial + ", titulo=" + titulo + ", subtitulo=" + subtitulo
+				+ ", nomeAutor=" + nomeAutor + ", editora=" + editora + ", edicao=" + edicao + ", classificacaoLivro="
+				+ classificacaoLivro + ", flEmprestado=" + flEmprestado + ", flDoado=" + flDoado + ", flRemovido="
+				+ flRemovido + ", emprestimos=" + emprestimos + "]";
+	}
+
+	/*@Override
+	public String toString() {
 		String emprestado = new String();
 		String retorno = new String();
 
@@ -239,5 +247,7 @@ public class Livro {
 			retorno = titulo + " - " + "Autor: " + nomeAutor + " - " + "Emprestado: " + emprestado;
 		
 		return retorno;
-	}
+	}*/
+	
+	
 }

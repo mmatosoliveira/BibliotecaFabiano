@@ -1,17 +1,25 @@
 package br.com.casafabianodecristo.biblioteca.controller;
 
 import java.util.*;
+
+import org.modelmapper.ModelMapper;
+
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
+import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
+import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroLivroInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.model.Classificacao;
+import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class CadastroLivroController {
@@ -45,7 +53,15 @@ public class CadastroLivroController {
 	@FXML
 	private TextField quantidadeExemplares;
 	
+	@FXML
+	private Pane paneSalvando;
+	
 	private BibliotecaAppService appService = new BibliotecaAppService();
+	
+	@SuppressWarnings("rawtypes")
+	private Task cadastrarLivro;
+	
+	Alertas alerta = new Alertas();
 
 	public CadastroLivroController(){}
 	
@@ -59,7 +75,6 @@ public class CadastroLivroController {
 		camposTexto.add(edicao);
 		camposTexto.add(editora);
 		camposTexto.add(titulo);
-		camposTexto.add(subtitulo);
 		camposTexto.add(nomeAutor);
 		camposTexto.add(quantidadeExemplares);
 		
@@ -76,7 +91,25 @@ public class CadastroLivroController {
 		botaoSalvar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	CadastroLivroInterfaceValidator.validarCamposObrigatorios(camposTexto, classificacao);
+            	paneSalvando.setStyle("-fx-background-color: #d7dbe2;");
+            	paneSalvando.setVisible(true); 
+            	botaoSalvar.setDisable(true);
+            	botaoCancelar.setDisable(true);
+            	
+            	if (CadastroLivroInterfaceValidator.validarCamposObrigatorios(camposTexto, classificacao) &&
+            		CadastroLivroInterfaceValidator.validarTamanhosMaximos(titulo, subtitulo, nomeAutor, editora, tomboPatrimonial))
+            	{
+                	cadastrarLivro = taskCadastrarLivro();
+        			Thread t = new Thread(cadastrarLivro);
+        			t.setDaemon(true);
+        			t.start();
+            	}
+            	/*else{
+            		paneSalvando.setVisible(false); 
+                	botaoSalvar.setDisable(false);
+                	botaoCancelar.setDisable(false);
+            	}*/
+            	           	
             }            
         });
 		
@@ -93,7 +126,7 @@ public class CadastroLivroController {
 	        @Override
 	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 	            if (!newValue.matches("\\d*")) {
-	            	tomboPatrimonial.setText(newValue.replaceAll("[^\\d]", ""));
+	            	quantidadeExemplares.setText(newValue.replaceAll("[^\\d]", ""));
 	            }
 	        }
 	    });
@@ -102,9 +135,53 @@ public class CadastroLivroController {
 	        @Override
 	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 	            if (!newValue.matches("\\d*")) {
-	            	tomboPatrimonial.setText(newValue.replaceAll("[^\\d]", ""));
+	            	edicao.setText(newValue.replaceAll("[^\\d]", ""));
 	            }
 	        }
 	    });
 	}
+	
+	private boolean cadastrarLivro(){
+		int tombo = Integer.parseInt(tomboPatrimonial.getText());
+    	int edicaoLivro = Integer.parseInt(edicao.getText());
+    	int qtdExemplares = Integer.parseInt(quantidadeExemplares.getText());
+    	ModelMapper mapper = new ModelMapper();                	
+    	ClassificacaoDto dtoClassif = mapper.map(classificacao.getSelectionModel().getSelectedItem(), ClassificacaoDto.class);
+    	LivroDto dto = new LivroDto(tombo, titulo.getText(), subtitulo.getText(), nomeAutor.getText(), editora.getText(), edicaoLivro, dtoClassif, 0, 0, 0);
+    	int retorno = appService.cadastrarLivro(dto, qtdExemplares);
+    	
+		if (retorno == 0)		
+			return true;
+		else if (retorno == 1)
+			return false;
+		
+		return true;
+	};
+	
+	@SuppressWarnings("rawtypes")
+	public Task taskCadastrarLivro() {
+        return new Task() {
+            @Override
+            protected Object call() throws Exception {
+        		return cadastrarLivro();
+            }
+            
+            @Override
+    		protected void succeeded() {
+            	boolean result = (boolean) getValue();
+            	if (!result){
+            		alerta.notificacaoErro("Cadastrar livro", "Já existe um livro cadastrado com esse tombo patrimonial. \nConfira o tombo patrimonial e tente novamente.");
+            		paneSalvando.setVisible(false);
+            		botaoSalvar.setDisable(false);
+                	botaoCancelar.setDisable(false);
+            	}
+            	else if (result){
+            		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
+    	            stage.close();
+    	            alerta.notificacaoSucessoSalvarDados("Cadastrar livro");
+            	}
+            		
+    		}
+        };
+    }
 }

@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
+import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.utils.ConvertToMD5;
 
 public class BibliotecaAppService {
@@ -36,8 +37,8 @@ public class BibliotecaAppService {
 		livroService.atualizarLivro(dto);
 	}
 	
-	public void cadastrarLivro(LivroDto dto){
-		livroService.cadastrarLivro(dto);
+	public int cadastrarLivro(LivroDto dto, int qtdExemplares){
+		return livroService.cadastrarLivro(dto, qtdExemplares); 
 	}
 	
 	public void removerLivroAcervo(int tomboPatrimonial){

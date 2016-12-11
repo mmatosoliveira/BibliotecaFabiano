@@ -1,6 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.service;
 
 import javax.persistence.*;
+
+import org.eclipse.persistence.exceptions.DatabaseException;
+
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
@@ -89,16 +92,26 @@ public class LivroService {
 		closeEntityManagerFactory();
 	}
 	
-	public void cadastrarLivro(LivroDto dto){	
+	public int cadastrarLivro(LivroDto dto, int qtd) {	
+		int retorno = 0;
 		createEntityManagerFactory();
 			createEntityManager();
-				em.getTransaction().begin();
-					Livro livro = LivroFactory.create(dto);
-					em.merge(livro);
-				em.getTransaction().commit();
+				Livro livroCadastrado = getLivroPorTombo(dto.getTomboPatrimonial());
+				if (livroCadastrado == null){
+					em.getTransaction().begin();
+						for (int i = 0; i < qtd; i++){
+							Livro livro = LivroFactory.create(dto);
+							em.merge(livro);
+							dto.setTomboPatrimonial(dto.getTomboPatrimonial() + 1);
+						}						
+					em.getTransaction().commit();
+				}
+				else 
+					retorno = 1;
+				
 			closeEntityManager();
 		closeEntityManagerFactory();
-		
+		return retorno;
 	}
 	
 	public void removerLivroAcervo(int tomboPatrimonial){
