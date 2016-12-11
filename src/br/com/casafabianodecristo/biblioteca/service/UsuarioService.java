@@ -89,9 +89,7 @@ public class UsuarioService {
 					try {
 						usuarioLogado = query.getSingleResult();
 					}
-					catch(NoResultException ex){
-						System.out.println("N�o foi poss�vel encontrar o usu�rio especificado.");
-					}
+					catch(NoResultException ex){}
 			closeEntityManager();
 		closeEntityManagerFactory();
 		return usuarioLogado;
@@ -107,7 +105,8 @@ public class UsuarioService {
 			try{
 				user = query.getSingleResult();
 			}
-			catch(NoResultException ex){}
+			catch(NoResultException ex){ex.printStackTrace();}
+			
 		closeEntityManager();
 		closeEntityManagerFactory();
 		return user.getDicaSenha();

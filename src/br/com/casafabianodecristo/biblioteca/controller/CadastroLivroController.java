@@ -2,6 +2,8 @@ package br.com.casafabianodecristo.biblioteca.controller;
 
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.model.Classificacao;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -57,5 +59,32 @@ public class CadastroLivroController {
 	            stage.close();
             }            
         });
+		
+		tomboPatrimonial.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	            if (!newValue.matches("\\d*")) {
+	            	tomboPatrimonial.setText(newValue.replaceAll("[^\\d]", ""));
+	            }
+	        }
+	    });
+		
+		quantidadeExemplares.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	            if (!newValue.matches("\\d*")) {
+	            	tomboPatrimonial.setText(newValue.replaceAll("[^\\d]", ""));
+	            }
+	        }
+	    });
+		
+		edicao.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	            if (!newValue.matches("\\d*")) {
+	            	tomboPatrimonial.setText(newValue.replaceAll("[^\\d]", ""));
+	            }
+	        }
+	    });
 	}
 }

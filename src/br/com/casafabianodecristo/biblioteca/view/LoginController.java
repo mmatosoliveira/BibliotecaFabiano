@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
+import br.com.casafabianodecristo.biblioteca.interfacevalidator.LoginInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -90,36 +91,16 @@ public class LoginController {
 	
 	public void validarLogin() {			 		
 		indicador.setVisible(true);
-				
-		if (nomeUsuario.getText().equals("") && senha.getText().equals("")){
-			nomeUsuario.setStyle("-fx-background-color: #ff7c7c;");
-    		senha.setStyle("-fx-background-color: #ff7c7c;");
-    		alerta.notificacaoAlerta("Login", "Verifique os campos obrigatórios e tente novamente.");
-    		nomeUsuario.requestFocus();
-			indicador.setVisible(false);
-    	}
-    	else if (senha.getText().equals("") && !nomeUsuario.getText().equals("")){
-    		senha.setStyle("-fx-background-color: #ff7c7c;");
-    		nomeUsuario.setStyle("-fx-background-color: white;");
-    		alerta.notificacaoAlerta("Login", "Verifique os campos obrigatórios e tente novamente.");
-    		senha.requestFocus();
-			indicador.setVisible(false);
-		}
-		else if (nomeUsuario.getText().equals("") && !senha.getText().equals("")){
-			nomeUsuario.setStyle("-fx-background-color: #ff7c7c;");
-			senha.setStyle("-fx-background-color: white;");
-			alerta.notificacaoAlerta("Login", "Verifique os campos obrigatórios e tente novamente.");
-    		nomeUsuario.requestFocus();
-    		indicador.setVisible(false);
-		}	
-		else {
-			senha.setStyle("-fx-background-color: white;");
-			nomeUsuario.setStyle("-fx-background-color: white;");
+		
+		if (LoginInterfaceValidator.validarCamposObrigatorios(nomeUsuario, senha)){
 			logar = taskLogar();
 			Thread t = new Thread(logar);
 			t.setDaemon(true);
 			t.start();
-		}			
+		}
+		else {
+			indicador.setVisible(false);
+		}
 	}
 	
 	private boolean logar(){
@@ -130,8 +111,10 @@ public class LoginController {
 			
 			if (dto != null){
 				logado = true;
-				if (tentativas == 3)
+				if (tentativas == 3){
 					dicaSenha = appService.getDicaSenha(nomeUsuario.getText());
+				}
+					
 			}
 			else
 				logado = false;			
@@ -152,8 +135,10 @@ public class LoginController {
             @Override
     		protected void succeeded() {
             	boolean result = (boolean) getValue();
-            	if (tentativas == 3){      
+            	if (tentativas == 3){ 
+            		System.out.println("tentativas == 3");
             		if (dicaSenha != null){
+            			System.out.println("dica senha != null");
             			labelDicaSenha.setText("Dica de senha: " + dicaSenha);
         				labelDicaSenha.setVisible(true);
         				tentativas = 0;
