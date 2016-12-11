@@ -1,6 +1,8 @@
 package br.com.casafabianodecristo.biblioteca.controller;
 
+import java.util.*;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
+import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroLivroInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.model.Classificacao;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -52,11 +54,29 @@ public class CadastroLivroController {
 		ObservableList<Classificacao> itens = FXCollections.observableArrayList(appService.getClassificacoes());
 		classificacao.setItems(itens);
 		
+		List<TextField> camposTexto = new ArrayList<TextField>();
+		camposTexto.add(tomboPatrimonial);
+		camposTexto.add(edicao);
+		camposTexto.add(editora);
+		camposTexto.add(titulo);
+		camposTexto.add(subtitulo);
+		camposTexto.add(nomeAutor);
+		camposTexto.add(quantidadeExemplares);
+		
+		
+		
 		botaoCancelar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
             	Stage stage = (Stage) botaoCancelar.getScene().getWindow();
 	            stage.close();
+            }            
+        });
+		
+		botaoSalvar.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+            	CadastroLivroInterfaceValidator.validarCamposObrigatorios(camposTexto, classificacao);
             }            
         });
 		
