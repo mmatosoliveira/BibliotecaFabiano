@@ -2,6 +2,9 @@ package br.com.casafabianodecristo.biblioteca.appservice;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+
+import org.modelmapper.ModelMapper;
+
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
@@ -13,6 +16,7 @@ public class BibliotecaAppService {
 	private UsuarioService usuarioService = new UsuarioService();
 	private EmprestimoService empService = new EmprestimoService();
 	private LembreteService lemService = new LembreteService();
+	private MensagemService msgService = new MensagemService(); 
 	
 	public BibliotecaAppService() {	}
 	
@@ -124,6 +128,9 @@ public class BibliotecaAppService {
 	 * MENSAGEM
 	 **/
 	
+	public boolean usuarioPossuiMensagens(int id){
+		return msgService.usuarioPossuiMensagensNaoLidas(id);
+	}
 	
 	/**
 	 * COMUM
@@ -131,7 +138,7 @@ public class BibliotecaAppService {
 	
 	
 	
-	public Usuario logar(String nomeUsuario, String senha){
+	public InicialDto logar(String nomeUsuario, String senha){
 		Usuario usuarioLogado = null;
 		Usuario admin = null;
 		String password = new String();
@@ -147,7 +154,22 @@ public class BibliotecaAppService {
 		
 		usuarioLogado = usuarioService.logar(nomeUsuario, senha);
 		
-		return usuarioLogado;
+		if (usuarioLogado != null){
+			System.out.println("chegou no IF do usuario logado != null");
+			ModelMapper mapper = new ModelMapper();
+			
+			UsuarioDto uDto = mapper.map(usuarioLogado, UsuarioDto.class);
+			uDto.setSenha(usuarioLogado.getSenha());
+			
+			int id = usuarioLogado.getIdUsuario();
+			String lembrete = this.getLembrete(id);
+			boolean msgs = this.usuarioPossuiMensagens(id);
+			List<Emprestimo> es = this.getDevolucoesPrevistas();
+			
+			InicialDto dto = new InicialDto(uDto, lembrete, msgs, es);
+			return dto;
+		}
+		else return null;
 	}	
 	
 	

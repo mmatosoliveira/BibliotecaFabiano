@@ -59,11 +59,17 @@ public class LembreteService {
 		Lembrete lembrete = new Lembrete();
 		createEntityManagerFactory();
 			createEntityManager();
+			
 				TypedQuery<Lembrete> query = em.createQuery("select o from Lembrete o where o.usuario.id = :idUsuario", Lembrete.class);
 				query.setParameter("idUsuario", idUsuario);
-				lembrete = query.getSingleResult();
+				try{
+					lembrete = query.getSingleResult();
+				}
+				catch(NoResultException e){}
+				
 			closeEntityManager();
 		closeEntityManagerFactory();
-		return lembrete.getLembrete();
+		
+		return lembrete.getLembrete(); 
 	}
 }

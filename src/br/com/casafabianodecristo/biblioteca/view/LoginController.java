@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
+import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.concurrent.Task;
@@ -44,11 +45,9 @@ public class LoginController {
     
     private BibliotecaAppService appService = new BibliotecaAppService();
     
-    private String lembrete = new String();
-	
-    private List<Emprestimo> historico = new ArrayList<Emprestimo>();
-    
     private String dicaSenha;
+    
+    private InicialDto dto = new InicialDto(); 
 	
 	public LoginController() {}
 	
@@ -128,24 +127,22 @@ public class LoginController {
 	}
 	
 	private boolean logar(){
-		try {
+		try {			
 			String password = ConvertToMD5.convertPasswordToMD5(senha.getText());
-			Usuario user = appService.logar(nomeUsuario.getText(), password);
+			
+			dto = appService.logar(nomeUsuario.getText(), password);
+			System.out.println(dto);
 			tentativas = tentativas + 1;
-			if (user != null){
+			
+			if (dto != null){
 				logado = true;
 				if (tentativas == 3)
 					dicaSenha = appService.getDicaSenha(nomeUsuario.getText());
-				else{
-					if (logado){
-						lembrete = appService.getLembrete(user.getIdUsuario());
-						historico = appService.getDevolucoesPrevistas();
-					}
-				}
 			}
 			else
 				logado = false;			
-		} catch (NoSuchAlgorithmException e) {e.printStackTrace();}
+		} 
+		catch (NoSuchAlgorithmException e) {e.printStackTrace();}
 		
 		return logado;
 	}	
@@ -170,7 +167,10 @@ public class LoginController {
     			}    
             	if (result == true){
             		//alerta.alertaAviso("Logar", "LOGOOOU!");
-            		principal.carregarTelaInicial(lembrete, historico, nomeUsuario.getText());
+            		
+            		
+            		System.out.println("nome usuario -->" + nomeUsuario);
+            		principal.carregarTelaInicial(dto.getTextoLembrete(), dto.getEmprestimo(), dto.getUsuario().getNomeUsuario());
             	}
             	else {
             		indicador.setVisible(false);

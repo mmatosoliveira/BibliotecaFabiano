@@ -70,6 +70,6 @@ public class Lembrete {
 
 	@Override
 	public String toString() {
-		return "Lembretes [Id=" + Id + ", lembrete=" + lembrete + "]";
+		return "Lembrete [Id=" + Id + ", lembrete=" + lembrete + "]";
 	}
 }

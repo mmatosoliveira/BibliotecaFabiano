@@ -40,7 +40,7 @@ public class Principal extends Application {
 		launch(args);
 	}
 	
-	public void carregarLogin(){
+	/*public void carregarLogin(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/PainelControle.fxml"));
@@ -56,9 +56,9 @@ public class Principal extends Application {
 		catch (IOException e) {
             e.printStackTrace();
         }
-	}
+	}*/
 	
-	/*public void carregarLogin(){
+	public void carregarLogin(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/Login.fxml"));
@@ -76,7 +76,7 @@ public class Principal extends Application {
 		} catch (IOException e) {
             e.printStackTrace();
         }
-	}*/
+	}
 	
 	@SuppressWarnings("unchecked")
 	public void carregarTelaInicial(String textoLembrete, List<Emprestimo> devolucoes, String nomeUsuario){

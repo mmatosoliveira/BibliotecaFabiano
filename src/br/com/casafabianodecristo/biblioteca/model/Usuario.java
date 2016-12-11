@@ -254,6 +254,10 @@ public class Usuario {
 		this.dicaSenha = dicaSenha;
 	}
 
+	public String getSenha(){
+		return this.senha;
+	}
+	
 	public void setSenhaCriptografada(String senha) throws NoSuchAlgorithmException{
 		this.senha = ConvertToMD5.convertPasswordToMD5(senha);
 	}

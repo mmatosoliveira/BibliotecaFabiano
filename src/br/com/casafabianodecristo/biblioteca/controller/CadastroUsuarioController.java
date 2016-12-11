@@ -1,7 +1,7 @@
 package br.com.casafabianodecristo.biblioteca.controller;
 
 import java.security.NoSuchAlgorithmException;
-import br.com.casafabianodecristo.biblioteca.Principal.Principal;
+import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.model.Usuario;
 import javafx.concurrent.Task;
