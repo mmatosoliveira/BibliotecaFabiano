@@ -104,11 +104,11 @@ public class CadastroLivroController {
         			t.setDaemon(true);
         			t.start();
             	}
-            	/*else{
+            	else{
             		paneSalvando.setVisible(false); 
                 	botaoSalvar.setDisable(false);
                 	botaoCancelar.setDisable(false);
-            	}*/
+            	}
             	           	
             }            
         });

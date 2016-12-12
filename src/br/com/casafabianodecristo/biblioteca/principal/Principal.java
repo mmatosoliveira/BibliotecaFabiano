@@ -173,6 +173,34 @@ public class Principal extends Application {
 		}
 	}
 	
+	@SuppressWarnings({"unchecked"})
+	public void carregarResultadoBusca(List<Livro> livros){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Principal.class.getResource("../view/ResultadoBuscaLivros.fxml"));
+		try {
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene  = new Scene(page);
+			
+			ResultadoBuscaController controller = loader.getController();
+			controller.setPrincipal(this);
+			
+			ObservableList<Livro> itens = FXCollections.observableList (livros);
+			TableView<Livro> tabelaLivros = (TableView<Livro>) scene.lookup("#tabelaLivros");
+			tabelaLivros.setItems(itens);
+						
+			Stage pagina = new Stage();
+			pagina.getIcons().add(new Image("file:resources/images/icon-search.png"));
+			pagina.setTitle("Resultado da busca de livros");
+			pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.setScene(scene);
+			pagina.show();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*public void carregarBuscaUsuario(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -281,33 +309,7 @@ public class Principal extends Application {
 	
 	
 	
-	@SuppressWarnings({"unchecked"})
-	public void carregarResultadoBusca(List<Livro> livros){
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Principal.class.getResource("../view/ResultadoBuscaLivros.fxml"));
-		try {
-			AnchorPane page = (AnchorPane) loader.load();
-			Scene scene  = new Scene(page);
-			
-			ResultadoBuscaController controller = loader.getController();
-			controller.setPrincipal(this);
-			
-			ObservableList<Livro> itens = FXCollections.observableList (livros);
-			TableView<Livro> tabelaLivros = (TableView<Livro>) scene.lookup("#tabelaLivros");
-			tabelaLivros.setItems(itens);
-						
-			Stage pagina = new Stage();
-			pagina.getIcons().add(new Image("file:resources/images/icon-search.png"));
-			pagina.setTitle("Resultado da busca de livros");
-			pagina.setResizable(false);
-			pagina.initOwner(primaryStage);
-			pagina.setScene(scene);
-			pagina.show();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	public void carregarInformacoesGeraisLivro(){
 		FXMLLoader loader = new FXMLLoader();

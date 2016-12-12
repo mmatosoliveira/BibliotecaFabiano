@@ -104,11 +104,10 @@ public class InicialController {
 	
 	@FXML
 	private void initialize(){
-		tpPesquisa.setText("Digite alguma informa��o e pesquise um livro!");
+		tpPesquisa.setText("Digite alguma informação e pesquise um livro!");
 		dadoLivroPesquisa.setTooltip(tpPesquisa);
 		tpLembrete.setText("Digite algum lembrete e aperte no disquete para salvar!");
 		lembrete.setTooltip(tpLembrete);
-		
 		
 		atualizarGrid();	
 		
@@ -133,7 +132,7 @@ public class InicialController {
 		itemCadastrarLivros.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				//principal.carregarCadastroLivros();			
+				principal.carregarCadastroLivros();			
 			}
 		});
 		
@@ -206,18 +205,14 @@ public class InicialController {
     	String textoAlerta = "Uma pesquisa vazia retorna todos os livros do sistema e isso pode demorar. Deseja continuar?";
     	
     	if (textoPesquisa.equals("")){
-    		if(alerta.alertaConfirmacao(textoAlerta).get() == ButtonType.OK){
-    			/*servico.createEntityManagerFactory();
-    				livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
-    			servico.closeEntityManagerFactory();
-    			principal.carregarResultadoBusca(livros);*/
+    		if(alerta.alertaConfirmacao(textoAlerta).get() == ButtonType.OK){	
+    			livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
+    			principal.carregarResultadoBusca(livros);
         	}     
     	}
     	else{
-    		/*servico.createEntityManagerFactory();
-				livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
-			servico.closeEntityManagerFactory();
-			principal.carregarResultadoBusca(livros);*/
+			livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
+			principal.carregarResultadoBusca(livros);
     	}
     	checkTitulo.setSelected(false);
     	checkAutor.setSelected(false);

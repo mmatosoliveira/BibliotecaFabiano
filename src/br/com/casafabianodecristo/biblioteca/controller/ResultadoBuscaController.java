@@ -1,7 +1,7 @@
 package br.com.casafabianodecristo.biblioteca.controller;
 
-import br.com.casafabianodecristo.biblioteca.Principal.Principal;
-import br.com.casafabianodecristo.biblioteca.appservice.Alertas;
+import br.com.casafabianodecristo.biblioteca.principal.Principal;
+import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.model.Livro;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.EventHandler;

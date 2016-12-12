@@ -2,13 +2,10 @@ package br.com.casafabianodecristo.biblioteca.appservice;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-
 import org.modelmapper.ModelMapper;
-
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
-import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.utils.ConvertToMD5;
 
 public class BibliotecaAppService {
@@ -29,8 +26,8 @@ public class BibliotecaAppService {
 		return livroService.getLivroPorTombo(tombo);
 	}
 	
-	public Livro getLivroPorTomboPatrimonial(int tombo){
-		return livroService.getLivroPorTomboPatrimonial(tombo);
+	public List<Livro> pesquisaRapidaLivro(String texto, boolean titulo, boolean autor, boolean tombo){
+		return livroService.pesquisaRapidaLivro(texto, titulo, autor, tombo);
 	}
 	
 	public void atualizarLivro(LivroDto dto){

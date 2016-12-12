@@ -1,9 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
-
-import org.eclipse.persistence.exceptions.DatabaseException;
-
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
@@ -47,25 +47,42 @@ public class LivroService {
 		return livro;
 	}
 	
-	public Livro getLivroPorTomboPatrimonial(int tombo){
-		Livro livro = null;
+	public List<Livro> pesquisaRapidaLivro(String texto, boolean titulo, boolean autor, boolean tombo){
+		List<Livro> livros = new ArrayList<>();
+		TypedQuery<Livro> query;
+		
 		createEntityManagerFactory();
 		createEntityManager();
-		TypedQuery<Livro> query = em.createQuery("select o from Livro o " +
-                "where o.tomboPatrimonial = :tombo",
-                Livro.class);
-		
-		query.setParameter("tombo", tombo);
-		
-		try {
-			livro = query.getSingleResult();
+		if (titulo){
+			query = em.createQuery("select o from Livro o where o.titulo like :texto", Livro.class);
+			query.setParameter("texto", "%" + texto + "%");
 		}
-		catch (NoResultException ex){}
+		else if (autor){
+			query = em.createQuery("select o from Livro o where o.nomeAutor like :texto", Livro.class);
+			query.setParameter("texto", "%" + texto + "%");
+		}
+		else if (tombo){
+			query = em.createQuery("select o from Livro o where o.tomboPatrimonial = :tombo", Livro.class);
+			int tomboP = 0;
+			try {tomboP = Integer.parseInt(texto);}
+			catch(NumberFormatException e){return new ArrayList<Livro>();}
+			System.out.println(tomboP);
+			query.setParameter("tombo", tomboP);
+		}
+		else {
+			query = em.createQuery("select o from Livro o where o.titulo like :texto", Livro.class);
+			query.setParameter("texto", "%" + texto + "%");
+		}
 		
+		try{
+			livros = query.getResultList();
+		}
+		catch(NoResultException ex){
+			System.out.println("Não foi possível encontrar o livro especificado.");
+		}
 		closeEntityManager();
 		closeEntityManagerFactory();
-		
-		return livro;
+		return livros;
 	}
 	
 	
