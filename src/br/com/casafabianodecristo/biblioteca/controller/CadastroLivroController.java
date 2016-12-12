@@ -170,7 +170,7 @@ public class CadastroLivroController {
     		protected void succeeded() {
             	boolean result = (boolean) getValue();
             	if (!result){
-            		alerta.notificacaoErro("Cadastrar livro", "Já existe um livro cadastrado com esse tombo patrimonial. \nConfira o tombo patrimonial e tente novamente.");
+            		alerta.notificacaoErro("Cadastrar livro", "Já existe um livro cadastrado com esse tombo patrimonial.\nConfira o tombo patrimonial e tente novamente.");
             		paneSalvando.setVisible(false);
             		botaoSalvar.setDisable(false);
                 	botaoCancelar.setDisable(false);
