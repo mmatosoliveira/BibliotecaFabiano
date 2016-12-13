@@ -11,12 +11,10 @@ import javafx.application.Application;
 import javafx.collections.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -73,7 +71,6 @@ public class Principal extends Application {
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage pagina = new Stage();			
 			Scene scene = new Scene (page);
-			Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 			TextArea lembrete = (TextArea) scene.lookup("#lembrete");
 			ObservableList<Emprestimo> itens =FXCollections.observableList(devolucoes); 
 			TableView<Emprestimo> tabelaEmprestimosPendentes  = (TableView<Emprestimo>) scene.lookup("#tabelaEmprestimosPendentes");
@@ -93,12 +90,9 @@ public class Principal extends Application {
 			
 			pagina.setTitle("LIVRES - Sistema para gestão de livros espíritas");
 			pagina.getIcons().add(new Image("file:resources/images/icon-principal.png"));
-			pagina.setResizable(false);
+			pagina.setResizable(true);
+			pagina.setMaximized(true);
 			pagina.setScene(scene);
-			pagina.setX(primaryScreenBounds.getMinX());
-			pagina.setY(primaryScreenBounds.getMinY());
-			pagina.setWidth(primaryScreenBounds.getWidth());
-			pagina.setHeight(primaryScreenBounds.getHeight());
 			
 			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				public void handle(WindowEvent ev) {
@@ -196,6 +190,26 @@ public class Principal extends Application {
 			pagina.setScene(scene);
 			pagina.show();
 			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void carregarConsultaAcervo(){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Principal.class.getResource("../view/ConsultarAcervo.fxml"));
+		try{
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			
+			Stage pagina = new Stage();
+			
+			pagina.setTitle("Consultar acervo");
+			//pagina.setResizable(false);
+			pagina.setMaximized(true);
+			pagina.initOwner(primaryStage);			
+			pagina.setScene(scene);
+			pagina.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

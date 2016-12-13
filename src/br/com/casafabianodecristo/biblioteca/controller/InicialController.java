@@ -60,6 +60,9 @@ public class InicialController {
 	private MenuItem itemCadastrarClassificacao;
 	
 	@FXML
+	private MenuItem itemConsultarAcervo;
+	
+	@FXML
 	private TextField dadoLivroPesquisa;
 	
 	@FXML
@@ -133,6 +136,13 @@ public class InicialController {
 			@Override
             public void handle(ActionEvent event) {
 				principal.carregarCadastroLivros();			
+			}
+		});
+		
+		itemConsultarAcervo.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				principal.carregarConsultaAcervo();			
 			}
 		});
 		

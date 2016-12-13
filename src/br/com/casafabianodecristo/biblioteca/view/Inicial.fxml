@@ -33,7 +33,7 @@
         <Menu mnemonicParsing="false" text="Livros">
           <items>
             <MenuItem fx:id="itemCadastrarLivros" mnemonicParsing="false" text="Cadastrar livros" />
-            <MenuItem mnemonicParsing="false" text="Consultar acervo" />
+            <MenuItem fx:id="itemConsultarAcervo" mnemonicParsing="false" text="Consultar acervo" />
             <MenuItem mnemonicParsing="false" text="Remover livros do acervo" />
             <MenuItem mnemonicParsing="false" text="Doar livros do acervo" />
             <MenuItem mnemonicParsing="false" text="Gerar etiquetas" />
