@@ -100,6 +100,7 @@ public class Principal extends Application {
 					//no clique do botão cancelar.
 					//Verificar na tela de cadastro de classificação!
 					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
+						
 						pagina.close();	    	
 			    	}	
 					else {} 

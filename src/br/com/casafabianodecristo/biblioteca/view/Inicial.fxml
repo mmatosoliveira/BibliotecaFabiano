@@ -33,7 +33,6 @@
         <Menu mnemonicParsing="false" text="Livros">
           <items>
             <MenuItem fx:id="itemCadastrarLivros" mnemonicParsing="false" text="Cadastrar livros" />
-            <MenuItem fx:id="itemConsultarAcervo" mnemonicParsing="false" text="Consultar acervo" />
             <MenuItem mnemonicParsing="false" text="Remover livros do acervo" />
             <MenuItem mnemonicParsing="false" text="Doar livros do acervo" />
             <MenuItem mnemonicParsing="false" text="Gerar etiquetas" />
@@ -174,7 +173,7 @@
         <Image url="@../../../../../../resources/images/add-icon.png" />
       </image>
     </ImageView>
-    <Label alignment="CENTER" layoutY="441.0" prefHeight="57.0" prefWidth="238.0" text="X mensagens nao lidas!" AnchorPane.bottomAnchor="191.0" AnchorPane.rightAnchor="0.0">
+    <Label alignment="CENTER" layoutY="441.0" prefHeight="57.0" prefWidth="238.0" text="X mensagens nao lidas!" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="0.0">
       <font>
         <Font size="15.0" />
       </font>

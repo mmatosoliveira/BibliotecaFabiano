@@ -44,7 +44,10 @@ public class ResultadoBuscaController {
 	
 	@FXML
 	private void initialize(){
-		colunaTitulo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getTitulo()));
+		colunaTitulo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x
+				.getValue()
+				.getTitulo()));
+		
 		colunaSubtitulo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getSubtitulo()));
 		colunaAutor.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getNomeAutor()));
 		colunaEmprestado.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getFlEmprestadoString()));		
@@ -66,7 +69,7 @@ public class ResultadoBuscaController {
             		alerta.alertaAviso("Clique", "Vc clicou no ver detalhes com o livro selecionado de tombo: " + livroSelecionado.getTomboPatrimonial());
             	}
             	else
-            		alerta.alertaErro("Erro!", "Voc� deve selecionar um registro na tabela para ver os detalhes.");
+            		alerta.alertaErro("Erro!", "Você deve selecionar um registro na tabela para ver os detalhes.");
             }            
         });
 	}
