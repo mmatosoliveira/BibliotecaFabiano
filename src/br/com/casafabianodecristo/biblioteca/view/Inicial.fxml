@@ -33,8 +33,7 @@
         <Menu mnemonicParsing="false" text="Livros">
           <items>
             <MenuItem fx:id="itemCadastrarLivros" mnemonicParsing="false" text="Cadastrar livros" />
-            <MenuItem mnemonicParsing="false" text="Remover livros do acervo" />
-            <MenuItem mnemonicParsing="false" text="Doar livros do acervo" />
+            <MenuItem fx:id="itemRemoverDoarLivro" mnemonicParsing="false" text="Remover/Doar livros do acervo" />
             <MenuItem mnemonicParsing="false" text="Gerar etiquetas" />
           </items>
         </Menu>
@@ -56,7 +55,7 @@
           <items>
             <MenuItem mnemonicParsing="false" text="Realizar novo empréstimo" />
             <MenuItem mnemonicParsing="false" text="Renovar empréstimo" />
-            <MenuItem mnemonicParsing="false" text="Consultar empréstimos atrasados" />
+            <MenuItem fx:id="itemConsultarEmprestimo" mnemonicParsing="false" text="Consultar empréstimos" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Relatórios">

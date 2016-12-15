@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.RemoverDoarLivrosController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label alignment="CENTER" prefWidth="723.0" text="Remover/Doar livros do acervo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+      <font>
+        <Font name="Calibri Light Italic" size="20.0" />
+      </font>
+    </Label>
+    <HBox id="HBox" alignment="CENTER" layoutY="40.0" prefWidth="723.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <children>
+        <Button fx:id="botaoRemover" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Remover" />
+        <Button fx:id="botaoDoar" mnemonicParsing="false" prefWidth="86.0" text="Doar" />
+        <Button fx:id="botaoFechar" mnemonicParsing="false" prefWidth="86.0" text="Fechar" />
+      </children>
+    </HBox>
+      <TableView fx:id="tabelaLivros" layoutX="269.0" layoutY="92.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0">
+        <columns>
+          <TableColumn fx:id="colunaTitulo" prefWidth="75.0" text="Título" />
+          <TableColumn fx:id="colunaSubtitulo" prefWidth="258.0" text="Subtítulo" />
+            <TableColumn fx:id="colunaAutor" prefWidth="75.0" text="Autor" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+  </children>
+</AnchorPane>

@@ -2,6 +2,7 @@ package br.com.casafabianodecristo.biblioteca.controller;
 
 import java.security.NoSuchAlgorithmException;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
+import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.model.Usuario;
 import javafx.concurrent.Task;
@@ -137,7 +138,7 @@ public class CadastroUsuarioController {
 		String nomeUsuario = this.nomeUsuario.getText();
 		String senha = this.senha.getText();
 		String dicaSenha = this.dicaSenha.getText();
-		servico.createEntityManagerFactory();
+		/*servico.createEntityManagerFactory();
 		Usuario usuario;
 		if (adm){
 			usuario = new Usuario(nome, sobrenome, nomeUsuario, ddd, telefone, 1, dicaSenha);
@@ -149,9 +150,9 @@ public class CadastroUsuarioController {
 			usuario = new Usuario(nome, sobrenome, ddd, telefone, 0);
 		}		
 			boolean resultado = servico.cadastrarUsuario(usuario);
-		servico.closeEntityManagerFactory();
+		servico.closeEntityManagerFactory();*/
 		
-		return resultado;
+		return true;
 	}
 	
 	protected boolean alterarDadosUsuario(){
@@ -161,11 +162,11 @@ public class CadastroUsuarioController {
 		int ddd = Integer.parseInt(this.ddd.getText());
 		int telefone = Integer.parseInt(this.telefone.getText());
 		
-		Usuario usuario = new Usuario(id, nome, sobrenome, ddd, telefone);
+		/*suario usuario = new Usuario(id, nome, sobrenome, ddd, telefone);
 		servico.createEntityManagerFactory();
 			boolean resultado = servico.alterarDadosUsuario(id, usuario);
-		servico.closeEntityManagerFactory();
-		return resultado;
+		servico.closeEntityManagerFactory();*/
+		return true;
 	}
 	
 	@SuppressWarnings("rawtypes")

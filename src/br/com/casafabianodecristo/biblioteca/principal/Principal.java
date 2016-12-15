@@ -96,15 +96,12 @@ public class Principal extends Application {
 			
 			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				public void handle(WindowEvent ev) {
-					//TODO Verificar forma de impedir que ele feche a tela
-					//no clique do botão cancelar.
-					//Verificar na tela de cadastro de classificação!
 					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
-						
-						pagina.close();	    	
+						System.exit(0);	    	
 			    	}	
-					else {} 
-						
+					else {
+						ev.consume();
+					} 
 	        	}
 			});
 			
@@ -134,8 +131,11 @@ public class Principal extends Application {
 			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				public void handle(WindowEvent ev) {
 					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
-			            pagina.close();	    	
+						System.exit(0);	    	
 			    	}	
+					else {
+						ev.consume();
+					}
 	        	}
 			});
 			
@@ -196,22 +196,64 @@ public class Principal extends Application {
 		}
 	}
 	
-	public void carregarConsultaAcervo(){
+	public void carregarRemoverDoarLivro(){
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Principal.class.getResource("../view/ConsultarAcervo.fxml"));
+		loader.setLocation(Principal.class.getResource("../view/RemoverDoarLivros.fxml"));
 		try{
 			AnchorPane page = (AnchorPane) loader.load();
 			Scene scene = new Scene(page);
 			
 			Stage pagina = new Stage();
 			
-			pagina.setTitle("Consultar acervo");
+			pagina.setTitle("Remover/Doar livros do acervo");
 			//pagina.setResizable(false);
 			pagina.setMaximized(true);
 			pagina.initOwner(primaryStage);			
 			pagina.setScene(scene);
 			pagina.show();
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void carregarConsultaEmprestimo(){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/Emprestimo.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Scene scene = new Scene(page);
+			
+			Stage pagina = new Stage();
+			//pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
+			pagina.setTitle("Consultar empréstimos");
+			//pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.setScene(scene);
+			pagina.show();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void carregarCadastroUsuario(){
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/CadastrarUsuario.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Scene scene = new Scene(page);
+			
+			Stage pagina = new Stage();
+			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
+			pagina.setTitle("Cadastrar usuário");
+			pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.setScene(scene);
+			pagina.show();
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -299,26 +341,7 @@ public class Principal extends Application {
         }
 	}
 	
-	public void carregarCadastroUsuario(){
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/CadastrarUsuario.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-			
-			Scene scene = new Scene(page);
-			
-			Stage pagina = new Stage();
-			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
-			pagina.setTitle("Cadastrar usuário");
-			pagina.setResizable(false);
-			pagina.initOwner(primaryStage);
-			pagina.setScene(scene);
-			pagina.show();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	
 	

@@ -60,7 +60,10 @@ public class InicialController {
 	private MenuItem itemCadastrarClassificacao;
 	
 	@FXML
-	private MenuItem itemConsultarAcervo;
+	private MenuItem itemRemoverDoarLivro;
+	
+	@FXML
+	private MenuItem itemConsultarEmprestimo;
 	
 	@FXML
 	private TextField dadoLivroPesquisa;
@@ -139,10 +142,10 @@ public class InicialController {
 			}
 		});
 		
-		itemConsultarAcervo.setOnAction(new EventHandler<ActionEvent>(){
+		itemRemoverDoarLivro.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarConsultaAcervo();			
+				principal.carregarRemoverDoarLivro();			
 			}
 		});
 		
@@ -153,10 +156,17 @@ public class InicialController {
 			}
 		});
 		
+		itemConsultarEmprestimo.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				principal.carregarConsultaEmprestimo();			
+			}
+		});
+		
 		itemCadastrarUsuario.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				//principal.carregarCadastroUsuario();			
+				principal.carregarCadastroUsuario();			
 			}
 		});
 		
@@ -202,7 +212,7 @@ public class InicialController {
 		botaoCadastrarUsuario.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	//principal.carregarCadastroUsuario();	
+            	principal.carregarCadastroUsuario();	
             }            
         });
 	}
