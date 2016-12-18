@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
+import br.com.casafabianodecristo.biblioteca.components.Numberfield;
 import br.com.casafabianodecristo.biblioteca.model.Usuario;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -30,10 +31,10 @@ public class CadastroUsuarioController {
 	private TextField sobrenome;
 	
 	@FXML
-	private TextField ddd;
+	private Numberfield ddd; 
 	
 	@FXML
-	private TextField telefone;
+	private Numberfield telefone = new Numberfield();
 	
 	@FXML
 	private PasswordField senha;
@@ -85,6 +86,8 @@ public class CadastroUsuarioController {
 	
 	@FXML
 	public void initialize(){
+		ddd.setMaxLength(3);
+		//telefone.setMaxLength(9);
 		botaoCancelar.setOnAction((event) -> {
 			Stage stage = (Stage) botaoCancelar.getScene().getWindow();
             stage.close();

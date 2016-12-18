@@ -54,18 +54,18 @@ public class CadastroLivroInterfaceValidator {
 				validado[camposTexto.indexOf(item)] = false;
 			}
 			else if (!item.getText().equals("") && classificacao.getSelectionModel().getSelectedItem() == null){
-				item.setStyle("-fx-background-color: white;");
+				item.setStyle("");
 				classificacao.setStyle("-fx-background-color: #ff7c7c;");
 				validado[camposTexto.indexOf(item)] = false;
 			}
 			else if (item.getText().equals("") && classificacao.getSelectionModel().getSelectedItem() != null){
 				item.setStyle("-fx-background-color: #ff7c7c;");
-				classificacao.setStyle("-fx-background-color: white;");
+				classificacao.setStyle("");
 				validado[camposTexto.indexOf(item)] = false;
 			}
 			else if (!item.getText().equals("") && classificacao.getSelectionModel().getSelectedItem() != null){
-				item.setStyle("-fx-background-color: white;");
-				classificacao.setStyle("-fx-background-color: white;");
+				item.setStyle("");
+				classificacao.setStyle("");
 				validado[camposTexto.indexOf(item)] = true;
 			}
 		}

@@ -92,7 +92,7 @@ public class Principal extends Application {
 			pagina.setTitle("LIVRES - Sistema para gestão de livros espíritas");
 			pagina.getIcons().add(new Image("file:resources/images/icon-principal.png"));
 			pagina.setResizable(true);
-			pagina.setMaximized(true);
+			pagina.setMaximized(false);
 			pagina.setScene(scene);
 			
 			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {

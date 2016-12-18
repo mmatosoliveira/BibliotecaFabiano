@@ -1,9 +1,7 @@
 package br.com.casafabianodecristo.biblioteca.controller;
 
 import java.util.*;
-
 import org.modelmapper.ModelMapper;
-
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.components.Numberfield;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
@@ -11,8 +9,6 @@ import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroLivroInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.model.Classificacao;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -43,7 +39,7 @@ public class CadastroLivroController {
 	private TextField nomeAutor;
 	
 	@FXML
-	private TextField edicao;
+	private Numberfield edicao;
 	
 	@FXML
 	private TextField editora;
@@ -52,7 +48,7 @@ public class CadastroLivroController {
 	private ComboBox<Classificacao> classificacao = new ComboBox<>();
 	
 	@FXML
-	private TextField quantidadeExemplares;
+	private Numberfield quantidadeExemplares;
 	
 	@FXML
 	private Pane paneSalvando;
@@ -68,8 +64,12 @@ public class CadastroLivroController {
 	
 	@FXML
 	public void initialize(){
+		tomboPatrimonial.setMaxLength(6);
+		edicao.setMaxLength(3);
+		quantidadeExemplares.setMaxLength(2);
 		ObservableList<Classificacao> itens = FXCollections.observableArrayList(appService.getClassificacoes());
 		classificacao.setItems(itens);
+		
 		
 		List<TextField> camposTexto = new ArrayList<TextField>();
 		camposTexto.add(tomboPatrimonial);
@@ -113,39 +113,12 @@ public class CadastroLivroController {
             	           	
             }            
         });
-		
-		/*tomboPatrimonial.textProperty().addListener(new ChangeListener<String>() {
-	        @Override
-	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-	            if (!newValue.matches("\\d*")) {
-	            	tomboPatrimonial.setText(newValue.replaceAll("[^\\d]", ""));
-	            }
-	        }
-	    });*/
-		
-		quantidadeExemplares.textProperty().addListener(new ChangeListener<String>() {
-	        @Override
-	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-	            if (!newValue.matches("\\d*")) {
-	            	quantidadeExemplares.setText(newValue.replaceAll("[^\\d]", ""));
-	            }
-	        }
-	    });
-		
-		edicao.textProperty().addListener(new ChangeListener<String>() {
-	        @Override
-	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-	            if (!newValue.matches("\\d*")) {
-	            	edicao.setText(newValue.replaceAll("[^\\d]", ""));
-	            }
-	        }
-	    });
 	}
 	
 	private boolean cadastrarLivro(){
-		int tombo = Integer.parseInt(tomboPatrimonial.getText());
-    	int edicaoLivro = Integer.parseInt(edicao.getText());
-    	int qtdExemplares = Integer.parseInt(quantidadeExemplares.getText());
+		int tombo = tomboPatrimonial.getValue();
+    	int edicaoLivro = edicao.getValue();
+    	int qtdExemplares = quantidadeExemplares.getValue();
     	ModelMapper mapper = new ModelMapper();                	
     	ClassificacaoDto dtoClassif = mapper.map(classificacao.getSelectionModel().getSelectedItem(), ClassificacaoDto.class);
     	LivroDto dto = new LivroDto(tombo, titulo.getText(), subtitulo.getText(), nomeAutor.getText(), editora.getText(), edicaoLivro, dtoClassif, 0, 0, 0);
