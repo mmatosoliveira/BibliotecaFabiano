@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -142,6 +143,7 @@ public class Principal extends Application {
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.setScene(scene);
+			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.show();
 			
 		} catch (IOException e) {}
@@ -161,6 +163,7 @@ public class Principal extends Application {
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.setScene(scene);
+			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.show();
 		} 
 		catch (IOException e) {
@@ -189,6 +192,7 @@ public class Principal extends Application {
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.setScene(scene);
+			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.show();
 			
 		} catch (IOException e) {
@@ -206,10 +210,10 @@ public class Principal extends Application {
 			Stage pagina = new Stage();
 			
 			pagina.setTitle("Remover/Doar livros do acervo");
-			//pagina.setResizable(false);
 			pagina.setMaximized(true);
 			pagina.initOwner(primaryStage);			
 			pagina.setScene(scene);
+			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -229,6 +233,7 @@ public class Principal extends Application {
 			pagina.setTitle("Consultar empréstimos");
 			//pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
 			pagina.show();
 		} 
@@ -250,6 +255,7 @@ public class Principal extends Application {
 			pagina.setTitle("Cadastrar usuário");
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
 			pagina.show();
 		} 
@@ -340,14 +346,6 @@ public class Principal extends Application {
             e.printStackTrace();
         }
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public void carregarInformacoesGeraisLivro(){
 		FXMLLoader loader = new FXMLLoader();
