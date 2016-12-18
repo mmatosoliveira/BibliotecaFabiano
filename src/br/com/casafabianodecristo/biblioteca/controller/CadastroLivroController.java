@@ -5,6 +5,7 @@ import java.util.*;
 import org.modelmapper.ModelMapper;
 
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
+import br.com.casafabianodecristo.biblioteca.components.Numberfield;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroLivroInterfaceValidator;
@@ -30,7 +31,7 @@ public class CadastroLivroController {
 	private Button botaoCancelar;
 	
 	@FXML
-	private TextField tomboPatrimonial;
+	private Numberfield tomboPatrimonial;
 	
 	@FXML
 	private TextField titulo;
@@ -113,14 +114,14 @@ public class CadastroLivroController {
             }            
         });
 		
-		tomboPatrimonial.textProperty().addListener(new ChangeListener<String>() {
+		/*tomboPatrimonial.textProperty().addListener(new ChangeListener<String>() {
 	        @Override
 	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 	            if (!newValue.matches("\\d*")) {
 	            	tomboPatrimonial.setText(newValue.replaceAll("[^\\d]", ""));
 	            }
 	        }
-	    });
+	    });*/
 		
 		quantidadeExemplares.textProperty().addListener(new ChangeListener<String>() {
 	        @Override

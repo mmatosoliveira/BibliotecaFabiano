@@ -1,14 +1,10 @@
 package br.com.casafabianodecristo.biblioteca.components;
 
 import java.io.IOException;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 
-public class Numberfield extends AnchorPane {
+public class Numberfield extends TextField {
 	@FXML
 	private TextField numberField;
 
@@ -22,15 +18,24 @@ public class Numberfield extends AnchorPane {
 		}catch(IOException e){}
 	}
 	
-	@FXML
-	private void initialize(){
-		numberField.textProperty().addListener(new ChangeListener<String>() {
-	        @Override
-	        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-	            if (!newValue.matches("\\d*")) {
-	            	numberField.setText(newValue.replaceAll("[^\\d]", ""));
-	            }
-	        }
-	    });
-	}
+	public void replaceText(int start, int end, String text)
+    {
+        if (validate(text))
+        {
+            super.replaceText(start, end, text);
+        }
+    }
+
+    public void replaceSelection(String text)
+    {
+        if (validate(text))
+        {
+            super.replaceSelection(text);
+        }
+    }
+
+    private boolean validate(String text)
+    {
+        return text.matches("[0-9]*");
+    }
 }

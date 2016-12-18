@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import br.com.casafabianodecristo.biblioteca.components.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
@@ -27,7 +28,7 @@
         <Label text="Editora:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
         <Label text="Classificação:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
         <Label text="Quantidade de exemplares:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-        <TextField fx:id="tomboPatrimonial" editable="true" prefWidth="200.0" GridPane.columnIndex="1" />
+        <Numberfield fx:id="tomboPatrimonial" maxHeight="26.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="344.0" GridPane.columnIndex="1" />
         <TextField fx:id="titulo" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField fx:id="subtitulo" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <TextField fx:id="nomeAutor" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
