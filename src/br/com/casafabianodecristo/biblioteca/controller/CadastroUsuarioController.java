@@ -86,7 +86,7 @@ public class CadastroUsuarioController {
 	
 	@FXML
 	public void initialize(){
-		ddd.setMaxLength(3);
+		//ddd.setMaxLength(3);
 		//telefone.setMaxLength(9);
 		botaoCancelar.setOnAction((event) -> {
 			Stage stage = (Stage) botaoCancelar.getScene().getWindow();

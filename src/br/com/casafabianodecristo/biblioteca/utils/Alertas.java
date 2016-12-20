@@ -81,4 +81,12 @@ public class Alertas {
 		return result;
 	}
 	
+	public Optional<ButtonType> alertaConfirmacaoSairTelaCadastro(){
+		alertConfirmacao.setTitle("Confirmação");
+		alertConfirmacao.setHeaderText("Deseja realmente sair e perder os dados que não foram salvos?");
+		alertConfirmacao.setContentText(null);	
+		Optional<ButtonType> result = alertConfirmacao.showAndWait();
+		return result;
+	}
+	
 }

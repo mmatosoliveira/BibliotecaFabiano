@@ -9,13 +9,15 @@ import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroLivroInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.model.Classificacao;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -65,11 +67,11 @@ public class CadastroLivroController {
 	@FXML
 	public void initialize(){
 		tomboPatrimonial.setMaxLength(6);
+		tomboPatrimonial.setMinLength(6);
 		edicao.setMaxLength(3);
 		quantidadeExemplares.setMaxLength(2);
 		ObservableList<Classificacao> itens = FXCollections.observableArrayList(appService.getClassificacoes());
 		classificacao.setItems(itens);
-		
 		
 		List<TextField> camposTexto = new ArrayList<TextField>();
 		camposTexto.add(tomboPatrimonial);
@@ -79,20 +81,54 @@ public class CadastroLivroController {
 		camposTexto.add(nomeAutor);
 		camposTexto.add(quantidadeExemplares);
 		
+		for (TextField tf : camposTexto){
+			tf.focusedProperty().addListener(new ChangeListener<Boolean>()
+			{
+			    @Override
+			    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+			    {
+			        if (oldPropertyValue && tf.getText().equals(""))
+			        	tf.setStyle("-fx-background-color: #ff7c7c;");
+			        else if (oldPropertyValue && !tf.getText().equals(""))
+			        	tf.setStyle("");
+			    }
+			});
+		}
 		
-		
-		botaoCancelar.setOnMousePressed(new EventHandler<MouseEvent>() {
+		classificacao.focusedProperty().addListener(new ChangeListener<Boolean>()
+		{
+		    @Override
+		    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+		    {
+		        if (oldPropertyValue && classificacao.getSelectionModel().getSelectedItem() == null)
+		        	classificacao.setStyle("-fx-background-color: #ff7c7c;");
+		        else if (oldPropertyValue && classificacao.getSelectionModel().getSelectedItem() != null)
+		        	classificacao.setStyle("");
+		        	
+		    }
+		});
+	
+		/*botaoCancelar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	Stage stage = (Stage) botaoCancelar.getScene().getWindow();
-	            stage.close();
+            	
             }            
-        });
+        });*/
 		
-		botaoSalvar.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            	paneSalvando.setStyle("-fx-background-color: #d7dbe2;");
+		botaoCancelar.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				if(alerta.alertaConfirmacaoSairTelaCadastro().get() == ButtonType.OK){
+					Stage stage = (Stage) botaoCancelar.getScene().getWindow();
+	            	stage.close();	
+				}
+			}
+		});
+		
+		botaoSalvar.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				paneSalvando.setStyle("-fx-background-color: #d7dbe2;");
             	paneSalvando.setVisible(true); 
             	botaoSalvar.setDisable(true);
             	botaoCancelar.setDisable(true);
@@ -110,9 +146,8 @@ public class CadastroLivroController {
                 	botaoSalvar.setDisable(false);
                 	botaoCancelar.setDisable(false);
             	}
-            	           	
-            }            
-        });
+			}
+		});
 	}
 	
 	private boolean cadastrarLivro(){
