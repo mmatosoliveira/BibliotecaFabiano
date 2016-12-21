@@ -150,8 +150,6 @@ public class BibliotecaAppService {
 	 * COMUM
 	 **/
 	
-	
-	
 	public InicialDto logar(String nomeUsuario, String senha){
 		Usuario usuarioLogado = null;
 		Usuario admin = null;
@@ -183,7 +181,5 @@ public class BibliotecaAppService {
 			return dto;
 		}
 		else return null;
-	}	
-	
-	
+	}		
 }
