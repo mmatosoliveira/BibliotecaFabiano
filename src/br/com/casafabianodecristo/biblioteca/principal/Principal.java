@@ -264,6 +264,25 @@ public class Principal extends Application {
 		}
 	}
 	
+	public void carregarEmprestimoLivro(){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/EmprestarLivro.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			Scene scene = new Scene(page);
+			Stage pagina = new Stage();
+			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
+			pagina.setTitle("Realizar empréstimo");
+			//pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.setScene(scene);
+			pagina.show();
+			
+		}catch(IOException e){}
+	}
+	
 	/*public void carregarBuscaUsuario(){
 		try {
 			FXMLLoader loader = new FXMLLoader();

@@ -153,4 +153,8 @@ public class UsuarioDto {
 	public void setDicaSenha(String dicaSenha) {
 		this.dicaSenha = dicaSenha;
 	}
+	
+	public String getFlInativoString(){
+		return (this.flInativo == 1) ? "Inativo" : "Ativo"; 
+	}
 }

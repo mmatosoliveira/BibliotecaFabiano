@@ -112,7 +112,7 @@
     <Label alignment="CENTER" font="$x1" layoutX="7.0" layoutY="105.0" prefWidth="231.0" text="Menu rápido" />
     <GridPane layoutY="135.0" prefHeight="181.0" prefWidth="231.0" AnchorPane.leftAnchor="7.0">
       <children>
-        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Emprestar livro" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Button fx:id="botaoEmprestarLivro" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Emprestar livro" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Renovar empréstimo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Button fx:id="botaoCadastrarLivro" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Cadastrar livro" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Button fx:id="botaoCadastrarUsuario" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Cadastrar usuário" GridPane.columnIndex="0" GridPane.rowIndex="3" />

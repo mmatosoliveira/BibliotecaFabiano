@@ -107,13 +107,6 @@ public class CadastroLivroController {
 		        	
 		    }
 		});
-	
-		/*botaoCancelar.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            	
-            }            
-        });*/
 		
 		botaoCancelar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override

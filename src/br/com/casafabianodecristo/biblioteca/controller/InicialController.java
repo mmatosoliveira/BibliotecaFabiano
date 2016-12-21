@@ -83,6 +83,9 @@ public class InicialController {
 	@FXML
 	private Button botaoCadastrarUsuario;
 	
+	@FXML
+	private Button botaoEmprestarLivro;
+	
 	private List<Livro> livros;
 	
 	private BibliotecaAppService servico = new BibliotecaAppService();
@@ -183,8 +186,7 @@ public class InicialController {
 				if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK)
 					System.exit(0);				
 			}
-		});
-		
+		});		
 		
 		iconeSalvarLembrete.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -213,6 +215,13 @@ public class InicialController {
             @Override
             public void handle(MouseEvent event) {
             	principal.carregarCadastroUsuario();	
+            }            
+        });
+		
+		botaoEmprestarLivro.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+            	principal.carregarEmprestimoLivro();	
             }            
         });
 	}
