@@ -28,17 +28,18 @@ public class EmprestimoService {
 	
 	public EmprestimoService(){}
 	
-	public void realizarEmprestimo(EmprestimoDto dto){
+	public Emprestimo realizarEmprestimo(EmprestimoDto dto){
 		createEntityManagerFactory();
 			createEntityManager();
 				em.getTransaction().begin();
 					Emprestimo emprestimo = EmprestimoFactory.create(dto);
 					emprestimo.getLivro().setFlEmprestado(1);
 					emprestimo.getLivro().addEmprestimo(emprestimo);
-					em.merge(emprestimo);
+					Emprestimo e = em.merge(emprestimo);
 				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();
+		return e;
 	}
 	
 	public void devolverLivro(EmprestimoDto dto){

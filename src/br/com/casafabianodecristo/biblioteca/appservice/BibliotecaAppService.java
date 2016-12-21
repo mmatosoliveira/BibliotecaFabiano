@@ -98,8 +98,8 @@ public class BibliotecaAppService {
 	 * EMPRÉSTIMO
 	 **/
 	
-	public void realizarEmprestimo(EmprestimoDto dto){
-		empService.realizarEmprestimo(dto);
+	public Emprestimo realizarEmprestimo(EmprestimoDto dto){
+		return empService.realizarEmprestimo(dto);
 	}
 	
 	public List<Emprestimo> getDevolucoesPrevistas(){

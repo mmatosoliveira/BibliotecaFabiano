@@ -66,6 +66,9 @@ public class InicialController {
 	private MenuItem itemConsultarEmprestimo;
 	
 	@FXML
+	private MenuItem itemRealizarEmprestimo;
+	
+	@FXML
 	private TextField dadoLivroPesquisa;
 	
 	@FXML
@@ -185,6 +188,13 @@ public class InicialController {
             public void handle(ActionEvent event) {
 				if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK)
 					System.exit(0);				
+			}
+		});		
+		
+		itemRealizarEmprestimo.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				principal.carregarEmprestimoLivro();			
 			}
 		});		
 		
