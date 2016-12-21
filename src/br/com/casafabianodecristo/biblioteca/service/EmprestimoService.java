@@ -28,6 +28,22 @@ public class EmprestimoService {
 	
 	public EmprestimoService(){}
 	
+	public List<Emprestimo> getEmprestimos(){
+		List<Emprestimo> emprestimos = null;
+		createEntityManagerFactory();
+			createEntityManager();
+				em.getTransaction().begin();
+					TypedQuery<Emprestimo> query = em.createQuery("select o from Emprestimo o", Emprestimo.class);
+					try{
+						emprestimos = query.getResultList();
+					}
+					catch(NoResultException e){}
+				em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+		return emprestimos;
+	}
+	
 	public Emprestimo realizarEmprestimo(EmprestimoDto dto){
 		createEntityManagerFactory();
 			createEntityManager();

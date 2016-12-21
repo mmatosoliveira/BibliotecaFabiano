@@ -3,6 +3,7 @@ package br.com.casafabianodecristo.biblioteca.controller;
 import java.util.List;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
+import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -165,7 +166,8 @@ public class InicialController {
 		itemConsultarEmprestimo.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarConsultaEmprestimo();			
+				List<EmprestimoDto> emprestimos = servico.getEmprestimos();
+				principal.carregarConsultaEmprestimo(emprestimos);			
 			}
 		});
 		

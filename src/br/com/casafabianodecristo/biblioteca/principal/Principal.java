@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.controller.*;
+import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.view.LoginController;
@@ -220,18 +221,20 @@ public class Principal extends Application {
 		}
 	}
 	
-	public void carregarConsultaEmprestimo(){
+	@SuppressWarnings("unchecked")
+	public void carregarConsultaEmprestimo(List<EmprestimoDto> emprestimos){
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/Emprestimo.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			
 			Scene scene = new Scene(page);
+			ObservableList<EmprestimoDto> itens = FXCollections.observableList (emprestimos);
+			TableView<EmprestimoDto> tabelaEmprestimos = (TableView<EmprestimoDto>) scene.lookup("#emprestimos");
+			tabelaEmprestimos.setItems(itens);
 			
 			Stage pagina = new Stage();
-			//pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
 			pagina.setTitle("Consultar empréstimos");
-			//pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);

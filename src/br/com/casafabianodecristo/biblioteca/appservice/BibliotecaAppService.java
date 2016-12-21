@@ -109,6 +109,18 @@ public class BibliotecaAppService {
 	public void devolverLivro(EmprestimoDto dto){
 		empService.devolverLivro(dto);
 	}
+	
+	public List<EmprestimoDto> getEmprestimos(){
+		List<Emprestimo> emprestimos = empService.getEmprestimos();
+		List<EmprestimoDto> dto = new ArrayList<EmprestimoDto>(); 
+		
+		if (emprestimos.size() != 0){
+			for (Emprestimo e : emprestimos){
+				dto.add(new EmprestimoDto(e.getId(), e.getDataEmprestimo(), e.getDataDevolucaoPrevista(), e.getDataDevolucaoEfetiva(), e.getLivro(), e.getUsuario()));
+			}
+		}
+		return dto;
+	}
 
 	/**
 	 * LEMBRETE
