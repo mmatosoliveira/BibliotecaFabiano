@@ -133,7 +133,7 @@ public class Principal extends Application {
 			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				public void handle(WindowEvent ev) {
 					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
-						System.exit(0);	    	
+						pagina.close();    	
 			    	}	
 					else {
 						ev.consume();
