@@ -98,7 +98,7 @@ public class BibliotecaAppService {
 	 * EMPRÉSTIMO
 	 **/
 	
-	public Emprestimo realizarEmprestimo(EmprestimoDto dto){
+	public boolean realizarEmprestimo(EmprestimoDto dto){
 		return empService.realizarEmprestimo(dto);
 	}
 	

@@ -6,10 +6,10 @@ import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 
 public class EmprestimoFactory {
-	public static Emprestimo create(EmprestimoDto dto){		
+	public static Emprestimo create(EmprestimoDto dto, LivroDto livroDto){		
 		Emprestimo emprestimo = new Emprestimo();
 		ModelMapper mapper = new ModelMapper();
-		Livro livro = mapper.map(dto.getLivro(), Livro.class);
+		Livro livro = mapper.map(livroDto, Livro.class);
 		Usuario usuario = mapper.map(dto.getUsuario(), Usuario.class);
 		
 		emprestimo.setDataEmprestimo(dto.getDataEmprestimo());

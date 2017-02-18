@@ -44,18 +44,24 @@ public class EmprestimoService {
 		return emprestimos;
 	}
 	
-	public Emprestimo realizarEmprestimo(EmprestimoDto dto){
+	public boolean realizarEmprestimo(EmprestimoDto dto){
 		createEntityManagerFactory();
 			createEntityManager();
+			boolean result = true;
 				em.getTransaction().begin();
-					Emprestimo emprestimo = EmprestimoFactory.create(dto);
-					emprestimo.getLivro().setFlEmprestado(1);
-					emprestimo.getLivro().addEmprestimo(emprestimo);
-					Emprestimo e = em.merge(emprestimo);
+					for(LivroDto livroDto : dto.getLivros()){
+						Emprestimo emprestimo = EmprestimoFactory.create(dto, livroDto);
+						emprestimo.getLivro().setFlEmprestado(1);
+						emprestimo.getLivro().addEmprestimo(emprestimo);
+						Emprestimo e = em.merge(emprestimo);
+						if (e == null) result = false; 
+						else result = true;
+					}
+					
 				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();
-		return e;
+		return result;
 	}
 	
 	public void devolverLivro(EmprestimoDto dto){

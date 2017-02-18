@@ -18,20 +18,20 @@ public class EmprestimoDto {
 	
 	private Date dataDevolucaoEfetiva;
 	
-	private LivroDto livroDto;
+	private List<LivroDto> livrosDto;
 	
 	private UsuarioDto usuarioDto;
 	
 	ModelMapper mapper = new ModelMapper();
 
-	public EmprestimoDto(int id, Date dataEmprestimo, Date dataDevolucaoPrevista, Date dataDevolucaoEfetiva, LivroDto livroDto,
+	public EmprestimoDto(int id, Date dataEmprestimo, Date dataDevolucaoPrevista, Date dataDevolucaoEfetiva, List<LivroDto> livrosDto,
 			UsuarioDto usuarioDto) {
 		super();
 		this.id = id;
 		this.dataEmprestimo = dataEmprestimo;
 		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
 		this.dataDevolucaoEfetiva = dataDevolucaoEfetiva;
-		this.livroDto = livroDto;
+		this.livrosDto = livrosDto;
 		this.usuarioDto = usuarioDto;
 	}
 	
@@ -41,7 +41,7 @@ public class EmprestimoDto {
 		this.dataEmprestimo = dataEmprestimo;
 		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
 		this.dataDevolucaoEfetiva = dataDevolucaoEfetiva;
-		this.livroDto = mapper.map(livro, LivroDto.class);
+		this.livrosDto.add(mapper.map(livro, LivroDto.class));
 		this.usuarioDto = mapper.map(usuario, UsuarioDto.class);
 	}
 
@@ -84,13 +84,13 @@ public class EmprestimoDto {
 	public void setDataDevolucaoEfetiva(Date dataDevolucaoEfetiva) {
 		this.dataDevolucaoEfetiva = dataDevolucaoEfetiva;
 	}
-
-	public LivroDto getLivro() {
-		return livroDto;
+	
+	public int getQtdLivros(){
+		return livrosDto.size();
 	}
-
-	public void setLivro(LivroDto livroDto) {
-		this.livroDto = livroDto;
+	
+	public List<LivroDto> getLivros(){
+		return this.livrosDto;
 	}
 
 	public UsuarioDto getUsuario() {

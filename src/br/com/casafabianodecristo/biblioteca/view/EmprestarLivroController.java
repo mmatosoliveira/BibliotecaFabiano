@@ -53,9 +53,6 @@ public class EmprestarLivroController {
 	@FXML
 	private TableColumn<UsuarioDto, String> colunaAtivo;
 	
-	@FXML
-	private ProgressIndicator indicador;
-	
 	private List<LivroDto> livrosDto = new ArrayList<LivroDto>();
 	
 	private BibliotecaAppService servico = new BibliotecaAppService();
@@ -120,13 +117,16 @@ public class EmprestarLivroController {
             	nomeUsuario.setDisable(true);
             	nomeLivro.setDisable(true);
             	usuarios.setDisable(true);
+            	selectorLivros.setDisable(true);
             	pesquisarUsuario.setDisable(true);
             	pesquisarLivro.setDisable(true);
 				UsuarioDto usuarioSelecionado = usuarios.getSelectionModel().getSelectedItem();
-				List<LivroDto> livroSelecionado = selectorLivros.getTargetItems();
+				List<LivroDto> livrosSelecionados = selectorLivros.getTargetItems();
 				
-				if (EmprestarLivroInterfaceValidator.validarRegistrosSelecionados(usuarioSelecionado, livroSelecionado)){
-					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livroSelecionado, usuarioSelecionado);
+				if (EmprestarLivroInterfaceValidator.validarUsuario(usuarioSelecionado) &&
+					EmprestarLivroInterfaceValidator.validarLivrosSelecionados(livrosSelecionados)){
+					
+					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
 					realizarNovoEmprestimo(dto);
 					emprestarLivro = taskEmprestarLivro(dto);
 					Thread t = new Thread(emprestarLivro);
@@ -134,13 +134,13 @@ public class EmprestarLivroController {
         			t.start();
 				}
 				else{
-	            	indicador.setVisible(false);
+					avisoCarregando.setVisible(false);
 	            	emprestar.setDisable(false);
 	            	cancelar.setDisable(false);
 	            	nomeUsuario.setDisable(false);
 	            	nomeLivro.setDisable(false);
 	            	usuarios.setDisable(false);
-	            	livros.setDisable(false);
+	            	selectorLivros.setDisable(false);
 	            	pesquisarUsuario.setDisable(false);
 	            	pesquisarLivro.setDisable(false);
 				}
@@ -171,28 +171,26 @@ public class EmprestarLivroController {
             	boolean result = (boolean) getValue();
             	if (!result){
             		alerta.notificacaoErro("Realizar empréstimo", "Ocorreu um erro durante o empréstimo do livro. Por favor tente novamente mais tarde.");
-            		indicador.setVisible(false);
 	            	emprestar.setDisable(false);
 	            	cancelar.setDisable(false);
 	            	nomeUsuario.setDisable(false);
 	            	nomeLivro.setDisable(false);
 	            	usuarios.setDisable(false);
-	            	livros.setDisable(false);
+	            	selectorLivros.setDisable(false);
 	            	pesquisarUsuario.setDisable(false);
 	            	pesquisarLivro.setDisable(false);
             	}
             	else if (result){
             		Stage stage = (Stage) cancelar.getScene().getWindow();
     	            stage.close();
-    	            alerta.notificacaoSucessoSalvarDados("Cadastrar livro");
+    	            alerta.notificacaoSucessoSalvarDados("Emprestar livro");
             	}
     		}
         };
     }
 	
 	private boolean realizarNovoEmprestimo(EmprestimoDto dto){
-		Emprestimo e = servico.realizarEmprestimo(dto);
-		return (e == null) ? false : true;
+		return servico.realizarEmprestimo(dto);
 	}
 	
 	private void atualizarUsuario(){
@@ -202,10 +200,13 @@ public class EmprestarLivroController {
 		usuarios.setItems(itens);
 		
 		colunaNome.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getNomeUsuario() + " " + x.getValue().getSobrenome()));
-		colunaAtivo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getFlInativoString()));		
+		colunaAtivo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getFlInativoString()));
 	}
 	
 	private void atualizarLivros(){
+		livrosDto = new ArrayList<LivroDto>();
+		ObservableList<LivroDto> itens = FXCollections.observableList(livrosDto);
+		selectorLivros.setSourceItems(itens);
 		List<Livro> l = servico.pesquisaRapidaLivro(nomeLivro.getText(), false, false, false);
 		
 		if(l.size() != 0){
@@ -214,7 +215,8 @@ public class EmprestarLivroController {
 				livrosDto.add(mapper.map(livro, LivroDto.class));
 			}
 		}
-
+		System.out.println(livrosDto);
 		selectorLivros.getSourceItems().addAll(livrosDto);
+		livrosDto.clear();
 	}
 }
