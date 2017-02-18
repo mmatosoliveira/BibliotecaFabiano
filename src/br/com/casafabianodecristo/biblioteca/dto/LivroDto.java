@@ -132,10 +132,10 @@ public class LivroDto {
 
 	@Override
 	public String toString() {
-		return "LivroDto [tomboPatrimonial=" + tomboPatrimonial + ", titulo=" + titulo + ", subtitulo=" + subtitulo
-				+ ", nomeAutor=" + nomeAutor + ", editora=" + editora + ", edicao=" + edicao + ", classificacaoLivro="
-				+ classificacaoLivro + ", flEmprestado=" + flEmprestado + ", flDoado=" + flDoado + ", flRemovido="
-				+ flRemovido + ", emprestimoDtos=" + emprestimoDtos + "]";
+		if(!titulo.isEmpty() && !subtitulo.isEmpty() && !nomeAutor.isEmpty())
+			return titulo + " - " + subtitulo + ": " + nomeAutor;
+		else 
+			return titulo + ": " + nomeAutor;
 	}
 	
 	

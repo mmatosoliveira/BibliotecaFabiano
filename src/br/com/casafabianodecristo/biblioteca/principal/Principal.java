@@ -270,7 +270,7 @@ public class Principal extends Application {
 	public void carregarEmprestimoLivro(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/EmprestarLivro.fxml"));
+			loader.setLocation(Principal.class.getResource("../view/OldEmprestarLivro.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			
 			Scene scene = new Scene(page);

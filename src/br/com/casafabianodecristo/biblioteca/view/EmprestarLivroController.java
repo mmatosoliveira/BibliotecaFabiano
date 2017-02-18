@@ -1,6 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.util.*;
+
+import org.controlsfx.control.ListSelectionView;
+import org.controlsfx.control.MaskerPane;
 import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
@@ -51,21 +54,6 @@ public class EmprestarLivroController {
 	private TableColumn<UsuarioDto, String> colunaAtivo;
 	
 	@FXML
-	private TableView<LivroDto> livros;
-	
-	@FXML
-	private TableColumn<LivroDto, String> colunaTitulo;
-	
-	@FXML
-	private TableColumn<LivroDto, String> colunaSubtitulo;
-
-	@FXML
-	private TableColumn<LivroDto, String> colunaAutor;
-	
-	@FXML
-	private TableColumn<LivroDto, String> colunaEmprestado;
-	
-	@FXML
 	private ProgressIndicator indicador;
 	
 	private List<LivroDto> livrosDto = new ArrayList<LivroDto>();
@@ -73,6 +61,12 @@ public class EmprestarLivroController {
 	private BibliotecaAppService servico = new BibliotecaAppService();
 	
 	private Alertas alerta = new Alertas();
+	
+	@FXML
+	private MaskerPane avisoCarregando = new MaskerPane();
+	
+	@FXML
+	ListSelectionView<LivroDto> selectorLivros = new ListSelectionView<>();
 	
 	@SuppressWarnings("rawtypes")
 	private Task emprestarLivro;
@@ -119,17 +113,17 @@ public class EmprestarLivroController {
 		emprestar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-            	indicador.setVisible(true);
+            	avisoCarregando.setVisible(true);
+            	avisoCarregando.setText("Realizando empréstimo. Aguarde!");
             	emprestar.setDisable(true);
             	cancelar.setDisable(true);
             	nomeUsuario.setDisable(true);
             	nomeLivro.setDisable(true);
             	usuarios.setDisable(true);
-            	livros.setDisable(true);
             	pesquisarUsuario.setDisable(true);
             	pesquisarLivro.setDisable(true);
 				UsuarioDto usuarioSelecionado = usuarios.getSelectionModel().getSelectedItem();
-				LivroDto livroSelecionado = livros.getSelectionModel().getSelectedItem();
+				List<LivroDto> livroSelecionado = selectorLivros.getTargetItems();
 				
 				if (EmprestarLivroInterfaceValidator.validarRegistrosSelecionados(usuarioSelecionado, livroSelecionado)){
 					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livroSelecionado, usuarioSelecionado);
@@ -219,16 +213,8 @@ public class EmprestarLivroController {
 			for (Livro livro : l){
 				livrosDto.add(mapper.map(livro, LivroDto.class));
 			}
-			ObservableList<LivroDto> itens = FXCollections.observableList (livrosDto);
-			livros.setItems(itens);
 		}
 
-		colunaTitulo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x
-				.getValue()
-				.getTitulo()));
-		
-		colunaSubtitulo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getSubtitulo()));
-		colunaAutor.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getNomeAutor()));
-		colunaEmprestado.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getFlEmprestadoString()));
+		selectorLivros.getSourceItems().addAll(livrosDto);
 	}
 }
