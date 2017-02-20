@@ -133,9 +133,9 @@ public class LivroDto {
 	@Override
 	public String toString() {
 		if(!titulo.isEmpty() && !subtitulo.isEmpty() && !nomeAutor.isEmpty())
-			return titulo + " - " + subtitulo + ": " + nomeAutor;
+			return tomboPatrimonial + " - " + titulo + " - " + subtitulo + ": " + nomeAutor;
 		else 
-			return titulo + ": " + nomeAutor;
+			return tomboPatrimonial + " - " + titulo + ": " + nomeAutor;
 	}
 	
 	

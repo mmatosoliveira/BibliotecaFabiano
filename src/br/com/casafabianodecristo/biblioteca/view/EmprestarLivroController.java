@@ -18,10 +18,14 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class EmprestarLivroController {
@@ -67,6 +71,9 @@ public class EmprestarLivroController {
 	@FXML
 	ListSelectionView<LivroDto> selectorLivros = new ListSelectionView<>();
 	
+	@FXML
+	private BorderPane paneCarregando;
+	
 	@SuppressWarnings("rawtypes")
 	private Task emprestarLivro;
 	
@@ -74,7 +81,6 @@ public class EmprestarLivroController {
 	
 	@FXML
 	private void initialize(){
-		avisoCarregando.setLayoutX(pane.getPrefWidth()/3.2);
 		Label labelSelecionado = new Label("Disponível");
 		labelSelecionado.setId("labelSelecionado");
 		labelSelecionado.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
@@ -119,6 +125,7 @@ public class EmprestarLivroController {
             public void handle(ActionEvent event) {
             	avisoCarregando.setVisible(true);
             	avisoCarregando.setText("Realizando empréstimo. Aguarde!");
+            	paneCarregando.setVisible(true);
             	emprestar.setDisable(true);
             	cancelar.setDisable(true);
             	nomeUsuario.setDisable(true);
@@ -132,7 +139,6 @@ public class EmprestarLivroController {
 				
 				if (EmprestarLivroInterfaceValidator.validarUsuario(usuarioSelecionado) &&
 					EmprestarLivroInterfaceValidator.validarLivrosSelecionados(livrosSelecionados)){
-					
 					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
 					realizarNovoEmprestimo(dto);
 					emprestarLivro = taskEmprestarLivro(dto);
@@ -221,7 +227,6 @@ public class EmprestarLivroController {
 				livrosDto.add(mapper.map(livro, LivroDto.class));
 			}
 		}
-		System.out.println(livrosDto);
 		selectorLivros.getSourceItems().addAll(livrosDto);		 
-		}
+	}
 }
