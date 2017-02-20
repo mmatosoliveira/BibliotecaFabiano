@@ -1,6 +1,7 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.security.NoSuchAlgorithmException;
+import java.awt.Toolkit;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
@@ -11,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 
 public class LoginController {
@@ -45,18 +47,28 @@ public class LoginController {
     private String dicaSenha;
     
     private InicialDto dto = new InicialDto(); 
+    
+    @FXML
+    private ImageView iconeAttention = new ImageView();
 	
 	public LoginController() {}
 	
 	@FXML
 	private void initialize(){
-		
+	botaoLogar.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());		
 		senha.setOnKeyPressed((new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.ENTER){
 					validarLogin();
-				}				
+				}
+				boolean capsLigado = Toolkit.getDefaultToolkit().getLockingKeyState(java.awt.event.KeyEvent.VK_CAPS_LOCK);
+				if(capsLigado){
+					iconeAttention.setVisible(true);
+				}
+				else{
+					iconeAttention.setVisible(false);
+				}
 			}
 		}));
 		

@@ -113,29 +113,9 @@
     <GridPane layoutY="135.0" prefHeight="181.0" prefWidth="231.0" AnchorPane.leftAnchor="7.0">
       <children>
         <Button fx:id="botaoEmprestarLivro" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Emprestar livro" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Renovar empréstimo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Button fx:id="botaoRenovarEmprestimo" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Renovar empréstimo" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Button fx:id="botaoCadastrarLivro" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Cadastrar livro" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Button fx:id="botaoCadastrarUsuario" mnemonicParsing="false" prefHeight="33.0" prefWidth="238.0" text="Cadastrar usuário" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
-          <image>
-            <Image url="@../../../../../../resources/images/right-icon.png" />
-          </image>
-        </ImageView>
-        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
-          <image>
-            <Image url="@../../../../../../resources/images/right-icon.png" />
-          </image>
-        </ImageView>
-        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
-          <image>
-            <Image url="@../../../../../../resources/images/right-icon.png" />
-          </image>
-        </ImageView>
-        <ImageView fitHeight="30.25" fitWidth="40.33333333333333" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
-          <image>
-            <Image url="@../../../../../../resources/images/right-icon.png" />
-          </image>
-        </ImageView>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

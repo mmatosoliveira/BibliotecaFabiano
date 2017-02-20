@@ -6,6 +6,7 @@ import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
+import br.com.casafabianodecristo.biblioteca.view.EmprestarLivroController;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.*;
 import javafx.event.*;
@@ -90,6 +91,9 @@ public class InicialController {
 	@FXML
 	private Button botaoEmprestarLivro;
 	
+	@FXML
+	private Button botaoRenovarEmprestimo;
+	
 	private List<Livro> livros;
 	
 	private BibliotecaAppService servico = new BibliotecaAppService();
@@ -117,6 +121,10 @@ public class InicialController {
 	
 	@FXML
 	private void initialize(){
+		botaoCadastrarLivro.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoCadastrarUsuario.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoEmprestarLivro.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoRenovarEmprestimo.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
 		tpPesquisa.setText("Digite alguma informação e pesquise um livro!");
 		dadoLivroPesquisa.setTooltip(tpPesquisa);
 		tpLembrete.setText("Digite algum lembrete e aperte no disquete para salvar!");

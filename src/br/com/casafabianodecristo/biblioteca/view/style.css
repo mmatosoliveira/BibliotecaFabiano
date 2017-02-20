@@ -9,3 +9,38 @@
 #labelSelecionado{
 	-fx-font-weight: bold;
 }
+
+#botaoLogar{
+    -fx-background-position: left;
+    -fx-background-size: 21px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-login-button.png');
+}
+
+#botaoCadastrarLivro{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/right-icon.png');
+}
+
+#botaoCadastrarUsuario{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/right-icon.png');
+}
+
+#botaoEmprestarLivro{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/right-icon.png');
+}
+
+#botaoRenovarEmprestimo{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/right-icon.png');
+}
