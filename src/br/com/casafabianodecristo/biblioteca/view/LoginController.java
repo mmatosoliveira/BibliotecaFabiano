@@ -91,6 +91,9 @@ public class LoginController {
 	
 	public void validarLogin() {			 		
 		indicador.setVisible(true);
+		nomeUsuario.setDisable(true);
+		senha.setDisable(true);
+		botaoLogar.setDisable(true);
 		
 		if (LoginInterfaceValidator.validarCamposObrigatorios(nomeUsuario, senha)){
 			logar = taskLogar();
@@ -100,6 +103,9 @@ public class LoginController {
 		}
 		else {
 			indicador.setVisible(false);
+			nomeUsuario.setDisable(false);
+			senha.setDisable(false);
+			botaoLogar.setDisable(false);
 		}
 	}
 	
@@ -149,6 +155,9 @@ public class LoginController {
             	}
             	else {
             		indicador.setVisible(false);
+            		nomeUsuario.setDisable(false);
+        			senha.setDisable(false);
+        			botaoLogar.setDisable(false);
             		alerta.notificacaoErro("Login", "Usuário ou senha incorretos, verifique os dados e tente novamente.");
             	}
             		
