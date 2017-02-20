@@ -72,6 +72,10 @@ public class EmprestarLivroController {
 	
 	@FXML
 	private void initialize(){
+		Label labelSelecionado = new Label("Disponível");
+		labelSelecionado.setId("labelSelecionado");
+		labelSelecionado.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		selectorLivros.setSourceHeader(labelSelecionado);
 		pesquisarLivro.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
 		pesquisarUsuario.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
 		

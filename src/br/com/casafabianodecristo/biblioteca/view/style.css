@@ -5,3 +5,7 @@
 #pesquisarUsuario{
 	-fx-background-image: url('../../../../../../resources/images/search-icon-resized.png');
 }
+
+#labelSelecionado{
+	-fx-font-weight: bold;
+}
