@@ -26,7 +26,6 @@ public class EmprestarLivroInterfaceValidator {
 			alerta.notificacaoAlerta("Emprestar Livro", "Não é permitido selecionar mais que 3 (três) livros para um empréstimo.");
 			return false;
 		}
-		else 
-			return true;
+		else return true;
 	}
 }

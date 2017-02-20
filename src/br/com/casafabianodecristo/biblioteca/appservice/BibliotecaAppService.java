@@ -26,8 +26,8 @@ public class BibliotecaAppService {
 		return livroService.getLivroPorTombo(tombo);
 	}
 	
-	public List<Livro> pesquisaRapidaLivro(String texto, boolean titulo, boolean autor, boolean tombo){
-		return livroService.pesquisaRapidaLivro(texto, titulo, autor, tombo);
+	public List<Livro> pesquisaRapidaLivro(String texto, boolean titulo, boolean autor, boolean tombo, boolean soDisponiveis){
+		return livroService.pesquisaRapidaLivro(texto, titulo, autor, tombo, soDisponiveis);
 	}
 	
 	public void atualizarLivro(LivroDto dto){

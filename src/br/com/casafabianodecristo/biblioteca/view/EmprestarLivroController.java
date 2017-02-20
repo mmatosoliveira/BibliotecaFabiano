@@ -204,10 +204,9 @@ public class EmprestarLivroController {
 	}
 	
 	private void atualizarLivros(){
-		livrosDto = new ArrayList<LivroDto>();
-		ObservableList<LivroDto> itens = FXCollections.observableList(livrosDto);
-		selectorLivros.setSourceItems(itens);
-		List<Livro> l = servico.pesquisaRapidaLivro(nomeLivro.getText(), false, false, false);
+		selectorLivros.getSourceItems().removeAll(livrosDto);
+		livrosDto.clear();
+		List<Livro> l = servico.pesquisaRapidaLivro(nomeLivro.getText(), false, false, false, true);
 		
 		if(l.size() != 0){
 			ModelMapper mapper = new ModelMapper();
@@ -216,7 +215,6 @@ public class EmprestarLivroController {
 			}
 		}
 		System.out.println(livrosDto);
-		selectorLivros.getSourceItems().addAll(livrosDto);
-		livrosDto.clear();
-	}
+		selectorLivros.getSourceItems().addAll(livrosDto);		 
+		}
 }

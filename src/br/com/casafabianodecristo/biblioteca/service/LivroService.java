@@ -47,7 +47,7 @@ public class LivroService {
 		return livro;
 	}
 	
-	public List<Livro> pesquisaRapidaLivro(String texto, boolean titulo, boolean autor, boolean tombo){
+	public List<Livro> pesquisaRapidaLivro(String texto, boolean titulo, boolean autor, boolean tombo, boolean soDisponiveis){
 		List<Livro> livros = new ArrayList<>();
 		TypedQuery<Livro> query;
 		
@@ -68,6 +68,9 @@ public class LivroService {
 			catch(NumberFormatException e){return new ArrayList<Livro>();}
 			System.out.println(tomboP);
 			query.setParameter("tombo", tomboP);
+		}
+		else if(soDisponiveis){
+			query = em.createQuery("select o from Livro o where o.flEmprestado = 0", Livro.class);
 		}
 		else {
 			query = em.createQuery("select o from Livro o where o.titulo like :texto", Livro.class);

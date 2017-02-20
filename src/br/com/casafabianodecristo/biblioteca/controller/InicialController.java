@@ -247,12 +247,12 @@ public class InicialController {
     	
     	if (textoPesquisa.equals("")){
     		if(alerta.alertaConfirmacao(textoAlerta).get() == ButtonType.OK){	
-    			livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
+    			livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo, false);
     			principal.carregarResultadoBusca(livros);
         	}     
     	}
     	else{
-			livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo);
+			livros = servico.pesquisaRapidaLivro(textoPesquisa, titulo, autor, tombo, false);
 			principal.carregarResultadoBusca(livros);
     	}
     	checkTitulo.setSelected(false);
