@@ -1,7 +1,6 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.util.*;
-
 import org.controlsfx.control.ListSelectionView;
 import org.controlsfx.control.MaskerPane;
 import org.modelmapper.ModelMapper;
@@ -10,7 +9,6 @@ import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
 import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.EmprestarLivroInterfaceValidator;
-import br.com.casafabianodecristo.biblioteca.model.Emprestimo;
 import br.com.casafabianodecristo.biblioteca.model.Livro;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -23,9 +21,13 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class EmprestarLivroController {
+	@FXML
+	private AnchorPane pane;
+	
 	@FXML
 	private TextField nomeUsuario;
 	
@@ -72,6 +74,7 @@ public class EmprestarLivroController {
 	
 	@FXML
 	private void initialize(){
+		avisoCarregando.setLayoutX(pane.getPrefWidth()/3.2);
 		Label labelSelecionado = new Label("Disponível");
 		labelSelecionado.setId("labelSelecionado");
 		labelSelecionado.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());

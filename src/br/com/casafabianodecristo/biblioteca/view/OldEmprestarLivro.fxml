@@ -11,7 +11,7 @@
 <?import org.controlsfx.control.ListSelectionView?>
 <?import org.controlsfx.control.MaskerPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.EmprestarLivroController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.EmprestarLivroController">
    <children>
       <Label alignment="CENTER" layoutX="258.0" layoutY="28.0" text="Realizar empréstimo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
          <font>

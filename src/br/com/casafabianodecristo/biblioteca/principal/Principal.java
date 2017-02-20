@@ -24,6 +24,19 @@ public class Principal extends Application {
 	private Stage primaryStage;
 	private AnchorPane login;
 	private Alertas alerta = new Alertas();
+	
+	private void onCloseRequest(Stage pagina){
+		pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent ev) {
+				if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
+					System.exit(0);	    	
+		    	}	
+				else {
+					ev.consume();
+				} 
+        	}
+		});
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -95,17 +108,7 @@ public class Principal extends Application {
 			pagina.setResizable(true);
 			pagina.setMaximized(false);
 			pagina.setScene(scene);
-			
-			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				public void handle(WindowEvent ev) {
-					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
-						System.exit(0);	    	
-			    	}	
-					else {
-						ev.consume();
-					} 
-	        	}
-			});
+			onCloseRequest(pagina);
 			
 			InicialController controller = loader.getController();
 			controller.setPrincipal(this);
@@ -129,17 +132,7 @@ public class Principal extends Application {
 			
 			Stage pagina = new Stage();
 			pagina.setTitle("Cadastrar classificação");
-			
-			pagina.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				public void handle(WindowEvent ev) {
-					if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
-						pagina.close();    	
-			    	}	
-					else {
-						ev.consume();
-					}
-	        	}
-			});
+			onCloseRequest(pagina);
 			
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
@@ -166,6 +159,7 @@ public class Principal extends Application {
 			pagina.setScene(scene);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.show();
+			onCloseRequest(pagina);
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -215,6 +209,7 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);			
 			pagina.setScene(scene);
 			pagina.initModality(Modality.APPLICATION_MODAL);
+			onCloseRequest(pagina);
 			pagina.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -238,6 +233,7 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
+			onCloseRequest(pagina);
 			pagina.show();
 		} 
 		catch (IOException e) {
@@ -260,6 +256,7 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
+			onCloseRequest(pagina);
 			pagina.show();
 		} 
 		catch (IOException e) {
@@ -281,6 +278,7 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
+			onCloseRequest(pagina);
 			pagina.show();
 			
 		}catch(IOException e){}
