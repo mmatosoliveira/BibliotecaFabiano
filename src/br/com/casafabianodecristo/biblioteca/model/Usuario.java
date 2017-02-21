@@ -43,14 +43,6 @@ public class Usuario {
 	@JoinColumn(name="Id")
 	private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 	
-	@OneToMany(mappedBy="destinatario")
-	@JoinColumn(name="Id")
-	private List<Mensagem> mensagensRecebidas = new ArrayList<Mensagem>();
-	
-	@OneToMany(mappedBy="remetente")
-	@JoinColumn(name="Id")
-	private List<Mensagem> mensagensEnviadas = new ArrayList<Mensagem>();;
-	
 	@Column(name="FlInativo", nullable=true)
 	private int flInativo;
 	

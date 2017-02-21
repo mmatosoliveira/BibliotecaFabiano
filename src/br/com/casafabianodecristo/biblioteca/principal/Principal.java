@@ -7,6 +7,7 @@ import br.com.casafabianodecristo.biblioteca.controller.*;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
+import br.com.casafabianodecristo.biblioteca.view.InicialController;
 import br.com.casafabianodecristo.biblioteca.view.LoginController;
 import javafx.application.Application;
 import javafx.collections.*;
@@ -82,23 +83,22 @@ public class Principal extends Application {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void carregarTelaInicial(String textoLembrete, List<Emprestimo> devolucoes, String nomeUsuario){
+	public void carregarTelaInicial(List<Emprestimo> devolucoes, String nomeUsuario, int idUsuario){
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/Inicial.fxml"));			
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage pagina = new Stage();			
 			Scene scene = new Scene (page);
-			TextArea lembrete = (TextArea) scene.lookup("#lembrete");
 			ObservableList<Emprestimo> itens =FXCollections.observableList(devolucoes); 
 			TableView<Emprestimo> tabelaEmprestimosPendentes  = (TableView<Emprestimo>) scene.lookup("#tabelaEmprestimosPendentes");
 			Label dataHora = (Label) scene.lookup("#dataHora");
+			Label id = (Label) scene.lookup("#labelId");
 			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			Date data = new Date();
 			
-			lembrete.setText(textoLembrete);
 			tabelaEmprestimosPendentes.setItems(itens);
-			
+			id.setText(Integer.toString(idUsuario));
 			
 			String str = fmt.format(data);			
 			dataHora.setText("Horário do acesso: " + str);

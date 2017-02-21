@@ -163,7 +163,7 @@ public class LoginController {
             		}    				
     			}    
             	if (result == true){
-            		principal.carregarTelaInicial(dto.getTextoLembrete(), dto.getEmprestimo(), dto.getUsuario().getNomeUsuario());
+            		principal.carregarTelaInicial(dto.getEmprestimo(), dto.getUsuario().getNomeUsuario(), dto.getUsuario().getId());
             	}
             	else {
             		indicador.setVisible(false);

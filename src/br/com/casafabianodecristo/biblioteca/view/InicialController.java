@@ -1,4 +1,4 @@
-package br.com.casafabianodecristo.biblioteca.controller;
+package br.com.casafabianodecristo.biblioteca.view;
 
 import java.util.List;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
@@ -6,7 +6,6 @@ import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
-import br.com.casafabianodecristo.biblioteca.view.EmprestarLivroController;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.*;
 import javafx.event.*;
@@ -17,16 +16,10 @@ import javafx.scene.control.*;
 
 public class InicialController {
 	@FXML
-	private ImageView iconeSalvarLembrete;
-	
-	@FXML
 	private ImageView iconePesquisar;
 	
 	@FXML
 	private ImageView iconeAtualizarDevolucoes;
-	
-	@FXML
-	private TextArea lembrete;
 	
 	@FXML
 	private Label dataHora;
@@ -47,6 +40,18 @@ public class InicialController {
 	private MenuItem itemSair = new MenuItem("Close");
 	
 	@FXML
+	private MenuItem itemRealizarBackup;
+	
+	@FXML
+	private MenuItem itemGerarEtiquetas;
+	
+	@FXML
+	private MenuItem itemGerenciarClassificacoes;
+	
+	@FXML
+	private MenuItem itemMeusDados;
+	
+	@FXML
 	private MenuItem itemCadastrarLivros;
 	
 	@FXML
@@ -54,9 +59,6 @@ public class InicialController {
 	
 	@FXML
 	private MenuItem itemEditarDadosUsuario;
-	
-	@FXML
-	private MenuItem itemRemoverUsuario;
 	
 	@FXML
 	private MenuItem itemCadastrarClassificacao;
@@ -94,6 +96,9 @@ public class InicialController {
 	@FXML
 	private Button botaoRenovarEmprestimo;
 	
+	@FXML
+	private Label labelId;
+	
 	private List<Livro> livros;
 	
 	private BibliotecaAppService servico = new BibliotecaAppService();
@@ -103,8 +108,6 @@ public class InicialController {
 	private Alertas alerta = new Alertas();
 	
 	private Tooltip tpPesquisa = new Tooltip();
-	
-	private Tooltip tpLembrete = new Tooltip();
 	
 	public InicialController(){}
 	
@@ -127,8 +130,6 @@ public class InicialController {
 		botaoRenovarEmprestimo.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
 		tpPesquisa.setText("Digite alguma informação e pesquise um livro!");
 		dadoLivroPesquisa.setTooltip(tpPesquisa);
-		tpLembrete.setText("Digite algum lembrete e aperte no disquete para salvar!");
-		lembrete.setTooltip(tpLembrete);
 		
 		atualizarGrid();	
 		
@@ -207,15 +208,6 @@ public class InicialController {
 				principal.carregarEmprestimoLivro();			
 			}
 		});		
-		
-		iconeSalvarLembrete.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            	/*servico.createEntityManagerFactory();
-	    			servico.salvarLembrete(lembrete.getText());
-	    		servico.closeEntityManagerFactory();*/
-            }            
-        });
 		
 		iconePesquisar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

@@ -13,8 +13,6 @@ public class BibliotecaAppService {
 	private ClassificacaoService classService = new ClassificacaoService();
 	private UsuarioService usuarioService = new UsuarioService();
 	private EmprestimoService empService = new EmprestimoService();
-	private LembreteService lemService = new LembreteService();
-	private MensagemService msgService = new MensagemService(); 
 	
 	public BibliotecaAppService() {	}
 	
@@ -121,30 +119,6 @@ public class BibliotecaAppService {
 		}
 		return dto;
 	}
-
-	/**
-	 * LEMBRETE
-	 **/
-	
-	public String getLembrete(int idUsuario){
-		return lemService.getLembretePorUsuario(idUsuario);
-	}
-	
-	public void cadastrarLembrete(Lembrete l){
-		lemService.cadastrarLembrete(l);
-	}
-	
-	public void editarLembrete(Lembrete l){
-		lemService.editarLembrete(l);
-	}
-	
-	/**
-	 * MENSAGEM
-	 **/
-	
-	public boolean usuarioPossuiMensagens(int id){
-		return msgService.usuarioPossuiMensagensNaoLidas(id);
-	}
 	
 	/**
 	 * COMUM
@@ -171,13 +145,10 @@ public class BibliotecaAppService {
 			
 			UsuarioDto uDto = mapper.map(usuarioLogado, UsuarioDto.class);
 			uDto.setSenha(usuarioLogado.getSenha());
-			
-			int id = usuarioLogado.getIdUsuario();
-			String lembrete = this.getLembrete(id);
-			boolean msgs = this.usuarioPossuiMensagens(id);
+
 			List<Emprestimo> es = this.getDevolucoesPrevistas();
 			
-			InicialDto dto = new InicialDto(uDto, lembrete, msgs, es);
+			InicialDto dto = new InicialDto(uDto, es);
 			return dto;
 		}
 		else return null;
