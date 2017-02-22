@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.controller.*;
+import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
@@ -276,6 +277,30 @@ public class Principal extends Application {
 			Stage pagina = new Stage();
 			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
 			pagina.setTitle("Realizar empréstimo");
+			//pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.setScene(scene);
+			onCloseRequest(pagina, false);
+			pagina.show();
+			
+		}catch(IOException e){}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void carregarGerenciamentoClassificacoes(List<ClassificacaoDto> classificacoes){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/GerenciarClassificacoes.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			Stage pagina = new Stage();
+			ObservableList<ClassificacaoDto> itens = FXCollections.observableList (classificacoes);
+			TableView<ClassificacaoDto> tabelaEmprestimos = (TableView<ClassificacaoDto>) scene.lookup("#classificacoes");
+			tabelaEmprestimos.setItems(itens);
+			
+			//pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
+			pagina.setTitle("Gerenciar classificações");
 			//pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);

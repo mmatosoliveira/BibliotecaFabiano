@@ -1,7 +1,8 @@
 package br.com.casafabianodecristo.biblioteca.interfacevalidator;
 
 import java.util.*;
-import br.com.casafabianodecristo.biblioteca.model.Classificacao;
+
+import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import javafx.scene.control.*;
 
@@ -44,7 +45,7 @@ public class CadastroLivroInterfaceValidator {
 		return true;
 	}
 	
-	public static boolean validarCamposObrigatorios(List<TextField> camposTexto, ComboBox<Classificacao> classificacao)
+	public static boolean validarCamposObrigatorios(List<TextField> camposTexto, ComboBox<ClassificacaoDto> classificacao)
 	{
 		boolean[] validado = new boolean [6];
 		for (TextField item : camposTexto){

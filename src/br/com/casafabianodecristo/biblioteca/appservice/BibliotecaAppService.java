@@ -60,8 +60,14 @@ public class BibliotecaAppService {
 		classService.atualizarClassificacao(dto);
 	}
 	
-	public List<Classificacao> getClassificacoes(){
-		return classService.getClassificacoes();
+	public List<ClassificacaoDto> getClassificacoes(){
+		ModelMapper mapper = new ModelMapper();
+		List<ClassificacaoDto> dto = new ArrayList<ClassificacaoDto>();
+		
+		for(Classificacao c : classService.getClassificacoes()){
+			dto.add(mapper.map(c, ClassificacaoDto.class));
+		}
+		return dto;		
 	}
 	
 	/**

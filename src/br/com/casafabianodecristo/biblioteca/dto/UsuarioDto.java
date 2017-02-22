@@ -25,12 +25,6 @@ public class UsuarioDto {
 	@SuppressWarnings("unused")
 	private List<EmprestimoDto> emprestimoDtos = new ArrayList<EmprestimoDto>();
 	
-	@SuppressWarnings("unused")
-	private List<MensagemDto> mensagensEnviadas = new ArrayList<MensagemDto>();
-	
-	@SuppressWarnings("unused")
-	private List<MensagemDto> mensagensRecebidas = new ArrayList<MensagemDto>();
-	
 	private int flInativo;
 	
 	public UsuarioDto(){}

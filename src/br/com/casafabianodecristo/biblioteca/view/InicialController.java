@@ -158,6 +158,13 @@ public class InicialController {
 			}
 		});
 		
+		itemGerenciarClassificacoes.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				principal.carregarGerenciamentoClassificacoes(servico.getClassificacoes());			
+			}
+		});
+		
 		itemRemoverDoarLivro.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {

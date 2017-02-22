@@ -47,7 +47,7 @@ public class CadastroLivroController {
 	private TextField editora;
 	
 	@FXML
-	private ComboBox<Classificacao> classificacao = new ComboBox<>();
+	private ComboBox<ClassificacaoDto> classificacao = new ComboBox<>();
 	
 	@FXML
 	private Numberfield quantidadeExemplares;
@@ -70,7 +70,7 @@ public class CadastroLivroController {
 		tomboPatrimonial.setMinLength(6);
 		edicao.setMaxLength(3);
 		quantidadeExemplares.setMaxLength(2);
-		ObservableList<Classificacao> itens = FXCollections.observableArrayList(appService.getClassificacoes());
+		ObservableList<ClassificacaoDto> itens = FXCollections.observableArrayList(appService.getClassificacoes());
 		classificacao.setItems(itens);
 		
 		List<TextField> camposTexto = new ArrayList<TextField>();
