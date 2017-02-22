@@ -16,8 +16,6 @@
       <class>br.com.casafabianodecristo.biblioteca.model.Livro</class>
       <class>br.com.casafabianodecristo.biblioteca.model.Emprestimo</class>
       <class>br.com.casafabianodecristo.biblioteca.model.Classificacao</class>
-      <class>br.com.casafabianodecristo.biblioteca.model.Mensagem</class>
-      <class>br.com.casafabianodecristo.biblioteca.model.Lembrete</class>
       <exclude-unlisted-classes/>
       <!-- propriedades desta unidade de persistência -->
       <properties>

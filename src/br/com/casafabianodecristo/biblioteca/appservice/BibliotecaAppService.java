@@ -54,14 +54,23 @@ public class BibliotecaAppService {
 	}
 	
 	public int cadastrarClassificacao(ClassificacaoDto dto){
-		if(ClassificacaoValidator.validarValoresRepetidos(dto.getDescricao(), dto.getCor()))
+		System.out.println("chegou na appservice");
+		System.out.println(dto);
+		boolean resultadoValidacao = ClassificacaoValidator.validarValoresRepetidos(dto.getDescricao(), dto.getCor(), false);
+		System.out.println(resultadoValidacao);
+		if(resultadoValidacao){
 			return classService.cadastrarClassificacao(dto);
+		}	
 		else
 			return 2;
 	}
 	
-	public void atualizarClassificacao(ClassificacaoDto dto){
-		classService.atualizarClassificacao(dto);
+	public int atualizarClassificacao(ClassificacaoDto dto){
+		if(ClassificacaoValidator.validarValoresRepetidos(dto.getDescricao(), dto.getCor(), true)){
+			classService.atualizarClassificacao(dto);
+			return 0;
+		}
+		else return 2;
 	}
 	
 	public List<ClassificacaoDto> getClassificacoes(){

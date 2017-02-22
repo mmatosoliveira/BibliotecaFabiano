@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="723.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.com.casafabianodecristo.biblioteca.controller.ResultadoBuscaController">
+<AnchorPane prefHeight="400.0" prefWidth="723.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="br.com.casafabianodecristo.biblioteca.view.ResultadoBuscaController">
   <!-- TODO Add Nodes -->
   <children>
     <Label alignment="CENTER" prefWidth="723.0" text="Resultado da busca de livros" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">

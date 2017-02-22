@@ -3,13 +3,14 @@ package br.com.casafabianodecristo.biblioteca.principal;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import br.com.casafabianodecristo.biblioteca.controller.*;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
+import br.com.casafabianodecristo.biblioteca.view.GerenciarClassificacoesController;
 import br.com.casafabianodecristo.biblioteca.view.InicialController;
 import br.com.casafabianodecristo.biblioteca.view.LoginController;
+import br.com.casafabianodecristo.biblioteca.view.ResultadoBuscaController;
 import javafx.application.Application;
 import javafx.collections.*;
 import javafx.event.EventHandler;
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -135,7 +137,41 @@ public class Principal extends Application {
 			
 			Stage pagina = new Stage();
 			pagina.setTitle("Cadastrar classificação");
+			Label lblId = (Label) scene.lookup("#lblId");
+			lblId.setText(null);
+			
 			onCloseRequest(pagina, false);
+			
+			pagina.setResizable(false);
+			pagina.initOwner(primaryStage);
+			pagina.setScene(scene);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.show();
+			
+		} catch (IOException e) {}
+	}
+	
+	public void carregarEditarClassificacao(ClassificacaoDto dto){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Principal.class.getResource("../view/CadastrarClassificacao.fxml"));
+		
+		try {
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			
+			Stage pagina = new Stage();
+			pagina.setTitle("Cadastrar classificação");
+			onCloseRequest(pagina, false);
+			
+			TextField descricao = (TextField) scene.lookup("#descricao");
+			descricao.setText(dto.getDescricao());
+			descricao.setEditable(false);
+			ColorPicker escolherCor = (ColorPicker) scene.lookup("#escolherCor");
+			escolherCor.setValue(Color.web(dto.getCor()));
+			Label lblTitulo = (Label) scene.lookup("#lblTitulo");
+			lblTitulo.setText("Editar classificação");
+			Label lblId = (Label) scene.lookup("#lblId");
+			lblId.setText(Integer.toString(dto.getId()));
 			
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
@@ -288,16 +324,16 @@ public class Principal extends Application {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void carregarGerenciamentoClassificacoes(List<ClassificacaoDto> classificacoes){
+	public void carregarGerenciamentoClassificacoes(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/GerenciarClassificacoes.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Scene scene = new Scene(page);
 			Stage pagina = new Stage();
-			ObservableList<ClassificacaoDto> itens = FXCollections.observableList (classificacoes);
+			/*ObservableList<ClassificacaoDto> itens = FXCollections.observableList (classificacoes);
 			TableView<ClassificacaoDto> tabelaEmprestimos = (TableView<ClassificacaoDto>) scene.lookup("#classificacoes");
-			tabelaEmprestimos.setItems(itens);
+			tabelaEmprestimos.setItems(itens);*/
 			
 			//pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
 			pagina.setTitle("Gerenciar classificações");
@@ -305,7 +341,6 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
-			onCloseRequest(pagina, false);
 			pagina.show();
 			
 		}catch(IOException e){}

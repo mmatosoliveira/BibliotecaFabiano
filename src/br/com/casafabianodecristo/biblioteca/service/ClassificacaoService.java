@@ -44,6 +44,7 @@ public class ClassificacaoService {
 			createEntityManager();
 				em.getTransaction().begin();
 					Classificacao classificacao = ClassificacaoFactory.create(dto);
+					System.out.println(classificacao);
 					em.persist(classificacao);
 				em.getTransaction().commit();
 				TypedQuery<Classificacao> query = em.createQuery("select o from Classificacao o where o.cor = :hexa", Classificacao.class);
@@ -54,9 +55,11 @@ public class ClassificacaoService {
 				}
 				catch(Exception e){
 					em.getTransaction().rollback();
+					e.printStackTrace();
 				}
 			closeEntityManager();
 		closeEntityManagerFactory();
+		System.out.println(c);
 		return (c == null) ? 1 : 0;
 	}
 	
@@ -82,7 +85,7 @@ public class ClassificacaoService {
 			try{
 				c = query.getResultList();
 			}
-			catch(NoResultException e){}
+			catch(Exception e){System.out.println("deu exceção");}
 			
 		closeEntityManager();
 		closeEntityManagerFactory();
@@ -99,7 +102,7 @@ public class ClassificacaoService {
 			try{
 				c = query.getResultList();
 			}
-			catch(Exception e){}
+			catch(Exception e){System.out.println("deu exceção");}
 			
 		closeEntityManager();
 		closeEntityManagerFactory();

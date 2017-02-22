@@ -9,16 +9,23 @@ public class ClassificacaoValidator {
 	private static Alertas alerta = new Alertas(); 
 	private static ClassificacaoService classService = new ClassificacaoService();
 	
-	public static boolean validarValoresRepetidos(String nome, String hexa){
+	public static boolean validarValoresRepetidos(String nome, String hexa, boolean isEdit){
 		List<Classificacao> classPorNome = classService.getClassificacaoPorNome(nome);
 		List<Classificacao> classPorCor = classService.getClassificacaoPorCor(hexa);
+		
+		System.out.println(classPorCor);
+		System.out.println(classPorNome);
 			
-		if(classPorNome.size() != 0){
+		if(classPorNome.size() != 0 && isEdit == false){
 			alerta.notificacaoErro("Cadastrar classificação", "Não é permitido cadastrar uma classificação de livros com um nome repetido.");
 			return false;
 		}
 		else if(classPorCor.size() != 0){
 			alerta.notificacaoErro("Cadastrar classificação", "Não é permitido cadastrar uma classificação de livros com uma cor repetida.");
+			return false;
+		}
+		else if(hexa.equalsIgnoreCase("#FFFFFF")){
+			alerta.notificacaoErro("Cadastrar classificação", "Não é permitido cadastrar uma classificação de livros com a cor branca.");
 			return false;
 		}
 		else 

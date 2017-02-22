@@ -1,4 +1,4 @@
-package br.com.casafabianodecristo.biblioteca.controller;
+package br.com.casafabianodecristo.biblioteca.view;
 
 import java.security.NoSuchAlgorithmException;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
