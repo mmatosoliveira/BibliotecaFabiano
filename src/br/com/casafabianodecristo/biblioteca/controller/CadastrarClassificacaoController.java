@@ -30,19 +30,27 @@ public class CadastrarClassificacaoController {
 	
 	@FXML
 	private void initialize(){
-		
-
 		botaoSalvar.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	if(validarCampos()){
 		    		ClassificacaoDto dto = new ClassificacaoDto(0, descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()));
-		    		appService.cadastrarClassificacao(dto);
+		    		int result = appService.cadastrarClassificacao(dto);
+		    		if(result == 0){
+		    			Stage stage = (Stage) botaoCancelar.getScene().getWindow();
+	    	            stage.close();
+	    	            alerta.notificacaoSucessoSalvarDados("Cadastrar classificação");
+		    		}
+		    		else if(result == 1){
+		    			alerta.notificacaoErro("Cadastrar classificação", "Ocorreu um erro ao tentar salvar a classificação, tente novamente mais tarde.");
+		    		}
+		    		else if(result != 2){
+		    			alerta.notificacaoErro("Cadastrar classificação", "Ops, algo deu errado. Tente novamente mais tarde, se o problema persistir contate o administrador do sistema.");
+		    		}
+		    		else{}
 		    	}
 		    }
 		});
-		
-		
-		
+			
 		botaoCancelar.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
 		    	if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){

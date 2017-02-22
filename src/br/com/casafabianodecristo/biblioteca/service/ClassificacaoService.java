@@ -38,15 +38,26 @@ public class ClassificacaoService {
 		return c;
 	}
 	
-	public void cadastrarClassificacao(ClassificacaoDto dto){
+	public int cadastrarClassificacao(ClassificacaoDto dto){
+		List<Classificacao> c = new ArrayList<Classificacao>();
 		createEntityManagerFactory();
 			createEntityManager();
 				em.getTransaction().begin();
 					Classificacao classificacao = ClassificacaoFactory.create(dto);
 					em.persist(classificacao);
 				em.getTransaction().commit();
+				TypedQuery<Classificacao> query = em.createQuery("select o from Classificacao o where o.cor = :hexa", Classificacao.class);
+				query.setParameter("hexa", dto.getCor());
+				
+				try{
+					c = query.getResultList();
+				}
+				catch(Exception e){
+					em.getTransaction().rollback();
+				}
 			closeEntityManager();
 		closeEntityManagerFactory();
+		return (c == null) ? 1 : 0;
 	}
 	
 	public void atualizarClassificacao(ClassificacaoDto dto){
@@ -60,6 +71,41 @@ public class ClassificacaoService {
 		closeEntityManager();
 	closeEntityManagerFactory();
 	}
+	
+	public List<Classificacao >getClassificacaoPorCor(String hexa){
+		List<Classificacao> c = new ArrayList<Classificacao>();
+		createEntityManagerFactory();
+		createEntityManager();
+			TypedQuery<Classificacao> query = em.createQuery("select o from Classificacao o where o.cor = :hexa", Classificacao.class);
+			query.setParameter("hexa", hexa);
+			
+			try{
+				c = query.getResultList();
+			}
+			catch(NoResultException e){}
+			
+		closeEntityManager();
+		closeEntityManagerFactory();
+		return c;
+	}
+	
+	public List<Classificacao> getClassificacaoPorNome(String nome){
+		List<Classificacao> c = new ArrayList<Classificacao>();
+		createEntityManagerFactory();
+		createEntityManager();
+			TypedQuery<Classificacao> query = em.createQuery("select o from Classificacao o where o.descricao = :nome", Classificacao.class);
+			query.setParameter("nome", nome);
+			
+			try{
+				c = query.getResultList();
+			}
+			catch(Exception e){}
+			
+		closeEntityManager();
+		closeEntityManagerFactory();
+		return c;
+	}
+
 
 	public List<Classificacao> getClassificacoes() {
 		List<Classificacao> c = new ArrayList<Classificacao>();

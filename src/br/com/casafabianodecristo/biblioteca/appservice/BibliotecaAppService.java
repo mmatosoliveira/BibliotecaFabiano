@@ -7,6 +7,7 @@ import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
 import br.com.casafabianodecristo.biblioteca.utils.ConvertToMD5;
+import br.com.casafabianodecristo.biblioteca.validator.ClassificacaoValidator;
 
 public class BibliotecaAppService {
 	private LivroService livroService = new LivroService();
@@ -52,8 +53,11 @@ public class BibliotecaAppService {
 		return classService.getClassificacaoById(id);
 	}
 	
-	public void cadastrarClassificacao(ClassificacaoDto dto){
-		classService.cadastrarClassificacao(dto);
+	public int cadastrarClassificacao(ClassificacaoDto dto){
+		if(ClassificacaoValidator.validarValoresRepetidos(dto.getDescricao(), dto.getCor()))
+			return classService.cadastrarClassificacao(dto);
+		else
+			return 2;
 	}
 	
 	public void atualizarClassificacao(ClassificacaoDto dto){
