@@ -44,7 +44,6 @@ public class ClassificacaoService {
 			createEntityManager();
 				em.getTransaction().begin();
 					Classificacao classificacao = ClassificacaoFactory.create(dto);
-					System.out.println(classificacao);
 					em.persist(classificacao);
 				em.getTransaction().commit();
 				TypedQuery<Classificacao> query = em.createQuery("select o from Classificacao o where o.cor = :hexa", Classificacao.class);
@@ -59,7 +58,6 @@ public class ClassificacaoService {
 				}
 			closeEntityManager();
 		closeEntityManagerFactory();
-		System.out.println(c);
 		return (c == null) ? 1 : 0;
 	}
 	

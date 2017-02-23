@@ -54,15 +54,7 @@ public class BibliotecaAppService {
 	}
 	
 	public int cadastrarClassificacao(ClassificacaoDto dto){
-		System.out.println("chegou na appservice");
-		System.out.println(dto);
-		boolean resultadoValidacao = ClassificacaoValidator.validarValoresRepetidos(dto.getDescricao(), dto.getCor(), false);
-		System.out.println(resultadoValidacao);
-		if(resultadoValidacao){
-			return classService.cadastrarClassificacao(dto);
-		}	
-		else
-			return 2;
+		return classService.cadastrarClassificacao(dto);
 	}
 	
 	public int atualizarClassificacao(ClassificacaoDto dto){

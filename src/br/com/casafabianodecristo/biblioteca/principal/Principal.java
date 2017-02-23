@@ -7,7 +7,6 @@ import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
-import br.com.casafabianodecristo.biblioteca.view.GerenciarClassificacoesController;
 import br.com.casafabianodecristo.biblioteca.view.InicialController;
 import br.com.casafabianodecristo.biblioteca.view.LoginController;
 import br.com.casafabianodecristo.biblioteca.view.ResultadoBuscaController;
@@ -323,7 +322,6 @@ public class Principal extends Application {
 		}catch(IOException e){}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void carregarGerenciamentoClassificacoes(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
@@ -331,13 +329,8 @@ public class Principal extends Application {
 			AnchorPane page = (AnchorPane) loader.load();
 			Scene scene = new Scene(page);
 			Stage pagina = new Stage();
-			/*ObservableList<ClassificacaoDto> itens = FXCollections.observableList (classificacoes);
-			TableView<ClassificacaoDto> tabelaEmprestimos = (TableView<ClassificacaoDto>) scene.lookup("#classificacoes");
-			tabelaEmprestimos.setItems(itens);*/
 			
-			//pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
 			pagina.setTitle("Gerenciar classificações");
-			//pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
