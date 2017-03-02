@@ -55,13 +55,13 @@ public class BuscarUsuarioController {
 	}
 	
 	private void realizarConsulta(){
-		List<Usuario> resultadoPesquisa;
+		/*List<Usuario> resultadoPesquisa;
     	servico.createEntityManagerFactory();
     		resultadoPesquisa = servico.getUsuarios(campoNome.getText());
     	servico.closeEntityManagerFactory();
     	ObservableList<Usuario> itens = FXCollections.observableList(resultadoPesquisa);
     	usuarios.setItems(itens);
-    	atualizarGrid();
+    	atualizarGrid();*/
 	}
 	
 	@FXML
@@ -99,8 +99,8 @@ public class BuscarUsuarioController {
             		alerta.notificacaoErro("Editar dados do usu�rio", "Voc� deve selecionar um registro da grid para realizar essa opera��o.");
             	else if (user.getFlAdministrador() == 1)
             		alerta.notificacaoErro("Editar dados do usu�rio", "N�o � permitido alterar os dados de um Administrador!");
-            	else	
-            		principal.carregarDadosUsuario(user);
+            	else	{}
+            		//principal.carregarDadosUsuario(user);
             }            
         });
 	}

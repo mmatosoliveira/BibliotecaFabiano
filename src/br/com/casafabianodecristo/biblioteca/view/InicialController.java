@@ -1,6 +1,8 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
-import java.util.List;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.util.*;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
@@ -12,6 +14,13 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import javafx.scene.control.*;
 
 public class InicialController {
@@ -150,6 +159,28 @@ public class InicialController {
 				}				
 			}
 		}));
+		
+		itemGerarEtiquetas.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				/*Map<String, Object> parametros = new HashMap<>();
+				Connection conexao ;
+				GeradorDeRelatorios.geraPdf(Principal.class.getResource("../reports/Teste.jrxml"), parametros, saida);*/
+				
+				List<Livro> livros = servico.pesquisaRapidaLivro("", false, false, false, false);				
+				JasperReport report;
+				JasperPrint print;
+				try {
+					System.out.println(Principal.class.getResource("../reports/").getPath());
+					report = JasperCompileManager.compileReport(Principal.class.getResource("../reports/").getPath());
+					print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(livros));
+					JasperExportManager.exportReportToPdfFile(print, "c:/Relatorio_de_Clientes.pdf");
+				} catch (JRException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		
 		itemCadastrarLivros.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
