@@ -167,17 +167,14 @@ public class InicialController {
 				Connection conexao ;
 				GeradorDeRelatorios.geraPdf(Principal.class.getResource("../reports/Teste.jrxml"), parametros, saida);*/
 				
-				List<Livro> livros = servico.pesquisaRapidaLivro("", false, false, false, false);				
-				JasperReport report;
-				JasperPrint print;
+				List<Livro> livros = servico.pesquisaRapidaLivro("", false, false, false, false);
+				GeradorDeRelatorios gerador = new GeradorDeRelatorios("TodosLivros.jrxml", "C:/Users/Matheus de Matos/Desktop/TodosLivros.pdf");
 				try {
-					System.out.println(Principal.class.getResource("../reports/").getPath());
-					report = JasperCompileManager.compileReport(Principal.class.getResource("../reports/").getPath());
-					print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(livros));
-					JasperExportManager.exportReportToPdfFile(print, "c:/Relatorio_de_Clientes.pdf");
-				} catch (JRException e1) {
+					gerador.gerar(livros);
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					System.out.println("Deu ruim =(");
+					e.printStackTrace();
 				}
 			}
 		});

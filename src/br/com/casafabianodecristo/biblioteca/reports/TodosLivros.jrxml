@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-01T21:02:17 -->
+<!-- 2017-03-02T21:04:36 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="787" leftMargin="35" rightMargin="20" topMargin="35" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BibliotecaFabiano2"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -63,12 +62,12 @@
 	<queryString language="SQL">
 		<![CDATA[select * from Livro]]>
 	</queryString>
-	<field name="TomboPatrimonial" class="java.lang.Integer"/>
-	<field name="Titulo" class="java.lang.String"/>
-	<field name="Subtitulo" class="java.lang.String"/>
-	<field name="NomeAutor" class="java.lang.String"/>
-	<field name="Editora" class="java.lang.String"/>
-	<field name="Edicao" class="java.lang.Integer"/>
+	<field name="tomboPatrimonial" class="java.lang.Integer"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="subtitulo" class="java.lang.String"/>
+	<field name="nomeAutor" class="java.lang.String"/>
+	<field name="editora" class="java.lang.String"/>
+	<field name="edicao" class="java.lang.Integer"/>
 	<title>
 		<band height="196" splitType="Stretch">
 			<line>
@@ -116,7 +115,7 @@
 			<staticText>
 				<reportElement x="0" y="130" width="777" height="50" uuid="6094b51c-b255-4031-8a25-22650f0eb8fd"/>
 				<textElement textAlignment="Justified">
-					<font fontName="arial" size="12"/>
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman"/>
 				</textElement>
 				<text><![CDATA[Neste relatório serão demonstrados todos os livros cadastrados no sistema, independente de estarem emprestados, removidos, doados ou indisponíveis no acervo. Este relatório pode ser utilizado para realização de revisão periódica da quantidade de exemplares cadastrados, além da comparação com o acervo (realização de levantamento de patrimônio).]]></text>
 			</staticText>
@@ -127,42 +126,42 @@
 			<staticText>
 				<reportElement style="Column header" positionType="Float" x="2" y="0" width="108" height="20" forecolor="#000000" uuid="02f4c84c-4a80-4ed1-9619-8e5786d4c9bc"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true" pdfFontName="Times-Roman"/>
 				</textElement>
 				<text><![CDATA[Tombo patrimonial]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" positionType="Float" x="113" y="0" width="193" height="20" forecolor="#000000" uuid="817869bd-9a45-4119-9de7-ee44b8527f90"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true" pdfFontName="Times-Roman"/>
 				</textElement>
 				<text><![CDATA[Título]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" positionType="Float" x="306" y="0" width="129" height="20" forecolor="#000000" uuid="46ce3b0c-8292-4bfc-86f4-e7f9d1e94fbc"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true" pdfFontName="Times-Roman"/>
 				</textElement>
 				<text><![CDATA[Subtitulo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" positionType="Float" x="435" y="0" width="158" height="20" forecolor="#000000" uuid="e91d8da3-6602-4fb0-83a7-0541d2e2c46e"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true" pdfFontName="Times-Roman"/>
 				</textElement>
 				<text><![CDATA[Nome do autor]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" positionType="Float" x="593" y="0" width="92" height="20" forecolor="#000000" uuid="bc01b98c-5004-426e-bae5-d113d9e69fbe"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true" pdfFontName="Times-Roman"/>
 				</textElement>
 				<text><![CDATA[Editora]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" positionType="Float" x="685" y="0" width="92" height="20" forecolor="#000000" uuid="7deb4a68-4f6a-4d30-aa97-ef1ceb0be3ce"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true" isItalic="true"/>
+					<font fontName="Times New Roman" size="12" isBold="true" isItalic="true" pdfFontName="Times-Roman"/>
 				</textElement>
 				<text><![CDATA[Edição]]></text>
 			</staticText>
@@ -173,44 +172,44 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement style="Detail" positionType="Float" x="2" y="0" width="108" height="20" uuid="61be65b4-301b-4d26-a0f4-44e537a369df"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false" pdfFontName="Times-Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{TomboPatrimonial}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tomboPatrimonial}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement style="Detail" positionType="Float" x="113" y="0" width="193" height="20" uuid="e4b0a471-523c-4358-8a30-1713b381c294"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false" pdfFontName="Times-Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Titulo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement style="Detail" positionType="Float" x="306" y="0" width="129" height="20" uuid="d7b162f5-79e4-4fb8-9e57-6822d2baae63"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false" pdfFontName="Times-Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Subtitulo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{subtitulo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement style="Detail" positionType="Float" x="435" y="0" width="158" height="20" uuid="abdcb2f0-8a14-40ec-a4cf-3139db880f98"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false" pdfFontName="Times-Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{NomeAutor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomeAutor}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement style="Detail" positionType="Float" x="593" y="0" width="92" height="20" uuid="feda5093-ba04-43b1-b32b-f64dbd6a2fd7"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false" pdfFontName="Times-Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Editora}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{editora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement style="Detail" positionType="Float" x="685" y="0" width="92" height="20" uuid="1141aef2-9476-441f-a50e-f6312c4d9488"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false" pdfFontName="Times-Roman"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Edicao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{edicao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -224,13 +223,18 @@
 				<text><![CDATA[Casa Fabiano de Cristo]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="651" y="157" width="143" height="20" uuid="6cadcb0f-f379-46ee-ac45-a2f2f23aee9f"/>
+				<reportElement x="651" y="155" width="143" height="20" uuid="6cadcb0f-f379-46ee-ac45-a2f2f23aee9f"/>
+				<textElement>
+					<font fontName="Serif" size="9" isBold="true" isItalic="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="560" y="157" width="91" height="20" uuid="583c8570-47dc-4b43-b997-5c20afb136e3"/>
+				<reportElement x="560" y="155" width="91" height="20" uuid="583c8570-47dc-4b43-b997-5c20afb136e3"/>
 				<box rightPadding="4"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right">
+					<font fontName="Serif" size="9" isBold="true" isItalic="true"/>
+				</textElement>
 				<text><![CDATA[Data da emissão:]]></text>
 			</staticText>
 		</band>
