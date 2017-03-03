@@ -1,7 +1,10 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
@@ -163,18 +166,27 @@ public class InicialController {
 		itemGerarEtiquetas.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				/*Map<String, Object> parametros = new HashMap<>();
-				Connection conexao ;
-				GeradorDeRelatorios.geraPdf(Principal.class.getResource("../reports/Teste.jrxml"), parametros, saida);*/
+				Date d = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat();
 				
 				List<Livro> livros = servico.pesquisaRapidaLivro("", false, false, false, false);
-				GeradorDeRelatorios gerador = new GeradorDeRelatorios("TodosLivros.jrxml", "C:/Users/Matheus de Matos/Desktop/TodosLivros.pdf");
+				GeradorDeRelatorios gerador = new GeradorDeRelatorios("TodosLivros.jrxml", "C:/Relatórios/TodosLivros" + sdf.format(d) + ".pdf");
 				try {
 					gerador.gerar(livros);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					System.out.println("Deu ruim =(");
-					e.printStackTrace();
+				} 
+				catch(Exception e){
+					if(e.getLocalizedMessage().contains("incorreta")){
+						boolean result = new File("C:/Relatórios").mkdir();
+						try{
+							gerador.gerar(livros);
+						}
+						catch(Exception ex){
+							alerta.notificacaoErro("Geração de relatórios", "Houve um erro na geração do relatório. Tente novamente mais tarde.");
+						}
+					}
+					else{
+						alerta.notificacaoErro("Geração de relatórios", "Houve um erro na geração do relatório. Tente novamente mais tarde.");
+					}
 				}
 			}
 		});

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-03-02T22:27:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboEmprestimo" pageWidth="164" pageHeight="283" columnWidth="124" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1082a88-cb37-4ca1-92c0-6e96a1f31286">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<image>
+				<reportElement x="12" y="0" width="98" height="48" uuid="f86af22c-44fd-4a10-90a0-7c05ad6766de"/>
+				<imageExpression><![CDATA["C:/git/BibliotecaFabiano/resources/images/Logo-Fabiano-Recibo-Emprestimo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="10" width="116" height="30" uuid="6e9420f3-ad3e-442a-86f9-d70e9f6cafa5"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibo de empréstimo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="181" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="120" height="20" uuid="54292426-4a00-4abd-bf41-611d8fdd9c3f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuário]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="120" height="20" uuid="17d32c09-8819-4f37-a6ef-68bab2abccfd"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeUsuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="120" height="20" uuid="ff1fcbee-a29f-4dd7-b4e5-96aed128e1a8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Livros:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="60" width="120" height="30" uuid="99778755-addb-4009-ba4f-5a821b1a6aae"/>
+				<textFieldExpression><![CDATA[$F{livro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="104" width="120" height="30" uuid="5502e75e-1423-43c6-b8f9-8f888919640e"/>
+				<textFieldExpression><![CDATA[$F{livro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="150" width="120" height="30" uuid="ef83b411-11de-487a-9095-59d87d5f0a53"/>
+				<textFieldExpression><![CDATA[$F{livro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="37" uuid="6952372f-a34e-4563-aac7-d4e3265b7f37"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Data de devolução:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="1" width="50" height="36" uuid="d7ef022d-4d7c-4484-b3fb-7da26ffc3677"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataDevolucao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
