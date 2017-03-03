@@ -1,6 +1,8 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.awt.Toolkit;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
@@ -59,15 +61,9 @@ public class LoginController {
 		senha.setOnKeyPressed((new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
+				//boolean capsLigado = Toolkit.getDefaultToolkit().getLockingKeyState(java.awt.event.KeyEvent.VK_CAPS_LOCK);
 				if (event.getCode() == KeyCode.ENTER){
 					validarLogin();
-				}
-				boolean capsLigado = Toolkit.getDefaultToolkit().getLockingKeyState(java.awt.event.KeyEvent.VK_CAPS_LOCK);
-				if(capsLigado){
-					iconeAttention.setVisible(true);
-				}
-				else{
-					iconeAttention.setVisible(false);
 				}
 			}
 		}));
@@ -129,13 +125,13 @@ public class LoginController {
 			
 			if (dto != null){
 				logado = true;
+			}
+			else{
+				logado = false;
 				if (tentativas == 3){
 					dicaSenha = appService.getDicaSenha(nomeUsuario.getText());
 				}
-					
 			}
-			else
-				logado = false;			
 		} 
 		catch (NoSuchAlgorithmException e) {e.printStackTrace();}
 		
@@ -154,9 +150,7 @@ public class LoginController {
     		protected void succeeded() {
             	boolean result = (boolean) getValue();
             	if (tentativas == 3){ 
-            		System.out.println("tentativas == 3");
             		if (dicaSenha != null){
-            			System.out.println("dica senha != null");
             			labelDicaSenha.setText("Dica de senha: " + dicaSenha);
         				labelDicaSenha.setVisible(true);
         				tentativas = 0;
