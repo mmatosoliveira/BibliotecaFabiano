@@ -7,7 +7,6 @@ import br.com.casafabianodecristo.biblioteca.components.Numberfield;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroLivroInterfaceValidator;
-import br.com.casafabianodecristo.biblioteca.model.Classificacao;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -87,6 +86,7 @@ public class CadastroLivroController {
 			    @Override
 			    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
 			    {
+
 			        if (oldPropertyValue && tf.getText().equals(""))
 			        	tf.setStyle("-fx-background-color: #ff7c7c;");
 			        else if (oldPropertyValue && !tf.getText().equals(""))
@@ -103,7 +103,7 @@ public class CadastroLivroController {
 		        if (oldPropertyValue && classificacao.getSelectionModel().getSelectedItem() == null)
 		        	classificacao.setStyle("-fx-background-color: #ff7c7c;");
 		        else if (oldPropertyValue && classificacao.getSelectionModel().getSelectedItem() != null)
-		        	classificacao.setStyle("");
+		        	classificacao.setStyle("-fx-background-color: "+ classificacao.getSelectionModel().getSelectedItem().getCor() + ";");
 		        	
 		    }
 		});

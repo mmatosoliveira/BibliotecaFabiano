@@ -18,14 +18,11 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class EmprestarLivroController {
@@ -79,6 +76,10 @@ public class EmprestarLivroController {
 	
 	public static final int ONE_WEEK = 86400 * 7 * 1000;
 	
+	private int validacaoUsuario;
+	
+	private int validacaoLivro;
+	
 	@FXML
 	private void initialize(){
 		Label labelSelecionado = new Label("Disponível");
@@ -120,43 +121,34 @@ public class EmprestarLivroController {
 			}
 		});
 		
+		pesquisarUsuario.setOnKeyPressed((new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.ENTER){
+					atualizarUsuario();
+				}				
+			}
+		}));
+		
+		pesquisarLivro.setOnKeyPressed((new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.ENTER){
+					atualizarUsuario();
+				}				
+			}
+		}));
+		
 		emprestar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-            	avisoCarregando.setVisible(true);
             	avisoCarregando.setText("Realizando empréstimo. Aguarde!");
-            	paneCarregando.setVisible(true);
-            	emprestar.setDisable(true);
-            	cancelar.setDisable(true);
-            	nomeUsuario.setDisable(true);
-            	nomeLivro.setDisable(true);
-            	usuarios.setDisable(true);
-            	selectorLivros.setDisable(true);
-            	pesquisarUsuario.setDisable(true);
-            	pesquisarLivro.setDisable(true);
-				UsuarioDto usuarioSelecionado = usuarios.getSelectionModel().getSelectedItem();
-				List<LivroDto> livrosSelecionados = selectorLivros.getTargetItems();
+            	mudarEstadoCamposTela(true);
 				
-				if (EmprestarLivroInterfaceValidator.validarUsuario(usuarioSelecionado) &&
-					EmprestarLivroInterfaceValidator.validarLivrosSelecionados(livrosSelecionados)){
-					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
-					realizarNovoEmprestimo(dto);
-					emprestarLivro = taskEmprestarLivro(dto);
-					Thread t = new Thread(emprestarLivro);
-        			t.setDaemon(true);
-        			t.start();
-				}
-				else{
-					avisoCarregando.setVisible(false);
-	            	emprestar.setDisable(false);
-	            	cancelar.setDisable(false);
-	            	nomeUsuario.setDisable(false);
-	            	nomeLivro.setDisable(false);
-	            	usuarios.setDisable(false);
-	            	selectorLivros.setDisable(false);
-	            	pesquisarUsuario.setDisable(false);
-	            	pesquisarLivro.setDisable(false);
-				}
+				emprestarLivro = taskEmprestarLivro();
+				Thread t = new Thread(emprestarLivro);
+    			t.setDaemon(true);
+    			t.start();			
 			}
 		});
 		
@@ -172,35 +164,68 @@ public class EmprestarLivroController {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public Task taskEmprestarLivro(EmprestimoDto dto) {
+	public Task taskEmprestarLivro() {
         return new Task() {
             @Override
-            protected Object call() throws Exception {
-        		return realizarNovoEmprestimo(dto);
+            protected Integer call() throws Exception {
+            	UsuarioDto usuarioSelecionado = usuarios.getSelectionModel().getSelectedItem();
+				List<LivroDto> livrosSelecionados = selectorLivros.getTargetItems();
+				validacaoUsuario = EmprestarLivroInterfaceValidator.validarUsuario(usuarioSelecionado);
+				validacaoLivro = EmprestarLivroInterfaceValidator.validarLivrosSelecionados(livrosSelecionados); 
+				System.out.println("Usuario: " + validacaoUsuario + " Livro: " + validacaoLivro);
+            	if (validacaoUsuario == 0 && validacaoLivro == 0){
+            		System.out.println("Caiu no IF");
+    					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
+    					super.succeeded();
+    					return (realizarNovoEmprestimo(dto) == true) ? 1 : 0;
+    			}
+    			super.failed();
+    			return 2;
             }
             
             @Override
     		protected void succeeded() {
-            	boolean result = (boolean) getValue();
-            	if (!result){
+            	int result = (int) getValue();
+            	
+            	if (result == 0){
             		alerta.notificacaoErro("Realizar empréstimo", "Ocorreu um erro durante o empréstimo do livro. Por favor tente novamente mais tarde.");
-	            	emprestar.setDisable(false);
-	            	cancelar.setDisable(false);
-	            	nomeUsuario.setDisable(false);
-	            	nomeLivro.setDisable(false);
-	            	usuarios.setDisable(false);
-	            	selectorLivros.setDisable(false);
-	            	pesquisarUsuario.setDisable(false);
-	            	pesquisarLivro.setDisable(false);
+            		mudarEstadoCamposTela(false);
             	}
-            	else if (result){
+            	else if (result == 1){
             		Stage stage = (Stage) cancelar.getScene().getWindow();
     	            stage.close();
     	            alerta.notificacaoSucessoSalvarDados("Emprestar livro");
             	}
+            	else{
+            		if(validacaoUsuario == 1){
+            			alerta.notificacaoAlerta("Emprestar Livro", "É obrigatório selecionar um usuário para realizar um empréstimo.");
+            			mudarEstadoCamposTela(false);
+            		}	
+    				else if(validacaoLivro == 1){
+    					alerta.notificacaoAlerta("Emprestar Livro", "É obrigatório selecionar pelo menos um livro para realizar um empréstimo.");
+    					mudarEstadoCamposTela(false);
+    				}
+    				else if(validacaoLivro == 2){
+    					alerta.notificacaoAlerta("Emprestar Livro", "Não é permitido selecionar mais que 3 (três) livros para um empréstimo.");
+    					mudarEstadoCamposTela(false);
+    				}
+            	}
+            	
     		}
         };
     }
+	
+	private void mudarEstadoCamposTela(boolean estado){
+		paneCarregando.setVisible(estado);
+    	emprestar.setDisable(estado);
+    	cancelar.setDisable(estado);
+    	nomeUsuario.setDisable(estado);
+    	nomeLivro.setDisable(estado);
+    	usuarios.setDisable(estado);
+    	selectorLivros.setDisable(estado);
+    	pesquisarUsuario.setDisable(estado);
+    	pesquisarLivro.setDisable(estado);
+	}
 	
 	private boolean realizarNovoEmprestimo(EmprestimoDto dto){
 		return servico.realizarEmprestimo(dto);
