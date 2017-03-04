@@ -100,4 +100,9 @@ public class RelatorioDto {
 	public void setFlObrigaUsuario(int flObrigaUsuario) {
 		this.flObrigaUsuario = flObrigaUsuario;
 	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
 }

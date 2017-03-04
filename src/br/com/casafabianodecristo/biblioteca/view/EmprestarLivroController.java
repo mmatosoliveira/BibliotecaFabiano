@@ -172,9 +172,7 @@ public class EmprestarLivroController {
 				List<LivroDto> livrosSelecionados = selectorLivros.getTargetItems();
 				validacaoUsuario = EmprestarLivroInterfaceValidator.validarUsuario(usuarioSelecionado);
 				validacaoLivro = EmprestarLivroInterfaceValidator.validarLivrosSelecionados(livrosSelecionados); 
-				System.out.println("Usuario: " + validacaoUsuario + " Livro: " + validacaoLivro);
             	if (validacaoUsuario == 0 && validacaoLivro == 0){
-            		System.out.println("Caiu no IF");
     					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
     					super.succeeded();
     					return (realizarNovoEmprestimo(dto) == true) ? 1 : 0;

@@ -166,7 +166,8 @@ public class InicialController {
 		itemGerarEtiquetas.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				Date d = new Date();
+				principal.carregarGerenciamentoRelatorios();
+				/*Date d = new Date();
 				SimpleDateFormat sdf = new SimpleDateFormat();
 				
 				List<Livro> livros = servico.pesquisaRapidaLivro("", false, false, false, false);
@@ -187,7 +188,7 @@ public class InicialController {
 					else{
 						alerta.notificacaoErro("Geração de relatórios", "Houve um erro na geração do relatório. Tente novamente mais tarde.");
 					}
-				}
+				}*/
 			}
 		});
 		

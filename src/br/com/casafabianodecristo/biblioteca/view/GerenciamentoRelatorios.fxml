@@ -11,9 +11,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import org.controlsfx.control.MaskerPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.GerenciamentoRelatoriosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.GerenciamentoRelatoriosController">
    <children>
       <Label alignment="CENTER" layoutX="272.0" layoutY="14.0" text="Gerenciamento de relatórios" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -22,8 +24,8 @@
       </Label>
       <GridPane layoutX="200.0" layoutY="57.0" prefHeight="272.0" prefWidth="580.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="60.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="222.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="358.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="263.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="417.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="86.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
@@ -55,8 +57,8 @@
             </Label>
             <HBox GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <DatePicker fx:id="dataInicio" prefHeight="25.0" prefWidth="190.0" promptText="Data de início" />
-                  <DatePicker fx:id="dataFim" prefHeight="25.0" prefWidth="190.0" promptText="Data de fim">
+                  <DatePicker fx:id="dataInicio" prefHeight="25.0" prefWidth="209.0" promptText="Data de início" />
+                  <DatePicker fx:id="dataFim" prefHeight="25.0" prefWidth="209.0" promptText="Data de fim">
                      <opaqueInsets>
                         <Insets left="50.0" />
                      </opaqueInsets>
@@ -71,10 +73,15 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comboUsuario" prefHeight="25.0" prefWidth="380.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="comboUsuario" prefHeight="25.0" prefWidth="446.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Button fx:id="botaoCancelar" layoutX="300.0" layoutY="350.0" mnemonicParsing="false" text="Cancelar" />
-      <Button fx:id="botaoGerar" layoutX="238.0" layoutY="350.0" mnemonicParsing="false" prefWidth="62.0" text="Gerar" />
+      <Button fx:id="botaoCancelar" layoutX="350.0" layoutY="361.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="botaoGerar" layoutX="288.0" layoutY="361.0" mnemonicParsing="false" prefWidth="62.0" text="Gerar" />
+      <BorderPane visible="false" fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <MaskerPane fx:id="avisoCarregando" BorderPane.alignment="CENTER" visible="false" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

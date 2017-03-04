@@ -14,8 +14,17 @@ public class BibliotecaAppService {
 	private ClassificacaoService classService = new ClassificacaoService();
 	private UsuarioService usuarioService = new UsuarioService();
 	private EmprestimoService empService = new EmprestimoService();
+	private RelatorioService relatorioService = new RelatorioService();
 	
 	public BibliotecaAppService() {	}
+	
+	/**
+	 * RELATÓRIO
+	 * **/
+	public List<RelatorioDto> getModelosRelatorios(){
+		return relatorioService.getModelosRelatorios();
+	}
+	
 	
 	/**
 	 * LIVRO 

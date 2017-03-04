@@ -339,6 +339,25 @@ public class Principal extends Application {
 		}catch(IOException e){}
 	}
 	
+	public void carregarGerenciamentoRelatorios(){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/GerenciamentoRelatorios.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			Stage pagina = new Stage();
+			
+			pagina.getIcons().add(new Image("file:resources/images/icon-report.png"));
+			pagina.setTitle("Gerenciamento de relatórios");
+			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.setResizable(false);
+			pagina.setScene(scene);
+			pagina.show();
+			
+		}catch(IOException e){}
+	}
+	
 	/*public void carregarBuscaUsuario(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
