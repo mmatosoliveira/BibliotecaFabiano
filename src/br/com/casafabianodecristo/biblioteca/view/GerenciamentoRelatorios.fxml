@@ -11,11 +11,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.MaskerPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.GerenciamentoRelatoriosController">
+<!-- <?import org.controlsfx.control.MaskerPane?>
+<?import javafx.scene.layout.BorderPane?>-->
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.GerenciamentoRelatoriosController">
    <children>
       <Label alignment="CENTER" layoutX="272.0" layoutY="14.0" text="Gerenciamento de relatórios" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <font>
@@ -32,6 +35,7 @@
           <RowConstraints maxHeight="178.0" minHeight="5.0" prefHeight="178.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Selecione o modelo do relatório:">
@@ -74,10 +78,20 @@
                </font>
             </Label>
             <ComboBox fx:id="comboUsuario" prefHeight="25.0" prefWidth="446.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Classificação de livro:" GridPane.rowIndex="4">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboClassificacao" prefHeight="25.0" prefWidth="458.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </ComboBox>
          </children>
       </GridPane>
-      <Button fx:id="botaoCancelar" layoutX="350.0" layoutY="361.0" mnemonicParsing="false" text="Cancelar" />
-      <Button fx:id="botaoGerar" layoutX="288.0" layoutY="361.0" mnemonicParsing="false" prefWidth="62.0" text="Gerar" />
+      <Button fx:id="botaoCancelar" layoutX="350.0" layoutY="392.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="botaoGerar" layoutX="288.0" layoutY="392.0" mnemonicParsing="false" prefWidth="62.0" text="Gerar" />
       <BorderPane visible="false" fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <MaskerPane fx:id="avisoCarregando" BorderPane.alignment="CENTER" visible="false" />

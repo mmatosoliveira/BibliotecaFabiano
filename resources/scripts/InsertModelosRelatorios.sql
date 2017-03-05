@@ -1,0 +1,12 @@
+INSERT INTO relatorio (Id, Descricao, FlObrigaDatas, FlObrigaUsuario, Nome, FlObrigaClassificacao)
+VALUES 
+(-10,'Neste relatório serão demonstrados todos os usuários marcados como\ninativos no sistema.',0,1,'Relação de todos os usuários inativos',0),
+(-9,'Neste relatório serão demonstrados todos os usuários cadastrados no\nsistema.',0,1,'Relação de todos os usuários cadastrados',0),
+(-8,'Neste relatório serão demonstradas todas as classificações de livros\ncadastradas no sistema.',0,0,'Relação de classificações de livros cadastrados',0),
+(-7,'Neste relatório serão demonstrados todos os livros que foram marcados\ncomo doados e que não se encontram mais disponíveis no acervo.',0,0,'Relação de livros doados',0),
+(-6,'Neste relatório serão demonstrados todos os livros que foram marcados\ncomo removidos do acervo',0,0,'Relação de livros removidos',0),
+(-5,'Neste relatório serão demonstrados todos os livros que ainda não possuem \ndata de devolução efetiva informada (estão em atraso), juntamente com o \nnome do usuário que emprestou o livro e a data da devolução prevista.',0,0,'Relação de livros em atraso',0),
+(-4,'Geração do arquivo com as etiquetas de identificação dos livros. Podem ser \ngeradas todas as etiquetas de uma só vez (não recomendado) e etiquetas \npor classificação.',1,0,'Relação de etiquetas',0),
+(-3,'Neste relatório serão demonstrados todos os empréstimos realizados em \numa determinada faixa de tempo. Serão exibidos o nome do usuário e os \nlivros que foram emprestados, ordenados por data do empréstimo.',1,0,'Relação de empréstimos por intervalo de tempo',0),
+(-2,'Neste relatório serão demonstrados todos os empréstimos realizados por um \nusuário informado na hora da geração do relatório. Este relatório pode ser \nutilizado para conferência da quantidade de exemplares físicos em posse do \nusuário em questão.',0,1,'Relação de empréstimos por usuário',0),
+(-1,'Neste relatório serão demonstrados todos os livros cadastrados no sistema,\nindependente de estarem emprestados, removidos, doados ou indisponíveis\nno acervo. Este relatório pode ser utilizado para realização de revisão\nperiódica da quantidade de exemplares cadastrados, além da comparação\ncom o acervo (realização de levantamento de patrimônio).',0,0,'Relação de todos os livros cadastrados no sistema',0);

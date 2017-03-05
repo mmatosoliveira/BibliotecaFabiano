@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(schema="BibliotecaFabiano2", name="Relatorio")
 public class Relatorio {
 	@Id
-	@Column(name="Id")
+	@Column(name="Id", nullable=false)
 	private int id;
 	
 	@Column(name="Nome", nullable=false, length=120)
@@ -20,15 +20,19 @@ public class Relatorio {
 	
 	@Column(name="FlObrigaUsuario", nullable=false)
 	private int flObrigaUsuario;
+	
+	@Column(name="FlObrigaClassificacao", nullable=false)
+	private int flObrigaClassificacao;
 
 	public Relatorio(){}
 	
-	public Relatorio(int id, String nome, String descricao, int flObrigaDatas, int flObrigaUsuario) {
+	public Relatorio(int id, String nome, String descricao, int flObrigaDatas, int flObrigaUsuario, int flObrigaClassificacao) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.flObrigaDatas = flObrigaDatas;
 		this.flObrigaUsuario = flObrigaUsuario;
+		this.flObrigaClassificacao = flObrigaClassificacao;
 	}
 
 	@Override
@@ -36,6 +40,7 @@ public class Relatorio {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + flObrigaClassificacao;
 		result = prime * result + flObrigaDatas;
 		result = prime * result + flObrigaUsuario;
 		result = prime * result + id;
@@ -57,6 +62,8 @@ public class Relatorio {
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
+		if (flObrigaClassificacao != other.flObrigaClassificacao)
+			return false;
 		if (flObrigaDatas != other.flObrigaDatas)
 			return false;
 		if (flObrigaUsuario != other.flObrigaUsuario)
@@ -69,6 +76,14 @@ public class Relatorio {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+	
+	public int getFlObrigaClassificacao() {
+		return flObrigaClassificacao;
+	}
+
+	public void setFlObrigaClassificacao(int flObrigaClassificacao) {
+		this.flObrigaClassificacao = flObrigaClassificacao;
 	}
 
 	public int getId() {

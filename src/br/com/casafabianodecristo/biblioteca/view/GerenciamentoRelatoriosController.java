@@ -40,6 +40,9 @@ public class GerenciamentoRelatoriosController {
 	private BorderPane paneCarregando = new BorderPane();
 	
 	@FXML
+	private ComboBox<ClassificacaoDto> comboClassificacao;
+	
+	@FXML
 	private void initialize(){
 		ObservableList<RelatorioDto> itens = FXCollections.observableArrayList(service.getModelosRelatorios());
 		comboModeloRelatorio.setItems(itens);
@@ -60,25 +63,41 @@ public class GerenciamentoRelatoriosController {
 	}	
 	
 	private void comportamentoComponentes(RelatorioDto itemSelecionado){
-		if(itemSelecionado.getFlObrigaDatas() == 0 && itemSelecionado.getFlObrigaUsuario() == 0){
+		if(itemSelecionado.getId() == -1){
 	    	dataInicio.setDisable(true);
 	    	dataFim.setDisable(true);
 	    	comboUsuario.setDisable(true);
+	    	comboClassificacao.setDisable(false);
 	    }
-	    else if(itemSelecionado.getFlObrigaDatas() == 0){
+		else if(itemSelecionado.getFlObrigaDatas() == 0 && itemSelecionado.getFlObrigaUsuario() == 0 && itemSelecionado.getFlObrigaClassificacaoLivro() == 0){
 	    	dataInicio.setDisable(true);
 	    	dataFim.setDisable(true);
-	    	comboUsuario.setDisable(false);
+	    	comboUsuario.setDisable(true);
+	    	comboClassificacao.setDisable(true);
 	    }
-	    else if(itemSelecionado.getFlObrigaUsuario() == 0){
+	    else if(itemSelecionado.getFlObrigaDatas() == 1){
 	    	dataInicio.setDisable(false);
 	    	dataFim.setDisable(false);
+	    	comboClassificacao.setDisable(true);
 	    	comboUsuario.setDisable(true);
+	    }
+	    else if(itemSelecionado.getFlObrigaUsuario() == 1){
+	    	dataInicio.setDisable(true);
+	    	dataFim.setDisable(true);
+	    	comboClassificacao.setDisable(true);
+	    	comboUsuario.setDisable(false);
+	    }
+	    else if(itemSelecionado.getFlObrigaClassificacaoLivro() == 1){
+	    	dataInicio.setDisable(true);
+	    	dataFim.setDisable(true);
+	    	comboUsuario.setDisable(true);
+	    	comboClassificacao.setDisable(false);
 	    }
 	    else{
 	    	dataInicio.setDisable(false);
 	    	dataFim.setDisable(false);
 	    	comboUsuario.setDisable(false);
+	    	comboClassificacao.setDisable(false);
 	    }
 	}
 }

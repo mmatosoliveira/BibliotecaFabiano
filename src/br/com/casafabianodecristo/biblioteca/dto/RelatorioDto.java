@@ -10,15 +10,18 @@ public class RelatorioDto {
 	private int flObrigaDatas;
 	
 	private int flObrigaUsuario;
+	
+	private int flObrigaClassificacaoLivro;
 
 	public RelatorioDto(){}
 	
-	public RelatorioDto(int id, String nome, String descricao, int flObrigaDatas, int flObrigaUsuario) {
+	public RelatorioDto(int id, String nome, String descricao, int flObrigaDatas, int flObrigaUsuario, int flObrigaClassificacaoLivro) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.flObrigaDatas = flObrigaDatas;
 		this.flObrigaUsuario = flObrigaUsuario;
+		this.flObrigaClassificacaoLivro = flObrigaClassificacaoLivro;
 	}
 
 	@Override
@@ -26,6 +29,7 @@ public class RelatorioDto {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + flObrigaClassificacaoLivro;
 		result = prime * result + flObrigaDatas;
 		result = prime * result + flObrigaUsuario;
 		result = prime * result + id;
@@ -46,6 +50,8 @@ public class RelatorioDto {
 			if (other.descricao != null)
 				return false;
 		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (flObrigaClassificacaoLivro != other.flObrigaClassificacaoLivro)
 			return false;
 		if (flObrigaDatas != other.flObrigaDatas)
 			return false;
@@ -104,5 +110,13 @@ public class RelatorioDto {
 	@Override
 	public String toString() {
 		return nome;
+	}
+
+	public int getFlObrigaClassificacaoLivro() {
+		return flObrigaClassificacaoLivro;
+	}
+
+	public void setFlObrigaClassificacaoLivro(int flObrigaClassificacaoLivro) {
+		this.flObrigaClassificacaoLivro = flObrigaClassificacaoLivro;
 	}
 }
