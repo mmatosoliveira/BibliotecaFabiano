@@ -117,4 +117,11 @@ public class EmprestimoDto {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		return (dataDevolucaoEfetiva == null) ? "" : sdf.format(dataDevolucaoEfetiva);
 	}
+
+	@Override
+	public String toString() {
+		return "EmprestimoDto [id=" + id + ", dataEmprestimo=" + dataEmprestimo + ", dataDevolucaoPrevista="
+				+ dataDevolucaoPrevista + ", dataDevolucaoEfetiva=" + dataDevolucaoEfetiva + ", livrosDto=" + livrosDto
+				+ ", usuarioDto=" + usuarioDto + ", mapper=" + mapper + "]";
+	}
 }

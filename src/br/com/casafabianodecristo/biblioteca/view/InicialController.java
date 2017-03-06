@@ -109,6 +109,9 @@ public class InicialController {
 	private Button botaoRenovarEmprestimo;
 	
 	@FXML
+	private MenuItem itemGerarRelatorio;
+	
+	@FXML
 	private Label labelId;
 	
 	private List<Livro> livros;
@@ -163,32 +166,17 @@ public class InicialController {
 			}
 		}));
 		
+		itemGerarRelatorio.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				principal.carregarGerenciamentoRelatorios();
+			}
+		});
+		
 		itemGerarEtiquetas.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
 				principal.carregarGerenciamentoRelatorios();
-				/*Date d = new Date();
-				SimpleDateFormat sdf = new SimpleDateFormat();
-				
-				List<Livro> livros = servico.pesquisaRapidaLivro("", false, false, false, false);
-				GeradorDeRelatorios gerador = new GeradorDeRelatorios("TodosLivros.jrxml", "C:/Relatórios/TodosLivros" + sdf.format(d) + ".pdf");
-				try {
-					gerador.gerar(livros);
-				} 
-				catch(Exception e){
-					if(e.getLocalizedMessage().contains("incorreta")){
-						boolean result = new File("C:/Relatórios").mkdir();
-						try{
-							gerador.gerar(livros);
-						}
-						catch(Exception ex){
-							alerta.notificacaoErro("Geração de relatórios", "Houve um erro na geração do relatório. Tente novamente mais tarde.");
-						}
-					}
-					else{
-						alerta.notificacaoErro("Geração de relatórios", "Houve um erro na geração do relatório. Tente novamente mais tarde.");
-					}
-				}*/
 			}
 		});
 		

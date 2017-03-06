@@ -7,7 +7,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -52,18 +51,12 @@
         <Menu mnemonicParsing="false" text="Empréstimos">
           <items>
             <MenuItem fx:id="itemRealizarEmprestimo" mnemonicParsing="false" text="Realizar novo empréstimo" />
-            <MenuItem mnemonicParsing="false" text="Renovar empréstimo" />
             <MenuItem fx:id="itemConsultarEmprestimo" mnemonicParsing="false" text="Consultar empréstimos" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Relatórios">
           <items>
-            <MenuItem mnemonicParsing="false" text="Empréstimos" />
-            <MenuItem mnemonicParsing="false" text="Doações de livros" />
-            <MenuItem mnemonicParsing="false" text="Remoção de livros do acervo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cadastro de usuários" />
-            <MenuItem mnemonicParsing="false" text="Atrasos por usuário" />
+            <MenuItem fx:id="itemGerarRelatorio" mnemonicParsing="false" text="Gerar relatório" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Ajuda">
@@ -84,7 +77,7 @@
       </font>
     </Label>
     <Separator prefWidth="650.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-    <Label alignment="CENTER" minHeight="13.999908447265625" prefHeight="24.0" prefWidth="739.0" text="Devoluções previstas para hoje" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="115.0">
+    <Label alignment="CENTER" layoutX="238.0" layoutY="109.0" minHeight="13.999908447265625" prefHeight="30.0" prefWidth="742.0" text="Devoluções previstas para hoje" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="109.0">
       <font>
         <Font size="20.0" fx:id="x1" />
       </font>

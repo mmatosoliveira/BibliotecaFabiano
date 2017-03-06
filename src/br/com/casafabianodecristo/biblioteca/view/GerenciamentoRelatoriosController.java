@@ -42,10 +42,16 @@ public class GerenciamentoRelatoriosController {
 	@FXML
 	private ComboBox<ClassificacaoDto> comboClassificacao;
 	
+	private ObservableList<UsuarioDto> listaUsuarios = null;
+	
+	private ObservableList<ClassificacaoDto> listaClassificacoes = null;
+	
 	@FXML
 	private void initialize(){
 		ObservableList<RelatorioDto> itens = FXCollections.observableArrayList(service.getModelosRelatorios());
 		comboModeloRelatorio.setItems(itens);
+		
+		comboUsuario.setEditable(true);
 		
 		
 		comboModeloRelatorio.setOnAction((event) -> {
@@ -55,12 +61,21 @@ public class GerenciamentoRelatoriosController {
 		});
 		
 		botaoGerar.setOnAction((event) -> {
-			System.out.println("caiu no evento");
 			avisoCarregando.setText("Gerando relatório. Aguarde!");
 			paneCarregando.setVisible(true);
 			avisoCarregando.setVisible(true);
 		});
 	}	
+	
+	private void getUsuarios(){
+		listaUsuarios = FXCollections.observableArrayList(service.getUsuarios(""));
+		comboUsuario.setItems(listaUsuarios);
+	}
+	
+	private void getClassificacoes(){
+		listaClassificacoes = FXCollections.observableArrayList(service.getClassificacoes());
+		comboClassificacao.setItems(listaClassificacoes);
+	}
 	
 	private void comportamentoComponentes(RelatorioDto itemSelecionado){
 		if(itemSelecionado.getId() == -1){
@@ -68,6 +83,8 @@ public class GerenciamentoRelatoriosController {
 	    	dataFim.setDisable(true);
 	    	comboUsuario.setDisable(true);
 	    	comboClassificacao.setDisable(false);
+	    	if(listaClassificacoes == null)
+	    		getClassificacoes();
 	    }
 		else if(itemSelecionado.getFlObrigaDatas() == 0 && itemSelecionado.getFlObrigaUsuario() == 0 && itemSelecionado.getFlObrigaClassificacaoLivro() == 0){
 	    	dataInicio.setDisable(true);
@@ -86,18 +103,26 @@ public class GerenciamentoRelatoriosController {
 	    	dataFim.setDisable(true);
 	    	comboClassificacao.setDisable(true);
 	    	comboUsuario.setDisable(false);
+	    	if(listaUsuarios == null)
+	    		getUsuarios();
 	    }
 	    else if(itemSelecionado.getFlObrigaClassificacaoLivro() == 1){
 	    	dataInicio.setDisable(true);
 	    	dataFim.setDisable(true);
 	    	comboUsuario.setDisable(true);
 	    	comboClassificacao.setDisable(false);
+	    	if(listaClassificacoes == null)
+	    		getClassificacoes();
 	    }
 	    else{
 	    	dataInicio.setDisable(false);
 	    	dataFim.setDisable(false);
 	    	comboUsuario.setDisable(false);
 	    	comboClassificacao.setDisable(false);
+	    	if(listaUsuarios == null)
+	    		getUsuarios();
+	    	if(listaClassificacoes == null)
+	    		getClassificacoes();
 	    }
 	}
 }

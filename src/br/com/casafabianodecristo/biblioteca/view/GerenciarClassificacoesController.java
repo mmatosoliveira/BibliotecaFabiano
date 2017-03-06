@@ -60,7 +60,7 @@ public class GerenciarClassificacoesController {
 	@FXML
 	public void initialize(){
 		realizarConsulta(null);
-		
+		botaoAtualizarGrid.setVisible(false);
 		botaoAtualizarGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

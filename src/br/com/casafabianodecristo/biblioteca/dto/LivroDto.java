@@ -138,5 +138,11 @@ public class LivroDto {
 			return tomboPatrimonial + " - " + titulo + ": " + nomeAutor;
 	}
 	
-	
+	public String getNomeConcatenadoLivro(){
+		if(!subtitulo.isEmpty())
+			return tomboPatrimonial + " - " + titulo + ": " + subtitulo;
+		else 
+			return tomboPatrimonial + " - " + titulo;
+
+	}
 }

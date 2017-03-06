@@ -330,6 +330,7 @@ public class Principal extends Application {
 			Scene scene = new Scene(page);
 			Stage pagina = new Stage();
 			
+			pagina.getIcons().add(new Image("file:resources/images/icon-manage.png"));
 			pagina.setTitle("Gerenciar classificações");
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
@@ -342,13 +343,13 @@ public class Principal extends Application {
 	public void carregarGerenciamentoRelatorios(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/GerenciamentoRelatorios.fxml"));
+			loader.setLocation(Principal.class.getResource("../view/GerarRelatorios.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Scene scene = new Scene(page);
 			Stage pagina = new Stage();
 			
 			pagina.getIcons().add(new Image("file:resources/images/icon-report.png"));
-			pagina.setTitle("Gerenciamento de relatórios");
+			pagina.setTitle("Gerenciar de relatórios");
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setResizable(false);

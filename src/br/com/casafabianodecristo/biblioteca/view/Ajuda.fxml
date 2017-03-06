@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.dialog.WizardPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <WizardPane contentText="BEM VINDO A AJUDA DO LIVRES (SISTEMA PARA GESTÃO DE LIVROS ESPÍRITAS). SELECIONE O TÓPICO QUE VOCÊ TEM DÚVIDAS E CLIQUE EM SEGUINTE PARA ACESSAR AS PERGUNTAS FREQUENTES." layoutY="36.0" prefHeight="118.0" prefWidth="580.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+         <buttonTypes>
+            <ButtonType fx:constant="NEXT" />
+         </buttonTypes>
+      </WizardPane>
+      <TableView layoutX="190.0" layoutY="343.0" prefHeight="397.0" prefWidth="580.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn prefWidth="579.0" text="C1" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutY="3.0" text="AJUDA - LIVRES" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

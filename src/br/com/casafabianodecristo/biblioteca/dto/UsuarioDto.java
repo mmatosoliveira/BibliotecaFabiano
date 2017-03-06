@@ -44,9 +44,7 @@ public class UsuarioDto {
 	}
 		@Override
 	public String toString() {
-		return "Usuario [idUsuario=" + id + ", nomeUsuario=" + nomeUsuario + ", sobrenome=" + sobrenome
-				+ ", nomeUsuarioAcessoSistema=" + nomeUsuarioAcessoSistema + ", senha=" + senha + ", ddd=" + ddd
-				+ ", telefone=" + telefone + ", flAdministrador=" + flAdministrador + ", dicaSenha=" + dicaSenha + "]";
+		return nomeUsuario + " " + sobrenome;
 	}
 		
 	public int getId() {

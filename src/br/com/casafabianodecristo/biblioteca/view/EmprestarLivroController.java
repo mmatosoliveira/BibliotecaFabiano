@@ -7,10 +7,12 @@ import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
+import br.com.casafabianodecristo.biblioteca.dto.ReciboEmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.EmprestarLivroInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.model.Livro;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
+import br.com.casafabianodecristo.biblioteca.utils.GeradorDeRelatorios;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -79,6 +81,10 @@ public class EmprestarLivroController {
 	private int validacaoUsuario;
 	
 	private int validacaoLivro;
+	
+	private EmprestimoDto dtoEmprestimo;
+	
+	private ReciboEmprestimoDto dtoRecibo = new ReciboEmprestimoDto();
 	
 	@FXML
 	private void initialize(){
@@ -173,9 +179,9 @@ public class EmprestarLivroController {
 				validacaoUsuario = EmprestarLivroInterfaceValidator.validarUsuario(usuarioSelecionado);
 				validacaoLivro = EmprestarLivroInterfaceValidator.validarLivrosSelecionados(livrosSelecionados); 
             	if (validacaoUsuario == 0 && validacaoLivro == 0){
-    					EmprestimoDto dto = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
+    					dtoEmprestimo = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
     					super.succeeded();
-    					return (realizarNovoEmprestimo(dto) == true) ? 1 : 0;
+    					return (realizarNovoEmprestimo(dtoEmprestimo) == true) ? 1 : 0;
     			}
     			super.failed();
     			return 2;
@@ -193,6 +199,7 @@ public class EmprestarLivroController {
             		Stage stage = (Stage) cancelar.getScene().getWindow();
     	            stage.close();
     	            alerta.notificacaoSucessoSalvarDados("Emprestar livro");
+    	            gerarRecibo();
             	}
             	else{
             		if(validacaoUsuario == 1){
@@ -213,8 +220,45 @@ public class EmprestarLivroController {
         };
     }
 	
+	private void gerarRecibo (){
+		dtoRecibo.setNomeUsuario(dtoEmprestimo.getUsuario().getNomeUsuario());
+		informarLivrosRecibo();
+		dtoRecibo.setDataDevolucao(dtoEmprestimo.getDevolucaoPrevista());
+		
+		List<ReciboEmprestimoDto> lista = new ArrayList<>();
+		lista.add(dtoRecibo);
+		GeradorDeRelatorios gerador = new GeradorDeRelatorios("ReciboEmprestimo.jrxml", "C:/Users/Recibo"+ new Random().nextInt() +".pdf");
+		
+		try {
+			gerador.gerar(lista);
+		} catch (Exception e) {
+			System.out.println("Deu Ruim ------------------->");
+			e.printStackTrace();
+		}
+	}
+	
+	private void informarLivrosRecibo(){
+		int quantidadeLivros = dtoEmprestimo.getLivros().size();
+		if(quantidadeLivros == 1){
+			dtoRecibo.setPrimeiroLivro(dtoEmprestimo.getLivros().get(0).getNomeConcatenadoLivro());
+			dtoRecibo.setSegundoLivro(null);
+			dtoRecibo.setTerceiroLivro(null);
+		}
+		else if(quantidadeLivros == 2){
+			dtoRecibo.setPrimeiroLivro(dtoEmprestimo.getLivros().get(0).getNomeConcatenadoLivro());
+			dtoRecibo.setSegundoLivro(dtoEmprestimo.getLivros().get(1).getNomeConcatenadoLivro());
+			dtoRecibo.setTerceiroLivro(null);
+		}
+		else{
+			dtoRecibo.setPrimeiroLivro(dtoEmprestimo.getLivros().get(0).getNomeConcatenadoLivro());
+			dtoRecibo.setSegundoLivro(dtoEmprestimo.getLivros().get(1).getNomeConcatenadoLivro());
+			dtoRecibo.setTerceiroLivro(dtoEmprestimo.getLivros().get(2).getNomeConcatenadoLivro());
+		}
+	}
+	
 	private void mudarEstadoCamposTela(boolean estado){
 		paneCarregando.setVisible(estado);
+		avisoCarregando.setVisible(estado);
     	emprestar.setDisable(estado);
     	cancelar.setDisable(estado);
     	nomeUsuario.setDisable(estado);
