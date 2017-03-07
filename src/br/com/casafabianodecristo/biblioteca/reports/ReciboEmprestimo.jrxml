@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-03-06T00:56:01 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboEmprestimo" pageWidth="164" pageHeight="311" columnWidth="124" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1082a88-cb37-4ca1-92c0-6e96a1f31286">
+<!-- 2017-03-07T19:02:10 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReciboEmprestimo" pageWidth="164" pageHeight="311" columnWidth="133" leftMargin="20" rightMargin="11" topMargin="20" bottomMargin="20" uuid="f1082a88-cb37-4ca1-92c0-6e96a1f31286">
 	<property name="com.jaspersoft.studio.unit." value="mm"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="com.jaspersoft.studio.unit.topMargin" value="mm"/>
-	<property name="com.jaspersoft.studio.unit.bottomMargin" value="mm"/>
-	<property name="com.jaspersoft.studio.unit.leftMargin" value="mm"/>
-	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
-	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
-	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -24,9 +20,16 @@
 	<title>
 		<band height="48" splitType="Stretch">
 			<image>
-				<reportElement x="12" y="0" width="98" height="48" uuid="f86af22c-44fd-4a10-90a0-7c05ad6766de"/>
-				<imageExpression><![CDATA["C:/git/BibliotecaFabiano/resources/images/Logo-Fabiano-Recibo-Emprestimo.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="48" height="48" uuid="f86af22c-44fd-4a10-90a0-7c05ad6766de"/>
+				<imageExpression><![CDATA["C:/git/BibliotecaFabiano/resources/images/icon-principal.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="50" y="3" width="74" height="40" uuid="7dec2837-c6d9-4579-a0f7-5fb875873446"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Biblioteca Espírita "Mãezinha"]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -37,7 +40,7 @@
 			<staticText>
 				<reportElement x="0" y="4" width="124" height="15" uuid="6e9420f3-ad3e-442a-86f9-d70e9f6cafa5"/>
 				<textElement textAlignment="Center">
-					<font size="11" isBold="true"/>
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Recibo de empréstimo]]></text>
 			</staticText>
@@ -94,14 +97,14 @@
 			<staticText>
 				<reportElement x="0" y="0" width="70" height="37" uuid="6952372f-a34e-4563-aac7-d4e3265b7f37"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data de devolução:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="74" y="0" width="50" height="36" uuid="d7ef022d-4d7c-4484-b3fb-7da26ffc3677"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dataDevolucao}]]></textFieldExpression>
 			</textField>

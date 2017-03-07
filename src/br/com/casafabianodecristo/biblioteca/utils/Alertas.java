@@ -24,6 +24,14 @@ public class Alertas {
         .text("Sucesso ao salvar dados!")
         .showInformation();     		
 	}
+	
+	@SuppressWarnings("static-access")
+	public void notificacaoSucesso(String titulo, String texto){
+		notificacao.create()
+        .title(titulo)
+        .text(texto)
+        .showInformation();     		
+	}
 
 	@SuppressWarnings("static-access")
 	public void notificacaoErro(String titulo, String texto){

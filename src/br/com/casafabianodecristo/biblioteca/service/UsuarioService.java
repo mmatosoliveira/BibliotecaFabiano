@@ -36,6 +36,30 @@ public class UsuarioService {
 		return u;
 	}
 	
+	public List<UsuarioDto> getUsuariosParaEmprestimo (String nomeUsuario){
+		List<Usuario> usuarios = null;
+		ModelMapper mapper = new ModelMapper();
+		List<UsuarioDto> usuariosDto = new ArrayList<UsuarioDto>();
+		
+		createEntityManagerFactory();
+		createEntityManager();
+			Query q = em.createNativeQuery("select * from Usuario U left join Emprestimo E ON u.Id = E.IdUsuario where E.DataDevolucaoEfetiva is not null and U.Nome like '% ? %'");
+			q.setParameter(1, nomeUsuario);
+	
+			try{
+				usuarios = q.getResultList();
+			}
+			catch(NoResultException ex){ex.printStackTrace();}
+		closeEntityManager();
+		closeEntityManagerFactory();
+		
+		for (Usuario u : usuarios){
+			usuariosDto.add(mapper.map(u, UsuarioDto.class));
+		}
+		
+		return usuariosDto;
+	}
+	
 	public List<UsuarioDto> getUsuarios(String nomeUsuario){
 		List<Usuario> usuarios = null;
 		ModelMapper mapper = new ModelMapper();

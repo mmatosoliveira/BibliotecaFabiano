@@ -26,6 +26,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 public class EmprestarLivroController {
 	@FXML
@@ -75,6 +77,9 @@ public class EmprestarLivroController {
 	
 	@SuppressWarnings("rawtypes")
 	private Task emprestarLivro;
+	
+	@SuppressWarnings("rawtypes")
+	private Task gerarRecibo;
 	
 	public static final int ONE_WEEK = 86400 * 7 * 1000;
 	
@@ -170,6 +175,37 @@ public class EmprestarLivroController {
 	}
 	
 	@SuppressWarnings("rawtypes")
+	public Task taskGerarRecibo(){
+		return new Task(){
+			@Override
+    		protected void succeeded() {
+				int result = (int) getValue();
+				
+				if(result == 1){
+					alerta.notificacaoAlerta("Emprestar livros", "Sucesso ao realizar empréstimo!");
+					Stage stage = (Stage) cancelar.getScene().getWindow();
+	            	stage.close();
+				}
+				else if(result == 2){
+					alerta.alertaErro("Imprimir recibo", "Ocorreu um erro ao imprimir o recibo do empréstimo. \nTalvez a impressora informada não esteja ligada ou instalada corretamente.");
+					Stage stage = (Stage) cancelar.getScene().getWindow();
+	            	stage.close();
+	            	this.done();
+				}
+				else {
+					alerta.alertaErro("Gerar recibo", "Ocorreu um erro ao gerar o recibo do empréstimo. Acesse a aplicação \"Consultar empréstimos\" e tente imprimir o recibo novamente.");
+					this.done();
+				}
+    		}
+
+			@Override
+			protected Object call() throws Exception {
+				return gerarRecibo();
+			}
+		};
+	}
+	
+	@SuppressWarnings("rawtypes")
 	public Task taskEmprestarLivro() {
         return new Task() {
             @Override
@@ -196,10 +232,11 @@ public class EmprestarLivroController {
             		mudarEstadoCamposTela(false);
             	}
             	else if (result == 1){
-            		Stage stage = (Stage) cancelar.getScene().getWindow();
-    	            stage.close();
-    	            alerta.notificacaoSucessoSalvarDados("Emprestar livro");
-    	            gerarRecibo();
+            		avisoCarregando.setText("Imprimindo recibo do empréstimo, aguarde!");
+            		gerarRecibo = taskGerarRecibo();
+            		Thread t = new Thread(gerarRecibo);
+        			t.setDaemon(true);
+        			t.start();
             	}
             	else{
             		if(validacaoUsuario == 1){
@@ -220,21 +257,30 @@ public class EmprestarLivroController {
         };
     }
 	
-	private void gerarRecibo (){
+	private int gerarRecibo (){
 		dtoRecibo.setNomeUsuario(dtoEmprestimo.getUsuario().getNomeUsuario());
 		informarLivrosRecibo();
 		dtoRecibo.setDataDevolucao(dtoEmprestimo.getDevolucaoPrevista());
 		
 		List<ReciboEmprestimoDto> lista = new ArrayList<>();
 		lista.add(dtoRecibo);
-		GeradorDeRelatorios gerador = new GeradorDeRelatorios("ReciboEmprestimo.jrxml", "C:/Users/Recibo"+ new Random().nextInt() +".pdf");
+		GeradorDeRelatorios gerador = new GeradorDeRelatorios("ReciboEmprestimo.jrxml");
 		
 		try {
-			gerador.gerar(lista);
+			JasperPrint jp = gerador.gerar(lista);
+			try{
+				gerador.imprimir(jp, "POS58 10.0.0.6");
+			}
+			catch(JRException ex){
+				return 2;
+			}
+            
 		} catch (Exception e) {
 			System.out.println("Deu Ruim ------------------->");
 			e.printStackTrace();
+			return 0;
 		}
+		return 1;
 	}
 	
 	private void informarLivrosRecibo(){

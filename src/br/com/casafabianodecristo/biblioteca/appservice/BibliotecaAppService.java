@@ -96,6 +96,10 @@ public class BibliotecaAppService {
 		return usuarioService.getUsuarios(nomeUsuario);
 	}
 	
+	public List<UsuarioDto> getUsuariosParaEmprestimo(String nomeUsuario){
+		return usuarioService.getUsuariosParaEmprestimo(nomeUsuario);
+	}
+	
 	public void atualizarUsuario(UsuarioDto dto){
 		usuarioService.atualizarUsuario(dto);
 	}
