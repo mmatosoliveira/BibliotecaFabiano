@@ -21,6 +21,7 @@ import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 
 /**
  *Classe responsável por exportar um relatório jasper em pdf
+ *Ou imprimir um relatório
  *@author Matheus de Matos Oliveira
  */
 @SuppressWarnings("deprecation")
@@ -75,7 +76,6 @@ public class GeradorDeRelatorios
 	 * Método que gera o relatório em pdf e salva em um caminho especificado.
 	 * @param <T>
 	 * @param lista
-	 * defaults to null 
 	 */	
 	public <T> void gerarPdf(List<T> lista) throws Exception	
 	{
@@ -86,19 +86,20 @@ public class GeradorDeRelatorios
 		JasperExportManager.exportReportToPdfFile(print, nomeCaminhoFinalRelatorio);		
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void imprimir(JasperPrint jp, String nomeImpressora) throws JRException {
+	/**
+	 * Método que recebe um relatório jasper compilado e imprime em uma determinada impresora.
+	 * @param jp 
+	 * @param nomeImpressora
+	 */
+	public void imprimir(JasperPrint jp, String nomeImpressora) throws JRException{
 	    PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
-	    // printRequestAttributeSet.add(MediaSizeName.ISO_A4); //setting page size
 	    printRequestAttributeSet.add(new Copies(1));
-
-	    PrinterName printerName = new PrinterName(nomeImpressora, null); //gets printer 
+	    PrinterName printerName = new PrinterName(nomeImpressora, null); 
 
 	    PrintServiceAttributeSet printServiceAttributeSet = new HashPrintServiceAttributeSet();
 	    printServiceAttributeSet.add(printerName);
 
 	    JRPrintServiceExporter exporter = new JRPrintServiceExporter();
-
 	    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
 	    exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
 	    exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, printServiceAttributeSet);

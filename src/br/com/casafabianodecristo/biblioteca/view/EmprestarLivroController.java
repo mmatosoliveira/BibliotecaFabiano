@@ -120,7 +120,9 @@ public class EmprestarLivroController {
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.ENTER){
+					mudarEstadoCamposTela(true);
 					atualizarUsuario();
+					mudarEstadoCamposTela(false);
 				}				
 			}
 		}));
@@ -276,7 +278,6 @@ public class EmprestarLivroController {
 			}
             
 		} catch (Exception e) {
-			System.out.println("Deu Ruim ------------------->");
 			e.printStackTrace();
 			return 0;
 		}
@@ -305,14 +306,14 @@ public class EmprestarLivroController {
 	private void mudarEstadoCamposTela(boolean estado){
 		paneCarregando.setVisible(estado);
 		avisoCarregando.setVisible(estado);
-    	emprestar.setDisable(estado);
+    	/*emprestar.setDisable(estado);
     	cancelar.setDisable(estado);
     	nomeUsuario.setDisable(estado);
     	nomeLivro.setDisable(estado);
     	usuarios.setDisable(estado);
     	selectorLivros.setDisable(estado);
     	pesquisarUsuario.setDisable(estado);
-    	pesquisarLivro.setDisable(estado);
+    	pesquisarLivro.setDisable(estado);*/
 	}
 	
 	private boolean realizarNovoEmprestimo(EmprestimoDto dto){
@@ -320,6 +321,7 @@ public class EmprestarLivroController {
 	}
 	
 	private void atualizarUsuario(){
+		avisoCarregando.setText("Carregando usuários, aguarde!");
 		List<UsuarioDto> u = servico.getUsuarios(nomeUsuario.getText());
 		ObservableList<UsuarioDto> itens = FXCollections.observableList(u);
 		
