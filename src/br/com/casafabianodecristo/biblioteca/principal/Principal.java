@@ -349,7 +349,26 @@ public class Principal extends Application {
 			Stage pagina = new Stage();
 			
 			pagina.getIcons().add(new Image("file:resources/images/icon-report.png"));
-			pagina.setTitle("Gerenciar de relatórios");
+			pagina.setTitle("Gerenciar relatórios");
+			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.setResizable(false);
+			pagina.setScene(scene);
+			pagina.show();
+			
+		}catch(IOException e){}
+	}
+	
+	public void carregarConfiguracaoImpressora(){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/ConfiguracaoImpressoraPadrao.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			Stage pagina = new Stage();
+			
+			pagina.getIcons().add(new Image("file:resources/images/icon-manage.png"));
+			pagina.setTitle("Configuração de impressora padrão para recibos");
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setResizable(false);

@@ -85,6 +85,9 @@ public class InicialController {
 	private MenuItem itemRealizarEmprestimo;
 	
 	@FXML
+	private MenuItem itemConfigurarImpressoraPadrao;
+	
+	@FXML
 	private TextField dadoLivroPesquisa;
 	
 	@FXML
@@ -272,6 +275,8 @@ public class InicialController {
             	principal.carregarEmprestimoLivro();	
             }            
         });
+		
+		itemConfigurarImpressoraPadrao.setOnAction((event) -> principal.carregarConfiguracaoImpressora());
 	}
 	
 	public void consultarLivro(){

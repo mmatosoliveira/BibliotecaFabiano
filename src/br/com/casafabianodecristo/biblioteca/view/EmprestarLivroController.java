@@ -260,7 +260,7 @@ public class EmprestarLivroController {
     }
 	
 	private int gerarRecibo (){
-		dtoRecibo.setNomeUsuario(dtoEmprestimo.getUsuario().getNomeUsuario());
+		dtoRecibo.setNomeUsuario(dtoEmprestimo.getUsuario().toString());
 		informarLivrosRecibo();
 		dtoRecibo.setDataDevolucao(dtoEmprestimo.getDevolucaoPrevista());
 		
@@ -271,7 +271,7 @@ public class EmprestarLivroController {
 		try {
 			JasperPrint jp = gerador.gerar(lista);
 			try{
-				gerador.imprimir(jp, "POS58 10.0.0.6");
+				gerador.imprimir(jp, "POS58");
 			}
 			catch(JRException ex){
 				return 2;
@@ -306,14 +306,6 @@ public class EmprestarLivroController {
 	private void mudarEstadoCamposTela(boolean estado){
 		paneCarregando.setVisible(estado);
 		avisoCarregando.setVisible(estado);
-    	/*emprestar.setDisable(estado);
-    	cancelar.setDisable(estado);
-    	nomeUsuario.setDisable(estado);
-    	nomeLivro.setDisable(estado);
-    	usuarios.setDisable(estado);
-    	selectorLivros.setDisable(estado);
-    	pesquisarUsuario.setDisable(estado);
-    	pesquisarLivro.setDisable(estado);*/
 	}
 	
 	private boolean realizarNovoEmprestimo(EmprestimoDto dto){
