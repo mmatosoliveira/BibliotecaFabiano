@@ -11,10 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.MaskerPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastrarClassificacaoController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastrarClassificacaoController">
   <children>
-    <Label fx:id="lblTitulo" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" text="Cadastrar classificação" textAlignment="CENTER" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+    <Label fx:id="lblTitulo" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" text="Cadastrar classificação de livros" textAlignment="CENTER" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
       <font>
         <Font size="20.0" />
       </font>
@@ -39,12 +41,17 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <HBox layoutX="223.0" layoutY="116.0">
+    <HBox layoutX="220.0" layoutY="117.0">
       <children>
-        <Button fx:id="botaoCancelar" mnemonicParsing="false" prefHeight="25.0" text="Cancelar" />
+        <Button fx:id="botaoCancelar" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Cancelar" />
         <Button fx:id="botaoSalvar" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Salvar" />
       </children>
     </HBox>
       <Label fx:id="lblId" layoutX="28.0" layoutY="121.0" text="" visible="false" />
+   	<BorderPane visible="false" fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <MaskerPane fx:id="avisoCarregando" BorderPane.alignment="CENTER" visible="false" />
+         </center>
+    </BorderPane>
   </children>
 </AnchorPane>

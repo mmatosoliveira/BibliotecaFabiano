@@ -44,3 +44,35 @@
     -fx-background-repeat: no-repeat;
 	-fx-background-image: url('../../../../../../resources/images/right-icon.png');
 }
+
+#botaoAdicionar{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-add.png');
+	-fx-background-color: none;
+}
+
+#botaoFechar{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-close.png');
+	-fx-background-color: none;
+}
+
+#botaoRemover{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-delete.png');
+	-fx-background-color: none;
+}
+
+#botaoEditar{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-edit.png');
+	-fx-background-color: none;
+}

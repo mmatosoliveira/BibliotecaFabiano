@@ -59,14 +59,13 @@ public class GerenciarClassificacoesController {
 	
 	@FXML
 	public void initialize(){
+		botaoAdicionar.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoEditar.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoRemover.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoFechar.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
 		realizarConsulta(null);
 		botaoAtualizarGrid.setVisible(false);
-		botaoAtualizarGrid.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            	//realizarConsulta();
-            }            
-        });
+
 		botaoFechar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

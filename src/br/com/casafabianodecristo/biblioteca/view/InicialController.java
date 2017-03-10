@@ -169,12 +169,7 @@ public class InicialController {
 			}
 		}));
 		
-		itemGerarRelatorio.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-            public void handle(ActionEvent event) {
-				principal.carregarGerenciamentoRelatorios();
-			}
-		});
+		itemGerarRelatorio.setOnAction((event) -> principal.carregarTela("GerarRelatorios", "Gerar relatórios", "icon-manage", true, true));
 		
 		itemGerarEtiquetas.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
@@ -182,6 +177,8 @@ public class InicialController {
 				principal.carregarGerenciamentoRelatorios();
 			}
 		});
+		
+		itemCadastrarClassificacao.setOnAction((e) -> principal.carregarTelaCadastro("CadastrarClassificacao", "Cadastrar classificação de livros", true, false));
 		
 		itemCadastrarLivros.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
@@ -201,13 +198,6 @@ public class InicialController {
 			@Override
             public void handle(ActionEvent event) {
 				principal.carregarRemoverDoarLivro();			
-			}
-		});
-		
-		itemCadastrarClassificacao.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-            public void handle(ActionEvent event) {
-				principal.carregarCadastrarClassificacao();			
 			}
 		});
 		

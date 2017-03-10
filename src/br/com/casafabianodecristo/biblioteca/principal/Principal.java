@@ -25,6 +25,7 @@ import javafx.stage.WindowEvent;
 
 public class Principal extends Application {
 	private Stage primaryStage;
+	
 	private AnchorPane login;
 	private Alertas alerta = new Alertas();
 	
@@ -367,8 +368,8 @@ public class Principal extends Application {
 			Scene scene = new Scene(page);
 			Stage pagina = new Stage();
 			
-			pagina.getIcons().add(new Image("file:resources/images/icon-manage.png"));
-			pagina.setTitle("Configuração de impressora padrão para recibos");
+			pagina.getIcons().add(new Image("file:resources/images/icon-printer.png"));
+			pagina.setTitle("Selecionar impressora padrão para recibos");
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setResizable(false);
@@ -376,6 +377,54 @@ public class Principal extends Application {
 			pagina.show();
 			
 		}catch(IOException e){}
+	}
+	
+	public void carregarTela(String nomeTela, String titulo, String iconName, boolean confirmCloseRequest, boolean resizable){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/"+ nomeTela +".fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			Stage pagina = new Stage();
+			
+			pagina.getIcons().add(new Image("file:resources/images/"+ iconName +".png"));
+			pagina.setTitle(titulo);
+			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.setResizable(resizable);
+			pagina.setScene(scene);
+			pagina.show();
+			
+		}catch(Exception e){
+			alerta.alertaErro("Abrir tela", "Ocorreu um erro enquanto abriamos a tela solicitada. Tente novamente mais tarde!\nSe o erro persistir, contate o administrador do sistema.");
+		}
+	}
+	
+	public void carregarTelaCadastro(String nomeTela, String titulo, boolean confirmCloseRequest, boolean resizable){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/"+ nomeTela +".fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			
+			Scene scene = new Scene(page);
+			Stage pagina = new Stage();
+			
+			Label lblId = (Label) scene.lookup("#lblId");
+			lblId.setText(null);
+			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
+			pagina.setTitle(titulo);
+			pagina.setResizable(resizable);
+			pagina.initOwner(primaryStage);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.setScene(scene);
+			if(confirmCloseRequest)
+				onCloseRequest(pagina, false);
+			pagina.show();
+			
+		}catch(Exception e){
+			alerta.alertaErro("Abrir tela", "Ocorreu um erro enquanto abriamos a tela solicitada. Tente novamente mais tarde!\nSe o erro persistir, contate o administrador do sistema.");
+		}
 	}
 	
 	/*public void carregarBuscaUsuario(){

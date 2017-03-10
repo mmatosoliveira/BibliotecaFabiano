@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.ConfigurarImpressoraPadraoController">
    <children>
-      <Label alignment="CENTER" layoutX="286.0" layoutY="6.0" text="Configuração de impressora padrão para recibos" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <Label alignment="CENTER" layoutX="286.0" layoutY="6.0" text="Selecionar impressora padrão para recibos" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -22,8 +22,8 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="selecionarPadrao" layoutX="300.0" layoutY="359.0" mnemonicParsing="false" text="Selecionar" AnchorPane.bottomAnchor="5.0" />
+      <Button fx:id="selecionarPadrao" layoutX="300.0" layoutY="359.0" mnemonicParsing="false" prefWidth="71.0" text="Selecionar" AnchorPane.bottomAnchor="5.0" />
       <Button fx:id="cancelar" layoutX="229.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Cancelar" AnchorPane.bottomAnchor="5.0" />
-      <Button fx:id="botaoImpressoraNaoListada" layoutX="5.0" layoutY="346.0" mnemonicParsing="false" text="Minha impressora não está na lista" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="350.0" />
+      <Button fx:id="botaoImpressoraNaoListada" layoutX="5.0" layoutY="346.0" mnemonicParsing="false" text="Minha impressora não está na lista" textFill="#1809eb" underline="true" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="350.0" />
    </children>
 </AnchorPane>

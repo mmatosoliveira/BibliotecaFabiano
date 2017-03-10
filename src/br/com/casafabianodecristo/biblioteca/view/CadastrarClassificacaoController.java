@@ -1,5 +1,6 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
+import org.controlsfx.control.MaskerPane;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
@@ -9,6 +10,7 @@ import javafx.concurrent.Task;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class CadastrarClassificacaoController {
@@ -36,6 +38,12 @@ public class CadastrarClassificacaoController {
 	
 	GerenciarClassificacoesController c = new GerenciarClassificacoesController();
 	
+	@FXML
+	private MaskerPane avisoCarregando = new MaskerPane();
+	
+	@FXML
+	private BorderPane paneCarregando;
+	
 	@SuppressWarnings("rawtypes")
 	private Task cadastrarClassificacao;
 	
@@ -45,11 +53,15 @@ public class CadastrarClassificacaoController {
 	private void initialize(){
 		botaoSalvar.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
+	    		alterarEstadoCampos(true);
 		    	if(validarCampos() && ClassificacaoValidator.validarValoresRepetidos(descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()), false)){
 		    		cadastrarClassificacao = taskCadastrarClassificacaoLivro();
         			Thread t = new Thread(cadastrarClassificacao);
         			t.setDaemon(true);
         			t.start();
+		    	}
+		    	else{
+		    		alterarEstadoCampos(false);
 		    	}
 		    }
 		});
@@ -62,6 +74,12 @@ public class CadastrarClassificacaoController {
 		    	}		    	
 		    }
 		});
+	}
+	
+	private void alterarEstadoCampos(boolean estado){
+		avisoCarregando.setText("Salvando... Aguarde!");
+		avisoCarregando.setVisible(estado);
+		paneCarregando.setVisible(estado);
 	}
 	
 	private boolean validarCampos(){
@@ -125,7 +143,7 @@ public class CadastrarClassificacaoController {
 			ClassificacaoDto dto = new ClassificacaoDto(id, descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()));
 			result = appService.atualizarClassificacao(dto);
 		}
-		
+		System.out.println(result);
 		if(result == 0){
 			return true;
 		}

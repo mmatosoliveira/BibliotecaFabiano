@@ -9,20 +9,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.GerenciarClassificacoesController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.GerenciarClassificacoesController">
    <children>
-      <Button fx:id="botaoAtualizarGrid" mnemonicParsing="false" text="Button" visible="true" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="14.0" prefWidth="548.0" text="Classificações" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="14.0" prefWidth="548.0" text="Gerenciar classificações" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font name="Calibri Light" size="20.0" fx:id="x2" />
          </font>
       </Label>
       <HBox id="HBox" alignment="CENTER" layoutX="2.0" layoutY="51.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0">
          <children>
-            <Button fx:id="botaoAdicionar" mnemonicParsing="false" prefHeight="21.0" prefWidth="81.0" text="Adicionar" />
-            <Button fx:id="botaoEditar" mnemonicParsing="false" prefWidth="81.0" text="Editar" />
-            <Button fx:id="botaoRemover" mnemonicParsing="false" prefHeight="21.0" prefWidth="81.0" text="Remover" />
-            <Button fx:id="botaoFechar" mnemonicParsing="false" prefWidth="81.0" text="Fechar" />
+            <Button fx:id="botaoAdicionar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="21.0" prefWidth="90.0" text="Adicionar" underline="true" />
+            <Button fx:id="botaoEditar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Editar" underline="true" />
+            <Button fx:id="botaoRemover" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="21.0" prefWidth="90.0" text="Remover" underline="true" />
+            <Button fx:id="botaoFechar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefWidth="73.0" text="Fechar" underline="true" />
          </children>
       </HBox>
       <Group id="Group" layoutX="409.0" layoutY="6.0" />
