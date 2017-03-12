@@ -23,7 +23,6 @@ public class Alertas {
 	
 	@SuppressWarnings("static-access")
 	public void notificacaoSucesso(String titulo, String texto){
-		notificacao.darkStyle();
 		notificacao.create()
         .title(titulo)
         .text(texto)

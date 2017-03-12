@@ -15,6 +15,7 @@ public class BibliotecaAppService {
 	private UsuarioService usuarioService = new UsuarioService();
 	private EmprestimoService empService = new EmprestimoService();
 	private RelatorioService relatorioService = new RelatorioService();
+	private ApplicationService appService = new ApplicationService();
 	
 	public BibliotecaAppService() {	}
 	
@@ -25,6 +26,16 @@ public class BibliotecaAppService {
 		return relatorioService.getModelosRelatorios();
 	}
 	
+	/**
+	 * SISTEMA
+	 */
+	public int salvarParametrizacao(String nomeImpressora){
+		return appService.salvarParametrizacao(nomeImpressora);
+	}
+	
+	public ParametrizacaoSistemaDto getParametrizacaoSistemaVigente() throws Exception{
+		return appService.getParametrizacaoSistemaVigente();
+	}
 	
 	/**
 	 * LIVRO 

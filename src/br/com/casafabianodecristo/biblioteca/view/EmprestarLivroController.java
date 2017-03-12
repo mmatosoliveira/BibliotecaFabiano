@@ -194,6 +194,12 @@ public class EmprestarLivroController {
 	            	stage.close();
 	            	this.done();
 				}
+				else if(result == 3){
+					alerta.alertaErro("Imprimir recibo", "Não existe uma impressora configurada como padrão para imprimir os recibos de empréstimos.\nPara configurar o sistema vá em: Sistema > Selecionar impressora padrão para recibos.");
+					Stage stage = (Stage) cancelar.getScene().getWindow();
+	            	stage.close();
+	            	this.done();
+				}
 				else {
 					alerta.alertaErro("Gerar recibo", "Ocorreu um erro ao gerar o recibo do empréstimo. Acesse a aplicação \"Consultar empréstimos\" e tente imprimir o recibo novamente.");
 					this.done();
@@ -267,18 +273,23 @@ public class EmprestarLivroController {
 		List<ReciboEmprestimoDto> lista = new ArrayList<>();
 		lista.add(dtoRecibo);
 		GeradorDeRelatorios gerador = new GeradorDeRelatorios("ReciboEmprestimo.jrxml");
+		String nomeImpressora = "";
+		try {
+			nomeImpressora = servico.getParametrizacaoSistemaVigente().getNomeImpressoraPadrao();
+		} catch (Exception e1) {
+			return 3;
+		}
 		
 		try {
 			JasperPrint jp = gerador.gerar(lista);
 			try{
-				gerador.imprimir(jp, "POS58");
+				gerador.imprimir(jp, nomeImpressora);
 			}
 			catch(JRException ex){
 				return 2;
 			}
             
 		} catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		}
 		return 1;

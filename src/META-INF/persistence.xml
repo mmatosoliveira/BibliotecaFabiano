@@ -17,6 +17,7 @@
       <class>br.com.casafabianodecristo.biblioteca.model.Emprestimo</class>
       <class>br.com.casafabianodecristo.biblioteca.model.Classificacao</class>
       <class>br.com.casafabianodecristo.biblioteca.model.Relatorio</class>
+      <class>br.com.casafabianodecristo.biblioteca.model.ParametrizacaoSistema</class> 
       <exclude-unlisted-classes/>
       <!-- propriedades desta unidade de persistência -->
       <properties>

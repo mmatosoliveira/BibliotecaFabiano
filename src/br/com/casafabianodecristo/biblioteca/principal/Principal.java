@@ -367,7 +367,7 @@ public class Principal extends Application {
 			AnchorPane page = (AnchorPane) loader.load();
 			Scene scene = new Scene(page);
 			Stage pagina = new Stage();
-			
+
 			pagina.getIcons().add(new Image("file:resources/images/icon-printer.png"));
 			pagina.setTitle("Selecionar impressora padrão para recibos");
 			pagina.initOwner(primaryStage);

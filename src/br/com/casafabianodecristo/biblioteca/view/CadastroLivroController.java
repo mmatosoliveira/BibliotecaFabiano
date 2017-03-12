@@ -86,7 +86,6 @@ public class CadastroLivroController {
 			    @Override
 			    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
 			    {
-
 			        if (oldPropertyValue && tf.getText().equals(""))
 			        	tf.setStyle("-fx-background-color: #ff7c7c;");
 			        else if (oldPropertyValue && !tf.getText().equals(""))

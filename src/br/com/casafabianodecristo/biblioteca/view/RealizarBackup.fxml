@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.RealizarBackupController">
+   <children>
+      <TabPane layoutX="2.0" layoutY="35.0" prefHeight="391.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+        <tabs>
+          <Tab text="Realizar backup">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="357.0" prefWidth="581.0">
+                     <children>
+                        <Button fx:id="iniciarBackup" layoutX="300.0" layoutY="330.0" mnemonicParsing="false" prefWidth="71.0" text="Iniciar" />
+                        <Button fx:id="botaoCancelar" layoutX="229.0" layoutY="330.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Cancelar" />
+                        <TextArea editable="false" layoutX="5.0" layoutY="14.0" prefHeight="183.0" prefWidth="590.0" text="O processo de realização de backup é um processo lento, mas exetremamente necessário, que permite recuperar informações do sistema quando ocorre alguma falha ou erro que pode acarretar em perda de dados já cadastrados. Ao clicar em ‘Realizar backup’ o sistema realiza uma leitura de todas as informações e faz uma cópia em um arquivo &quot;.SQL&quot;.&#10;Durante a execução do backup algumas funcionalidades do sistema ficarão temporariamente indisponíveis, mas não se preocupe, o sistema estará  em total funcionalidade de uso após a finalização do backup. O backup ocorre em  background, ou seja, as telas do  sistema não ficarão travadas, mas lembre-se: se alguma funcionalidade do sistema não estiver executando corretamente, espere o backup acabar e tente novamente." wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                        <RadioButton fx:id="radioEncerrarLivres" layoutX="14.0" layoutY="207.0" mnemonicParsing="false" text="Encerrar o LIVRES após realizar o backup" AnchorPane.leftAnchor="14.0" />
+                        <RadioButton fx:id="radioEncerrarLivresESistema" layoutX="14.0" layoutY="236.0" mnemonicParsing="false" text="Encerrar o LIVRES e desligar o computador após realizar o backup" />
+                        <ProgressBar fx:id="progresso" layoutX="200.0" layoutY="300.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Restaurar backup">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea editable="false" layoutX="5.0" layoutY="14.0" prefHeight="183.0" prefWidth="590.0" text="O processo de restauração de backup é um processo lento, mas exetremamente necessário principalmente para restauração de informações que foram perdidas após alguma falha do sistema. Nunca restaure backups sem necessidade, pois a restauração acarreta em perda das informações cadastradas posteriormente ao backup. Ao clicar em ‘Restaurar backup’ você deve informar na pasta de backups do LIVRES qual o backup deseja restaurar. Lembre-se: Apenas arquivos &quot;.SQL&quot; são aceitos para a restauração de backups.&#10;Durante a restauração do backup o sistema ficará indisponível, não sendo possível realizar nenhuma operação durante o processo. " wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                        <TextField fx:id="caminhoArquivoBackup" editable="false" layoutX="5.0" layoutY="209.0" prefHeight="25.0" prefWidth="435.0" promptText="Caminho do arquivo selecionado" AnchorPane.leftAnchor="5.0" />
+                        <Button fx:id="selecionarArquivo" alignment="TOP_RIGHT" layoutX="449.0" layoutY="209.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Selecionar arquivo" textAlignment="RIGHT" AnchorPane.leftAnchor="449.0" AnchorPane.rightAnchor="5.0" />
+                        <RadioButton layoutX="14.0" layoutY="243.0" mnemonicParsing="false" text="Encerrar o LIVRES após restaurar o backup" AnchorPane.leftAnchor="14.0" />
+                        <RadioButton layoutX="14.0" layoutY="266.0" mnemonicParsing="false" text="Encerrar o LIVRES e desligar o computador após restaurar o backup" />
+                        <ProgressBar layoutX="200.0" layoutY="292.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button fx:id="restaurarBackup" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="323.0" mnemonicParsing="false" prefWidth="71.0" text="Iniciar" textAlignment="CENTER" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="229.0" layoutY="323.0" mnemonicParsing="false" prefWidth="71.0" text="Cancelar" textAlignment="CENTER" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Label alignment="TOP_CENTER" layoutX="286.0" layoutY="6.0" text="Backup" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="3.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
