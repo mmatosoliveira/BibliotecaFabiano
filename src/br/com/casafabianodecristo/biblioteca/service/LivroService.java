@@ -31,6 +31,22 @@ public class LivroService {
 
 	public LivroService(){}
 	
+	public int getUltimoTombo(){
+		int result = 0;
+		createEntityManagerFactory();
+			createEntityManager();
+				TypedQuery<Livro> query = em.createQuery("select o from Livro o order by o.tomboPatrimonial DESC", Livro.class);
+				query.setFirstResult(0);
+				query.setMaxResults(1);
+				try{
+					result = query.getSingleResult().getTomboPatrimonial();
+				}
+				catch(Exception e){	}
+			closeEntityManager();
+		closeEntityManagerFactory();
+		return result;
+	}
+	
 	public Livro getLivroPorTombo(int tombo){
 		Livro livro = null;
 		TypedQuery<Livro> query = em.createQuery("select o from Livro o " +

@@ -1,12 +1,10 @@
 package br.com.casafabianodecristo.biblioteca.appservice;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
-import br.com.casafabianodecristo.biblioteca.utils.ConvertToMD5;
 import br.com.casafabianodecristo.biblioteca.validator.ClassificacaoValidator;
 
 public class BibliotecaAppService {
@@ -40,6 +38,10 @@ public class BibliotecaAppService {
 	/**
 	 * LIVRO 
 	 **/
+	
+	public int getUltimoTombo(){
+		return livroService.getUltimoTombo();
+	}
 	
 	public Livro getLivroPorTombo(int tombo){
 		return livroService.getLivroPorTombo(tombo);

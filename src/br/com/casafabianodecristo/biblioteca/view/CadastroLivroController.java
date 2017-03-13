@@ -28,7 +28,7 @@ public class CadastroLivroController {
 	private Button botaoCancelar;
 	
 	@FXML
-	private Numberfield tomboPatrimonial;
+	private Numberfield tomboPatrimonial  = new Numberfield();
 	
 	@FXML
 	private TextField titulo;
@@ -65,8 +65,8 @@ public class CadastroLivroController {
 	
 	@FXML
 	public void initialize(){
-		tomboPatrimonial.setMaxLength(6);
-		tomboPatrimonial.setMinLength(6);
+		tomboPatrimonial.setEditable(false);
+		tomboPatrimonial.setText(appService.getUltimoTombo()+1+"");
 		edicao.setMaxLength(3);
 		quantidadeExemplares.setMaxLength(2);
 		ObservableList<ClassificacaoDto> itens = FXCollections.observableArrayList(appService.getClassificacoes());

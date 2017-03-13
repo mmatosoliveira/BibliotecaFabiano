@@ -20,10 +20,18 @@ public class Numberfield extends TextField {
 		FXMLLoader loader = new FXMLLoader(Numberfield.class.getResource("NumberField.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
+		numberField = new TextField();
 		
 		try{
-			loader.load();
+			numberField = (TextField) loader.load();
 		}catch(IOException e){}
+	}
+	
+	/**
+	 * Seta um inteiro para o {@code NumberField}.
+	 * @param valor*/
+	public void setText(Integer valor){
+		numberField.setText(valor.toString());
 	}
 	
 	/**
