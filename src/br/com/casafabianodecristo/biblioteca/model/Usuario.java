@@ -36,15 +36,18 @@ public class Usuario {
 	@Column(name="FlAdministrador", nullable=false)
 	private int flAdministrador;
 	
-	@Column(name="DicaSenha", length= 200)
+	@Column(name="DicaSenha", length= 100)
 	private String dicaSenha;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="usuario")
 	@JoinColumn(name="Id")
 	private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 	
-	@Column(name="FlInativo", nullable=true)
+	@Column(name="FlInativo", nullable=false)
 	private int flInativo;
+	
+	@Column(name="FlPossuiAtraso", nullable=false)
+	private int flPossuiAtraso;
 	
 	public Usuario(){}
 
@@ -59,6 +62,7 @@ public class Usuario {
 		this.flAdministrador = flAdministrador;
 		this.dicaSenha = dicaSenha;
 		this.flInativo = flInativo;
+		this.flPossuiAtraso = 0;
 	}
 	
 	public Usuario(int id, String nomeUsuario, String sobrenome, int ddd, int telefone, int flAdministrador,
@@ -253,4 +257,14 @@ public class Usuario {
 	public void setSenhaCriptografada(String senha) throws NoSuchAlgorithmException{
 		this.senha = ConvertToMD5.convertPasswordToMD5(senha);
 	}
+
+	public int getFlPossuiAtraso() {
+		return flPossuiAtraso;
+	}
+
+	public void setFlPossuiAtraso(int flPossuiAtraso) {
+		this.flPossuiAtraso = flPossuiAtraso;
+	}
+	
+	
 }

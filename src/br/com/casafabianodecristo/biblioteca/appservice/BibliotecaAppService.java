@@ -115,8 +115,8 @@ public class BibliotecaAppService {
 		usuarioService.atualizarUsuario(dto);
 	}
 	
-	public void cadastrarUsuario(UsuarioDto dto){
-		usuarioService.cadastrarUsuario(dto);
+	public boolean cadastrarUsuario(UsuarioDto dto){
+		return usuarioService.cadastrarUsuario(dto);
 	}	
 	
 	public void inativarUsuario(int id){
@@ -161,15 +161,10 @@ public class BibliotecaAppService {
 	
 	public InicialDto logar(String nomeUsuario, String senha){
 		Usuario usuarioLogado = null;
-		Usuario admin = null;
-		String password = new String();
-		try {
-			password = ConvertToMD5.convertPasswordToMD5("Admin");
-		} catch (NoSuchAlgorithmException e) {}
-			
+		Usuario admin = null;			
 		admin = usuarioService.getUsuarioPorNomeUsuario("Admin");
 		if (admin == null){
-			UsuarioDto adminDto = new UsuarioDto(0, "Administrador", "Administrador", "Admin", password, 00, 000000000, 1, "Administrador", 0);
+			UsuarioDto adminDto = new UsuarioDto(0, "Administrador", "", "Admin", "Admin", 00, 000000000, true, "Administrador", 0);
 			usuarioService.cadastrarUsuario(adminDto);
 		}
 		

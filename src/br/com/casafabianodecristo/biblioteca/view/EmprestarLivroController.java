@@ -184,7 +184,7 @@ public class EmprestarLivroController {
 				int result = (int) getValue();
 				
 				if(result == 1){
-					alerta.notificacaoAlerta("Emprestar livros", "Sucesso ao realizar empréstimo!");
+					alerta.notificacaoSucesso("Emprestar livros", "Sucesso ao realizar empréstimo!");
 					Stage stage = (Stage) cancelar.getScene().getWindow();
 	            	stage.close();
 				}

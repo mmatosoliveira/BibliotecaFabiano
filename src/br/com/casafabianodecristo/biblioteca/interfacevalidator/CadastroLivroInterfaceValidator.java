@@ -23,7 +23,7 @@ public class CadastroLivroInterfaceValidator {
 		}
 		else if (textoSubtitulo.length() > 300){
 			subtitulo.requestFocus();
-			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho mÃ¡ximo para o subtÃ­tulo Ã© de 300 caracteres.");
+			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho máximo para o subtítulo é de 300 caracteres.");
 			return false;
 		}	
 		else if (textoNomeAutor.length() > 300){
@@ -73,7 +73,7 @@ public class CadastroLivroInterfaceValidator {
 		
 		for (int i = 0; i < validado.length; i++){
 			if (validado[i] == false){
-				alerta.notificacaoAlerta("Cadastrar livro", "Verifique os campos obrigatÃ³rios e tente novamente.");
+				alerta.notificacaoAlerta("Cadastrar livro", "Verifique os campos obrigatórios e tente novamente.");
 				camposTexto.get(i).requestFocus();
 				return false;
 			}

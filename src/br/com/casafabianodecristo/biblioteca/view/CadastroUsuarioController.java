@@ -1,10 +1,15 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.components.Numberfield;
+import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
+import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroUsuarioInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.model.Usuario;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -34,7 +39,7 @@ public class CadastroUsuarioController {
 	private Numberfield ddd; 
 	
 	@FXML
-	private Numberfield telefone = new Numberfield();
+	private Numberfield telefone;
 	
 	@FXML
 	private PasswordField senha;
@@ -86,76 +91,69 @@ public class CadastroUsuarioController {
 	
 	@FXML
 	public void initialize(){
-		//ddd.setMaxLength(3);
-		//telefone.setMaxLength(9);
+		ddd.setMaxLength(3);
+		ddd.setMinLength(3);
+		telefone.setMaxLength(9);
+		telefone.setMinLength(9);
 		botaoCancelar.setOnAction((event) -> {
 			Stage stage = (Stage) botaoCancelar.getScene().getWindow();
             stage.close();
 		});
 		
-		botaoSalvar.setOnAction((event) -> {
-			boolean camposObrigatorios = validarCamposObrigatorios(checkAdm.isSelected());
-        	boolean senhas = validarSenha(checkAdm.isSelected());
-        	boolean telefone = validarTelefone();
-        	String texto = this.id.getText();
-        	int id = 0;
-        	if (!texto.equals(""))
-        		id = Integer.parseInt(this.id.getText());
-
-        	if (id == 0){
-        		if (camposObrigatorios && senhas && telefone){
-            		try {
-            			indicador.setVisible(true);
-            			operacao = taskCadastrarUsuario();
-            			Thread t = new Thread(operacao);
-            			t.setDaemon(true);
-            			t.start();
-    				} catch (Exception e) {
-    					e.printStackTrace();
-    				}
-            	}
-        	}
-        	else{
-        		camposObrigatorios = validarCamposObrigatorios(checkAdm.isSelected());
-        		telefone = validarTelefone();
-        		if(camposObrigatorios && telefone){
-        			indicador.setVisible(true);
-        			operacao = taskAlterarUsuario();
-        			Thread t = new Thread(operacao);
-        			t.setDaemon(true);
-        			t.start();
+		botaoSalvar.setOnAction((event) -> {        	
+        	if(CadastroUsuarioInterfaceValidator.validarCamposObrigatorios(checkAdm.isSelected(), getListaCampos())){
+        		if(CadastroUsuarioInterfaceValidator.validarTamanhosObrigatorios(checkAdm.isSelected(), nome, sobrenome, ddd, telefone, senha, confirmacaoSenha, dicaSenha)){
+        			if(checkAdm.isSelected()){
+        				if(CadastroUsuarioInterfaceValidator.validarSenha(senha, confirmacaoSenha, dicaSenha)){
+        					criarTask();
+        				}
+        			}
+        			else criarTask();
         		}
         	}
 		});
 		
-		checkAdm.setOnAction((event) -> {
-		    desabilitarComportamento();
-		});
+		checkAdm.setOnAction((event) -> desabilitarComportamento());
+	}
+	
+	private void criarTask(){
+		try {
+			indicador.setVisible(true);
+			operacao = taskCadastrarUsuario();
+			Thread t = new Thread(operacao);
+			t.setDaemon(true);
+			t.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private List<TextField> getListaCampos(){
+		List<TextField> lista = new ArrayList<TextField>();
+		lista.add(nome);
+		lista.add(sobrenome);
+		lista.add(ddd);
+		lista.add(telefone);
+		lista.add(nomeUsuario);
+		lista.add(senha);
+		lista.add(confirmacaoSenha);
+		lista.add(dicaSenha);
+		
+		return lista;
 	}
 	
 	protected boolean cadastrarUsuario(boolean adm) throws Exception{
 		String nome = this.nome.getText();
 		String sobrenome = this.sobrenome.getText();
-		int ddd = Integer.parseInt(this.ddd.getText());
-		int telefone = Integer.parseInt(this.telefone.getText());
-		String nomeUsuario = this.nomeUsuario.getText();
-		String senha = this.senha.getText();
-		String dicaSenha = this.dicaSenha.getText();
-		/*servico.createEntityManagerFactory();
-		Usuario usuario;
-		if (adm){
-			usuario = new Usuario(nome, sobrenome, nomeUsuario, ddd, telefone, 1, dicaSenha);
-			try {
-				usuario.setSenhaCriptografada(senha);
-			} catch (NoSuchAlgorithmException e) {e.printStackTrace();}
-		}
-		else {
-			usuario = new Usuario(nome, sobrenome, ddd, telefone, 0);
-		}		
-			boolean resultado = servico.cadastrarUsuario(usuario);
-		servico.closeEntityManagerFactory();*/
+		int ddd = this.ddd.getValue();
+		int telefone = this.telefone.getValue();
+		String nomeUsuario = (this.nomeUsuario.getText().equals("")) ? null : this.nomeUsuario.getText();
+		String senha = (this.senha.getText().equals("")) ? null : this.senha.getText();
+		String dicaSenha = (this.dicaSenha.getText().equals("")) ? null : this.dicaSenha.getText();
 		
-		return true;
+		UsuarioDto dto = new UsuarioDto(0, nome, sobrenome, nomeUsuario, senha, ddd, telefone, checkAdm.isSelected(), dicaSenha, 0);
+		
+		return servico.cadastrarUsuario(dto);
 	}
 	
 	protected boolean alterarDadosUsuario(){
@@ -186,10 +184,10 @@ public class CadastroUsuarioController {
             	if (result == true){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
                     stage.close();
-            		alerta.notificacaoSucessoSalvarDados("Cadastrar usu�rio");
+            		alerta.notificacaoSucessoSalvarDados("Cadastrar usuário");
             	}
             	else{
-            		alerta.notificacaoErro("Cadastrar usu�rio", "O nome de usu�rio escolhido para acesso ao sistema j� est� em uso. \nEscolha outro e tente novamente!");
+            		alerta.notificacaoErro("Cadastrar usuário", "O nome de usuário escolhido para acesso ao sistema já está em uso. \nEscolha outro e tente novamente!");
             		indicador.setVisible(false);
             	}
         			
@@ -221,103 +219,6 @@ public class CadastroUsuarioController {
     		}
         };
     }
-	
-	protected boolean validarSenha(boolean adm){
-		String senha = this.senha.getText();
-		String confirmacaoSenha = this.confirmacaoSenha.getText();
-		String dicaSenha = this.dicaSenha.getText();
-		boolean resultado = true;
-		if (adm){
-			if (senha.equals(confirmacaoSenha) && !dicaSenha.equals(senha) && senha.length() <= 8)
-				resultado = true;
-			else if (senha.equals(confirmacaoSenha) && dicaSenha.equals(senha)){
-				alerta.alertaErro("Cadastrar usu�rio", "A dica de senha n�o pode ser igual a senha.");
-				resultado = false;
-			}
-			else if (senha.length()>8){
-				alerta.notificacaoErro("Cadastrar usu�rio", "A senha deve ter no m�ximo 8 caracteres.");
-				this.senha.requestFocus();
-				resultado = false;
-			}
-			else{
-				alerta.notificacaoErro("Cadastrar usu�rio", "As senhas digitadas n�o coincidem.");
-				resultado = false;
-			}
-		}		
-		return resultado;
-	}
-	
-	@SuppressWarnings("unused")
-	protected boolean validarTelefone(){
-		int ddd = 0;
-		int telefone = 0;
-		boolean retorno;
-		if (this.ddd.getText().equals(""))
-			ddd = 0;
-		else 
-			ddd = Integer.parseInt(this.ddd.getText());
-		
-		caracteres = this.telefone.getText().length();
-		if (caracteres == 9){
-			lblTamanhoCaracteres.setText("M�ximo: 9 caracteres.");
-			lblTamanhoCaracteres.setVisible(true);
-		}
-		
-		String dddString = Integer.toString(ddd);
-		String telefoneString = Integer.toString(telefone);
-		
-		
-		if (dddString.length() > 3){
-			alerta.alertaAviso("Cadastrar usu�rios", "O DDD pode ter at� 3 digitos.");
-			retorno =  false;
-		}			
-		
-		if (caracteres > 9){
-			alerta.alertaAviso("Cadastrar usu�rios", "O telefone pode ter no m�ximo 9 digitos.");
-			retorno =  false;
-		}
-		else{
-			telefone = Integer.parseInt(this.telefone.getText());
-			retorno = true;	
-		}	
-		return retorno;
-	}
-	
-	protected boolean validarCamposObrigatorios (boolean adm){
-		String nome = this.nome.getText();
-		String sobrenome = this.sobrenome.getText();
-		int ddd;
-		String nomeUsuario = this.nomeUsuario.getText();
-		String senha = this.senha.getText();
-		String confirmacaoSenha = this.confirmacaoSenha.getText();
-		String dicaSenha = this.dicaSenha.getText();
-		boolean resultado;
-		
-		if (this.ddd.getText().equals(""))
-			ddd = 0;
-		else 
-			ddd = Integer.parseInt(this.ddd.getText());
-		
-		if (adm){
-			if (!nome.equals("") && !sobrenome.equals("") && ddd != 0 && 
-				caracteres != 0 && !nomeUsuario.equals("") && !senha.equals("") && 
-				!confirmacaoSenha.equals("") && !dicaSenha.equals(""))				
-				resultado = true;
-			else{
-				alerta.alertaErro("Usu�rio", "Verifique os campos de preenchimento obrigat�rio e tente novamente.");
-				resultado = false;
-			}				
-		}
-		else{
-			if (!nome.equals("") && !sobrenome.equals("") && ddd != 0 && caracteres != 0)
-				resultado =  true;
-			else{
-				alerta.alertaErro("Usu�rio", "Verifique os campos de preenchimento obrigat�rio e tente novamente.");
-				resultado = false;
-			}
-		}
-		return resultado;	
-	}
 	
 	protected void desabilitarComportamento(){
 		if (checkAdm.isSelected()){

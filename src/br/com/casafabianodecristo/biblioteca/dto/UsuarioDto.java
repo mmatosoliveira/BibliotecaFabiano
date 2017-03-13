@@ -1,6 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.dto;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
+
+import br.com.casafabianodecristo.biblioteca.utils.ConvertToMD5;
 
 public class UsuarioDto {
 	
@@ -30,21 +33,29 @@ public class UsuarioDto {
 	public UsuarioDto(){}
 
 	public UsuarioDto(int id, String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
-			int telefone, int flAdministrador, String dicaSenha, int flInativo) {
+			int telefone, boolean flAdministrador, String dicaSenha, int flInativo) {
 		this.id = id;
 		this.nomeUsuario = nomeUsuario;
 		this.sobrenome = sobrenome;
 		this.nomeUsuarioAcessoSistema = nomeUsuarioAcessoSistema;
-		this.senha = senha;
+		this.senha = (senha == "" || senha == null) ? null : setSenhaCriptografada(senha);
 		this.ddd = ddd;
 		this.telefone = telefone;
-		this.flAdministrador = flAdministrador;
+		this.flAdministrador = (flAdministrador == true) ? 1 : 0;
 		this.dicaSenha = dicaSenha;
 		this.flInativo = flInativo;
 	}
 		@Override
 	public String toString() {
 		return nomeUsuario + " " + sobrenome;
+	}
+		
+	private String setSenhaCriptografada(String senha){
+		try {
+			return this.senha = ConvertToMD5.convertPasswordToMD5(senha);
+		} catch (NoSuchAlgorithmException e) {
+			return senha;
+		}
 	}
 		
 	public int getId() {

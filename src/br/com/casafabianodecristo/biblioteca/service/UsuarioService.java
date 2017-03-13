@@ -36,15 +36,17 @@ public class UsuarioService {
 		return u;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<UsuarioDto> getUsuariosParaEmprestimo (String nomeUsuario){
+	System.out.println(nomeUsuario);
 		List<Usuario> usuarios = null;
 		ModelMapper mapper = new ModelMapper();
 		List<UsuarioDto> usuariosDto = new ArrayList<UsuarioDto>();
 		
 		createEntityManagerFactory();
 		createEntityManager();
-			Query q = em.createNativeQuery("select * from Usuario U left join Emprestimo E ON u.Id = E.IdUsuario where E.DataDevolucaoEfetiva is not null and U.Nome like '% ? %'");
-			q.setParameter(1, nomeUsuario);
+			Query q = em.createNativeQuery("select * from Usuario U "
+					+ "where U.FlPossuiAtraso <> 0 and U.Nome like '%"+nomeUsuario+"%'", Usuario.class);
 	
 			try{
 				usuarios = q.getResultList();
@@ -58,6 +60,33 @@ public class UsuarioService {
 		}
 		
 		return usuariosDto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int atualizarUsuariosComAtraso(){
+		List<Integer> idsUsuariosComAtraso = new ArrayList<>();
+		Usuario usuario = new Usuario();
+		createEntityManagerFactory();
+			createEntityManager();
+			Query query = em.createNativeQuery("select * from Usuario U "
+					+ "left join Emprestimo E ON U.Id = E.IdUsuario "
+					+ "where E.DataDevolucaoEfetiva is null", Integer.class);
+			try{
+				idsUsuariosComAtraso = query.getResultList();
+			}
+			catch(NoResultException e){
+				System.out.println("Nenhum usuário com atraso.");
+				return 0;
+			}
+			System.out.println(idsUsuariosComAtraso);
+			for(Integer item: idsUsuariosComAtraso){
+				usuario = this.getUsuarioById(item);
+				usuario.setFlPossuiAtraso(1);
+				em.merge(usuario);
+			}
+			closeEntityManager();
+		closeEntityManagerFactory();
+		return 1;
 	}
 	
 	public List<UsuarioDto> getUsuarios(String nomeUsuario){
@@ -101,7 +130,10 @@ public class UsuarioService {
 	}
 	
 	public Usuario logar(String nomeUsuario, String senha){
+		System.out.println(nomeUsuario);
+		System.out.println(senha);
 		Usuario usuarioLogado = null;
+		//this.atualizarUsuariosComAtraso();
 		createEntityManagerFactory();
 			createEntityManager();
 			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o "+
@@ -116,6 +148,7 @@ public class UsuarioService {
 					catch(NoResultException ex){}
 			closeEntityManager();
 		closeEntityManagerFactory();
+		System.out.println(usuarioLogado);
 		return usuarioLogado;
 	}
 	
@@ -150,15 +183,23 @@ public class UsuarioService {
 		closeEntityManagerFactory();
 	}
 	
-	public void cadastrarUsuario(UsuarioDto dto){
+	public boolean cadastrarUsuario(UsuarioDto dto){
 		createEntityManagerFactory();
 			createEntityManager();
 				em.getTransaction().begin();
 					Usuario usuario = UsuarioFactory.create(dto);
-					em.persist(usuario);
+					try
+					{
+						em.persist(usuario);
+					}
+					catch(Exception e){
+						em.getTransaction().rollback();
+						return false;
+					}
 				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();
+		return true;
 	}	
 	
 	public void inativarUsuario(int id){
