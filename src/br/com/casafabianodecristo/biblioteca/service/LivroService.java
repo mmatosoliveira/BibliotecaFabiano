@@ -82,7 +82,6 @@ public class LivroService {
 			int tomboP = 0;
 			try {tomboP = Integer.parseInt(texto);}
 			catch(NumberFormatException e){return new ArrayList<Livro>();}
-			System.out.println(tomboP);
 			query.setParameter("tombo", tomboP);
 		}
 		else if(soDisponiveis){

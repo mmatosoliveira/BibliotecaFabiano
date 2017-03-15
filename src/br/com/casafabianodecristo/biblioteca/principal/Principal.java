@@ -127,7 +127,7 @@ public class Principal extends Application {
 		}
 	}
 	
-	public void carregarCadastrarClassificacao(){
+	public void carregarCadastrarClassificacao(TableView<ClassificacaoDto> tabela){
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Principal.class.getResource("../view/CadastrarClassificacao.fxml"));
 		
@@ -136,6 +136,7 @@ public class Principal extends Application {
 			Scene scene = new Scene(page);
 			
 			Stage pagina = new Stage();
+			scene.getRoot().setUserData(tabela);
 			pagina.setTitle("Cadastrar classificação");
 			Label lblId = (Label) scene.lookup("#lblId");
 			lblId.setText(null);
@@ -146,7 +147,7 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);
 			pagina.setScene(scene);
 			pagina.initModality(Modality.APPLICATION_MODAL);
-			pagina.show();
+			pagina.showAndWait();
 			
 		} catch (IOException e) {}
 	}

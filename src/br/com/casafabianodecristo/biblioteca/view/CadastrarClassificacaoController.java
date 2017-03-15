@@ -1,11 +1,14 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
+import java.util.List;
+
 import org.controlsfx.control.MaskerPane;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.utils.RGBConverter;
 import br.com.casafabianodecristo.biblioteca.validator.ClassificacaoValidator;
+import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.event.*;
 import javafx.fxml.FXML;
@@ -106,7 +109,8 @@ public class CadastrarClassificacaoController {
         		return cadastrarClassificacao();
             }
             
-            @Override
+            @SuppressWarnings("unchecked")
+			@Override
     		protected void succeeded() {
             	
             	int id = 0;
@@ -115,22 +119,30 @@ public class CadastrarClassificacaoController {
             	boolean result = (boolean) getValue();
             	if (result){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
+            		setarItensTabela();
                     stage.close();                    
-                    //p.atualizarGerenciamentoClassificacoes();
                     alerta.notificacaoSucessoSalvarDados("Cadastrar classificação"); 
             	}
             	else if (result && id != 0){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
                     stage.close();
-                    //c.initialize();
+                    setarItensTabela();
                     alerta.notificacaoSucessoSalvarDados("Editar classificação"); 
             	}
     		}
         };
     }
 	
+	@SuppressWarnings("unchecked")
+	private void setarItensTabela(){
+		TableView<ClassificacaoDto> tabela = (TableView<ClassificacaoDto>) botaoCancelar.getScene().getRoot().getUserData();
+		if(tabela != null){
+			List<ClassificacaoDto> lista = appService.getClassificacoes();
+			tabela.setItems(FXCollections.observableArrayList(lista));
+		}
+	}
+	
 	private boolean cadastrarClassificacao(){
-		System.out.println("caiu no método de cadastro");
 		int result;
     	int id = 0;
     	if(lblId.getText() != null)
@@ -143,7 +155,6 @@ public class CadastrarClassificacaoController {
 			ClassificacaoDto dto = new ClassificacaoDto(id, descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()));
 			result = appService.atualizarClassificacao(dto);
 		}
-		System.out.println(result);
 		if(result == 0){
 			return true;
 		}

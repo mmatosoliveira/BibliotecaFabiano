@@ -12,9 +12,6 @@ public class ClassificacaoValidator {
 	public static boolean validarValoresRepetidos(String nome, String hexa, boolean isEdit){
 		List<Classificacao> classPorNome = classService.getClassificacaoPorNome(nome);
 		List<Classificacao> classPorCor = classService.getClassificacaoPorCor(hexa);
-		
-		System.out.println(classPorCor);
-		System.out.println(classPorNome);
 			
 		if(classPorNome.size() != 0 && isEdit == false){
 			alerta.notificacaoErro("Cadastrar classificação", "Não é permitido cadastrar uma classificação de livros com um nome repetido.");

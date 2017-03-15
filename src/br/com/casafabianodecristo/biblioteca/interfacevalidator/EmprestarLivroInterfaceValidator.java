@@ -5,7 +5,6 @@ import br.com.casafabianodecristo.biblioteca.dto.*;
 
 public class EmprestarLivroInterfaceValidator {
 	public static int validarUsuario(UsuarioDto usuario){
-		System.out.println(usuario);
 		if (usuario != null)
 			return 0;
 		else {
@@ -15,7 +14,6 @@ public class EmprestarLivroInterfaceValidator {
 	}
 	
 	public static int validarLivrosSelecionados(List<LivroDto> livros){
-		System.out.println(livros);
 		if(livros.isEmpty()){
 			return 1;
 		}

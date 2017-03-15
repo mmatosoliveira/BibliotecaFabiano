@@ -94,7 +94,6 @@ public class BuscarUsuarioController {
             @Override
             public void handle(MouseEvent event) {
             	Usuario user = usuarios.getSelectionModel().getSelectedItem();
-            	//System.out.println(user);
             	if (user == null)
             		alerta.notificacaoErro("Editar dados do usu�rio", "Voc� deve selecionar um registro da grid para realizar essa opera��o.");
             	else if (user.getFlAdministrador() == 1)

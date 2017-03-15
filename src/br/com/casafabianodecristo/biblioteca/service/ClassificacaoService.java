@@ -73,7 +73,7 @@ public class ClassificacaoService {
 	closeEntityManagerFactory();
 	}
 	
-	public List<Classificacao >getClassificacaoPorCor(String hexa){
+	public List<Classificacao> getClassificacaoPorCor(String hexa){
 		List<Classificacao> c = new ArrayList<Classificacao>();
 		createEntityManagerFactory();
 		createEntityManager();

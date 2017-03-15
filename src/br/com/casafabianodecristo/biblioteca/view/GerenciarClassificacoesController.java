@@ -77,7 +77,7 @@ public class GerenciarClassificacoesController {
 		botaoAdicionar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-            	principal.carregarCadastrarClassificacao();
+            	principal.carregarCadastrarClassificacao(classificacoes);
             }            
         });
 		
@@ -92,21 +92,20 @@ public class GerenciarClassificacoesController {
         });
 	}
 	
-	public void realizarConsulta(List<ClassificacaoDto> dto){
+	public void realizarConsulta(){
+		this.realizarConsulta(null);
+	}
+	
+	private void realizarConsulta(List<ClassificacaoDto> dto){
 		if(dto == null){
-			System.out.println(itens.size());
-			itens.removeAll(lista);
-			System.out.println(lista.size());
-			itens = FXCollections.observableArrayList(lista);
-			this.setItens(lista);
+			itens = FXCollections.observableList(servico.getClassificacoes());
 			classificacoes.setItems(itens);
 			classificacoes.refresh();
 		}
 		else{ 
 			ObservableList<ClassificacaoDto> itens = classificacoes.getItems();
-			System.out.println("itens da grid: "+itens.size());
 			itens.removeAll(dto);
-			itens = FXCollections.observableArrayList(dto);
+			itens = FXCollections.observableList(dto);
 			classificacoes.setItems(itens);
 		}
 		atualizarGrid();

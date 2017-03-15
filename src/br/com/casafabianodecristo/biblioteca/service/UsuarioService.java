@@ -38,7 +38,6 @@ public class UsuarioService {
 	
 	@SuppressWarnings("unchecked")
 	public List<UsuarioDto> getUsuariosParaEmprestimo (String nomeUsuario){
-	System.out.println(nomeUsuario);
 		List<Usuario> usuarios = null;
 		ModelMapper mapper = new ModelMapper();
 		List<UsuarioDto> usuariosDto = new ArrayList<UsuarioDto>();
@@ -75,10 +74,8 @@ public class UsuarioService {
 				idsUsuariosComAtraso = query.getResultList();
 			}
 			catch(NoResultException e){
-				System.out.println("Nenhum usuário com atraso.");
 				return 0;
 			}
-			System.out.println(idsUsuariosComAtraso);
 			for(Integer item: idsUsuariosComAtraso){
 				usuario = this.getUsuarioById(item);
 				usuario.setFlPossuiAtraso(1);
@@ -130,8 +127,6 @@ public class UsuarioService {
 	}
 	
 	public Usuario logar(String nomeUsuario, String senha){
-		System.out.println(nomeUsuario);
-		System.out.println(senha);
 		Usuario usuarioLogado = null;
 		//this.atualizarUsuariosComAtraso();
 		createEntityManagerFactory();
@@ -148,7 +143,6 @@ public class UsuarioService {
 					catch(NoResultException ex){}
 			closeEntityManager();
 		closeEntityManagerFactory();
-		System.out.println(usuarioLogado);
 		return usuarioLogado;
 	}
 	
@@ -174,9 +168,7 @@ public class UsuarioService {
 			createEntityManager();
 				em.getTransaction().begin();
 					Usuario user = getUsuarioById(dto.getId());
-					System.out.println(user);
 					user = UsuarioUpdater.update(dto);
-					System.out.println(user);
 					em.merge(user);
 				em.getTransaction().commit();
 			closeEntityManager();
