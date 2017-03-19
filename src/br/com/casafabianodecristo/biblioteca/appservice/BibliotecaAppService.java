@@ -2,6 +2,9 @@ package br.com.casafabianodecristo.biblioteca.appservice;
 
 import java.util.*;
 import org.modelmapper.ModelMapper;
+
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
@@ -95,6 +98,10 @@ public class BibliotecaAppService {
 			dto.add(mapper.map(c, ClassificacaoDto.class));
 		}
 		return dto;		
+	}
+	
+	public int removerClassificacao(int id) throws MySQLIntegrityConstraintViolationException{
+		return classService.removerClassificacao(id);
 	}
 	
 	/**

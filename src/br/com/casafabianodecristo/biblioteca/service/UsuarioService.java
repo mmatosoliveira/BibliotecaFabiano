@@ -80,6 +80,7 @@ public class UsuarioService {
 				usuario = this.getUsuarioById(item);
 				usuario.setFlPossuiAtraso(1);
 				em.merge(usuario);
+				//em.
 			}
 			closeEntityManager();
 		closeEntityManagerFactory();

@@ -123,4 +123,24 @@ public class ClassificacaoService {
 		closeEntityManagerFactory();
 		return c;
 	}	
+	
+	public int removerClassificacao(int id){
+		int result = 0;
+		createEntityManagerFactory();
+			createEntityManager();
+				em.getTransaction().begin();
+					Classificacao c = em.find(Classificacao.class, id);
+					System.out.println(c);
+					try{
+						em.remove(c);
+					}
+					catch(Exception e){
+						e.printStackTrace();
+						result = 1;
+					}
+				em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+		return result;
+	}
 }

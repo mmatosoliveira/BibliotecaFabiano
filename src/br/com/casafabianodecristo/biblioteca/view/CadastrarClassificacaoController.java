@@ -50,14 +50,25 @@ public class CadastrarClassificacaoController {
 	@SuppressWarnings("rawtypes")
 	private Task cadastrarClassificacao;
 	
+	private TableView<ClassificacaoDto> tabela;
+	
+	private int id = 0;
+	
+	boolean isEdit = false;
+	
 	public CadastrarClassificacaoController (){}
 	
+	@SuppressWarnings("unchecked")
 	@FXML
-	private void initialize(){
+	private void initialize(){	
 		botaoSalvar.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-	    		alterarEstadoCampos(true);
-		    	if(validarCampos() && ClassificacaoValidator.validarValoresRepetidos(descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()), false)){
+		    	List<Object> dados = (List<Object>) botaoCancelar.getScene().getRoot().getUserData();
+				tabela = (TableView<ClassificacaoDto>) dados.get(0);
+				id = (Integer) dados.get(1);
+				isEdit = (id == 0) ? false : true;
+	    		alterarEstadoCampos(true);            		
+		    	if(validarCampos() && ClassificacaoValidator.validarValoresRepetidos(descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()), isEdit)){
 		    		cadastrarClassificacao = taskCadastrarClassificacaoLivro();
         			Thread t = new Thread(cadastrarClassificacao);
         			t.setDaemon(true);
@@ -91,7 +102,7 @@ public class CadastrarClassificacaoController {
 		 {
 			 result = false;
 			 descricao.setStyle("-fx-background-color: #ff7c7c;");
-			 alerta.notificacaoErro("", "");
+			 alerta.notificacaoErro("Cadastrar classificação", "É obrigatório informar uma descrição para a classificação de livros.");
 		 }
 		 else{
 			 result = true;
@@ -109,13 +120,9 @@ public class CadastrarClassificacaoController {
         		return cadastrarClassificacao();
             }
             
-            @SuppressWarnings("unchecked")
 			@Override
     		protected void succeeded() {
             	
-            	int id = 0;
-            	if(lblId.getText() != null)
-            		id = Integer.parseInt(lblId.getText());
             	boolean result = (boolean) getValue();
             	if (result){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
@@ -133,9 +140,7 @@ public class CadastrarClassificacaoController {
         };
     }
 	
-	@SuppressWarnings("unchecked")
 	private void setarItensTabela(){
-		TableView<ClassificacaoDto> tabela = (TableView<ClassificacaoDto>) botaoCancelar.getScene().getRoot().getUserData();
 		if(tabela != null){
 			List<ClassificacaoDto> lista = appService.getClassificacoes();
 			tabela.setItems(FXCollections.observableArrayList(lista));

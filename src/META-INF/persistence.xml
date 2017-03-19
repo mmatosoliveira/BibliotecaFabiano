@@ -33,7 +33,7 @@
          
          <property name="eclipselink.orm.validate.schema" value="true"/>
          
-         <property name="eclipselink.logging.level" value="SEVERE"/>
+         <property name="eclipselink.logging.level" value="ALL"/>
          <!-- a aplicação NÃO será executada em um servidor de aplicações -->
          <property name="eclipselink.target-server" value="None"/>
          <!-- a propriedade a seguir é opcional, pois 'database' é padrão  -->

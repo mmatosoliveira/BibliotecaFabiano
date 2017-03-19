@@ -178,7 +178,7 @@ public class InicialController {
 			}
 		});
 		
-		itemCadastrarClassificacao.setOnAction((e) -> principal.carregarTelaCadastro("CadastrarClassificacao", "Cadastrar classificação de livros", true, false));
+		itemCadastrarClassificacao.setOnAction((e) -> principal.carregarTelaCadastro("CadastrarClassificacao", "Cadastrar classificação de livros", true, false, new TableView<>()));
 		
 		itemCadastrarLivros.setOnAction(new EventHandler<ActionEvent>(){
 			@Override

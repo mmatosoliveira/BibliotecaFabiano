@@ -136,12 +136,18 @@ public class Principal extends Application {
 			Scene scene = new Scene(page);
 			
 			Stage pagina = new Stage();
-			scene.getRoot().setUserData(tabela);
+			
 			pagina.setTitle("Cadastrar classificação");
+			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
 			Label lblId = (Label) scene.lookup("#lblId");
 			lblId.setText(null);
 			
 			onCloseRequest(pagina, false);
+			List<Object> dados = new ArrayList<>();
+			dados.add(tabela);
+			dados.add(new Integer(0));
+			
+			scene.getRoot().setUserData(dados);
 			
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
@@ -152,7 +158,7 @@ public class Principal extends Application {
 		} catch (IOException e) {}
 	}
 	
-	public void carregarEditarClassificacao(ClassificacaoDto dto){
+	public void carregarEditarClassificacao(ClassificacaoDto dto, TableView<ClassificacaoDto> tabela){
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Principal.class.getResource("../view/CadastrarClassificacao.fxml"));
 		
@@ -161,9 +167,10 @@ public class Principal extends Application {
 			Scene scene = new Scene(page);
 			
 			Stage pagina = new Stage();
-			pagina.setTitle("Cadastrar classificação");
+			pagina.setTitle("Editar classificação");
 			onCloseRequest(pagina, false);
 			
+			pagina.getIcons().add(new Image("file:resources/images/icon-edit.png"));
 			TextField descricao = (TextField) scene.lookup("#descricao");
 			descricao.setText(dto.getDescricao());
 			descricao.setEditable(false);
@@ -174,6 +181,11 @@ public class Principal extends Application {
 			Label lblId = (Label) scene.lookup("#lblId");
 			lblId.setText(Integer.toString(dto.getId()));
 			
+			List<Object> dados = new ArrayList<>();
+			dados.add(tabela);
+			dados.add(new Integer(dto.getId()));
+			
+			scene.getRoot().setUserData(dados);
 			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.setScene(scene);
@@ -401,7 +413,7 @@ public class Principal extends Application {
 		}
 	}
 	
-	public void carregarTelaCadastro(String nomeTela, String titulo, boolean confirmCloseRequest, boolean resizable){
+	public <T> void carregarTelaCadastro(String nomeTela, String titulo, boolean confirmCloseRequest, boolean resizable, TableView<T> tabela){
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/"+ nomeTela +".fxml"));
@@ -419,11 +431,19 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
+			
+			List<Object> dados = new ArrayList<>();
+			dados.add(tabela);
+			dados.add(new Integer(0));
+			
+			scene.getRoot().setUserData(dados);
+			
 			if(confirmCloseRequest)
 				onCloseRequest(pagina, false);
 			pagina.show();
 			
 		}catch(Exception e){
+			e.printStackTrace();
 			alerta.alertaErro("Abrir tela", "Ocorreu um erro enquanto abriamos a tela solicitada. Tente novamente mais tarde!\nSe o erro persistir, contate o administrador do sistema.");
 		}
 	}
