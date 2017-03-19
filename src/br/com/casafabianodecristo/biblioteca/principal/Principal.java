@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
-import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.view.InicialController;
@@ -50,7 +49,7 @@ public class Principal extends Application {
 		primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
 		primaryStage.setResizable(false);
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("LIVRES - Sistema para gestão de livros espíritas");
+		this.primaryStage.setTitle("LIVRES - Sistema gerenciador de livros espíritas");
 		this.primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
 		this.primaryStage.setResizable(false);
 		carregarLogin();
@@ -268,31 +267,6 @@ public class Principal extends Application {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void carregarConsultaEmprestimo(List<EmprestimoDto> emprestimos){
-		try{
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/Emprestimo.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-			
-			Scene scene = new Scene(page);
-			ObservableList<EmprestimoDto> itens = FXCollections.observableList (emprestimos);
-			TableView<EmprestimoDto> tabelaEmprestimos = (TableView<EmprestimoDto>) scene.lookup("#emprestimos");
-			tabelaEmprestimos.setItems(itens);
-			
-			Stage pagina = new Stage();
-			pagina.setTitle("Consultar empréstimos");
-			pagina.initOwner(primaryStage);
-			pagina.initModality(Modality.APPLICATION_MODAL);
-			pagina.setScene(scene);
-			onCloseRequest(pagina, false);
-			pagina.show();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void carregarCadastroUsuario(){
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -405,6 +379,7 @@ public class Principal extends Application {
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setResizable(resizable);
+			onCloseRequest(pagina, confirmCloseRequest);
 			pagina.setScene(scene);
 			pagina.show();
 			

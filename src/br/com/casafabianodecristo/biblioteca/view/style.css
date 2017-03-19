@@ -76,3 +76,27 @@
 	-fx-background-image: url('../../../../../../resources/images/icon-edit.png');
 	-fx-background-color: none;
 }
+
+#renovar{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-renew.png');
+	-fx-background-color: none;
+}
+
+#imprimirRecibo{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-printer.png');
+	-fx-background-color: none;
+}
+
+#botaoAplicarFiltro{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-filter.png');
+	-fx-background-color: none;
+}

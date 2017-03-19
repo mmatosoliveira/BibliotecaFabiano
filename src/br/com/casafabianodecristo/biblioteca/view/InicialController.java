@@ -1,14 +1,8 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.sql.Connection;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
-import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -17,13 +11,6 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import javafx.scene.control.*;
 
 public class InicialController {
@@ -201,13 +188,7 @@ public class InicialController {
 			}
 		});
 		
-		itemConsultarEmprestimo.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-            public void handle(ActionEvent event) {
-				List<EmprestimoDto> emprestimos = servico.getEmprestimos();
-				principal.carregarConsultaEmprestimo(emprestimos);			
-			}
-		});
+		itemConsultarEmprestimo.setOnAction((event) -> principal.carregarTela("Emprestimo", "Consultar empréstimos", "icon-search", false, false));
 		
 		itemCadastrarUsuario.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
