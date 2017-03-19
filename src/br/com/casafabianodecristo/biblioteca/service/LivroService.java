@@ -85,7 +85,8 @@ public class LivroService {
 			query.setParameter("tombo", tomboP);
 		}
 		else if(soDisponiveis){
-			query = em.createQuery("select o from Livro o where o.flEmprestado = 0", Livro.class);
+			query = em.createQuery("select o from Livro o where o.flEmprestado = 0 and o.titulo like :texto", Livro.class);
+			query.setParameter("texto", "%" + texto + "%");
 		}
 		else {
 			query = em.createQuery("select o from Livro o where o.titulo like :texto", Livro.class);

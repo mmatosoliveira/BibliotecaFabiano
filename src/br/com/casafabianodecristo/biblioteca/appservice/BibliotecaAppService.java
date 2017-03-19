@@ -152,6 +152,10 @@ public class BibliotecaAppService {
 		empService.devolverLivro(dto);
 	}
 	
+	public List<EmprestimoDto> getEmprestimosPorNome(String nomeUsuario, boolean apenasAtrasados){
+		return empService.getEmprestimosPorUsuario(nomeUsuario, apenasAtrasados);
+	}
+	
 	public List<EmprestimoDto> getEmprestimos(){
 		List<Emprestimo> emprestimos = empService.getEmprestimos();
 		List<EmprestimoDto> dto = new ArrayList<EmprestimoDto>(); 

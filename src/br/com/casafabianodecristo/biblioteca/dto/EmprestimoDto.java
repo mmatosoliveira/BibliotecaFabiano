@@ -102,7 +102,7 @@ public class EmprestimoDto {
 	}
 	
 	public String getAtrasado(){
-		if (dataDevolucaoPrevista.compareTo(new Date()) < 0)
+		if (dataDevolucaoPrevista.compareTo(new Date()) < 0 && dataDevolucaoEfetiva == null)
 			return "Sim";
 		else
 			return "Não";
