@@ -7,12 +7,11 @@ import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.dto.LivroDto;
-import br.com.casafabianodecristo.biblioteca.dto.ReciboEmprestimoDto;
 import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.EmprestarLivroInterfaceValidator;
 import br.com.casafabianodecristo.biblioteca.model.Livro;
+import br.com.casafabianodecristo.biblioteca.service.GeradorReciboService;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
-import br.com.casafabianodecristo.biblioteca.utils.GeradorDeRelatorios;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,8 +25,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperPrint;
 
 public class EmprestarLivroController {
 	@FXML
@@ -88,8 +85,6 @@ public class EmprestarLivroController {
 	private int validacaoLivro;
 	
 	private EmprestimoDto dtoEmprestimo;
-	
-	private ReciboEmprestimoDto dtoRecibo = new ReciboEmprestimoDto();
 	
 	@FXML
 	private void initialize(){
@@ -182,11 +177,11 @@ public class EmprestarLivroController {
 			@Override
     		protected void succeeded() {
 				int result = (int) getValue();
-				
 				if(result == 1){
 					alerta.notificacaoSucesso("Emprestar livros", "Sucesso ao realizar empréstimo!");
 					Stage stage = (Stage) cancelar.getScene().getWindow();
 	            	stage.close();
+	            	this.done();
 				}
 				else if(result == 2){
 					alerta.alertaErro("Imprimir recibo", "Ocorreu um erro ao imprimir o recibo do empréstimo. \nTalvez a impressora informada não esteja ligada ou instalada corretamente.");
@@ -208,7 +203,8 @@ public class EmprestarLivroController {
 
 			@Override
 			protected Object call() throws Exception {
-				return gerarRecibo();
+				GeradorReciboService gerador = new GeradorReciboService(dtoEmprestimo);
+				return gerador.gerarRecibo();
 			}
 		};
 	}
@@ -268,54 +264,7 @@ public class EmprestarLivroController {
         };
     }
 	
-	private int gerarRecibo (){
-		dtoRecibo.setNomeUsuario(dtoEmprestimo.getUsuario().toString());
-		informarLivrosRecibo();
-		dtoRecibo.setDataDevolucao(dtoEmprestimo.getDevolucaoPrevista());
-		
-		List<ReciboEmprestimoDto> lista = new ArrayList<>();
-		lista.add(dtoRecibo);
-		GeradorDeRelatorios gerador = new GeradorDeRelatorios("ReciboEmprestimo.jrxml");
-		String nomeImpressora = "";
-		try {
-			nomeImpressora = servico.getParametrizacaoSistemaVigente().getNomeImpressoraPadrao();
-		} catch (Exception e1) {
-			return 3;
-		}
-		
-		try {
-			JasperPrint jp = gerador.gerar(lista);
-			try{
-				gerador.imprimir(jp, nomeImpressora);
-			}
-			catch(JRException ex){
-				return 2;
-			}
-            
-		} catch (Exception e) {
-			return 0;
-		}
-		return 1;
-	}
 	
-	private void informarLivrosRecibo(){
-		int quantidadeLivros = dtoEmprestimo.getLivros().size();
-		if(quantidadeLivros == 1){
-			dtoRecibo.setPrimeiroLivro(dtoEmprestimo.getLivros().get(0).getNomeConcatenadoLivro());
-			dtoRecibo.setSegundoLivro(null);
-			dtoRecibo.setTerceiroLivro(null);
-		}
-		else if(quantidadeLivros == 2){
-			dtoRecibo.setPrimeiroLivro(dtoEmprestimo.getLivros().get(0).getNomeConcatenadoLivro());
-			dtoRecibo.setSegundoLivro(dtoEmprestimo.getLivros().get(1).getNomeConcatenadoLivro());
-			dtoRecibo.setTerceiroLivro(null);
-		}
-		else{
-			dtoRecibo.setPrimeiroLivro(dtoEmprestimo.getLivros().get(0).getNomeConcatenadoLivro());
-			dtoRecibo.setSegundoLivro(dtoEmprestimo.getLivros().get(1).getNomeConcatenadoLivro());
-			dtoRecibo.setTerceiroLivro(dtoEmprestimo.getLivros().get(2).getNomeConcatenadoLivro());
-		}
-	}
 	
 	private void mudarEstadoCamposTela(boolean estado){
 		paneCarregando.setVisible(estado);

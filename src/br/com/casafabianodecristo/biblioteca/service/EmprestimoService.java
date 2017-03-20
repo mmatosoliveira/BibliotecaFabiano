@@ -34,7 +34,7 @@ public class EmprestimoService {
 	@SuppressWarnings("unchecked")
 	public List<EmprestimoDto> getEmprestimosPorUsuario(String nomeUsuario, boolean apenasAtrasados){
 		List<Emprestimo> emprestimos = new ArrayList<>();
-		List<EmprestimoDto> dto = new ArrayList<>();
+		List<EmprestimoDto> lista = new ArrayList<>();
 		ModelMapper mapper = new ModelMapper();
 		createEntityManagerFactory();
 			createEntityManager();
@@ -47,6 +47,7 @@ public class EmprestimoService {
 					else{
 						query = em.createNativeQuery("select * from Emprestimo E"
 								+ " join Usuario U ON U.Id = E.IdUsuario"
+								+ " join Livro L on L.TomboPatrimonial = E.TomboPatrimonial"
 								+ " where U.NomeCompleto like '%"+nomeUsuario+"%'"
 								+ " and E.DataDevolucaoPrevista < CURDATE()"
 								+ " and E.DataDevolucaoEfetiva IS NULL", Emprestimo.class);
@@ -59,9 +60,18 @@ public class EmprestimoService {
 		closeEntityManagerFactory();
 		
 		for(Emprestimo item : emprestimos){
-			dto.add(mapper.map(item, EmprestimoDto.class));
+			List<LivroDto> livros = new ArrayList<>();
+			livros.add(mapper.map(item.getLivro(), LivroDto.class));
+			UsuarioDto usuario = mapper.map(item.getUsuario(), UsuarioDto.class);
+			EmprestimoDto dto = new EmprestimoDto(item.getId(), 
+												  item.getDataEmprestimo(), 
+												  item.getDataDevolucaoPrevista(), 
+												  item.getDataDevolucaoEfetiva(), 
+												  livros, 
+												  usuario);
+			lista.add(dto);
 		}
-		return dto;
+		return lista;
 	}
 	
 	public List<Emprestimo> getEmprestimos(){
@@ -101,16 +111,24 @@ public class EmprestimoService {
 		return result;
 	}
 	
-	public void devolverLivro(EmprestimoDto dto){
+	public boolean devolverLivro(EmprestimoDto dto){
+		boolean result = true;
 		createEntityManagerFactory();
 		createEntityManager();
 			Emprestimo e = em.find(Emprestimo.class, dto.getId());
+			System.out.println("e: "+e);
+			Livro livro = e.getLivro();
+			System.out.println("livro: "+livro);
+			livro.setFlEmprestado(0);
 			e.setDataDevolucaoEfetiva(new Date());
 			em.getTransaction().begin();
-			em.merge(e);
+			Emprestimo alterado = em.merge(e);
+			System.out.println("alterado: "+alterado);
 			em.getTransaction().commit();
 		closeEntityManager();
 		closeEntityManagerFactory();
+		result = (alterado == null) ? false : true;
+		return result;
 	}
 	
 	public boolean renovarEmprestimo(int id){

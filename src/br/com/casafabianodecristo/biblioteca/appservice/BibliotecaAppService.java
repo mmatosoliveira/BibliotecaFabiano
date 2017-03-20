@@ -152,8 +152,8 @@ public class BibliotecaAppService {
 		return empService.getDevolucoesPrevistas();
 	}
 	
-	public void devolverLivro(EmprestimoDto dto){
-		empService.devolverLivro(dto);
+	public boolean devolverLivro(EmprestimoDto dto){
+		return empService.devolverLivro(dto);
 	}
 	
 	public List<EmprestimoDto> getEmprestimosPorNome(String nomeUsuario, boolean apenasAtrasados){

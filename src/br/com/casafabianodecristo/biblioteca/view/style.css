@@ -95,8 +95,16 @@
 
 #botaoAplicarFiltro{
 	-fx-background-position: left;
-    -fx-background-size: 26px;
+    -fx-background-size: 24px;
     -fx-background-repeat: no-repeat;
 	-fx-background-image: url('../../../../../../resources/images/icon-filter.png');
+	-fx-background-color: none;
+}
+
+#devolverLivro{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-devolver.png');
 	-fx-background-color: none;
 }
