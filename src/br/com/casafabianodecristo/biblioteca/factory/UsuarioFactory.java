@@ -17,6 +17,7 @@ public class UsuarioFactory {
 		usuario.setTelefone(dto.getTelefone());
 		usuario.setFlAdministrador(dto.getFlAdministrador());
 		usuario.setFlInativo(dto.getFlInativo());
+		usuario.setNomeCompleto(dto.getNomeUsuario() + " " + dto.getSobrenome());
 		
 		return usuario;
 		

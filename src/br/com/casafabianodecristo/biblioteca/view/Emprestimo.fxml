@@ -22,10 +22,10 @@
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="24.0" prefWidth="548.0" text="Consultar empréstimos" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <font>
-            <Font name="Calibri Light" size="20.0" fx:id="x2" />
+            <Font name="Calibri Light" size="20.0"/>
          </font>
       </Label>
-      <Accordion layoutX="407.0" layoutY="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <Accordion fx:id="accordion" layoutX="407.0" layoutY="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <panes>
             <TitledPane fx:id="paneFiltro" prefHeight="141.0" prefWidth="600.0" text="Filtro" textAlignment="CENTER">
                <content>
@@ -45,13 +45,13 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nomeUsuario" prefHeight="0.0" onAction="#aplicarFiltro" prefWidth="739.0" promptText="Usuário" GridPane.columnIndex="1">
+                        <TextField fx:id="nomeUsuario" onAction="#aplicarFiltro" prefHeight="0.0" prefWidth="739.0" promptText="Usuário" GridPane.columnIndex="1">
                            <cursor>
                               <Cursor fx:constant="V_RESIZE" />
                            </cursor>
                         </TextField>
                         <CheckBox fx:id="checkAtrasados" mnemonicParsing="false" text="Apenas empréstimos atrasados" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button fx:id="botaoAplicarFiltro" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#aplicarFiltro" prefHeight="25.0" prefWidth="112.0" text="Aplicar filtro" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="botaoAplicarFiltro" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#aplicarFiltro" prefHeight="25.0" prefWidth="108.0" text="Aplicar filtro" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </content>
@@ -60,10 +60,10 @@
       </Accordion>
       <HBox id="HBox" alignment="CENTER" layoutY="190.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="botaoAdicionar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="21.0" prefWidth="77.0" text="Novo" underline="true" />
-            <Button fx:id="renovar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="21.0" prefWidth="85.0" text="Renovar" underline="true" />
+            <Button fx:id="botaoAdicionar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="21.0" prefWidth="68.0" text="Novo" underline="true" />
+            <Button fx:id="renovar" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#renovarEmprestimo" prefHeight="21.0" prefWidth="85.0" text="Renovar" underline="true" />
             <Button fx:id="imprimirRecibo" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" text="Imprimir recibo" textAlignment="RIGHT" underline="true" />
-            <Button fx:id="botaoFechar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefWidth="77.0" text="Fechar" underline="true" />
+            <Button fx:id="botaoFechar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefWidth="75.0" text="Fechar" underline="true" />
          </children>
       </HBox>
       <TableView fx:id="emprestimos" layoutX="200.0" layoutY="237.0" prefHeight="263.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="237.0">

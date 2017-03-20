@@ -30,6 +30,8 @@ public class UsuarioDto {
 	
 	private int flInativo;
 	
+	private String nomeCompleto;
+	
 	public UsuarioDto(){}
 
 	public UsuarioDto(int id, String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
@@ -44,10 +46,35 @@ public class UsuarioDto {
 		this.flAdministrador = (flAdministrador == true) ? 1 : 0;
 		this.dicaSenha = dicaSenha;
 		this.flInativo = flInativo;
+		this.nomeCompleto = nomeUsuario + " " + sobrenome;;
 	}
-		@Override
+	
+	public UsuarioDto(int id, String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
+			int telefone, boolean flAdministrador, String dicaSenha, int flInativo, String nomeCompleto) {
+		this.id = id;
+		this.nomeUsuario = nomeUsuario;
+		this.sobrenome = sobrenome;
+		this.nomeUsuarioAcessoSistema = nomeUsuarioAcessoSistema;
+		this.senha = (senha == "" || senha == null) ? null : setSenhaCriptografada(senha);
+		this.ddd = ddd;
+		this.telefone = telefone;
+		this.flAdministrador = (flAdministrador == true) ? 1 : 0;
+		this.dicaSenha = dicaSenha;
+		this.flInativo = flInativo;
+		this.nomeCompleto = nomeCompleto;
+	}
+	
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
+	
+	public String getNomeCompleto(){
+		return this.nomeCompleto;
+	}
+	
+	@Override
 	public String toString() {
-		return nomeUsuario + " " + sobrenome;
+		return nomeCompleto;
 	}
 		
 	private String setSenhaCriptografada(String senha){
@@ -59,10 +86,10 @@ public class UsuarioDto {
 	}
 		
 	public int getId() {
-			return id;
-		}
+		return id;
+	}
 	
-		public int getFlInativo() {
+	public int getFlInativo() {
 		return flInativo;
 	}
 
@@ -70,17 +97,17 @@ public class UsuarioDto {
 		this.flInativo = flInativo;
 	}
 
-		public void setId(int id) {
-			this.id = id;
-		}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-		public String getSenha() {
-			return senha;
-		}
+	public String getSenha() {
+		return senha;
+	}
 
-		public void setSenha(String senha) {
-			this.senha = senha;
-		}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	public String getIdString(){
 		return this.id + "";

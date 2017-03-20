@@ -144,6 +144,10 @@ public class BibliotecaAppService {
 		return empService.realizarEmprestimo(dto);
 	}
 	
+	public boolean renovarEmprestimo(int id){
+		return empService.renovarEmprestimo(id);
+	}
+	
 	public List<Emprestimo> getDevolucoesPrevistas(){
 		return empService.getDevolucoesPrevistas();
 	}

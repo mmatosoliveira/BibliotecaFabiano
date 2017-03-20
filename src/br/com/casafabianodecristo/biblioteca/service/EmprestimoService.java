@@ -38,33 +38,29 @@ public class EmprestimoService {
 		ModelMapper mapper = new ModelMapper();
 		createEntityManagerFactory();
 			createEntityManager();
-				em.getTransaction().begin();
 					Query query; 
 					if(!apenasAtrasados){
 						query = em.createNativeQuery("select * from Emprestimo E"
 								+ " join Usuario U ON U.Id = E.IdUsuario"
-								+ " where U.Nome like '%"+nomeUsuario+"%'", Emprestimo.class);
+								+ " where U.NomeCompleto like '%"+nomeUsuario+"%'", Emprestimo.class);
 					}
 					else{
 						query = em.createNativeQuery("select * from Emprestimo E"
 								+ " join Usuario U ON U.Id = E.IdUsuario"
-								+ " where U.Nome like '%"+nomeUsuario+"%'"
+								+ " where U.NomeCompleto like '%"+nomeUsuario+"%'"
 								+ " and E.DataDevolucaoPrevista < CURDATE()"
 								+ " and E.DataDevolucaoEfetiva IS NULL", Emprestimo.class);
 					}
-					System.out.println(query.toString());
 					try{
 						emprestimos = query.getResultList();
 					}
 					catch(NoResultException e){}
-				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();
 		
 		for(Emprestimo item : emprestimos){
 			dto.add(mapper.map(item, EmprestimoDto.class));
 		}
-		System.out.println(dto.size());
 		return dto;
 	}
 	
@@ -93,13 +89,15 @@ public class EmprestimoService {
 						Emprestimo emprestimo = EmprestimoFactory.create(dto, livroDto);
 						emprestimo.getLivro().setFlEmprestado(1);
 						emprestimo.getLivro().addEmprestimo(emprestimo);
+						
 						Emprestimo e = em.merge(emprestimo);
-						result = (e == null) ? false : true; 
+						if (e == null) result = false; 
+						else result = true;
 					}
-					
 				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();
+		System.out.println(result);
 		return result;
 	}
 	
@@ -113,6 +111,23 @@ public class EmprestimoService {
 			em.getTransaction().commit();
 		closeEntityManager();
 		closeEntityManagerFactory();
+	}
+	
+	public boolean renovarEmprestimo(int id){
+		boolean result = true;
+		final int ONE_WEEK = 86400 * 7 * 1000;
+		
+		createEntityManagerFactory();
+			createEntityManager();
+				em.getTransaction().begin();
+					Emprestimo e = em.find(Emprestimo.class, id);
+					e.setDataDevolucaoPrevista(new Date(System.currentTimeMillis() + ONE_WEEK));
+					Emprestimo obj = em.merge(e);
+				em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+		result = (obj == null) ? false : true;
+		return result;
 	}
 	
 	public List<Emprestimo> getDevolucoesPrevistas(){

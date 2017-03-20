@@ -57,7 +57,7 @@ public class UsuarioService {
 		for (Usuario u : usuarios){
 			usuariosDto.add(mapper.map(u, UsuarioDto.class));
 		}
-		
+		System.out.println(usuariosDto);
 		return usuariosDto;
 	}
 	

@@ -155,7 +155,7 @@ public class EmprestarLivroController {
 		emprestar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-            	avisoCarregando.setText("Realizando empréstimo. Aguarde!");
+            	avisoCarregando.setText("Realizando empréstimo... Aguarde!");
             	mudarEstadoCamposTela(true);
 				
 				emprestarLivro = taskEmprestarLivro();
@@ -225,7 +225,10 @@ public class EmprestarLivroController {
             	if (validacaoUsuario == 0 && validacaoLivro == 0){
     					dtoEmprestimo = new EmprestimoDto(0, new Date(), new Date(System.currentTimeMillis() + ONE_WEEK), null, livrosSelecionados, usuarioSelecionado);
     					super.succeeded();
-    					return (realizarNovoEmprestimo(dtoEmprestimo) == true) ? 1 : 0;
+    					boolean result = realizarNovoEmprestimo(dtoEmprestimo); 
+    	            	if(result)
+    	            		return 1;
+    	            	else return 0;
     			}
     			super.failed();
     			return 2;
@@ -240,7 +243,7 @@ public class EmprestarLivroController {
             		mudarEstadoCamposTela(false);
             	}
             	else if (result == 1){
-            		avisoCarregando.setText("Imprimindo recibo do empréstimo, aguarde!");
+            		avisoCarregando.setText("Imprimindo recibo do empréstimo... Aguarde!");
             		gerarRecibo = taskGerarRecibo();
             		Thread t = new Thread(gerarRecibo);
         			t.setDaemon(true);

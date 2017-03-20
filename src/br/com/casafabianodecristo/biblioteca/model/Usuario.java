@@ -49,6 +49,9 @@ public class Usuario {
 	@Column(name="FlPossuiAtraso", nullable=false)
 	private int flPossuiAtraso;
 	
+	@Column(name="NomeCompleto", nullable=false, length= 100)
+	private String nomeCompleto;
+	
 	public Usuario(){}
 
 	public Usuario(String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
@@ -153,6 +156,18 @@ public class Usuario {
 				+ ", nomeUsuarioAcessoSistema=" + nomeUsuarioAcessoSistema + ", senha=" + senha + ", ddd=" + ddd
 				+ ", telefone=" + telefone + ", flAdministrador=" + flAdministrador + ", dicaSenha=" + dicaSenha
 				+ ", emprestimos=" + emprestimos + ", flInativo=" + flInativo + "]";
+	}
+
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
+
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public int getFlInativo() {

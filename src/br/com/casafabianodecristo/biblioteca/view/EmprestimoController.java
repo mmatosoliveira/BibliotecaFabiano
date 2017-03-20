@@ -4,6 +4,7 @@ import java.util.List;
 import org.controlsfx.control.MaskerPane;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
+import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
+@SuppressWarnings("rawtypes")
 public class EmprestimoController {
 	@FXML private TableView<EmprestimoDto> emprestimos;
 	
@@ -44,14 +46,41 @@ public class EmprestimoController {
 	
 	@FXML private BorderPane paneCarregando;
 	
+	@FXML private Accordion accordion;
+	
 	private BibliotecaAppService servico = new BibliotecaAppService();
 	
 	private Alertas alerta = new Alertas();
 	
-	@SuppressWarnings("rawtypes")
+	private Principal principal = new Principal();
+	
+	private Task renovarEmprestimo;
+	
 	private Task aplicarFiltro;
 	
-	@SuppressWarnings("rawtypes")
+	public Task taskRenovarEmprestimo(){
+        return new Task() {
+            @Override
+            protected Boolean call() throws Exception {
+            	return servico.renovarEmprestimo(emprestimos.getSelectionModel().getSelectedItem().getId());
+            }
+            
+			@Override
+    		protected void succeeded() {
+            	boolean result = (boolean) getValue();
+            	if(result){
+            		showMaskerPane(false, "Consultando... Aguarde!");
+            		alerta.notificacaoSucesso("Renovar empréstimo", "Sucesso ao renovar empréstimo.");
+            		atualizarGrid(null);
+            	}
+            	else{
+            		showMaskerPane(false, "Consultando... Aguarde!");
+            		alerta.alertaAviso("Renovar empréstimo", "Ocorreu um erro ao tentar renovar o empréstimo.\nTente novamente mais tarde");
+            	}
+    		}
+        };
+    }
+	
 	public Task taskAplicarFiltro() {
         return new Task() {
             @Override
@@ -59,7 +88,7 @@ public class EmprestimoController {
             	String nome = nomeUsuario.getText();
             	if(nome.equals(null) || nome.equals("")){
             		alerta.notificacaoErro("Consultar empréstimos", "É obrigatório informar pelo menos o nome do usuário no filtro.");
-            		showMaskerPane(false);
+            		showMaskerPane(false, "Consultando... Aguarde!");
             		super.failed();
             		return null;
             	}
@@ -72,21 +101,23 @@ public class EmprestimoController {
 			@Override
     		protected void succeeded() {
             	List<EmprestimoDto> result = (List<EmprestimoDto>) getValue();
-            	
             	if(result.equals(null) || result.isEmpty()){
-            		alerta.alertaAviso("Consultar empréstimos", "O usuário informado não possui empréstimos pendentes.");
-            		showMaskerPane(false);
-            	}
-            	else{
-            		showMaskerPane(false);
+            		showMaskerPane(false, "Consultando... Aguarde!");
+            		alerta.alertaAviso("Consultar empréstimos", "O usuário informado não possui registros de empréstimos.");
             		atualizarGrid(result);
             	}
-            		
+            	else{
+            		showMaskerPane(false, "Consultando... Aguarde!");
+            		atualizarGrid(result);
+            	}
     		}
         };
     }
 	
 	private void atualizarGrid(List<EmprestimoDto> result){
+		if(result == null)
+			result = servico.getEmprestimosPorNome(nomeUsuario.getText(), checkAtrasados.isSelected());
+		
 		ObservableList<EmprestimoDto> itens = FXCollections.observableList(result);
 		emprestimos.setItems(itens);
 		colunaUsuario.setCellValueFactory(x -> new ReadOnlyStringWrapper(
@@ -108,15 +139,33 @@ public class EmprestimoController {
 	}
 	
 	@FXML private void aplicarFiltro(){
-		showMaskerPane(true);
+		showMaskerPane(true, "Consultando... Aguarde!");
 		aplicarFiltro = taskAplicarFiltro();
 		Thread t = new Thread(aplicarFiltro);
 		t.setDaemon(true);
 		t.start();	
 	}
 	
-	private void showMaskerPane(boolean visibility){
-		avisoCarregando.setText("Consultando... Aguarde!");
+	@FXML private void renovarEmprestimo(){
+		EmprestimoDto itemSelecionado = emprestimos.getSelectionModel().getSelectedItem();
+		
+		if(itemSelecionado == null)
+			alerta.notificacaoAlerta("Renovar empréstimo", "É obrigatório selecionar um empréstimo para renovar.");
+		else if (itemSelecionado.getDataDevolucaoEfetiva() != null)
+			alerta.notificacaoAlerta("Renovar empréstimo", "É obrigatório selecionar um empréstimo que não tenha sido devolvido para renovar.");
+		else if (itemSelecionado.getAtrasado().equals("Sim"))
+			alerta.notificacaoAlerta("Renovar empréstimo", "Não é permitido renovar um empréstimo que esteja atrasado.");
+		else{
+			showMaskerPane(true, "Renovando empréstimo... Aguarde!");
+			renovarEmprestimo = taskRenovarEmprestimo();
+			Thread t = new Thread(renovarEmprestimo);
+			t.setDaemon(true);
+			t.start();	
+		}
+	}
+	
+	private void showMaskerPane(boolean visibility, String text){
+		avisoCarregando.setText(text);
 		paneCarregando.setVisible(visibility);
 		avisoCarregando.setVisible(visibility);
 	}
@@ -125,9 +174,11 @@ public class EmprestimoController {
 	private void initialize(){
 		botaoAplicarFiltro.getStylesheets().add(EmprestimoController.class.getResource("style.css").toExternalForm());
 		botaoAdicionar.getStylesheets().add(EmprestimoController.class.getResource("style.css").toExternalForm());
+		botaoAdicionar.setOnAction((e) -> principal.carregarEmprestimoLivro());
 		renovar.getStylesheets().add(EmprestimoController.class.getResource("style.css").toExternalForm());
 		imprimirRecibo.getStylesheets().add(EmprestimoController.class.getResource("style.css").toExternalForm());
 		botaoFechar.getStylesheets().add(EmprestimoController.class.getResource("style.css").toExternalForm());
-		paneFiltro.setExpanded(true);
+		paneFiltro.setCollapsible(false);
+		accordion.setExpandedPane(paneFiltro);
 	}
 }
