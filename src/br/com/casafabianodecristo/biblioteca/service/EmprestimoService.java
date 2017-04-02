@@ -116,14 +116,11 @@ public class EmprestimoService {
 		createEntityManagerFactory();
 		createEntityManager();
 			Emprestimo e = em.find(Emprestimo.class, dto.getId());
-			System.out.println("e: "+e);
 			Livro livro = e.getLivro();
-			System.out.println("livro: "+livro);
-			livro.setFlEmprestado(0);
 			e.setDataDevolucaoEfetiva(new Date());
 			em.getTransaction().begin();
-			Emprestimo alterado = em.merge(e);
-			System.out.println("alterado: "+alterado);
+				livro.setFlEmprestado(0);
+				Emprestimo alterado = em.merge(e);
 			em.getTransaction().commit();
 		closeEntityManager();
 		closeEntityManagerFactory();
