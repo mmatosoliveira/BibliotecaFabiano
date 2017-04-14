@@ -2,20 +2,31 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JPA"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/MysqlJDBC"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/ModelMapper"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/ControlsFX"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JasperReports"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jars"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/commons-beanutils-1.7.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/commons-digester-1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/groovy-all-1.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/itext-2.1.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/poi-3.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/JarsEclipse/JasperReports/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/controlsfx-8.40.12/controlsfx-8.40.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/controlsfx-8.40.12/controlsfx-samples-8.40.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/controlsfx-8.40.12/fxsampler-1.0.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/EclipseLink/eclipselink.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/commons-beanutils-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/groovy-all-minimal-1.5.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/jasperreports-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/jasperreports-chart-customizers-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/jasperreports-chart-themes-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/jasperreports-fonts-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/jasperreports-functions-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/jasperreports-javaflow-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/JasperReports/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/jpa/javax.persistence.source_2.1.1.v201509150925.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/jpa/javax.persistence_2.1.1.v201509150925.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/jpa/org.eclipse.persistence.jpa.modelgen.source_2.6.4.v20160829-44060b6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/jpa/org.eclipse.persistence.jpa.modelgen_2.6.4.v20160829-44060b6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/jpa/org.eclipse.persistence.jpars.source_2.6.4.v20160829-44060b6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/jpa/org.eclipse.persistence.jpars_2.6.4.v20160829-44060b6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/git/BibliotecaFabiano/resources/JarsEclipse/MysqlJDBC/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Matheus de Matos/Downloads/modelmapper-0.7.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
