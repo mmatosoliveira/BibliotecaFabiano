@@ -34,6 +34,15 @@ public class UsuarioDto {
 	
 	public UsuarioDto(){}
 
+	public UsuarioDto(int id, String nomeUsuario, String sobrenome, int ddd, int telefone, int flAdministrador) {
+		this.id = id;
+		this.nomeUsuario = nomeUsuario;
+		this.sobrenome = sobrenome;
+		this.ddd = ddd;
+		this.telefone = telefone;
+		this.flAdministrador = flAdministrador;
+	}
+
 	public UsuarioDto(int id, String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
 			int telefone, boolean flAdministrador, String dicaSenha, int flInativo) {
 		this.id = id;

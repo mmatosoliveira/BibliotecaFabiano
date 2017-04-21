@@ -3,7 +3,7 @@ package br.com.casafabianodecristo.biblioteca.view;
 import java.util.List;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
-import br.com.casafabianodecristo.biblioteca.model.Usuario;
+import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -11,66 +11,79 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class BuscarUsuarioController {
 	@FXML
 	private Button botaoFechar;
 	
 	@FXML
-	private Button botaoEditarDados;
+	private Button botaoEditar;
 	
 	@FXML
-	private ImageView iconePesquisar;
+	private Button botaoAdicionar;
+	
+	@FXML
+	private Button botaoRemover;
 	
 	@FXML
 	private TextField campoNome;
 	
 	@FXML
-	private TableView <Usuario> usuarios;
+	private TableView <UsuarioDto> usuarios;
 	
 	@FXML
-	private TableColumn<Usuario, String> colunaNome;
+	private TableColumn<UsuarioDto, String> colunaNome;
 	
 	@FXML
-	private TableColumn<Usuario, String> colunaSobrenome;
+	private TableColumn<UsuarioDto, String> colunaSobrenome;
 	
 	@FXML
-	private TableColumn<Usuario, String> colunaAdministrador;
+	private TableColumn<UsuarioDto, String> colunaAdministrador;
+	
+	@FXML
+	private Button botaoAplicarFiltro;
 	
 	Alertas alerta = new Alertas();
 	
-	private Principal principal;
+	private Principal principal = new Principal();
 	
 	BibliotecaAppService servico = new BibliotecaAppService();
 	
 	private void atualizarGrid(){
-		colunaNome.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getNomeUsuario()));
-		colunaSobrenome.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getSobrenome()));
+		colunaNome.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getNomeCompleto()));
 		colunaAdministrador.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getFlAdministradorString()));
 	}
 	
-	private void realizarConsulta(){
-		/*List<Usuario> resultadoPesquisa;
-    	servico.createEntityManagerFactory();
-    		resultadoPesquisa = servico.getUsuarios(campoNome.getText());
-    	servico.closeEntityManagerFactory();
-    	ObservableList<Usuario> itens = FXCollections.observableList(resultadoPesquisa);
+	private void realizarConsulta(String filtro){
+		List<UsuarioDto> resultadoPesquisa = servico.getUsuarios(filtro);
+		ObservableList<UsuarioDto> itens = FXCollections.observableList(resultadoPesquisa);
     	usuarios.setItems(itens);
-    	atualizarGrid();*/
+    	atualizarGrid();
 	}
 	
 	@FXML
 	private void initialize(){
+		botaoAdicionar.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoEditar.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoRemover.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoFechar.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		botaoAplicarFiltro.getStylesheets().add(EmprestarLivroController.class.getResource("style.css").toExternalForm());
+		
+		realizarConsulta("");
+		
 		botaoFechar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
             	Stage stage = (Stage) botaoFechar.getScene().getWindow();
-	            stage.close();
+            	stage.fireEvent(new WindowEvent(
+            	        stage,
+            	        WindowEvent.WINDOW_CLOSE_REQUEST
+            	    ));
             }            
         });
 		
@@ -78,30 +91,33 @@ public class BuscarUsuarioController {
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.ENTER){
-					realizarConsulta();
+					aplicarFiltro();
 				}				
 			}
 		}));
 		
-		iconePesquisar.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
+		botaoAplicarFiltro.setOnMousePressed(e -> aplicarFiltro());
+		
+		botaoEditar.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
             public void handle(MouseEvent event) {
-            	realizarConsulta();
+            	UsuarioDto user = usuarios.getSelectionModel().getSelectedItem();
+            	if (user == null)
+            		alerta.notificacaoAlerta("Editar dados do usuário", "Você deve selecionar um usuário para editar.");
+            	else if (user.getFlAdministrador() == 1)
+            		alerta.notificacaoErro("Editar dados do usuário", "Não é permitido editar dados de um usuário Administrador.");
+            	else	{
+            		principal.carregarEditarDadosUsuario(user, usuarios);
+            	}
             }            
         });
 		
-		botaoEditarDados.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-            	Usuario user = usuarios.getSelectionModel().getSelectedItem();
-            	if (user == null)
-            		alerta.notificacaoErro("Editar dados do usu�rio", "Voc� deve selecionar um registro da grid para realizar essa opera��o.");
-            	else if (user.getFlAdministrador() == 1)
-            		alerta.notificacaoErro("Editar dados do usu�rio", "N�o � permitido alterar os dados de um Administrador!");
-            	else	{}
-            		//principal.carregarDadosUsuario(user);
-            }            
-        });
+		botaoAdicionar.setOnAction((e) -> principal.carregarTelaCadastro("CadastrarUsuario", "Cadastrar usuário", true, false, usuarios));
+	}
+	
+	private void aplicarFiltro(){
+		String nomeUsuario = campoNome.getText();
+		realizarConsulta(nomeUsuario);
 	}
 	
 	public void setPrincipal(Principal principal){

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
+import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
+import br.com.casafabianodecristo.biblioteca.view.CadastroUsuarioController;
 import br.com.casafabianodecristo.biblioteca.view.InicialController;
 import br.com.casafabianodecristo.biblioteca.view.LoginController;
 import br.com.casafabianodecristo.biblioteca.view.ResultadoBuscaController;
@@ -300,7 +302,6 @@ public class Principal extends Application {
 			Stage pagina = new Stage();
 			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
 			pagina.setTitle("Realizar empréstimo");
-			//pagina.setResizable(false);
 			pagina.initOwner(primaryStage);
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.setScene(scene);
@@ -398,8 +399,6 @@ public class Principal extends Application {
 			Scene scene = new Scene(page);
 			Stage pagina = new Stage();
 			
-			Label lblId = (Label) scene.lookup("#lblId");
-			lblId.setText(null);
 			pagina.getIcons().add(new Image("file:resources/images/icon-add.png"));
 			pagina.setTitle(titulo);
 			pagina.setResizable(resizable);
@@ -410,6 +409,7 @@ public class Principal extends Application {
 			List<Object> dados = new ArrayList<>();
 			dados.add(tabela);
 			dados.add(new Integer(0));
+			dados.add(new Boolean(false));
 			
 			scene.getRoot().setUserData(dados);
 			
@@ -420,6 +420,51 @@ public class Principal extends Application {
 		}catch(Exception e){
 			e.printStackTrace();
 			alerta.alertaErro("Abrir tela", "Ocorreu um erro enquanto abriamos a tela solicitada. Tente novamente mais tarde!\nSe o erro persistir, contate o administrador do sistema.");
+		}
+	}
+	
+	public <T> void carregarEditarDadosUsuario(UsuarioDto usuario, TableView<T> tabela){
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/CadastrarUsuario.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			
+			CadastroUsuarioController controller = loader.getController();
+            controller.setPrincipal(this);
+			
+			Scene scene = new Scene(page);
+			TextField nome = (TextField) scene.lookup("#nome");;
+			TextField sobrenome = (TextField) scene.lookup("#sobrenome");
+			TextField ddd = (TextField) scene.lookup("#ddd");
+			TextField telefone = (TextField) scene.lookup("#telefone");
+			CheckBox checkAdm = (CheckBox) scene.lookup("#checkAdm");
+			Label tituloPagina = (Label) scene.lookup("#tituloPagina");
+			
+			tituloPagina.setText("Editar dados do usuário");
+			checkAdm.setDisable(true);
+			nome.setText(usuario.getNomeUsuario());
+			sobrenome.setText(usuario.getSobrenome());
+			ddd.setText(usuario.getDddString());
+			telefone.setText(usuario.getTelefoneString());
+			
+			List<Object> dados = new ArrayList<>();
+			dados.add(tabela);
+			dados.add(new Integer(usuario.getId()));
+			dados.add(new Boolean(true));
+			scene.getRoot().setUserData(dados);
+			
+			Stage pagina = new Stage();
+			pagina.getIcons().add(new Image("file:resources/images/icon-edit.png"));
+			pagina.setTitle("Editar dados do usuário");
+			pagina.setResizable(false);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.initOwner(primaryStage);
+			onCloseRequest(pagina, false);
+			pagina.setScene(scene);
+			pagina.show();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -447,7 +492,7 @@ public class Principal extends Application {
 		}
 	}
 	
-	public void carregarDadosUsuario(Usuario usuario){
+	public void carregarDadosUsuario(UsuarioDto usuario){
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/CadastrarUsuario.fxml"));

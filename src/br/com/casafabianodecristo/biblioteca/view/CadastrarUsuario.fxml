@@ -7,16 +7,17 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.MaskerPane?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastroUsuarioController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastroUsuarioController">
   <children>
     <GridPane layoutX="18.0" layoutY="57.0" prefWidth="586.0" AnchorPane.rightAnchor="-18.0">
       <children>
@@ -63,27 +64,19 @@
             <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Label fx:id="tituloPagina" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="19.0" prefWidth="586.0" text="Adicionar usuário">
+    <Label fx:id="tituloPagina" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="19.0" prefWidth="586.0" text="Cadastrar usuário">
       <font>
         <Font name="Calibri Light" size="20.0" />
       </font>
     </Label>
     <Group id="Group" layoutX="409.0" layoutY="6.0" />
     <Label fx:id="id" layoutX="494.0" layoutY="356.0" text="" visible="false" />
-      <ProgressIndicator fx:id="indicador" layoutX="275.0" layoutY="349.0" prefHeight="45.0" prefWidth="36.0" progress="-1.0" visible="false">
-         <padding>
-            <Insets right="5.0" />
-         </padding>
-      </ProgressIndicator>
-      <Button fx:id="botaoSalvar" layoutX="290.0" layoutY="396.0" mnemonicParsing="false" prefWidth="77.0" text="Salvar">
-         <font>
-            <Font size="14.0" fx:id="x1" />
-         </font>
-      </Button>
-      <Button fx:id="botaoCancelar" layoutX="208.0" layoutY="396.0" mnemonicParsing="false" text="Cancelar">
-         <font>
-            <Font size="14.0" fx:id="x3" />
-         </font>
-      </Button>
+      <Button fx:id="botaoSalvar" layoutX="293.0" layoutY="352.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="80.0" text="Salvar" />
+      <Button fx:id="botaoCancelar" layoutX="213.0" layoutY="352.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="80.0" text="Cancelar" />
+      <BorderPane fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <MaskerPane fx:id="avisoCarregando" visible="false" BorderPane.alignment="CENTER" />
+         </center>
+    </BorderPane>
   </children>
 </AnchorPane>

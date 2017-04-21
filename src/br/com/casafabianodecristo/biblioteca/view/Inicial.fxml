@@ -45,7 +45,7 @@
         <Menu mnemonicParsing="false" text="Usuários">
           <items>
             <MenuItem fx:id="itemCadastrarUsuario" mnemonicParsing="false" text="Cadastrar usuário" />
-            <MenuItem fx:id="itemEditarDadosUsuario" mnemonicParsing="false" text="Gerenciar usuário" />
+            <MenuItem fx:id="itemEditarDadosUsuario" mnemonicParsing="false" text="Gerenciar usuários" />
             <MenuItem fx:id="itemMeusDados" mnemonicParsing="false" text="Meus dados" />
           </items>
         </Menu>

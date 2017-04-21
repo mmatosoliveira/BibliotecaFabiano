@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import br.com.casafabianodecristo.biblioteca.dto.*;
+import br.com.casafabianodecristo.biblioteca.exceptions.ApplicationException;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.service.*;
 import br.com.casafabianodecristo.biblioteca.validator.ClassificacaoValidator;
@@ -121,7 +122,11 @@ public class BibliotecaAppService {
 	}
 	
 	public void atualizarUsuario(UsuarioDto dto){
-		usuarioService.atualizarUsuario(dto);
+		try {
+			usuarioService.atualizarUsuario(dto);
+		} catch (ApplicationException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean cadastrarUsuario(UsuarioDto dto){

@@ -1,19 +1,20 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.controlsfx.control.MaskerPane;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
 import br.com.casafabianodecristo.biblioteca.components.Numberfield;
 import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
+import br.com.casafabianodecristo.biblioteca.exceptions.ApplicationException;
 import br.com.casafabianodecristo.biblioteca.interfacevalidator.CadastroUsuarioInterfaceValidator;
-import br.com.casafabianodecristo.biblioteca.model.Usuario;
+import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class CadastroUsuarioController {
@@ -69,9 +70,6 @@ public class CadastroUsuarioController {
 	private Label lblTamanhoCaracteres;
 	
 	@FXML
-	private ProgressIndicator indicador;
-	
-	@FXML
 	private Label tituloPagina;
 	
 	@SuppressWarnings("rawtypes")
@@ -81,7 +79,11 @@ public class CadastroUsuarioController {
 	
 	private BibliotecaAppService servico = new BibliotecaAppService();
 	
-	private int caracteres;
+	@FXML
+	private MaskerPane avisoCarregando = new MaskerPane();
+	
+	@FXML
+	private BorderPane paneCarregando = new BorderPane();
 	
 	Stage stage;
 	
@@ -105,10 +107,18 @@ public class CadastroUsuarioController {
         		if(CadastroUsuarioInterfaceValidator.validarTamanhosObrigatorios(checkAdm.isSelected(), nome, sobrenome, ddd, telefone, senha, confirmacaoSenha, dicaSenha)){
         			if(checkAdm.isSelected()){
         				if(CadastroUsuarioInterfaceValidator.validarSenha(senha, confirmacaoSenha, dicaSenha)){
-        					criarTask();
+        					try {
+								criarTask();
+							} catch (ApplicationException e) {
+								e.printStackTrace();
+							}
         				}
-        			}
-        			else criarTask();
+        			} else
+						try {
+							criarTask();
+						} catch (ApplicationException e) {
+							e.printStackTrace();
+						}
         		}
         	}
 		});
@@ -116,16 +126,49 @@ public class CadastroUsuarioController {
 		checkAdm.setOnAction((event) -> desabilitarComportamento());
 	}
 	
-	private void criarTask(){
+	@SuppressWarnings("unchecked")
+	private void criarTask() throws ApplicationException{
+		List<Object> dados = (List<Object>) botaoCancelar.getScene().getRoot().getUserData();
+		boolean isEdit = false;
+		int id = 0; 
+		exibirMascara(true, isEdit);
+		if(dados != null){
+			isEdit = (boolean) dados.get(2);
+			id = (int) dados.get(1);
+		}
+		id = 0;
+		isEdit = true;
+		if(id == 0 && isEdit){
+			throw new ApplicationException("Erro ao editar usuário. Não foi possível identificar o Id do usuário a ser editado.", "Editar dados do usuário", "Erro ao editar usuário. Não foi possível identificar o Id do usuário a ser editado.");
+		}
+			
 		try {
-			indicador.setVisible(true);
-			operacao = taskCadastrarUsuario();
-			Thread t = new Thread(operacao);
-			t.setDaemon(true);
-			t.start();
+			
+			if(isEdit == false){
+				operacao = taskCadastrarUsuario();
+				Thread t = new Thread(operacao);
+				t.setDaemon(true);
+				t.start();
+			}
+			else {
+				operacao = taskAlterarUsuario();
+				Thread t = new Thread(operacao);
+				t.setDaemon(true);
+				t.start();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void exibirMascara(boolean visible, boolean isEdit){
+		if(isEdit)
+			avisoCarregando.setText("Alterando dados do usuário... Aguarde!");
+		else
+			avisoCarregando.setText("Cadastrando usuário... Aguarde!");
+		
+		avisoCarregando.setVisible(visible);
+		paneCarregando.setVisible(visible); 
 	}
 	
 	private List<TextField> getListaCampos(){
@@ -156,18 +199,18 @@ public class CadastroUsuarioController {
 		return servico.cadastrarUsuario(dto);
 	}
 	
-	protected boolean alterarDadosUsuario(){
-		int id = Integer.parseInt(this.id.getText());
+	@SuppressWarnings("unchecked")
+	protected void alterarDadosUsuario(){
+		List<Object> dados = (List<Object>) botaoCancelar.getScene().getRoot().getUserData();
+		
+		int id = (int) dados.get(1);
 		String nome = this.nome.getText();
 		String sobrenome = this.sobrenome.getText();
-		int ddd = Integer.parseInt(this.ddd.getText());
-		int telefone = Integer.parseInt(this.telefone.getText());
+		int ddd = this.ddd.getValue();
+		int telefone = this.telefone.getValue();
 		
-		/*suario usuario = new Usuario(id, nome, sobrenome, ddd, telefone);
-		servico.createEntityManagerFactory();
-			boolean resultado = servico.alterarDadosUsuario(id, usuario);
-		servico.closeEntityManagerFactory();*/
-		return true;
+		UsuarioDto dto = new UsuarioDto(id, nome, sobrenome, ddd, telefone, 0);
+		servico.atualizarUsuario(dto);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -183,39 +226,49 @@ public class CadastroUsuarioController {
             	boolean result = (boolean) getValue();
             	if (result == true){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
+            		atualizarTableView();
                     stage.close();
             		alerta.notificacaoSucessoSalvarDados("Cadastrar usuário");
             	}
             	else{
             		alerta.notificacaoErro("Cadastrar usuário", "O nome de usuário escolhido para acesso ao sistema já está em uso. \nEscolha outro e tente novamente!");
-            		indicador.setVisible(false);
+            		exibirMascara(false, false);
             	}
         			
     		}
         };
     }
 	
+	@SuppressWarnings("unchecked")
+	private void atualizarTableView(){
+		List<Object> dados = (List<Object>) botaoCancelar.getScene().getRoot().getUserData();
+		TableView<UsuarioDto> usuarios = (TableView<UsuarioDto>) dados.get(0);
+		List<UsuarioDto> lista = servico.getUsuarios("");
+		usuarios.setItems(FXCollections.observableList(lista));
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public Task taskAlterarUsuario() {
         return new Task() {
             @Override
             protected Object call() throws Exception {
-        		return alterarDadosUsuario();
+        		alterarDadosUsuario();
+            	return null;
             }
             
             @Override
     		protected void succeeded() {
-            	boolean result = (boolean) getValue();
-            	if (result == true){
+            	Object result = (Object) getValue();
+            	if (result == null){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
+            		atualizarTableView();
                     stage.close();
-            		alerta.notificacaoSucessoSalvarDados("Alterar dados do usu�rio");
+            		alerta.notificacaoSucessoSalvarDados("Editar dados do usuário");
             	}
             	else{
-            		alerta.notificacaoErro("Alterar dados do usu�rio", "Ocorreu um erro ao alterar os dados. Tente novamente mais tarde.");
-            		indicador.setVisible(false);
+            		alerta.notificacaoErro("Editar dados do usuário", "Ocorreu um erro ao alterar os dados. Tente novamente mais tarde.");
+            		exibirMascara(false, false);
             	}
-        			
     		}
         };
     }

@@ -5,8 +5,7 @@ import br.com.casafabianodecristo.biblioteca.model.Usuario;
 
 public class UsuarioUpdater {
 
-	public static Usuario update(UsuarioDto dto){
-		Usuario usuario = new Usuario();
+	public static Usuario update(UsuarioDto dto, Usuario usuario){
 		
 		usuario.setId(dto.getId());
 		usuario.setNomeUsuario(dto.getNomeUsuario());
@@ -18,6 +17,7 @@ public class UsuarioUpdater {
 		usuario.setTelefone(dto.getTelefone());
 		usuario.setFlAdministrador(dto.getFlAdministrador());
 		usuario.setFlInativo(dto.getFlInativo());
+		usuario.setNomeCompleto(dto.getNomeUsuario() + " " + dto.getSobrenome());
 		
 		return usuario;		
 	}

@@ -156,7 +156,7 @@ public class InicialController {
 			}
 		}));
 		
-		itemGerarRelatorio.setOnAction((event) -> principal.carregarTela("GerarRelatorios", "Gerar relatórios", "icon-manage", true, true));
+		itemGerarRelatorio.setOnAction((event) -> principal.carregarTela("GerarRelatorios", "Gerar relatórios", "icon-manage", false, true));
 		
 		itemGerarEtiquetas.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
@@ -197,12 +197,7 @@ public class InicialController {
 			}
 		});
 		
-		itemEditarDadosUsuario.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-            public void handle(ActionEvent event) {
-				//principal.carregarBuscaUsuario();
-			}
-		});
+		itemEditarDadosUsuario.setOnAction(e -> principal.carregarTela("BuscarUsuarios", "Gerenciar usuários", "icon-manage", false, true));
 		
 		itemSair.setOnAction(new EventHandler<ActionEvent>(){
 			@Override

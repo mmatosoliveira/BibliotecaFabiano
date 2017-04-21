@@ -2,8 +2,11 @@ package br.com.casafabianodecristo.biblioteca.service;
 
 import java.util.*;
 import javax.persistence.*;
+
+import org.eclipse.persistence.exceptions.DatabaseException;
 import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.dto.*;
+import br.com.casafabianodecristo.biblioteca.exceptions.ApplicationException;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.updater.*;
@@ -13,26 +16,45 @@ public class UsuarioService {
 	private EntityManager        em;
 	
 	private void createEntityManagerFactory() {
-		emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
+		try{
+			emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
+		}
+		catch(Exception e){
+			System.out.println("Erro no database!");
+		}
 	}
 
 	private void closeEntityManagerFactory() {
-		emf.close();
+		try{
+			emf.close();
+		}
+		catch(Exception e){
+			System.out.println("Erro!");
+		}
 	}
 
 	private void createEntityManager() {
-		em  = emf.createEntityManager();
+		try{
+			em  = emf.createEntityManager();
+		}
+		catch(Exception e){
+			System.out.println("Erro!");
+		}
 	}
 
 	private void closeEntityManager() {
-		em.close();
+		try{
+			em.close();
+		}
+		catch(Exception e){
+			System.out.println("Erro!");
+		}
 	}
 	
 	public UsuarioService(){}
 	
 	public Usuario getUsuarioById(int id){
 		Usuario u = em.find(Usuario.class, id);
-		
 		return u;
 	}
 	
@@ -95,7 +117,7 @@ public class UsuarioService {
 		createEntityManagerFactory();
 		createEntityManager();
 		
-			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuario like :nomeUsuario", Usuario.class);
+			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeCompleto like :nomeUsuario order by o.nomeCompleto asc", Usuario.class);
 			query.setParameter("nomeUsuario", "%" + nomeUsuario + "%");
 			try{
 				usuarios = query.getResultList();
@@ -121,7 +143,7 @@ public class UsuarioService {
 			try{
 				user = query.getSingleResult();
 			}
-			catch(NoResultException ex){}
+			catch(Exception ex){System.out.println("Exce��o no getUsuarioPorNome...");}
 		closeEntityManager();
 		closeEntityManagerFactory();
 		return user;
@@ -141,7 +163,9 @@ public class UsuarioService {
 					try {
 						usuarioLogado = query.getSingleResult();
 					}
-					catch(NoResultException ex){}
+					catch(DatabaseException ex){
+						System.out.println("Exce��o");
+					}
 			closeEntityManager();
 		closeEntityManagerFactory();
 		return usuarioLogado;
@@ -164,13 +188,18 @@ public class UsuarioService {
 		return user.getDicaSenha();
 	}
 	
-	public void atualizarUsuario(UsuarioDto dto){
+	public void atualizarUsuario(UsuarioDto dto) throws ApplicationException{
 		createEntityManagerFactory();
 			createEntityManager();
 				em.getTransaction().begin();
-					Usuario user = getUsuarioById(dto.getId());
-					user = UsuarioUpdater.update(dto);
-					em.merge(user);
+					Usuario user = em.find(Usuario.class, dto.getId());
+					user = UsuarioUpdater.update(dto, user);
+					try{
+						em.merge(user);
+					}
+					catch (Exception e){
+						throw new ApplicationException("Erro ao editar usuário. Não foi possível realizar a operação de atualização.", "Editar dados do usuário", "Erro ao editar usuário. Não foi possível realizar a operação de atualização");
+					}
 				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();

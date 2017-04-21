@@ -2,9 +2,12 @@ package br.com.casafabianodecristo.biblioteca.utils;
 
 import java.util.Optional;
 import org.controlsfx.control.Notifications;
+
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -50,7 +53,18 @@ public class Alertas {
 		setIcon(alertErro);
         alertErro.setTitle(titulo);
         alertErro.setHeaderText(texto);
+        //fecharTela(alertErro);
         alertErro.showAndWait();
+	}
+	
+	public void alertaErro1(String titulo, String texto){
+		Alert alertErro = new Alert(AlertType.ERROR);
+		setIcon(alertErro);
+        alertErro.setTitle(titulo);
+        alertErro.setHeaderText(texto);
+        //fecharTela(alertErro);
+        Optional<ButtonType> result = alertErro.showAndWait();
+        fecharTela(alertErro, result);
 	}
 	
 	public void alertaSucesso(String titulo, String texto){
@@ -105,6 +119,17 @@ public class Alertas {
 		alertConfirmacao.setContentText(null);	
 		Optional<ButtonType> result = alertConfirmacao.showAndWait();
 		return result;
+	}
+	
+	private void fecharTela(Alert alert, Optional<ButtonType> o){
+		alert.onCloseRequestProperty();
+		
+		//System.out.println(alert.);
+		/*Scene scene = (Scene) alert.getDialogPane().getScene();
+		System.out.println(scene);
+		System.out.println(scene.getRoot().getParent());
+		BorderPane pane = (BorderPane) scene.lookup("#paneCarregando");
+		pane.setVisible(false);*/
 	}
 	
 	private void setIcon(Alert alert){
