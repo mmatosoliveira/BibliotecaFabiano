@@ -19,7 +19,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastroUsuarioController">
   <children>
-    <GridPane layoutX="18.0" layoutY="57.0" prefWidth="586.0" AnchorPane.rightAnchor="-18.0">
+    <GridPane layoutX="18.0" layoutY="57.0" prefWidth="586.0" AnchorPane.rightAnchor="-18.0" AnchorPane.topAnchor="50.0">
       <children>
         <Label text="Sobrenome:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Label text="DDD:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -64,7 +64,7 @@
             <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-    <Label fx:id="tituloPagina" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="19.0" prefWidth="586.0" text="Cadastrar usuário">
+    <Label fx:id="tituloPagina" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="19.0" prefWidth="586.0" text="Cadastrar usuário" AnchorPane.topAnchor="10.0">
       <font>
         <Font name="Calibri Light" size="20.0" />
       </font>

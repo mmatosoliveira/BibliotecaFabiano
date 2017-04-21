@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.RemoverDoarLivrosController">
+<AnchorPane prefHeight="400.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.RemoverDoarLivrosController">
   <!-- TODO Add Nodes -->
   <children>
     <Label alignment="CENTER" prefWidth="723.0" text="Remover/Doar livros do acervo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
       <font>
-        <Font name="Calibri Light Italic" size="20.0" />
+        <Font name="Calibri Light" size="20.0" />
       </font>
     </Label>
     <HBox id="HBox" alignment="CENTER" layoutY="40.0" prefWidth="723.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

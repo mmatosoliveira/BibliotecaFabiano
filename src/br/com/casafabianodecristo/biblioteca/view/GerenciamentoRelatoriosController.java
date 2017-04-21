@@ -1,7 +1,7 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import org.controlsfx.control.MaskerPane;
-
+import org.controlsfx.control.textfield.TextFields;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import javafx.collections.*;
@@ -53,7 +53,6 @@ public class GerenciamentoRelatoriosController {
 		
 		comboUsuario.setEditable(true);
 		
-		
 		comboModeloRelatorio.setOnAction((event) -> {
 			RelatorioDto itemSelecionado = comboModeloRelatorio.getSelectionModel().getSelectedItem();
 		    descricao.setText(itemSelecionado.getDescricao());
@@ -61,7 +60,7 @@ public class GerenciamentoRelatoriosController {
 		});
 		
 		botaoGerar.setOnAction((event) -> {
-			avisoCarregando.setText("Gerando relatório. Aguarde!");
+			avisoCarregando.setText("Gerando relatório... Aguarde!");
 			paneCarregando.setVisible(true);
 			avisoCarregando.setVisible(true);
 		});
@@ -69,6 +68,7 @@ public class GerenciamentoRelatoriosController {
 	
 	private void getUsuarios(){
 		listaUsuarios = FXCollections.observableArrayList(service.getUsuarios(""));
+		TextFields.bindAutoCompletion(comboUsuario.getEditor(), listaUsuarios);
 		comboUsuario.setItems(listaUsuarios);
 	}
 	

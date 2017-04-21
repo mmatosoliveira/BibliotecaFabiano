@@ -6,19 +6,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.MaskerPane?>
-<?import javafx.scene.layout.BorderPane?>
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastrarClassificacaoController">
   <children>
     <Label fx:id="lblTitulo" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" text="Cadastrar classificação de livros" textAlignment="CENTER" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
       <font>
-        <Font size="20.0" />
+        <Font name="Calibri Light" size="20.0" />
       </font>
     </Label>
     <GridPane layoutY="41.0" prefHeight="60.0" prefWidth="600.0" AnchorPane.leftAnchor="-5.0">
@@ -48,9 +48,9 @@
       </children>
     </HBox>
       <Label fx:id="lblId" layoutX="28.0" layoutY="121.0" text="" visible="false" />
-   	<BorderPane visible="false" fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   	<BorderPane fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <MaskerPane fx:id="avisoCarregando" BorderPane.alignment="CENTER" visible="false" />
+            <MaskerPane fx:id="avisoCarregando" visible="false" BorderPane.alignment="CENTER" />
          </center>
     </BorderPane>
   </children>

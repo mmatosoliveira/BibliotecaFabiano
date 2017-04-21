@@ -13,14 +13,14 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.RealizarBackupController">
    <children>
-      <TabPane layoutX="2.0" layoutY="35.0" prefHeight="391.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+      <TabPane layoutX="2.0" layoutY="42.0" prefHeight="384.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
         <tabs>
           <Tab text="Realizar backup">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="357.0" prefWidth="581.0">
                      <children>
-                        <Button fx:id="iniciarBackup" layoutX="300.0" layoutY="330.0" mnemonicParsing="false" prefWidth="71.0" text="Iniciar" />
-                        <Button fx:id="botaoCancelar" layoutX="229.0" layoutY="330.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Cancelar" />
+                        <Button fx:id="iniciarBackup" layoutX="300.0" layoutY="326.0" mnemonicParsing="false" prefWidth="71.0" text="Iniciar" />
+                        <Button fx:id="botaoCancelar" layoutX="229.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Cancelar" />
                         <TextArea editable="false" layoutX="5.0" layoutY="14.0" prefHeight="183.0" prefWidth="590.0" text="O processo de realização de backup é um processo lento, mas exetremamente necessário, que permite recuperar informações do sistema quando ocorre alguma falha ou erro que pode acarretar em perda de dados já cadastrados. Ao clicar em ‘Realizar backup’ o sistema realiza uma leitura de todas as informações e faz uma cópia em um arquivo &quot;.SQL&quot;.&#10;Durante a execução do backup algumas funcionalidades do sistema ficarão temporariamente indisponíveis, mas não se preocupe, o sistema estará  em total funcionalidade de uso após a finalização do backup. O backup ocorre em  background, ou seja, as telas do  sistema não ficarão travadas, mas lembre-se: se alguma funcionalidade do sistema não estiver executando corretamente, espere o backup acabar e tente novamente." wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
                         <RadioButton fx:id="radioEncerrarLivres" layoutX="14.0" layoutY="207.0" mnemonicParsing="false" text="Encerrar o LIVRES após realizar o backup" AnchorPane.leftAnchor="14.0" />
                         <RadioButton fx:id="radioEncerrarLivresESistema" layoutX="14.0" layoutY="236.0" mnemonicParsing="false" text="Encerrar o LIVRES e desligar o computador após realizar o backup" />
@@ -47,9 +47,9 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Label alignment="TOP_CENTER" layoutX="286.0" layoutY="6.0" text="Backup" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="3.0">
+      <Label alignment="TOP_CENTER" layoutX="286.0" layoutY="6.0" text="Backup" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
          <font>
-            <Font size="20.0" />
+            <Font name="Calibri Light" size="20.0" />
          </font>
       </Label>
    </children>
