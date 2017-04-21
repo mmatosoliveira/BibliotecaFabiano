@@ -5,6 +5,7 @@ import javax.persistence.*;
 import org.modelmapper.ModelMapper;
 
 import br.com.casafabianodecristo.biblioteca.dto.ParametrizacaoSistemaDto;
+import br.com.casafabianodecristo.biblioteca.exceptions.ApplicationException;
 import br.com.casafabianodecristo.biblioteca.model.ParametrizacaoSistema;
 
 public class ApplicationService {
@@ -57,7 +58,7 @@ public class ApplicationService {
 				query.setMaxResults(1);
 				ParametrizacaoSistema param = query.getSingleResult();
 				if(param == null)
-					throw new Exception("Não foi encontrada nenhuma parametrização cadastrada.");
+					throw new ApplicationException("Não foi encontrada nenhuma parametrização cadastrada.", "Parametrizações vigentes", "Não foi encontrada nenhuma parametrização cadastrada.");
 				dto = mapper.map(param, ParametrizacaoSistemaDto.class);
 			closeEntityManager();
 		closeEntityManagerFactory();

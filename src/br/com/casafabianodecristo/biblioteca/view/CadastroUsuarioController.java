@@ -131,16 +131,14 @@ public class CadastroUsuarioController {
 		List<Object> dados = (List<Object>) botaoCancelar.getScene().getRoot().getUserData();
 		boolean isEdit = false;
 		int id = 0; 
-		exibirMascara(true, isEdit);
 		if(dados != null){
 			isEdit = (boolean) dados.get(2);
 			id = (int) dados.get(1);
 		}
-		id = 0;
-		isEdit = true;
 		if(id == 0 && isEdit){
 			throw new ApplicationException("Erro ao editar usuário. Não foi possível identificar o Id do usuário a ser editado.", "Editar dados do usuário", "Erro ao editar usuário. Não foi possível identificar o Id do usuário a ser editado.");
 		}
+		exibirMascara(true, isEdit);
 			
 		try {
 			

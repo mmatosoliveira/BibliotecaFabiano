@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
+import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
 import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
@@ -87,28 +88,27 @@ public class Principal extends Application {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void carregarTelaInicial(List<Emprestimo> devolucoes, String nomeUsuario, int idUsuario){
+	public void carregarTelaInicial(InicialDto dto){
 		try{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Principal.class.getResource("../view/Inicial.fxml"));			
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage pagina = new Stage();			
 			Scene scene = new Scene (page);
-			ObservableList<Emprestimo> itens =FXCollections.observableList(devolucoes); 
+			ObservableList<Emprestimo> itens =FXCollections.observableList(dto.getEmprestimo()); 
 			TableView<Emprestimo> tabelaEmprestimosPendentes  = (TableView<Emprestimo>) scene.lookup("#tabelaEmprestimosPendentes");
 			Label dataHora = (Label) scene.lookup("#dataHora");
-			Label id = (Label) scene.lookup("#labelId");
 			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			Date data = new Date();
 			
 			tabelaEmprestimosPendentes.setItems(itens);
-			id.setText(Integer.toString(idUsuario));
+			scene.getRoot().setUserData(dto);
 			
 			String str = fmt.format(data);			
 			dataHora.setText("Horário do acesso: " + str);
 			
 			Label usuarioAcesso = (Label) scene.lookup("#usuarioAcesso");
-			usuarioAcesso.setText("Usuário logado: " + nomeUsuario);
+			usuarioAcesso.setText("Usuário logado: " + dto.getUsuario().getNomeUsuarioAcessoSistema());
 			
 			pagina.setTitle("LIVRES - Sistema para gestão de livros espíritas");
 			pagina.getIcons().add(new Image("file:resources/images/icon-principal.png"));

@@ -3,6 +3,7 @@ package br.com.casafabianodecristo.biblioteca.view;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
+import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -11,6 +12,7 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.stage.Stage;
 import javafx.scene.control.*;
 
 public class InicialController {
@@ -206,6 +208,15 @@ public class InicialController {
             public void handle(ActionEvent event) {
 				if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK)
 					System.exit(0);				
+			}
+		});		
+		
+		itemMeusDados.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				InicialDto dto = (InicialDto) botaoCadastrarLivro.getScene().getRoot().getUserData();
+				alerta.alertaAviso("ahusa", "Id usuário:" + dto.getUsuario().getIdString());
+				//principal.carregarEmprestimoLivro();			
 			}
 		});		
 		

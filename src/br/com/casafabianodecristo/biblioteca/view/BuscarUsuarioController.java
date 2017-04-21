@@ -104,8 +104,6 @@ public class BuscarUsuarioController {
             	UsuarioDto user = usuarios.getSelectionModel().getSelectedItem();
             	if (user == null)
             		alerta.notificacaoAlerta("Editar dados do usuário", "Você deve selecionar um usuário para editar.");
-            	else if (user.getFlAdministrador() == 1)
-            		alerta.notificacaoErro("Editar dados do usuário", "Não é permitido editar dados de um usuário Administrador.");
             	else	{
             		principal.carregarEditarDadosUsuario(user, usuarios);
             	}

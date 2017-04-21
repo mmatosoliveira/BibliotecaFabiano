@@ -1,9 +1,9 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.ExecutorService;
+/*import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.awt.Toolkit;
+import java.awt.Toolkit;*/
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
@@ -157,7 +157,7 @@ public class LoginController {
             		}    				
     			}    
             	if (result == true){
-            		principal.carregarTelaInicial(dto.getEmprestimo(), dto.getUsuario().getNomeUsuario(), dto.getUsuario().getId());
+            		principal.carregarTelaInicial(dto);
             	}
             	else {
             		indicador.setVisible(false);
