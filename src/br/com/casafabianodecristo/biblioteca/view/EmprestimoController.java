@@ -2,8 +2,11 @@ package br.com.casafabianodecristo.biblioteca.view;
 
 import java.util.List;
 import org.controlsfx.control.MaskerPane;
+import org.controlsfx.control.textfield.TextFields;
+
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.dto.EmprestimoDto;
+import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.service.GeradorReciboService;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
@@ -285,5 +288,10 @@ public class EmprestimoController {
 		});
 		paneFiltro.setCollapsible(false);
 		accordion.setExpandedPane(paneFiltro);
+		getUsuarios();
+	}
+	private void getUsuarios(){
+		List<UsuarioDto> listaUsuarios = (List<UsuarioDto>) FXCollections.observableArrayList(servico.getUsuarios(""));
+		TextFields.bindAutoCompletion(nomeUsuario, listaUsuarios);
 	}
 }

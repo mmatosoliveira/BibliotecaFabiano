@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.eclipse.persistence.config.HintValues;
+import org.eclipse.persistence.config.QueryHints;
+
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
@@ -35,15 +39,17 @@ public class LivroService {
 		int result = 0;
 		createEntityManagerFactory();
 			createEntityManager();
-				TypedQuery<Livro> query = em.createQuery("select o from Livro o order by o.tomboPatrimonial DESC", Livro.class);
+				TypedQuery<Integer> query = em.createQuery("select o.tomboPatrimonial from Livro o order by o.tomboPatrimonial DESC", Integer.class);
+				query.setHint(QueryHints.READ_ONLY, HintValues.TRUE);
 				query.setFirstResult(0);
 				query.setMaxResults(1);
 				try{
-					result = query.getSingleResult().getTomboPatrimonial();
+					result = query.getSingleResult();
 				}
 				catch(Exception e){	}
 			closeEntityManager();
 		closeEntityManagerFactory();
+		//System.out.println(result);
 		return result;
 	}
 	

@@ -1,6 +1,7 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
 import java.util.*;
+import org.controlsfx.control.MaskerPane;
 import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.components.Numberfield;
@@ -17,7 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class CadastroLivroController {
@@ -51,15 +52,18 @@ public class CadastroLivroController {
 	@FXML
 	private Numberfield quantidadeExemplares;
 	
-	@FXML
-	private Pane paneSalvando;
-	
 	private BibliotecaAppService appService = new BibliotecaAppService();
 	
 	@SuppressWarnings("rawtypes")
 	private Task cadastrarLivro;
 	
 	Alertas alerta = new Alertas();
+	
+	@FXML
+	private MaskerPane avisoCarregando = new MaskerPane();
+	
+	@FXML
+	private BorderPane paneCarregando = new BorderPane();
 
 	public CadastroLivroController(){}
 	
@@ -120,26 +124,23 @@ public class CadastroLivroController {
 		botaoSalvar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				paneSalvando.setStyle("-fx-background-color: #d7dbe2;");
-            	paneSalvando.setVisible(true); 
-            	botaoSalvar.setDisable(true);
-            	botaoCancelar.setDisable(true);
-            	
             	if (CadastroLivroInterfaceValidator.validarCamposObrigatorios(camposTexto, classificacao) &&
             		CadastroLivroInterfaceValidator.validarTamanhosMaximos(titulo, subtitulo, nomeAutor, editora, tomboPatrimonial))
             	{
+            		mudarComportamentoTela(true);
                 	cadastrarLivro = taskCadastrarLivro();
         			Thread t = new Thread(cadastrarLivro);
         			t.setDaemon(true);
         			t.start();
             	}
-            	else{
-            		paneSalvando.setVisible(false); 
-                	botaoSalvar.setDisable(false);
-                	botaoCancelar.setDisable(false);
-            	}
 			}
 		});
+	}
+	
+	private void mudarComportamentoTela(boolean estado){
+		avisoCarregando.setText("Salvando livro(s)... Aguarde");
+		avisoCarregando.setVisible(estado);
+		paneCarregando.setVisible(estado);
 	}
 	
 	private boolean cadastrarLivro(){
@@ -172,16 +173,13 @@ public class CadastroLivroController {
             	boolean result = (boolean) getValue();
             	if (!result){
             		alerta.notificacaoErro("Cadastrar livro", "Já existe um livro cadastrado com esse tombo patrimonial.\nConfira o tombo patrimonial e tente novamente.");
-            		paneSalvando.setVisible(false);
-            		botaoSalvar.setDisable(false);
-                	botaoCancelar.setDisable(false);
             	}
             	else if (result){
             		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
     	            stage.close();
     	            alerta.notificacaoSucessoSalvarDados("Cadastrar livro");
             	}
-            		
+            	mudarComportamentoTela(false);	
     		}
         };
     }
