@@ -25,7 +25,7 @@
         <Menu mnemonicParsing="false" text="Sistema">
           <items>
             <MenuItem fx:id="itemConfigurarImpressoraPadrao" mnemonicParsing="false" text="Selecionar impressora padrão para recibos" />
-                  <MenuItem fx:id="itemRealizarBackup1" mnemonicParsing="false" text="Realizar backup do sistema" />
+                  <MenuItem fx:id="itemRealizarBackup" mnemonicParsing="false" text="Realizar backup do sistema" />
             <MenuItem fx:id="itemSair" mnemonicParsing="false" text="Sair" />
           </items>
         </Menu>

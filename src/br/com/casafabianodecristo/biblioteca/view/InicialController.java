@@ -167,6 +167,8 @@ public class InicialController {
 		
 		itemCadastrarClassificacao.setOnAction((e) -> principal.carregarTelaCadastro("CadastrarClassificacao", "Cadastrar classificação de livros", true, false, new TableView<>()));
 		
+		itemRealizarBackup.setOnAction(e -> principal.carregarTela("RealizarBackup", "Realizar backup", "backup-icon", false, true));
+		
 		itemCadastrarLivros.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {

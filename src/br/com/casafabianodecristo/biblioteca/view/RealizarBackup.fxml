@@ -47,7 +47,7 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Label alignment="TOP_CENTER" layoutX="286.0" layoutY="6.0" text="Backup" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+      <Label alignment="TOP_CENTER" layoutX="286.0" layoutY="6.0" text="Realizar backup" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="Calibri Light" size="20.0" />
          </font>
