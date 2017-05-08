@@ -2,12 +2,9 @@ package br.com.casafabianodecristo.biblioteca.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
-
 import org.eclipse.persistence.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
-
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
@@ -19,6 +16,7 @@ public class LivroService {
 	
 	private void createEntityManagerFactory() {
 		emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
+		
 	}
 
 	private void closeEntityManagerFactory() {
@@ -28,7 +26,7 @@ public class LivroService {
 	private void createEntityManager() {
 		em  = emf.createEntityManager();
 	}
-
+	
 	private void closeEntityManager() {
 		em.close();
 	}
@@ -37,8 +35,9 @@ public class LivroService {
 	
 	public int getUltimoTombo(){
 		int result = 0;
-		createEntityManagerFactory();
+			createEntityManagerFactory();
 			createEntityManager();
+
 				TypedQuery<Integer> query = em.createQuery("select o.tomboPatrimonial from Livro o order by o.tomboPatrimonial DESC", Integer.class);
 				query.setHint(QueryHints.READ_ONLY, HintValues.TRUE);
 				query.setFirstResult(0);
@@ -49,7 +48,6 @@ public class LivroService {
 				catch(Exception e){	}
 			closeEntityManager();
 		closeEntityManagerFactory();
-		//System.out.println(result);
 		return result;
 	}
 	

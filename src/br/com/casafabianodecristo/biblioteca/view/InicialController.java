@@ -12,7 +12,6 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
 
 public class InicialController {
@@ -215,8 +214,7 @@ public class InicialController {
 			@Override
             public void handle(ActionEvent event) {
 				InicialDto dto = (InicialDto) botaoCadastrarLivro.getScene().getRoot().getUserData();
-				alerta.alertaAviso("ahusa", "Id usuário:" + dto.getUsuario().getIdString());
-				//principal.carregarEmprestimoLivro();			
+				principal.carregarEditarDadosAcesso(dto.getUsuario());		
 			}
 		});		
 		

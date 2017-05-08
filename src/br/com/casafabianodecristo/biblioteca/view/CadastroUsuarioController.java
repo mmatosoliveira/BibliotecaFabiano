@@ -104,9 +104,9 @@ public class CadastroUsuarioController {
 		
 		botaoSalvar.setOnAction((event) -> {        	
         	if(CadastroUsuarioInterfaceValidator.validarCamposObrigatorios(checkAdm.isSelected(), getListaCampos())){
-        		if(CadastroUsuarioInterfaceValidator.validarTamanhosObrigatorios(checkAdm.isSelected(), nome, sobrenome, ddd, telefone, senha, confirmacaoSenha, dicaSenha)){
+        		if(CadastroUsuarioInterfaceValidator.validarTamanhosObrigatorios(checkAdm.isSelected(), nome, sobrenome, ddd, telefone, senha, confirmacaoSenha, dicaSenha, "Usuário")){
         			if(checkAdm.isSelected()){
-        				if(CadastroUsuarioInterfaceValidator.validarSenha(senha, confirmacaoSenha, dicaSenha)){
+        				if(CadastroUsuarioInterfaceValidator.validarSenha(senha, confirmacaoSenha, dicaSenha, "Usuário")){
         					try {
 								criarTask();
 							} catch (ApplicationException e) {

@@ -2,12 +2,9 @@ package br.com.casafabianodecristo.biblioteca.utils;
 
 import java.util.Optional;
 import org.controlsfx.control.Notifications;
-
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -55,6 +52,16 @@ public class Alertas {
         alertErro.setHeaderText(texto);
         //fecharTela(alertErro);
         alertErro.showAndWait();
+	}
+	
+	public Optional<ButtonType> alertaErro2(String titulo, String texto){
+		Alert alertErro = new Alert(AlertType.ERROR);
+		setIcon(alertErro);
+        alertErro.setTitle(titulo);
+        alertErro.setHeaderText(texto);
+        //fecharTela(alertErro);
+        Optional<ButtonType> result = alertErro.showAndWait();
+        return result;
 	}
 	
 	public void alertaErro1(String titulo, String texto){

@@ -182,7 +182,7 @@ public class BibliotecaAppService {
 	 **/
 	
 	public InicialDto logar(String nomeUsuario, String senha){
-		Usuario usuarioLogado = null;
+		UsuarioDto usuarioLogado = null;
 		Usuario admin = null;			
 		admin = usuarioService.getUsuarioPorNomeUsuario("Admin");
 		if (admin == null){
@@ -193,14 +193,14 @@ public class BibliotecaAppService {
 		usuarioLogado = usuarioService.logar(nomeUsuario, senha);
 		
 		if (usuarioLogado != null){
-			ModelMapper mapper = new ModelMapper();
+			//ModelMapper mapper = new ModelMapper();
 			
-			UsuarioDto uDto = mapper.map(usuarioLogado, UsuarioDto.class);
-			uDto.setSenha(usuarioLogado.getSenha());
+			//UsuarioDto uDto = mapper.map(usuarioLogado, UsuarioDto.class);
+			usuarioLogado.setSenha(usuarioLogado.getSenha());
 
 			List<Emprestimo> es = this.getDevolucoesPrevistas();
-			
-			InicialDto dto = new InicialDto(uDto, es);
+			usuarioLogado.setSenhaAntesEdicao(usuarioLogado.getSenha());
+			InicialDto dto = new InicialDto(usuarioLogado, es);
 			return dto;
 		}
 		else return null;

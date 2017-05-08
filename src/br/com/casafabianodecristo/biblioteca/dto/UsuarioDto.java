@@ -17,6 +17,8 @@ public class UsuarioDto {
 	
 	private String senha;	
 	
+	private String senhaAntesEdicao;
+	
 	private int ddd;	
 	
 	private int telefone;	
@@ -24,6 +26,8 @@ public class UsuarioDto {
 	private int flAdministrador;	
 	
 	private String dicaSenha;
+	
+	private boolean exibeMsg = true;
 
 	@SuppressWarnings("unused")
 	private List<EmprestimoDto> emprestimoDtos = new ArrayList<EmprestimoDto>();
@@ -73,6 +77,22 @@ public class UsuarioDto {
 		this.nomeCompleto = nomeCompleto;
 	}
 	
+	public String getSenhaAntesEdicao() {
+		return senhaAntesEdicao;
+	}
+
+	public void setSenhaAntesEdicao(String senhaAntesEdicao) {
+		this.senhaAntesEdicao = senhaAntesEdicao;
+	}
+
+	public boolean isExibeMsg() {
+		return exibeMsg;
+	}
+
+	public void setExibeMsg(boolean exibeMsg) {
+		this.exibeMsg = exibeMsg;
+	}
+
 	public void setNomeCompleto(String nomeCompleto) {
 		this.nomeCompleto = nomeCompleto;
 	}

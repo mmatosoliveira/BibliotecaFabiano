@@ -2,25 +2,30 @@ package br.com.casafabianodecristo.biblioteca.service;
 
 import java.util.*;
 import javax.persistence.*;
-
+import org.eclipse.persistence.config.HintValues;
+import org.eclipse.persistence.config.QueryHints;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import org.modelmapper.ModelMapper;
+
+import br.com.casafabianodecristo.biblioteca.dbmanager.DbManager;
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.exceptions.ApplicationException;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.updater.*;
+import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 
 public class UsuarioService {
 	private EntityManagerFactory emf;
 	private EntityManager        em;
+	private Alertas alerta = new Alertas();
 	
 	private void createEntityManagerFactory() {
 		try{
 			emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
 		}
 		catch(Exception e){
-			System.out.println("Erro no database!");
+			//throw new ApplicationException("Erro na criação do entity manager.", "Login", "Erro na criação do contexto de entidades. \nContate o administrador do sistema!");
 		}
 	}
 
@@ -34,14 +39,34 @@ public class UsuarioService {
 	}
 
 	private void createEntityManager() {
+		em  = emf.createEntityManager();
+	}
+
+	private void criarEntityManagerFactory() {
+		try{
+			emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
+		}
+		catch(RuntimeException e){
+			System.out.println("Caiu no erro factory");
+			throw new ApplicationException("Erro na criação do entity manager.", "Login", "Erro na criação do contexto de entidades.");
+		}
+	}
+	
+	private void criarEntityManager() throws Exception{
 		try{
 			em  = emf.createEntityManager();
 		}
-		catch(Exception e){
-			System.out.println("Erro!");
+		catch(RuntimeException  e){
+			throw new Exception("Erro na criação do entity manager.");
+			//alerta.alertaErro("Login", "Erro na criação do contexto de entidades.");
+			//System.out.println("Caiu no erro 1");
+
+
+			//System.out.println("execução dps do alerta");
+
 		}
 	}
-
+	
 	private void closeEntityManager() {
 		try{
 			em.close();
@@ -135,8 +160,28 @@ public class UsuarioService {
 	
 	public Usuario getUsuarioPorNomeUsuario(String nomeUsuario){
 		Usuario user = null;
-		createEntityManagerFactory();
-		createEntityManager();
+		/*try{
+			DbManager.createEntityManagerFactory();
+			DbManager.createEntityManager();
+		}
+		catch (Exception e) {alerta.notificacaoAlerta("erro", "erro");}
+		
+		TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuarioAcessoSistema = :nomeUsuario", Usuario.class);	
+		query.setParameter("nomeUsuario", nomeUsuario);
+	
+		user = query.getSingleResult();
+		try{
+			user = query.getSingleResult();
+		}
+		catch(Exception ex){System.out.println("Erro na consulta...");}
+		
+		DbManager.closeEntityManagerFactory();
+		DbManager.closeEntityManager();*/
+		
+		try {
+			criarEntityManagerFactory();
+			criarEntityManager();
+		} catch (Exception e) {alerta.notificacaoAlerta("erro", "erro");}
 			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuarioAcessoSistema = :nomeUsuario", Usuario.class);	
 			query.setParameter("nomeUsuario", nomeUsuario);
 			
@@ -149,26 +194,30 @@ public class UsuarioService {
 		return user;
 	}
 	
-	public Usuario logar(String nomeUsuario, String senha){
+	public UsuarioDto logar(String nomeUsuario, String senha){
 		Usuario usuarioLogado = null;
+		ModelMapper mapper = new ModelMapper();
 		//this.atualizarUsuariosComAtraso();
-		createEntityManagerFactory();
-			createEntityManager();
+		
+		try {
+			criarEntityManagerFactory();
+			criarEntityManager();
+		} catch (Exception e) {}
 			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o "+
 					 "where o.nomeUsuarioAcessoSistema = :nomeUsuario " + 
 					 "and o.senha = :senha" , Usuario.class);
 					query.setParameter("nomeUsuario", nomeUsuario);
 					query.setParameter("senha", senha);
+					query.setHint(QueryHints.READ_ONLY, HintValues.TRUE);
 					
-					try {
+//					try {
 						usuarioLogado = query.getSingleResult();
-					}
-					catch(DatabaseException ex){
-						System.out.println("Exce��o");
-					}
+
+					em.detach(usuarioLogado);
 			closeEntityManager();
 		closeEntityManagerFactory();
-		return usuarioLogado;
+		UsuarioDto dto = mapper.map(usuarioLogado, UsuarioDto.class);
+		return dto;
 	}
 	
 	public String getDicaSenha(String nomeUsuario){
@@ -189,18 +238,19 @@ public class UsuarioService {
 	}
 	
 	public void atualizarUsuario(UsuarioDto dto) throws ApplicationException{
+		//dto.setSobrenome(null);
 		createEntityManagerFactory();
 			createEntityManager();
-				em.getTransaction().begin();
-					Usuario user = em.find(Usuario.class, dto.getId());
-					user = UsuarioUpdater.update(dto, user);
-					try{
+				try {
+					em.getTransaction().begin();
+						Usuario user = em.find(Usuario.class, dto.getId());
+						user = UsuarioUpdater.update(dto, user);
 						em.merge(user);
-					}
-					catch (Exception e){
-						throw new ApplicationException("Erro ao editar usuário. Não foi possível realizar a operação de atualização.", "Editar dados do usuário", "Erro ao editar usuário. Não foi possível realizar a operação de atualização");
-					}
-				em.getTransaction().commit();
+					em.getTransaction().commit();
+				}
+				catch (Exception e){
+					throw new ApplicationException("Erro ao editar usuário. Não foi possível realizar a operação de atualização.", "Editar dados do usuário", "Erro ao editar usuário. Não foi possível realizar a operação de atualização", dto.isExibeMsg());
+				}
 			closeEntityManager();
 		closeEntityManagerFactory();
 	}

@@ -1,29 +1,22 @@
 package br.com.casafabianodecristo.biblioteca.principal;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import br.com.casafabianodecristo.biblioteca.dto.ClassificacaoDto;
-import br.com.casafabianodecristo.biblioteca.dto.InicialDto;
-import br.com.casafabianodecristo.biblioteca.dto.UsuarioDto;
+import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
 import br.com.casafabianodecristo.biblioteca.utils.Alertas;
-import br.com.casafabianodecristo.biblioteca.view.CadastroUsuarioController;
-import br.com.casafabianodecristo.biblioteca.view.InicialController;
-import br.com.casafabianodecristo.biblioteca.view.LoginController;
-import br.com.casafabianodecristo.biblioteca.view.ResultadoBuscaController;
+import br.com.casafabianodecristo.biblioteca.view.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
 public class Principal extends Application {
 	private Stage primaryStage;
@@ -46,11 +39,23 @@ public class Principal extends Application {
         	}
 		});
 	}
+	
+	private static void showError(Thread t, Throwable e) {
+        Alertas alerta = new Alertas();
+        if (Platform.isFxApplicationThread()) {
+        	alerta.alertaErro("Erro", "Ocorreu um erro ao executar a ação solicitada. Tente novamente mais tarde.\nSe o erro persistir, contate o Administrador do sistema.");
+        } else {
+        	alerta.alertaErro("Erro", "Ocorreu um erro ao executar a ação solicitada. Tente novamente mais tarde.\nSe o erro persistir, contate o Administrador do sistema.");
+        }
+        //System.exit(0);
+    }
 
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
 		primaryStage.setResizable(false);
+		Thread.setDefaultUncaughtExceptionHandler((t, e) -> Platform.runLater(() -> showError(t, e)));
+        Thread.currentThread().setUncaughtExceptionHandler(Principal::showError);
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("LIVRES - Sistema gerenciador de livros espíritas");
 		this.primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
@@ -82,9 +87,7 @@ public class Principal extends Application {
             LoginController controller = loader.getController();
             controller.setPrincipal(this);
             
-		} catch (IOException e) {
-            e.printStackTrace();
-        }
+		} catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -123,9 +126,7 @@ public class Principal extends Application {
 			pagina.show();
 			primaryStage.close();
 		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
+		catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarCadastrarClassificacao(TableView<ClassificacaoDto> tabela){
@@ -156,7 +157,7 @@ public class Principal extends Application {
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.showAndWait();
 			
-		} catch (IOException e) {}
+		} catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarEditarClassificacao(ClassificacaoDto dto, TableView<ClassificacaoDto> tabela){
@@ -193,13 +194,13 @@ public class Principal extends Application {
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.show();
 			
-		} catch (IOException e) {}
+		} catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarCadastroLivros(){
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Principal.class.getResource("../view/CadastrarLivro.fxml"));
 		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Principal.class.getResource("../view/CadastrarLivro.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			
 			Scene scene = new Scene(page);
@@ -214,8 +215,8 @@ public class Principal extends Application {
 			pagina.show();
 			onCloseRequest(pagina, false);
 		} 
-		catch (IOException e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			Principal.showError(Thread.currentThread(), e);
 		}
 	}
 	
@@ -243,9 +244,7 @@ public class Principal extends Application {
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			pagina.show();
 			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarRemoverDoarLivro(){
@@ -264,9 +263,7 @@ public class Principal extends Application {
 			pagina.initModality(Modality.APPLICATION_MODAL);
 			onCloseRequest(pagina, false);
 			pagina.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarCadastroUsuario(){
@@ -287,9 +284,7 @@ public class Principal extends Application {
 			onCloseRequest(pagina, false);
 			pagina.show();
 		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarEmprestimoLivro(){
@@ -308,7 +303,7 @@ public class Principal extends Application {
 			onCloseRequest(pagina, false);
 			pagina.show();
 			
-		}catch(IOException e){}
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarGerenciamentoClassificacoes(){
@@ -326,7 +321,7 @@ public class Principal extends Application {
 			pagina.setScene(scene);
 			pagina.show();
 			
-		}catch(IOException e){}
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarGerenciamentoRelatorios(){
@@ -345,7 +340,7 @@ public class Principal extends Application {
 			pagina.setScene(scene);
 			pagina.show();
 			
-		}catch(IOException e){}
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarConfiguracaoImpressora(){
@@ -364,7 +359,7 @@ public class Principal extends Application {
 			pagina.setScene(scene);
 			pagina.show();
 			
-		}catch(IOException e){}
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarTela(String nomeTela, String titulo, String iconName, boolean confirmCloseRequest, boolean resizable){
@@ -384,9 +379,7 @@ public class Principal extends Application {
 			pagina.setScene(scene);
 			pagina.show();
 			
-		}catch(Exception e){
-			alerta.alertaErro("Abrir tela", "Ocorreu um erro enquanto abriamos a tela solicitada. Tente novamente mais tarde!\nSe o erro persistir, contate o administrador do sistema.");
-		}
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public <T> void carregarTelaCadastro(String nomeTela, String titulo, boolean confirmCloseRequest, boolean resizable, TableView<T> tabela){
@@ -417,10 +410,7 @@ public class Principal extends Application {
 				onCloseRequest(pagina, false);
 			pagina.show();
 			
-		}catch(Exception e){
-			e.printStackTrace();
-			alerta.alertaErro("Abrir tela", "Ocorreu um erro enquanto abriamos a tela solicitada. Tente novamente mais tarde!\nSe o erro persistir, contate o administrador do sistema.");
-		}
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public <T> void carregarEditarDadosUsuario(UsuarioDto usuario, TableView<T> tabela){
@@ -462,10 +452,29 @@ public class Principal extends Application {
 			onCloseRequest(pagina, false);
 			pagina.setScene(scene);
 			pagina.show();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
+	}
+	
+	public void carregarEditarDadosAcesso(UsuarioDto dto){
+		try{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Principal.class.getResource("../view/EditarInformacoesAdm.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Scene scene = new Scene(page);
+			TextField nomeUsuario = (TextField) scene.lookup("#nomeUsuario");
+			nomeUsuario.setText(dto.getNomeUsuarioAcessoSistema());
+			scene.getRoot().setUserData(dto);
+			Stage pagina = new Stage();
+			pagina.getIcons().add(new Image("file:resources/images/icon-edit.png"));
+			pagina.setTitle("Editar informações de acesso");
+			pagina.setResizable(false);
+			pagina.initModality(Modality.APPLICATION_MODAL);
+			pagina.initOwner(primaryStage);
+			onCloseRequest(pagina, false);
+			pagina.setScene(scene);
+			pagina.show();
 		}
+		catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	/*public void carregarBuscaUsuario(){

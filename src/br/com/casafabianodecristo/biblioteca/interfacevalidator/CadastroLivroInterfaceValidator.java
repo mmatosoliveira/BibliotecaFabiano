@@ -28,17 +28,17 @@ public class CadastroLivroInterfaceValidator {
 		}	
 		else if (textoNomeAutor.length() > 300){
 			nomeAutor.requestFocus();
-			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho mÃ¡ximo para o nome do autor Ã© de 300 caracteres.");
+			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho máximo para o nome do autor é de 300 caracteres.");
 			return false;
 		}
 		else if (textoEditora.length() > 50){
 			editora.requestFocus();
-			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho mÃ¡ximo para o nome da editora Ã© de 50 caracteres.");
+			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho máximo para o nome da editora é de 50 caracteres.");
 			return false;
 		}
 		else if (tombo.length() > 6){
 			tomboPatrimonial.requestFocus();
-			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho mÃ¡ximo para o tombo patrimonial Ã© de 6 caracteres.");
+			alerta.notificacaoAlerta("Cadastrar livro", "O tamanho máximo para o tombo patrimonial é de 6 caracteres.");
 			return false;
 		}
 		

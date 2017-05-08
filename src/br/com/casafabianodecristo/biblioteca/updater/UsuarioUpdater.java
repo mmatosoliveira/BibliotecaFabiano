@@ -11,7 +11,7 @@ public class UsuarioUpdater {
 		usuario.setNomeUsuario(dto.getNomeUsuario());
 		usuario.setSobrenome(dto.getSobrenome());
 		usuario.setNomeUsuarioAcessoSistema(dto.getNomeUsuarioAcessoSistema());
-		usuario.setSenha(dto.getDicaSenha());
+		usuario.setSenha(dto.getSenha());
 		usuario.setDicaSenha(dto.getDicaSenha());
 		usuario.setDdd(dto.getDdd());
 		usuario.setTelefone(dto.getTelefone());
