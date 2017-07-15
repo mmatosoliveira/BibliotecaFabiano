@@ -66,6 +66,9 @@ public class CadastrarClassificacaoController {
 		    	List<Object> dados = (List<Object>) botaoCancelar.getScene().getRoot().getUserData();
 				tabela = (TableView<ClassificacaoDto>) dados.get(0);
 				id = (Integer) dados.get(1);
+				System.out.println("Id: " + id);
+				System.out.println("IdTabela: " + tabela.getId());
+				
 				isEdit = (id == 0) ? false : true;
 	    		alterarEstadoCampos(true);            		
 		    	if(validarCampos() && ClassificacaoValidator.validarValoresRepetidos(descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()), isEdit)){
@@ -149,10 +152,8 @@ public class CadastrarClassificacaoController {
 	
 	private boolean cadastrarClassificacao(){
 		int result;
-    	int id = 0;
-    	if(lblId.getText() != null)
-    		id = Integer.parseInt(lblId.getText());
-		if(id == 0){
+		
+		if(!isEdit){
 			ClassificacaoDto dto = new ClassificacaoDto(0, descricao.getText(), RGBConverter.toRGBCode(escolherCor.getValue()));
     		result = appService.cadastrarClassificacao(dto);
 		}
@@ -164,11 +165,11 @@ public class CadastrarClassificacaoController {
 			return true;
 		}
 		else if(result == 1){
-			alerta.notificacaoErro("Cadastrar classificação", "Ocorreu um erro ao tentar salvar a classificação, tente novamente mais tarde.");
+			alerta.notificacaoErro("Classificação de livros", "Ocorreu um erro ao tentar salvar a classificação, tente novamente mais tarde.");
 			return false;
 		}
 		else if(result != 2){
-			alerta.notificacaoErro("Cadastrar classificação", "Ops, algo deu errado. Tente novamente mais tarde, se o problema persistir contate o administrador do sistema.");
+			alerta.notificacaoErro("Classificação de livros", "Ops, algo deu errado. Tente novamente mais tarde, se o problema persistir contate o Administrador do sistema.");
 			return false;
 		}
 		return true;
