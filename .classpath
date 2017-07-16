@@ -28,5 +28,7 @@
 	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/jpa/org.eclipse.persistence.jpars_2.6.4.v20160829-44060b6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/ModelMapper/modelmapper-0.7.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/MysqlJDBC/mysql-connector-java-5.1.42-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/Apache/commons-lang3-3.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/Apache/commons-lang3-3.6-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
