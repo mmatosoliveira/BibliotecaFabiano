@@ -43,9 +43,9 @@ public class Principal extends Application {
 	private static void showError(Thread t, Throwable e) {
         Alertas alerta = new Alertas();
         if (Platform.isFxApplicationThread()) {
-        	alerta.alertaErro("Erro", e.getMessage());
+        	alerta.alertaErro("Erro", "Ocorreu um erro ao executar a ação solicitada. Tente novamente mais tarde.\nSe o erro persistir, contate o Administrador do sistema.");
         } else {
-        	alerta.alertaErro("Erro", e.getMessage());
+        	alerta.alertaErro("Erro", "Ocorreu um erro ao executar a ação solicitada. Tente novamente mais tarde.\nSe o erro persistir, contate o Administrador do sistema.");
         }
         //System.exit(0);
     }
@@ -303,11 +303,7 @@ public class Principal extends Application {
 			onCloseRequest(pagina, false);
 			pagina.show();
 			
-		}catch(Exception e){
-			e.printStackTrace();	
-			Principal.showError(Thread.currentThread(), e);
-		
-		}
+		}catch(Exception e){Principal.showError(Thread.currentThread(), e);}
 	}
 	
 	public void carregarGerenciamentoClassificacoes(){
