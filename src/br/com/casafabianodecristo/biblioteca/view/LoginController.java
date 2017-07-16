@@ -13,6 +13,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -151,10 +152,15 @@ public class LoginController {
             	boolean result = (boolean) getValue();
             	if (tentativas == 3){ 
             		if (dicaSenha != null){
-            			labelDicaSenha.setText("Dica de senha: " + dicaSenha);
-        				labelDicaSenha.setVisible(true);
-        				tentativas = 0;
-            		}    				
+            			labelDicaSenha.setText("Dica de senha: " + dicaSenha);	
+            		}
+            		else{
+            			labelDicaSenha.setText("Número de tentativas de acesso excedido. \nContate o Administrador de sistema para correção de dados cadastrais e tente novamente mais tarde!");
+            		}
+            		
+            		labelDicaSenha.setAlignment(Pos.CENTER);
+            		labelDicaSenha.setVisible(true);
+    				tentativas = 0;
     			}    
             	if (result == true){
             		principal.carregarTelaInicial(dto);

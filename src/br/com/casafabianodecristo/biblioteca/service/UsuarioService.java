@@ -197,7 +197,7 @@ public class UsuarioService {
 	public UsuarioDto logar(String nomeUsuario, String senha){
 		Usuario usuarioLogado = null;
 		ModelMapper mapper = new ModelMapper();
-		//this.atualizarUsuariosComAtraso();
+		UsuarioDto dto;
 		
 		try {
 			criarEntityManagerFactory();
@@ -210,31 +210,35 @@ public class UsuarioService {
 					query.setParameter("senha", senha);
 					query.setHint(QueryHints.READ_ONLY, HintValues.TRUE);
 					
-//					try {
+					try {
 						usuarioLogado = query.getSingleResult();
+					}
+					catch(NoResultException e){
+						dto = null;
+					}
 
-					em.detach(usuarioLogado);
 			closeEntityManager();
 		closeEntityManagerFactory();
-		UsuarioDto dto = mapper.map(usuarioLogado, UsuarioDto.class);
+		
+		dto = (usuarioLogado != null) ? mapper.map(usuarioLogado, UsuarioDto.class) : null;
 		return dto;
 	}
 	
 	public String getDicaSenha(String nomeUsuario){
-		Usuario user = null;
+		String dicaSenha = null;
 		createEntityManagerFactory();
 		createEntityManager();
-			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuarioAcessoSistema = :nomeUsuario", Usuario.class);	
+			TypedQuery<String> query = em.createQuery("select o.dicaSenha from Usuario o where o.nomeUsuarioAcessoSistema = :nomeUsuario", String.class);	
 			query.setParameter("nomeUsuario", nomeUsuario);
 			
 			try{
-				user = query.getSingleResult();
+				dicaSenha = query.getSingleResult();
 			}
-			catch(NoResultException ex){ex.printStackTrace();}
+			catch(NoResultException ex){dicaSenha = null;}
 			
 		closeEntityManager();
 		closeEntityManagerFactory();
-		return user.getDicaSenha();
+		return dicaSenha;
 	}
 	
 	public void atualizarUsuario(UsuarioDto dto) throws ApplicationException{
