@@ -116,3 +116,19 @@
 	-fx-background-image: url('../../../../../../resources/images/icon-refresh.png');
 	-fx-background-color: none;
 }
+
+#botaoRemoverLivroAcervo{
+	-fx-background-position: left;
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-remove.png');
+	-fx-background-color: none;
+}
+
+#botaoDoar{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-donate.png');
+	-fx-background-color: none;
+}

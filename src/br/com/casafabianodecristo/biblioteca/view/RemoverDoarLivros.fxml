@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import br.com.casafabianodecristo.biblioteca.components.Numberfield?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.RemoverDoarLivrosController">
+<AnchorPane prefHeight="457.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.RemoverDoarLivrosController">
   <!-- TODO Add Nodes -->
   <children>
     <Label alignment="CENTER" prefWidth="723.0" text="Remover/Doar livros do acervo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
@@ -16,22 +21,41 @@
         <Font name="Calibri Light" size="20.0" />
       </font>
     </Label>
-    <HBox id="HBox" alignment="CENTER" layoutY="40.0" prefWidth="723.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <HBox id="HBox" alignment="CENTER" layoutY="97.0" prefWidth="723.0" spacing="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
       <children>
-        <Button fx:id="botaoRemover" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Remover" />
-        <Button fx:id="botaoDoar" mnemonicParsing="false" prefWidth="86.0" text="Doar" />
-        <Button fx:id="botaoFechar" mnemonicParsing="false" prefWidth="86.0" text="Fechar" />
+        <Button fx:id="botaoRemoverLivroAcervo" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Remover" underline="true" />
+        <Button fx:id="botaoDoar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="Doar" underline="true" />
+        <Button fx:id="botaoFechar" alignment="CENTER_RIGHT" mnemonicParsing="false" prefWidth="75.0" text="Fechar" underline="true" />
       </children>
     </HBox>
-      <TableView fx:id="tabelaLivros" layoutX="269.0" layoutY="92.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0">
+      <TableView fx:id="tabelaLivros" layoutX="269.0" layoutY="129.0" prefHeight="271.0" prefWidth="723.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="129.0">
         <columns>
-          <TableColumn fx:id="colunaTitulo" prefWidth="75.0" text="Título" />
+          <TableColumn fx:id="colunaTitulo" maxWidth="7000.0" prefWidth="75.0" text="Título" />
           <TableColumn fx:id="colunaSubtitulo" prefWidth="258.0" text="Subtítulo" />
-            <TableColumn fx:id="colunaAutor" prefWidth="75.0" text="Autor" />
+            <TableColumn fx:id="colunaAutor" maxWidth="4000.0" prefWidth="75.0" text="Autor" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <GridPane layoutX="10.0" layoutY="51.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="51.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.0" minWidth="10.0" prefWidth="114.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="547.0" minWidth="10.0" prefWidth="523.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="138.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Tombo patrimonial:" />
+            <Numberfield fx:id="tomboPatrimonial" GridPane.columnIndex="1" />
+            <Button fx:id="botaoConsultar" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#consultarLivro" prefHeight="25.0" prefWidth="110.0" text="Consultar" textAlignment="RIGHT" underline="true" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets left="25.0" right="-30.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
   </children>
 </AnchorPane>

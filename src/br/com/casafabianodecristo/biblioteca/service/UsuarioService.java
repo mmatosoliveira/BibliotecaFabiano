@@ -18,62 +18,22 @@ import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 public class UsuarioService {
 	private EntityManagerFactory emf;
 	private EntityManager        em;
-	private Alertas alerta = new Alertas();
 	
 	private void createEntityManagerFactory() {
-		try{
-			emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
-		}
-		catch(Exception e){
-			//throw new ApplicationException("Erro na criação do entity manager.", "Login", "Erro na criação do contexto de entidades. \nContate o administrador do sistema!");
-		}
+		emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
+		
 	}
 
 	private void closeEntityManagerFactory() {
-		try{
-			emf.close();
-		}
-		catch(Exception e){
-			System.out.println("Erro!");
-		}
+		emf.close();
 	}
 
 	private void createEntityManager() {
 		em  = emf.createEntityManager();
 	}
-
-	private void criarEntityManagerFactory() {
-		try{
-			emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
-		}
-		catch(RuntimeException e){
-			System.out.println("Caiu no erro factory");
-			throw new ApplicationException("Erro na criação do entity manager.", "Login", "Erro na criação do contexto de entidades.");
-		}
-	}
-	
-	private void criarEntityManager() throws Exception{
-		try{
-			em  = emf.createEntityManager();
-		}
-		catch(RuntimeException  e){
-			throw new Exception("Erro na criação do entity manager.");
-			//alerta.alertaErro("Login", "Erro na criação do contexto de entidades.");
-			//System.out.println("Caiu no erro 1");
-
-
-			//System.out.println("execução dps do alerta");
-
-		}
-	}
 	
 	private void closeEntityManager() {
-		try{
-			em.close();
-		}
-		catch(Exception e){
-			System.out.println("Erro!");
-		}
+		em.close();
 	}
 	
 	public UsuarioService(){}
@@ -178,10 +138,10 @@ public class UsuarioService {
 		DbManager.closeEntityManagerFactory();
 		DbManager.closeEntityManager();*/
 		
-		try {
-			criarEntityManagerFactory();
-			criarEntityManager();
-		} catch (Exception e) {alerta.notificacaoAlerta("erro", "erro");}
+		
+			createEntityManagerFactory();
+			createEntityManager();
+		
 			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o where o.nomeUsuarioAcessoSistema = :nomeUsuario", Usuario.class);	
 			query.setParameter("nomeUsuario", nomeUsuario);
 			
@@ -199,10 +159,8 @@ public class UsuarioService {
 		ModelMapper mapper = new ModelMapper();
 		UsuarioDto dto;
 		
-		try {
-			criarEntityManagerFactory();
-			criarEntityManager();
-		} catch (Exception e) {}
+			createEntityManagerFactory();
+			createEntityManager();
 			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o "+
 					 "where o.nomeUsuarioAcessoSistema = :nomeUsuario " + 
 					 "and o.senha = :senha" , Usuario.class);

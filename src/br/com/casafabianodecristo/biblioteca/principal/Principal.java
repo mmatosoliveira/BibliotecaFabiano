@@ -43,11 +43,10 @@ public class Principal extends Application {
 	private static void showError(Thread t, Throwable e) {
         Alertas alerta = new Alertas();
         if (Platform.isFxApplicationThread()) {
-        	alerta.alertaErro("Erro", "Ocorreu um erro ao executar a ação solicitada. Tente novamente mais tarde.\nSe o erro persistir, contate o Administrador do sistema.");
+        	alerta.showErrorDialog(e);
         } else {
-        	alerta.alertaErro("Erro", "Ocorreu um erro ao executar a ação solicitada. Tente novamente mais tarde.\nSe o erro persistir, contate o Administrador do sistema.");
+        	alerta.showErrorDialog(e);
         }
-        //System.exit(0);
     }
 
 	@Override
@@ -257,7 +256,8 @@ public class Principal extends Application {
 			Stage pagina = new Stage();
 			
 			pagina.setTitle("Remover/Doar livros do acervo");
-			pagina.setMaximized(true);
+			pagina.getIcons().add(new Image("file:resources/images/icon-remove.png"));
+			pagina.setResizable(false);
 			pagina.initOwner(primaryStage);			
 			pagina.setScene(scene);
 			pagina.initModality(Modality.APPLICATION_MODAL);
