@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.ListSelectionView?>
 <?import org.controlsfx.control.MaskerPane?>
@@ -42,13 +41,9 @@
          </font>
       </Label>
       <Button fx:id="pesquisarLivro" layoutX="754.0" layoutY="283.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="283.0" />
-      <HBox alignment="CENTER" layoutX="290.0" layoutY="510.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Button fx:id="emprestar" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Emprestar" />
-            <Button fx:id="cancelar" mnemonicParsing="false" prefHeight="26.0" prefWidth="93.0" text="Cancelar" />
-         </children>
-      </HBox>
       <ListSelectionView fx:id="selectorLivros" layoutX="7.0" layoutY="313.0" prefHeight="297.0" prefWidth="785.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="8.0" />
+      <Button fx:id="emprestar" layoutX="360.0" layoutY="605.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Emprestar" />
+      <Button fx:id="cancelar" layoutX="267.0" layoutY="605.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="93.0" text="Cancelar" />
       <BorderPane fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <MaskerPane fx:id="avisoCarregando" visible="false" BorderPane.alignment="CENTER" />

@@ -85,7 +85,7 @@ public class CadastrarClassificacaoController {
 			
 		botaoCancelar.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	if (alerta.alertaConfirmacaoSair().get() == ButtonType.OK){
+		    	if (alerta.alertaConfirmacaoSairTelaCadastro().get() == ButtonType.OK){
 		    		Stage stage = (Stage) botaoCancelar.getScene().getWindow();
 		    		stage.close();	    	
 		    	}		    	

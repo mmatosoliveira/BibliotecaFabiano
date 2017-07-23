@@ -37,6 +37,8 @@ public class ConfigurarImpressoraPadraoController {
 	@FXML
 	private Button cancelar;
 	
+	@FXML private Button botaoAtualizarImpressorasInstaladas;
+	
 	@FXML
 	private MaskerPane avisoCarregando = new MaskerPane();
 	
@@ -54,11 +56,8 @@ public class ConfigurarImpressoraPadraoController {
 	
 	private Task taskSelecionarImpressora;
 	
-	@FXML
-	private void initialize(){
-		botaoImpressoraNaoListada.setStyle("-fx-background-color: none");
-		botaoImpressoraNaoListada.setOnAction(e -> abrirProgramaExterno(e));
-		
+	private void consultarImpressoras(){
+		impressoras.clear();
 		PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
         for (PrintService printer : printServices)
             impressoras.add(printer.getName());
@@ -66,6 +65,15 @@ public class ConfigurarImpressoraPadraoController {
         gridImpressoras.setItems(itens);
         
         colunaImpressorasDisponiveis.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().toString()));
+	}
+	
+	@FXML
+	private void initialize(){
+		botaoImpressoraNaoListada.setStyle("-fx-background-color: none");
+		botaoImpressoraNaoListada.setOnAction(e -> abrirProgramaExterno(e));
+		botaoAtualizarImpressorasInstaladas.getStylesheets().add(ConfigurarImpressoraPadraoController.class.getResource("style.css").toExternalForm());
+		consultarImpressoras();
+		botaoAtualizarImpressorasInstaladas.setOnAction(e -> consultarImpressoras());
         
         cancelar.setOnAction(new EventHandler<ActionEvent>(){
 			@Override

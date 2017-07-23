@@ -26,12 +26,12 @@
       </TableView>
       <Button fx:id="selecionarPadrao" layoutX="300.0" layoutY="359.0" mnemonicParsing="false" prefWidth="71.0" text="Selecionar" AnchorPane.bottomAnchor="5.0" />
       <Button fx:id="cancelar" layoutX="229.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Cancelar" AnchorPane.bottomAnchor="5.0" />
-      <Button fx:id="botaoImpressoraNaoListada" layoutX="5.0" layoutY="346.0" mnemonicParsing="false" text="Minha impressora não está na lista" textFill="#1809eb" underline="true" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="350.0" />
+      <Button fx:id="botaoImpressoraNaoListada" layoutX="5.0" layoutY="356.0" mnemonicParsing="false" text="Minha impressora não está na lista" textFill="#1809eb" underline="true" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="356.0" />
       <BorderPane fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <MaskerPane fx:id="avisoCarregando" visible="false" BorderPane.alignment="CENTER" />
          </center>
     </BorderPane>
-      <Button alignment="CENTER_RIGHT" layoutX="508.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Atualizar" underline="true" AnchorPane.rightAnchor="5.0" />
+      <Button fx:id="botaoAtualizarImpressorasInstaladas" alignment="CENTER_RIGHT" layoutX="506.0" layoutY="360.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Atualizar" underline="true" AnchorPane.rightAnchor="5.0" />
    </children>
 </AnchorPane>

@@ -108,3 +108,11 @@
 	-fx-background-image: url('../../../../../../resources/images/icon-devolver.png');
 	-fx-background-color: none;
 }
+
+#botaoAtualizarImpressorasInstaladas{
+	-fx-background-position: left;
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+	-fx-background-image: url('../../../../../../resources/images/icon-refresh.png');
+	-fx-background-color: none;
+}
