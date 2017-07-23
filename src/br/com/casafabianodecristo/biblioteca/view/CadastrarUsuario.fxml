@@ -17,35 +17,33 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.MaskerPane?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastroUsuarioController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="364.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.casafabianodecristo.biblioteca.view.CadastroUsuarioController">
   <children>
     <GridPane layoutX="18.0" layoutY="57.0" prefWidth="586.0" AnchorPane.rightAnchor="-18.0" AnchorPane.topAnchor="50.0">
       <children>
-        <Label text="Sobrenome:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <Label text="DDD:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label fx:id="lblNomeUsuario" disable="true" text="Nome de usuário:" GridPane.rowIndex="5" />
-        <Label fx:id="lblSenha" disable="true" text="Senha:" GridPane.rowIndex="6" />
-        <Label fx:id="lblConfirmaSenha" disable="true" text="Confirmação de senha:" GridPane.rowIndex="7" />
-        <TextField fx:id="nome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField fx:id="sobrenome" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Numberfield fx:id="ddd" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Label text="DDD:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label fx:id="lblNomeUsuario" disable="true" text="Nome de usuário:" GridPane.rowIndex="4" />
+        <Label fx:id="lblSenha" disable="true" text="Senha:" GridPane.rowIndex="5" />
+        <Label fx:id="lblConfirmaSenha" disable="true" text="Confirmação de senha:" GridPane.rowIndex="6" />
+        <TextField fx:id="nomeCompleto" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Numberfield fx:id="ddd" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="170.0" />
                </GridPane.margin></Numberfield>
-        <Numberfield fx:id="telefone" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <CheckBox fx:id="checkAdm" mnemonicParsing="false" text="Administrador" GridPane.rowIndex="4" />
-        <TextField fx:id="nomeUsuario" disable="true" prefHeight="25.0" prefWidth="149.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <PasswordField fx:id="senha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <PasswordField fx:id="confirmacaoSenha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-        <TextField fx:id="dicaSenha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-        <Label fx:id="lblDicaSenha" disable="true" text="Dica de senha:" GridPane.rowIndex="8" />
-        <Label fx:id="lblTamanhoCaracteres" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6">
+        <Numberfield fx:id="telefone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <CheckBox fx:id="checkAdm" mnemonicParsing="false" text="Administrador" GridPane.rowIndex="3" />
+        <TextField fx:id="nomeUsuario" disable="true" prefHeight="25.0" prefWidth="149.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <PasswordField fx:id="senha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <PasswordField fx:id="confirmacaoSenha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField fx:id="dicaSenha" disable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <Label fx:id="lblDicaSenha" disable="true" text="Dica de senha:" GridPane.rowIndex="7" />
+        <Label fx:id="lblTamanhoCaracteres" text="Label" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5">
           <textFill>
             <Color blue="0.000" green="0.000" red="0.600" fx:id="x2" />
           </textFill>
         </Label>
-        <Label text="Nome:" />
-            <Label text="Telefone:" GridPane.rowIndex="3" />
+        <Label text="Nome completo:" />
+            <Label text="Telefone:" GridPane.rowIndex="2" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="168.0" />
@@ -53,7 +51,6 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="150.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
@@ -71,8 +68,8 @@
     </Label>
     <Group id="Group" layoutX="409.0" layoutY="6.0" />
     <Label fx:id="id" layoutX="494.0" layoutY="356.0" text="" visible="false" />
-      <Button fx:id="botaoSalvar" layoutX="293.0" layoutY="352.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="80.0" text="Salvar" />
-      <Button fx:id="botaoCancelar" layoutX="213.0" layoutY="352.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="80.0" text="Cancelar" />
+      <Button fx:id="botaoSalvar" layoutX="293.0" layoutY="316.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="80.0" text="Salvar" />
+      <Button fx:id="botaoCancelar" layoutX="213.0" layoutY="316.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="80.0" text="Cancelar" />
       <BorderPane fx:id="paneCarregando" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <MaskerPane fx:id="avisoCarregando" visible="false" BorderPane.alignment="CENTER" />

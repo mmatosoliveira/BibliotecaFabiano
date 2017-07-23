@@ -9,12 +9,9 @@ import javafx.scene.control.TextField;
 public class CadastroUsuarioInterfaceValidator {
 	private static Alertas alerta = new Alertas();
 	
-	public static boolean validarTamanhosObrigatorios(boolean adm, TextField nome, TextField sobrenome, Numberfield ddd, Numberfield telefone, TextField senha, TextField confirmacao, TextField dicaSenha, String operacao){
+	public static boolean validarTamanhosObrigatorios(boolean adm, TextField nome, Numberfield ddd, Numberfield telefone, TextField senha, TextField confirmacao, TextField dicaSenha, String operacao){
 		if(nome.getText().length() > 50 || nome.getText().length() < 1)
-			return setarFoco(nome, "nome", 50, 1, operacao);
-		
-		if(sobrenome.getText().length() > 50 || sobrenome.getText().length() < 1)
-			return setarFoco(sobrenome, "sobrenome", 50, 1, operacao);
+			return setarFoco(nome, "nome", 100, 1, operacao);
 		
 		if(ddd.getText().length() > 3 || ddd.getText().length() < 2)
 			return setarFoco(ddd, "DDD",3, 2, operacao);
@@ -64,8 +61,8 @@ public class CadastroUsuarioInterfaceValidator {
 	public static boolean validarCamposObrigatorios (boolean adm, List<TextField> campos){
 		boolean[] validado;
 		if(!adm){
-			validado  = new boolean [4];
-			for(int i = 0; i < 4; i++){
+			validado = new boolean [3];
+			for(int i = 0; i < 3; i++){
 				TextField item = campos.get(i);
 				if (item.getText().equals("")){
 					item.setStyle("-fx-background-color: #ff7c7c;");
@@ -78,8 +75,8 @@ public class CadastroUsuarioInterfaceValidator {
 			}
 		}
 		else{
-			validado = new boolean [8];
-			for(int i = 0; i < 8; i++){
+			validado = new boolean [7];
+			for(int i = 0; i < 7; i++){
 				TextField item = campos.get(i);
 				if (item.getText().equals("")){
 					item.setStyle("-fx-background-color: #ff7c7c;");

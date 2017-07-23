@@ -9,10 +9,6 @@ public class UsuarioDto {
 	
 	private int id;	
 	
-	private String nomeUsuario;	
-	
-	private String sobrenome;	
-	
 	private String nomeUsuarioAcessoSistema;
 	
 	private String senha;	
@@ -38,35 +34,44 @@ public class UsuarioDto {
 	
 	public UsuarioDto(){}
 
-	public UsuarioDto(int id, String nomeUsuario, String sobrenome, int ddd, int telefone, int flAdministrador) {
+	public UsuarioDto(int id, String nomeCompleto, int ddd, int telefone, int flAdministrador) {
 		this.id = id;
-		this.nomeUsuario = nomeUsuario;
-		this.sobrenome = sobrenome;
+		this.nomeCompleto = nomeCompleto;
 		this.ddd = ddd;
 		this.telefone = telefone;
 		this.flAdministrador = flAdministrador;
 	}
-
-	public UsuarioDto(int id, String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
-			int telefone, boolean flAdministrador, String dicaSenha, int flInativo) {
+	
+	public UsuarioDto (int id,
+			String nomeCompleto,
+			int ddd,
+			int telefone,
+			boolean flAdminsitrador,
+			String nomeUsuarioAcessoSistema,
+			String senha,
+			String dicaSenha,
+			int flInativo){
 		this.id = id;
-		this.nomeUsuario = nomeUsuario;
-		this.sobrenome = sobrenome;
 		this.nomeUsuarioAcessoSistema = nomeUsuarioAcessoSistema;
 		this.senha = (senha == "" || senha == null) ? null : setSenhaCriptografada(senha);
 		this.ddd = ddd;
 		this.telefone = telefone;
-		this.flAdministrador = (flAdministrador == true) ? 1 : 0;
+		this.flAdministrador = (flAdminsitrador == true) ? 1 : 0;
 		this.dicaSenha = dicaSenha;
 		this.flInativo = flInativo;
-		this.nomeCompleto = nomeUsuario + " " + sobrenome;;
+		this.nomeCompleto = nomeCompleto;
 	}
 	
-	public UsuarioDto(int id, String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
-			int telefone, boolean flAdministrador, String dicaSenha, int flInativo, String nomeCompleto) {
+	public UsuarioDto(int id, 
+			String nomeUsuarioAcessoSistema, 
+			String senha, 
+			int ddd,
+			int telefone, 
+			boolean flAdministrador, 
+			String dicaSenha, 
+			int flInativo, 
+			String nomeCompleto) {
 		this.id = id;
-		this.nomeUsuario = nomeUsuario;
-		this.sobrenome = sobrenome;
 		this.nomeUsuarioAcessoSistema = nomeUsuarioAcessoSistema;
 		this.senha = (senha == "" || senha == null) ? null : setSenhaCriptografada(senha);
 		this.ddd = ddd;
@@ -140,22 +145,6 @@ public class UsuarioDto {
 
 	public String getIdString(){
 		return this.id + "";
-	}
-	
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
-	}
-
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
 	}
 
 	public String getNomeUsuarioAcessoSistema() {

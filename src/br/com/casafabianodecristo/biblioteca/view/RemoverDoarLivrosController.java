@@ -1,5 +1,7 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
+import java.util.Optional;
+
 import br.com.casafabianodecristo.biblioteca.appservice.BibliotecaAppService;
 import br.com.casafabianodecristo.biblioteca.components.Numberfield;
 import br.com.casafabianodecristo.biblioteca.model.Livro;
@@ -7,6 +9,7 @@ import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -55,6 +58,18 @@ public class RemoverDoarLivrosController {
             public void handle(MouseEvent event) {
             	Stage stage = (Stage) botaoFechar.getScene().getWindow();
 	            stage.close();
+            }            
+        });
+		
+		botaoRemoverLivroAcervo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	Optional<ButtonType> result = alerta.alertaConfirmacao("Remover um livro do acervo significa marca-lo como inutilizado e indisponível no acervo físico."
+            			+ "\nIsso implica em tornar o livro indisponível para empréstimos, consultas e outras operações. Deseja continuar?");
+            	
+            	if(result.get() == ButtonType.OK){
+            		
+            	}
             }            
         });
 	}

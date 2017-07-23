@@ -166,4 +166,17 @@ public class LivroService {
 		closeEntityManagerFactory();
 	}
 
+	
+	public void doarLivroAcervo(int tomboPatrimonial){
+		createEntityManagerFactory();
+			createEntityManager();
+				em.getTransaction().begin();
+					Livro livro = getLivroPorTombo(tomboPatrimonial);
+					livro.setFlDoado(1);
+					em.merge(livro);
+				em.getTransaction().commit();
+			closeEntityManager();
+		closeEntityManagerFactory();
+	}
+
 }

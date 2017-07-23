@@ -31,10 +31,7 @@ public class CadastroUsuarioController {
 	private TextField nomeUsuario;
 	
 	@FXML
-	private TextField nome;
-	
-	@FXML
-	private TextField sobrenome;
+	private TextField nomeCompleto;
 	
 	@FXML
 	private Numberfield ddd; 
@@ -104,7 +101,7 @@ public class CadastroUsuarioController {
 		
 		botaoSalvar.setOnAction((event) -> {        	
         	if(CadastroUsuarioInterfaceValidator.validarCamposObrigatorios(checkAdm.isSelected(), getListaCampos())){
-        		if(CadastroUsuarioInterfaceValidator.validarTamanhosObrigatorios(checkAdm.isSelected(), nome, sobrenome, ddd, telefone, senha, confirmacaoSenha, dicaSenha, "Usuário")){
+        		if(CadastroUsuarioInterfaceValidator.validarTamanhosObrigatorios(checkAdm.isSelected(), nomeCompleto, ddd, telefone, senha, confirmacaoSenha, dicaSenha, "Usuário")){
         			if(checkAdm.isSelected()){
         				if(CadastroUsuarioInterfaceValidator.validarSenha(senha, confirmacaoSenha, dicaSenha, "Usuário")){
         					try {
@@ -171,8 +168,7 @@ public class CadastroUsuarioController {
 	
 	private List<TextField> getListaCampos(){
 		List<TextField> lista = new ArrayList<TextField>();
-		lista.add(nome);
-		lista.add(sobrenome);
+		lista.add(nomeCompleto);
 		lista.add(ddd);
 		lista.add(telefone);
 		lista.add(nomeUsuario);
@@ -184,15 +180,14 @@ public class CadastroUsuarioController {
 	}
 	
 	protected boolean cadastrarUsuario(boolean adm) throws Exception{
-		String nome = this.nome.getText();
-		String sobrenome = this.sobrenome.getText();
+		String nome = this.nomeCompleto.getText();
 		int ddd = this.ddd.getValue();
 		int telefone = this.telefone.getValue();
 		String nomeUsuario = (this.nomeUsuario.getText().equals("")) ? null : this.nomeUsuario.getText();
 		String senha = (this.senha.getText().equals("")) ? null : this.senha.getText();
 		String dicaSenha = (this.dicaSenha.getText().equals("")) ? null : this.dicaSenha.getText();
 		
-		UsuarioDto dto = new UsuarioDto(0, nome, sobrenome, nomeUsuario, senha, ddd, telefone, checkAdm.isSelected(), dicaSenha, 0);
+		UsuarioDto dto = new UsuarioDto(0, nome, ddd, telefone, checkAdm.isSelected(), nomeUsuario, senha, dicaSenha, 0);
 		
 		return servico.cadastrarUsuario(dto);
 	}
@@ -202,12 +197,11 @@ public class CadastroUsuarioController {
 		List<Object> dados = (List<Object>) botaoCancelar.getScene().getRoot().getUserData();
 		
 		int id = (int) dados.get(1);
-		String nome = this.nome.getText();
-		String sobrenome = this.sobrenome.getText();
+		String nome = this.nomeCompleto.getText();
 		int ddd = this.ddd.getValue();
 		int telefone = this.telefone.getValue();
 		
-		UsuarioDto dto = new UsuarioDto(id, nome, sobrenome, ddd, telefone, 0);
+		UsuarioDto dto = new UsuarioDto(id, nome, ddd, telefone, 0);
 		servico.atualizarUsuario(dto);
 	}
 	

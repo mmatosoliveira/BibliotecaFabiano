@@ -22,11 +22,11 @@ public class Emprestimo {
 	@Column(name="DataDevolucaoEfetiva", nullable=true)
 	private Date dataDevolucaoEfetiva;
 	
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="TomboPatrimonial", referencedColumnName="TomboPatrimonial")
 	private Livro livro;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="IdUsuario", referencedColumnName="Id")
 	private Usuario usuario;
 

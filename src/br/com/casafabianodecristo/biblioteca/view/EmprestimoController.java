@@ -195,10 +195,7 @@ public class EmprestimoController {
 		colunaUsuario.setCellValueFactory(x -> new ReadOnlyStringWrapper(
 				x.getValue()
 				.getUsuario()
-				.getNomeUsuario() + " " + 
-				x.getValue()
-				.getUsuario()
-				.getSobrenome()));
+				.getNomeCompleto()));
 		colunaDataPrevista.setCellValueFactory(x -> new ReadOnlyStringWrapper(
 					x.getValue()
 					.getDevolucaoPrevista()));

@@ -67,6 +67,10 @@ public class BibliotecaAppService {
 		livroService.removerLivroAcervo(tomboPatrimonial);
 	}
 	
+	public void doarLivroAcervo(int tomboPatrimonial){
+		livroService.doarLivroAcervo(tomboPatrimonial);
+	}
+	
 	public void excluirLivro(LivroDto dto){
 		livroService.excluir(dto);
 	}

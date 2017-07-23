@@ -8,8 +8,6 @@ public class UsuarioUpdater {
 	public static Usuario update(UsuarioDto dto, Usuario usuario){
 		
 		usuario.setId(dto.getId());
-		usuario.setNomeUsuario(dto.getNomeUsuario());
-		usuario.setSobrenome(dto.getSobrenome());
 		usuario.setNomeUsuarioAcessoSistema(dto.getNomeUsuarioAcessoSistema());
 		usuario.setSenha(dto.getSenha());
 		usuario.setDicaSenha(dto.getDicaSenha());
@@ -17,7 +15,7 @@ public class UsuarioUpdater {
 		usuario.setTelefone(dto.getTelefone());
 		usuario.setFlAdministrador(dto.getFlAdministrador());
 		usuario.setFlInativo(dto.getFlInativo());
-		usuario.setNomeCompleto(dto.getNomeUsuario() + " " + dto.getSobrenome());
+		usuario.setNomeCompleto(dto.getNomeCompleto());
 		
 		return usuario;		
 	}

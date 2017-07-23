@@ -336,7 +336,7 @@ public class EmprestarLivroController {
 		
 		usuarios.setItems(itens);
 		
-		colunaNome.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getNomeUsuario() + " " + x.getValue().getSobrenome()));
+		colunaNome.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getNomeCompleto()));
 		colunaAtivo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x.getValue().getFlInativoString()));
 	}
 	

@@ -15,13 +15,7 @@ public class Usuario {
 	@Column(name="Id")
 	private int id;
 	
-	@Column(name="Nome", nullable=false, length=50)
-	private String nomeUsuario;
-	
-	@Column(name = "Sobrenome", nullable = false, length=50)
-	private String sobrenome;
-	
-	@Column(name="NomeUsuarioAcesso", length=10)
+	@Column(name="NomeUsuarioAcesso", length=10, unique=true)
 	private String nomeUsuarioAcessoSistema;
 	
 	@Column(name="Senha")
@@ -54,10 +48,8 @@ public class Usuario {
 	
 	public Usuario(){}
 
-	public Usuario(String nomeUsuario, String sobrenome, String nomeUsuarioAcessoSistema, String senha, int ddd,
+	public Usuario(String nomeUsuarioAcessoSistema, String senha, int ddd,
 			int telefone, int flAdministrador, String dicaSenha, int flInativo) {
-		this.nomeUsuario = nomeUsuario;
-		this.sobrenome = sobrenome;
 		this.nomeUsuarioAcessoSistema = nomeUsuarioAcessoSistema;
 		this.senha = senha;
 		this.ddd = ddd;
@@ -68,12 +60,10 @@ public class Usuario {
 		this.flPossuiAtraso = 0;
 	}
 	
-	public Usuario(int id, String nomeUsuario, String sobrenome, int ddd, int telefone, int flAdministrador,
+	public Usuario(int id, int ddd, int telefone, int flAdministrador,
 			int flInativo) {
 		super();
 		this.id = id;
-		this.nomeUsuario = nomeUsuario;
-		this.sobrenome = sobrenome;
 		this.ddd = ddd;
 		this.telefone = telefone;
 		this.flAdministrador = flAdministrador;
@@ -81,6 +71,8 @@ public class Usuario {
 	}
 
 	
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,11 +81,11 @@ public class Usuario {
 		result = prime * result + ((dicaSenha == null) ? 0 : dicaSenha.hashCode());
 		result = prime * result + flAdministrador;
 		result = prime * result + flInativo;
+		result = prime * result + flPossuiAtraso;
 		result = prime * result + id;
-		result = prime * result + ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
+		result = prime * result + ((nomeCompleto == null) ? 0 : nomeCompleto.hashCode());
 		result = prime * result + ((nomeUsuarioAcessoSistema == null) ? 0 : nomeUsuarioAcessoSistema.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		result = prime * result + ((sobrenome == null) ? 0 : sobrenome.hashCode());
 		result = prime * result + telefone;
 		return result;
 	}
@@ -114,21 +106,18 @@ public class Usuario {
 				return false;
 		} else if (!dicaSenha.equals(other.dicaSenha))
 			return false;
-		if (emprestimos == null) {
-			if (other.emprestimos != null)
-				return false;
-		} else if (!emprestimos.equals(other.emprestimos))
-			return false;
 		if (flAdministrador != other.flAdministrador)
 			return false;
 		if (flInativo != other.flInativo)
 			return false;
+		if (flPossuiAtraso != other.flPossuiAtraso)
+			return false;
 		if (id != other.id)
 			return false;
-		if (nomeUsuario == null) {
-			if (other.nomeUsuario != null)
+		if (nomeCompleto == null) {
+			if (other.nomeCompleto != null)
 				return false;
-		} else if (!nomeUsuario.equals(other.nomeUsuario))
+		} else if (!nomeCompleto.equals(other.nomeCompleto))
 			return false;
 		if (nomeUsuarioAcessoSistema == null) {
 			if (other.nomeUsuarioAcessoSistema != null)
@@ -140,11 +129,6 @@ public class Usuario {
 				return false;
 		} else if (!senha.equals(other.senha))
 			return false;
-		if (sobrenome == null) {
-			if (other.sobrenome != null)
-				return false;
-		} else if (!sobrenome.equals(other.sobrenome))
-			return false;
 		if (telefone != other.telefone)
 			return false;
 		return true;
@@ -152,10 +136,9 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nomeUsuario=" + nomeUsuario + ", sobrenome=" + sobrenome
-				+ ", nomeUsuarioAcessoSistema=" + nomeUsuarioAcessoSistema + ", senha=" + senha + ", ddd=" + ddd
-				+ ", telefone=" + telefone + ", flAdministrador=" + flAdministrador + ", dicaSenha=" + dicaSenha
-				+ ", emprestimos=" + emprestimos + ", flInativo=" + flInativo + "]";
+		return "Usuario [id=" + id + ", ddd=" + ddd + ", telefone=" + telefone + ", flAdministrador=" + flAdministrador
+				+ ", flInativo=" + flInativo + ", flPossuiAtraso=" + flPossuiAtraso + ", nomeCompleto=" + nomeCompleto
+				+ "]";
 	}
 
 	public String getNomeCompleto() {
@@ -192,22 +175,6 @@ public class Usuario {
 
 	public int getIdUsuario(){
 		return this.id;
-	}
-	
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
-	}
-
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
 	}
 
 	public String getNomeUsuarioAcessoSistema() {
@@ -250,7 +217,7 @@ public class Usuario {
 		if (flAdministrador == 1)
 			return "Sim";
 		else
-			return "N�o";
+			return "Não";
 	}
 	
 	public void setFlAdministrador(int flAdministrador) {
@@ -280,6 +247,4 @@ public class Usuario {
 	public void setFlPossuiAtraso(int flPossuiAtraso) {
 		this.flPossuiAtraso = flPossuiAtraso;
 	}
-	
-	
 }

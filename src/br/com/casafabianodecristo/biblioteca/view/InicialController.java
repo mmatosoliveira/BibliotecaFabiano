@@ -121,7 +121,7 @@ public class InicialController {
 		colunaNomeUsuario.setCellValueFactory(x -> new ReadOnlyStringWrapper(x
 				.getValue()
 				.getUsuario()
-				.getNomeUsuario()));
+				.getNomeCompleto()));
 		colunaTitulo.setCellValueFactory(x -> new ReadOnlyStringWrapper(x
 					.getValue()
 					.getLivro()
@@ -196,7 +196,9 @@ public class InicialController {
 		itemCadastrarUsuario.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarCadastroUsuario();			
+				principal.carregarTelaCadastro("CadastrarUsuario", "Cadastrar usuário", true, false, new TableView<>());
+				//(e) -> principal.carregarTelaCadastro("CadastrarClassificacao", "Cadastrar classificação de livros", true, false, new TableView<>())
+				//principal.carregarCadastroUsuario();			
 			}
 		});
 		

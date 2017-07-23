@@ -423,8 +423,7 @@ public class Principal extends Application {
             controller.setPrincipal(this);
 			
 			Scene scene = new Scene(page);
-			TextField nome = (TextField) scene.lookup("#nome");;
-			TextField sobrenome = (TextField) scene.lookup("#sobrenome");
+			TextField nome = (TextField) scene.lookup("#nomeCompleto");
 			TextField ddd = (TextField) scene.lookup("#ddd");
 			TextField telefone = (TextField) scene.lookup("#telefone");
 			CheckBox checkAdm = (CheckBox) scene.lookup("#checkAdm");
@@ -432,8 +431,7 @@ public class Principal extends Application {
 			
 			tituloPagina.setText("Editar dados do usuário");
 			checkAdm.setDisable(true);
-			nome.setText(usuario.getNomeUsuario());
-			sobrenome.setText(usuario.getSobrenome());
+			nome.setText(usuario.getNomeCompleto());
 			ddd.setText(usuario.getDddString());
 			telefone.setText(usuario.getTelefoneString());
 			
