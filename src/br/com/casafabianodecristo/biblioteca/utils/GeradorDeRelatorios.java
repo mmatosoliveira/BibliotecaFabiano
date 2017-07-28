@@ -1,7 +1,10 @@
 package br.com.casafabianodecristo.biblioteca.utils;
 
+import java.io.OutputStream;
+import java.sql.Connection;
 import java.util.List;
-
+import java.util.Locale;
+import java.util.Map;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.HashPrintServiceAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
@@ -9,6 +12,7 @@ import javax.print.attribute.PrintServiceAttributeSet;
 import javax.print.attribute.standard.Copies;
 import javax.print.attribute.standard.PrinterName;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -16,6 +20,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
 
@@ -24,12 +29,18 @@ import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
  *Ou imprimir um relatório
  *@author Matheus de Matos Oliveira
  */
+/**
+ * @author Matheus Matos
+ *
+ */
 @SuppressWarnings("deprecation")
 public class GeradorDeRelatorios 
 {
 	private String path;
 	
 	private String pathToReportPackage;
+	
+	private Connection conexao = ConnectionFactory.getConnection(); 
 	
 	/**
 	 * Nome do arquivo .jrxml que deve ser compilado
@@ -57,6 +68,8 @@ public class GeradorDeRelatorios
 		this.pathToReportPackage = this.path + "br/com/casafabianodecristo/biblioteca/reports/";
 	}
 	
+	
+	
 	/**
 	 * Método que gera o relatório.
 	 * @param <T>
@@ -70,6 +83,39 @@ public class GeradorDeRelatorios
 		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(lista));
 		
 		return print;
+	}
+	
+	/**
+	 * Método que gera o relatório em pdf a partir do SQL do relatório
+	 * através de uma conexão JDBC
+	 * @param Map<String, Object> mapa de parâmetros
+	 * @param OutputStream saída do arquivo
+	 */	
+	@SuppressWarnings("rawtypes")
+	public Object gerarPdf(Map<String, Object> parametros, OutputStream saida){
+		String jrxml = this.getPathToReportPackage() + nomeArquivoJasper;
+		
+		try {
+
+            // compila jrxml em memoria
+            JasperReport jasper = JasperCompileManager.compileReport(jrxml);
+            
+            //parametros.put(JRParameter.REPORT_LOCALE, Locale.);
+
+            // preenche relatorio
+            JasperPrint print = JasperFillManager.fillReport(jasper, parametros, this.conexao);
+
+            // exporta para pdf
+            JRExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, saida);
+
+            exporter.exportReport();
+            return new Object();
+
+        } catch (Exception e) {
+            return null;
+        }
 	}
 	
 	/**

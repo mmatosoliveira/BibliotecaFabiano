@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-07-25T20:48:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TodosOsLivros" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e791b703-cf13-45cb-b691-e1f6edaf3527">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="YFZ3TGl2cm9zQ2FkYXN0cmFkb3NgICwxNSwxNSw4MTIxZDBiNy1iOTI5LTQyZGUtYWM3OC1mNTcx&#xA;OGZmNzMxZmI7"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexao"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="647"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="353"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM `VwLivrosCadastrados`
+ORDER BY `VwLivrosCadastrados`.`TomboPatrimonial` ASC]]>
+	</queryString>
+	<field name="TomboPatrimonial" class="java.lang.Integer"/>
+	<field name="Titulo" class="java.lang.String"/>
+	<field name="Autor" class="java.lang.String"/>
+	<field name="Classificacao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="543" height="25" uuid="fe51775b-9821-48ce-8369-bb4c5ea2b130">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Biblioteca Espírita Dulce K. Gonçalves - "Mãezinha"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="35" width="217" height="15" uuid="c260e4bc-7826-4634-a849-cf373bc1a1e8"/>
+				<text><![CDATA[Rua Roberto Beverglieri Filho, 350]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="217" height="15" uuid="4a1939ed-28a5-4caf-99c8-d903cd7ada49"/>
+				<text><![CDATA[Londrina - PR, 86056-290]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="65" width="217" height="14" uuid="e41e040d-c7bf-48c6-a285-9920adaa88ab"/>
+				<text><![CDATA[www.casafabianodecristo.com.br]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="122">
+			<staticText>
+				<reportElement x="0" y="10" width="552" height="30" backcolor="#E6E8E9" uuid="0c807d38-2ffc-457c-b7a1-e47506be212a">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineColor="#E6E8E9"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relação de todos os livros cadastrados no sistema]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="552" height="60" uuid="ef96b287-d86e-47d7-a1dc-ba5dd97bc4b6"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="12" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Neste relatório serão demonstrados todos os livros cadastrados no sistema, independente de estarem emprestados, removidos, doados ou indisponíveis no acervo. Este relatório pode ser utilizado para realização de revisão periódica da quantidade de exemplares cadastrados, além da comparação com o acervo (realização de levantamento de patrimônio).]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="90" height="30" uuid="d4a99d7b-96c0-449e-9706-689301cefee2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tombo patrimonial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="10" width="200" height="30" uuid="9f78ba60-7f28-4cbf-8873-60dd38486ec8"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Título]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="10" width="130" height="30" uuid="f892baea-626a-4658-8a11-2b16e40ec58d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Autor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="10" width="132" height="30" uuid="67269cb7-7f6e-49db-ae23-b7442ee2d588"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Classificação]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement x="0" y="0" width="90" height="22" uuid="e8fdebb7-1b1b-4d63-a830-c1ac710f4794"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{TomboPatrimonial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="0" width="200" height="22" uuid="3eb04dc2-04f9-475e-86dc-2da336e2924a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="130" height="22" uuid="896f8c27-8a6b-4711-8165-85ebf33f41d8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Autor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="132" height="22" uuid="ea81d155-22b2-4873-b5bc-596d9f86175c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Classificacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="1" y="7" width="552" height="30" backcolor="#E6E8E9" uuid="9563dd40-1900-451e-9bc0-1cb801283506"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Casa Fabiano de Cristo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="368" y="14" width="90" height="16" uuid="a30a413f-6159-46bc-9a8a-82f1f0437f9f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página:  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="462" y="14" width="90" height="17" uuid="de608805-27d9-4b01-907f-b76f445a8d12"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de  " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="20" y="15" width="100" height="15" uuid="4d221bcc-ee21-4445-8973-2dc43294eea6"/>
+				<textFieldExpression><![CDATA[DATEFORMAT(new Date(),"dd/MM/yyyy HH:mm:ss")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

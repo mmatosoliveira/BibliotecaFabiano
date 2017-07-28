@@ -20,8 +20,20 @@ FROM RELATORIO
 having (COUNT(*) > 0) ;
 
 
-INSERT INTO USUARIO (DDD, DicaSenha, FlAdministrador, FlInativo, FlPossuiAtraso, NomeCompleto, NomeUsuarioAcesso, Senha, Sobrenome, Telefone)
-VALUES(043, 'Admin', 1, 0, 0, 'Administrador', 'Admin', 'e3afed0047b08059d0fada10f400c1e5', "", 00000000);
+INSERT INTO USUARIO (DDD, DicaSenha, FlAdministrador, FlInativo, FlPossuiAtraso, NomeCompleto, NomeUsuarioAcesso, Senha, Telefone)
+VALUES(043, 'Admin', 1, 0, 0, 'Administrador', 'Admin', 'e3afed0047b08059d0fada10f400c1e5',  00000000);
+
+-- region Criação da view para relatório de Livros cadastrados
+drop view `LivrosCadastrados`;
+CREATE VIEW `VwLivrosCadastrados` (TomboPatrimonial , Titulo , Autor, Classificacao) AS
+    SELECT 
+        Livro.TomboPatrimonial,
+        Livro.Titulo + " - " +  Livro.Subtitulo,
+        Livro.NomeAutor
+    FROM
+        Livroclassificacao
+	INNER JOIN Classificacao.Descricao AS Classificacao 
+    ON Classificacao.Id = Livro.IdClassificacao;
 
 -- region Criação do procedimento que atualiza a Flag de atraso de um usuário
 DROP PROCEDURE IF EXISTS SPAtualizaUsuariosComAtraso;

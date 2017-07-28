@@ -1,5 +1,8 @@
 package br.com.casafabianodecristo.biblioteca.view;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.principal.Principal;
 import br.com.casafabianodecristo.biblioteca.appservice.*;
@@ -157,12 +160,25 @@ public class InicialController {
 			}
 		}));
 		
-		itemGerarRelatorio.setOnAction((event) -> principal.carregarTela("GerarRelatorios", "Gerar relatórios", "icon-manage", false, true));
+		itemGerarRelatorio.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+            public void handle(ActionEvent event) {
+				principal.carregarGerenciamentoRelatorios();
+			}
+		});
 		
 		itemGerarEtiquetas.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
             public void handle(ActionEvent event) {
-				principal.carregarGerenciamentoRelatorios();
+				GeradorDeRelatorios gerador = new GeradorDeRelatorios("TodosOsLivros.jrxml");
+				try {
+					OutputStream saida = new FileOutputStream("TodosLivros.pdf");
+					gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//principal.carregarGerenciamentoRelatorios();
 			}
 		});
 		
@@ -197,8 +213,6 @@ public class InicialController {
 			@Override
             public void handle(ActionEvent event) {
 				principal.carregarTelaCadastro("CadastrarUsuario", "Cadastrar usuário", true, false, new TableView<>());
-				//(e) -> principal.carregarTelaCadastro("CadastrarClassificacao", "Cadastrar classificação de livros", true, false, new TableView<>())
-				//principal.carregarCadastroUsuario();			
 			}
 		});
 		

@@ -30,5 +30,8 @@
 	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/MysqlJDBC/mysql-connector-java-5.1.42-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/Apache/commons-lang3-3.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/Apache/commons-lang3-3.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/spring-core-3.2.3.release.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/spring-beans-2.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mathe/git/BibliotecaFabiano/resources/JarsEclipse/joda-time-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

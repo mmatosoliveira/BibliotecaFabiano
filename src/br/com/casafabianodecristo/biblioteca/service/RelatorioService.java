@@ -1,5 +1,8 @@
 package br.com.casafabianodecristo.biblioteca.service;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.*;
 
 import javax.persistence.EntityManager;
@@ -10,12 +13,15 @@ import javax.persistence.TypedQuery;
 
 import org.modelmapper.ModelMapper;
 
+import br.com.casafabianodecristo.biblioteca.dto.ImpressaoRelatorioDto;
 import br.com.casafabianodecristo.biblioteca.dto.RelatorioDto;
 import br.com.casafabianodecristo.biblioteca.model.Relatorio;
+import br.com.casafabianodecristo.biblioteca.utils.GeradorDeRelatorios;
 
 public class RelatorioService {
 	private EntityManagerFactory emf;
 	private EntityManager        em;
+	private GeradorDeRelatorios gerador;
 	
 	private void createEntityManagerFactory() {
 		emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
@@ -34,6 +40,57 @@ public class RelatorioService {
 	}
 	
 	public RelatorioService(){}
+	
+	public Object gerarRelatorio(ImpressaoRelatorioDto dto){
+		try {
+			OutputStream saida;
+			switch(dto.getIdClassificacao()){
+				case(-1):
+					gerador = new GeradorDeRelatorios("TodosOsLivros.jrxml");
+					 saida = new FileOutputStream("TodosLivros.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-2):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-3):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-4):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-5):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-6):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-7):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-8):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-9):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+				case (-10):
+					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");
+					saida = new FileOutputStream("EmprestimosPorUsuario.pdf");
+					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
+			}
+		}catch (FileNotFoundException e) {
+			System.out.println("Erro na geração do relatório");
+		}
+		return null;
+	}
 	
 	public List<RelatorioDto> getModelosRelatorios(){
 		List<RelatorioDto> relatorios = new ArrayList<RelatorioDto>();
