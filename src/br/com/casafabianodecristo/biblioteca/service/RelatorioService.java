@@ -1,5 +1,6 @@
 package br.com.casafabianodecristo.biblioteca.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -42,12 +43,17 @@ public class RelatorioService {
 	public RelatorioService(){}
 	
 	public Object gerarRelatorio(ImpressaoRelatorioDto dto){
+		String user = System.getProperty("user.home");
+		boolean result = new File(user+"\\Documents\\Livres\\Relatórios").mkdirs();
+		System.out.println("resultado: " + result);
+		System.out.println("resultado1: " + user+"\\Documents\\Livres\\Relatórios");
+		System.out.println(dto.getIdRelatorio());
 		try {
 			OutputStream saida;
 			switch(dto.getIdClassificacao()){
 				case(-1):
-					gerador = new GeradorDeRelatorios("TodosOsLivros.jrxml");
-					 saida = new FileOutputStream("TodosLivros.pdf");
+					 gerador = new GeradorDeRelatorios("TodosOsLivros.jrxml");
+					 saida = new FileOutputStream(user+"\\Documents\\Livres\\Relatórios\\TodosLivros.pdf");
 					return gerador.gerarPdf(new HashMap<String,Object>(), saida);
 				case (-2):
 					gerador = new GeradorDeRelatorios("EmprestimosPorUsuario.jrxml");

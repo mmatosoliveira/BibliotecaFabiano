@@ -1,5 +1,6 @@
 package br.com.casafabianodecristo.biblioteca.principal;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import br.com.casafabianodecristo.biblioteca.dto.*;
@@ -51,10 +52,17 @@ public class Principal extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
-		primaryStage.setResizable(false);
+		//Criação dos diretórios padrão que serão usados pelo Livres.
+		String user = System.getProperty("user.home");
+		new File(user+"\\Documents\\Livres\\Relatórios").mkdirs();
+		new File(user+"\\Documents\\Livres\\Backups").mkdirs();
+		
+		//Criação ddo tratamento padrão para exceções não tratadas.
 		Thread.setDefaultUncaughtExceptionHandler((t, e) -> Platform.runLater(() -> showError(t, e)));
         Thread.currentThread().setUncaughtExceptionHandler(Principal::showError);
+        
+        primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));
+		primaryStage.setResizable(false);
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("LIVRES - Sistema gerenciador de livros espíritas");
 		this.primaryStage.getIcons().add(new Image("file:resources/images/icon-principal.png"));

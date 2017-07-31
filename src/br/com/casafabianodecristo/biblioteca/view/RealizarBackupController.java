@@ -34,6 +34,10 @@ public class RealizarBackupController {
 		iniciarBackup.setOnAction(e -> gerarBackup());
 	}
 	
+	private void restaurarBackup(){
+		
+	}
+	
 	private void gerarBackup(){
 		progresso.setVisible(true);
 		SimpleDateFormat sdf = new SimpleDateFormat("[dd-MM-yyyy-HH-mm-ss]");
@@ -46,9 +50,9 @@ public class RealizarBackupController {
 			if(exec.waitFor() == 0)
 			{
 				if(radioEncerrarLivresESistema.isSelected()){
-					alerta.alertaSucesso("Realizar backup", "Sucesso ao realizar backup!");
+					alerta.alertaSucesso("Realizar backup", "Sucesso ao realizar backup! \nO sistema será desligado em 10 segundos.");
+					new ProcessBuilder("cmd.exe", "/c", "shutdown -s -f -t 10").start();
 					System.exit(0);
-					new ProcessBuilder("cmd.exe", "/c", "shutdown -s -f -t 00").start();
 				}
 				else if(radioEncerrarLivres.isSelected()){
 					alerta.alertaSucesso("Realizar backup", "Sucesso ao realizar backup!");
@@ -59,7 +63,6 @@ public class RealizarBackupController {
 					Stage stage = (Stage) progresso.getScene().getWindow();
 					stage.close();
 				}
-				//exec.destroy();
 			}
 			else //ERROR
 			{

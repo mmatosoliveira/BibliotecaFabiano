@@ -1,5 +1,6 @@
 package br.com.casafabianodecristo.biblioteca.utils;
 
+import java.io.File;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.util.List;
@@ -65,6 +66,7 @@ public class GeradorDeRelatorios
 	
 	private void inicializarVariaveis(){
 		this.path = this.getClass().getClassLoader().getResource("").getPath();
+		System.out.println("path: " + path);
 		this.pathToReportPackage = this.path + "br/com/casafabianodecristo/biblioteca/reports/";
 	}
 	
@@ -94,9 +96,9 @@ public class GeradorDeRelatorios
 	@SuppressWarnings("rawtypes")
 	public Object gerarPdf(Map<String, Object> parametros, OutputStream saida){
 		String jrxml = this.getPathToReportPackage() + nomeArquivoJasper;
-		
+		//String user = System.getProperty("user.home");
 		try {
-
+			
             // compila jrxml em memoria
             JasperReport jasper = JasperCompileManager.compileReport(jrxml);
             
@@ -109,11 +111,46 @@ public class GeradorDeRelatorios
             JRExporter exporter = new JRPdfExporter();
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, saida);
+            //exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, user+"\\Documents\\Livres\\Relatórios\\TodosLivros.pdf");
 
             exporter.exportReport();
+            
+    		
+    		
+            //this.nomeCaminhoFinalRelatorio = (user+"\\Documents\\Livres\\Relatórios\\"+saida.toString()).toString();
+            //System.out.println(nomeCaminhoFinalRelatorio);
+            //JasperExportManager.exportReportToPdfStream(print, saida);
+            
             return new Object();
 
         } catch (Exception e) {
+            return null;
+        }
+	}
+	
+	/**
+	 * Método que gera o relatório em pdf a partir do SQL do relatório
+	 * através de uma conexão JDBC
+	 * @param Map<String, Object> mapa de parâmetros
+	 * @param String Nome de saída do arquivo. O caminho será padrão e montado dentro do método
+	 */	
+	public Object gerarPdf(Map<String, Object> parametros, String nome){
+		String jrxml = this.getPathToReportPackage() + nomeArquivoJasper;
+	
+		try {
+
+            // compila jrxml em memoria
+            JasperReport jasper = JasperCompileManager.compileReport(jrxml);
+            
+            // preenche relatorio
+            JasperPrint print = JasperFillManager.fillReport(jasper, parametros, this.conexao);
+            String nomeComposto = System.getProperty("user.home")+"\\Documents\\Livres\\Relatórios"+nome;
+            JasperExportManager.exportReportToPdfFile(print, nomeComposto);
+            
+            return new Object();
+
+        } catch (Exception e) {
+        	e.printStackTrace();
             return null;
         }
 	}
