@@ -3,7 +3,7 @@ package br.com.casafabianodecristo.biblioteca.model;
 import javax.persistence.*;
 
 @Entity
-@Table(schema="BibliotecaFabiano2", name="Classificacao")
+@Table(schema="BibliotecaFabiano2", name="classificacao")
 public class Classificacao {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

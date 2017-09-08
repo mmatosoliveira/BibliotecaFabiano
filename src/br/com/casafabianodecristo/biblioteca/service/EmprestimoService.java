@@ -8,10 +8,12 @@ import org.modelmapper.ModelMapper;
 import br.com.casafabianodecristo.biblioteca.dto.*;
 import br.com.casafabianodecristo.biblioteca.factory.*;
 import br.com.casafabianodecristo.biblioteca.model.*;
+import br.com.casafabianodecristo.biblioteca.utils.Alertas;
 
 public class EmprestimoService {
 	private EntityManagerFactory emf;
 	private EntityManager        em;
+	private Alertas alerta = new Alertas();
 	
 	private void createEntityManagerFactory() {
 		emf = Persistence.createEntityManagerFactory("BibliotecaFabiano2");
@@ -40,14 +42,14 @@ public class EmprestimoService {
 			createEntityManager();
 					Query query; 
 					if(!apenasAtrasados){
-						query = em.createNativeQuery("select * from Emprestimo E"
-								+ " join Usuario U ON U.Id = E.IdUsuario"
+						query = em.createNativeQuery("select * from emprestimo E"
+								+ " join usuario U ON U.Id = E.IdUsuario"
 								+ " where U.NomeCompleto like '%"+nomeUsuario+"%'", Emprestimo.class);
 					}
 					else{
-						query = em.createNativeQuery("select * from Emprestimo E"
-								+ " join Usuario U ON U.Id = E.IdUsuario"
-								+ " join Livro L on L.TomboPatrimonial = E.TomboPatrimonial"
+						query = em.createNativeQuery("select * from emprestimo E"
+								+ " join usuario U ON U.Id = E.IdUsuario"
+								+ " join livro L on L.TomboPatrimonial = E.TomboPatrimonial"
 								+ " where U.NomeCompleto like '%"+nomeUsuario+"%'"
 								+ " and E.DataDevolucaoPrevista < CURDATE()"
 								+ " and E.DataDevolucaoEfetiva IS NULL", Emprestimo.class);
@@ -131,18 +133,30 @@ public class EmprestimoService {
 	public boolean renovarEmprestimo(int id){
 		boolean result = true;
 		final int ONE_WEEK = 86400 * 7 * 1000;
+		Emprestimo obj = null;
 		
 		createEntityManagerFactory();
 			createEntityManager();
 				em.getTransaction().begin();
 					Emprestimo e = em.find(Emprestimo.class, id);
-					e.setDataDevolucaoPrevista(new Date(System.currentTimeMillis() + ONE_WEEK));
-					Emprestimo obj = em.merge(e);
+					if(validarRenovacao(e)){
+						e.setDataDevolucaoPrevista(new Date(System.currentTimeMillis() + ONE_WEEK));
+						obj = em.merge(e);
+					}
 				em.getTransaction().commit();
 			closeEntityManager();
 		closeEntityManagerFactory();
 		result = (obj == null) ? false : true;
 		return result;
+	}
+	
+	private boolean validarRenovacao(Emprestimo e){
+		if(e.getDataDevolucaoPrevista().after(new Date())){
+			alerta.alertaAviso("Renovar livro", "Não é permitido renovar um livro que está atrasado.");
+			return false;
+		}
+			
+		return true;	
 	}
 	
 	public List<Emprestimo> getDevolucoesPrevistas(){

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import br.com.casafabianodecristo.biblioteca.utils.ConvertToMD5;
 
 @Entity
-@Table(schema="BibliotecaFabiano2", name="Usuario")
+@Table(schema="BibliotecaFabiano2", name="usuario")
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

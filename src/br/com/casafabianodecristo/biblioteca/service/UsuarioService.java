@@ -158,12 +158,12 @@ public class UsuarioService {
 		Usuario usuarioLogado = null;
 		ModelMapper mapper = new ModelMapper();
 		UsuarioDto dto;
-		
 			createEntityManagerFactory();
 			createEntityManager();
 			TypedQuery<Usuario> query = em.createQuery("select o from Usuario o "+
 					 "where o.nomeUsuarioAcessoSistema = :nomeUsuario " + 
 					 "and o.senha = :senha" , Usuario.class);
+			System.out.println(query.toString());
 					query.setParameter("nomeUsuario", nomeUsuario);
 					query.setParameter("senha", senha);
 					query.setHint(QueryHints.READ_ONLY, HintValues.TRUE);
@@ -177,7 +177,6 @@ public class UsuarioService {
 
 			closeEntityManager();
 		closeEntityManagerFactory();
-		
 		dto = (usuarioLogado != null) ? mapper.map(usuarioLogado, UsuarioDto.class) : null;
 		return dto;
 	}

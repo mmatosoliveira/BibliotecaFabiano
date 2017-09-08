@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(schema="BibliotecaFabiano2", name="Livro")
+@Table(schema="BibliotecaFabiano2", name="livro")
 public class Livro {
 	@Id
 	@Column(name="TomboPatrimonial", nullable=false)

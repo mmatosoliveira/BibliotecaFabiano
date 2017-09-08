@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
-@Table(schema="BibliotecaFabiano2", name="Emprestimo")
+@Table(schema="BibliotecaFabiano2", name="emprestimo")
 public class Emprestimo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

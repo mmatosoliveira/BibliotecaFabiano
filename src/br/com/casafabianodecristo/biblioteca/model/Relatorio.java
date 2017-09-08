@@ -3,7 +3,7 @@ package br.com.casafabianodecristo.biblioteca.model;
 import javax.persistence.*;
 
 @Entity
-@Table(schema="BibliotecaFabiano2", name="Relatorio")
+@Table(schema="BibliotecaFabiano2", name="relatorio")
 public class Relatorio {
 	@Id
 	@Column(name="Id", nullable=false)
